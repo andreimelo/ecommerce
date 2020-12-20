@@ -3,3 +3,6 @@ vscode/
 
 yarn.lock
 
+.env
+.env.swp
+.eslintcache
