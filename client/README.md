@@ -1,6 +1,6 @@
 ## Figma Design for ecommerce. 
 
-[Link: ](https://www.figma.com/file/hk6smvafAozcvjbJq1Hvs7/Ecommerce) 
+Link: [https://www.figma.com/file/hk6smvafAozcvjbJq1Hvs7/Ecommerce](https://www.figma.com/file/hk6smvafAozcvjbJq1Hvs7/Ecommerce) 
 
 ## Available Scripts
 
