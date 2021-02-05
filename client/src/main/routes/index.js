@@ -1,10 +1,8 @@
-import React, { lazy, Suspense } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import React, {Suspense} from 'react';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Footer from '../../library/components/Footer';
 import Header from '../../library/components/Header';
-const Home = lazy(() => import('../../modules/default/Home'));
-const Login = lazy(() => import('../../modules/auth/Login'));
-const Register = lazy(() => import('../../modules/auth/Register'));
+import {route} from '../../library/utilities/routes';
 
 function initialRoutes(){
 	return (
@@ -12,9 +10,15 @@ function initialRoutes(){
 			<BrowserRouter>
 				<Header />
 				<Switch>
-					<Route exact path='/' component={Home} />
-					<Route exact path='/login' component={Login} />
-					<Route exact path='/register' component={Register} />
+					{route.map((item) => (
+						<Route
+							exact
+							path={item.path}
+							component={
+								item.component
+							}
+						/>
+					))}
 				</Switch>
 				<Footer />
 			</BrowserRouter>
