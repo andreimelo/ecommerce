@@ -1,0 +1,6 @@
+.inp {
+    padding: 15px;
+    background-color: var(--light-gray-color);
+    border-radius: 30px;
+    border: none;
+}

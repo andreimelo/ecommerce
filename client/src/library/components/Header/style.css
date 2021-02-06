@@ -7,7 +7,6 @@
 .nav-sub-container {
   margin: auto;
   width: 95%;
-  /* display: flex; */
   -moz-box-pack: justify;
   justify-content: space-between;
   -moz-box-align: center;
@@ -18,7 +17,7 @@
    /* background: red;  */
    display: inline-block;
    padding:30px 40px 20px 40px;
-   font-weight: 600;
+   font-weight: var(--font-poppins-600);
    width:10vh;
 }
 

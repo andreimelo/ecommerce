@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import './style.css';
+import '../Input/style.css';
 
-function Input({type, value,name, variant, onChange, placeHolder}){
-	return <input type={type} value={value} name={name} style={variant} onChange={onChange} placeholder={placeHolder}/>;
+function Input({ type, value, name, variant, onChange, placeHolder }) {
+	return <input type={type} value={value} name={name} className={variant} onChange={onChange} placeholder={placeHolder} />;
 }
 
 Input.propTypes = {
