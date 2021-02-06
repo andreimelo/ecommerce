@@ -1,4 +1,4 @@
-import * as firebase from 'firebase';
+import firebase from 'firebase';
 
 const firebaseConfig = {
 	apiKey            : process.env.REACT_APP_FIREBASE_API_KEY,
@@ -8,6 +8,11 @@ const firebaseConfig = {
 	messagingSenderId : process.env.REACT_APP_FIREBASE_MESSAGE_SENDER_ID,
 	appId             : process.env.REACT_APP_FIREBASE_APP_ID,
 	measurementId     : process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+};
+
+export const registerConfig = {
+	url             : 'http://localhost:3000/register',
+	handleCodeInApp : true,
 };
 
 // Initialize Firebase

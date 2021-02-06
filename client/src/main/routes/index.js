@@ -10,8 +10,9 @@ function initialRoutes(){
 			<BrowserRouter>
 				<Header />
 				<Switch>
-					{route.map((item) => (
+					{route.map((item, key) => (
 						<Route
+							key={key}
 							exact
 							path={item.path}
 							component={

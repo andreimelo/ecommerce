@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 
-const useInput = () => {
+const useInput = (callback, validate) => {
 	const [
 		values,
 		setValues,
@@ -17,11 +17,14 @@ const useInput = () => {
 	useEffect(
 		() => {
 			if (Object.keys(errors).length === 0 && isSubmitting) {
-				callback();
+				callback(values);
 			}
 		},
 		[
+			values,
 			errors,
+			callback,
+			isSubmitting,
 		],
 	);
 
