@@ -1,11 +1,15 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+import './style.css';
 
-function Input(){
-	return (
-		<React.Fragment>
-			<input />
-		</React.Fragment>
-	);
+function Input({type, name, variant}){
+	return <input type={type} name={name} style={variant} />;
 }
+
+Input.propTypes = {
+	type    : PropTypes.string.isRequired,
+	variant : PropTypes.string,
+	name    : PropTypes.string.isRequired,
+};
 
 export default React.memo(Input);

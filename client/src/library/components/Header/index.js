@@ -9,7 +9,7 @@ function Header(){
 	return (
 		<nav className='nav-container shadow'>
 			<div className='nav-sub-container'>
-				<span id='logo'>Logo</span>
+				<span id='logo'>{string.common.logoTitle}</span>
 				<span onClick={() => history.push('/')}>
 					{string.routes.homeTitle}
 				</span>

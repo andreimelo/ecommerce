@@ -1,4 +1,8 @@
 export const string = {
+	common     : {
+		logoTitle : 'Logo',
+	},
+
 	routes     : {
 		homeTitle     : 'Home',
 		loginTitle    : 'Login',
