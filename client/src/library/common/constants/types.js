@@ -4,5 +4,6 @@ export const type = {
 		email    : 'email',
 		password : 'password',
 		default  : 'text',
+		search   : 'search',
 	},
 };

@@ -1,6 +1,8 @@
 import React from 'react';
-import {useHistory} from 'react-router-dom';
-import {string} from '../../common/constants/strings';
+import { useHistory } from 'react-router-dom';
+import { string } from '../../common/constants/strings';
+import { type } from '../../common/constants/types';
+import CustomInput from '../Input';
 import './style.css';
 
 function Header(){
@@ -9,26 +11,28 @@ function Header(){
 	return (
 		<nav className='nav-container shadow'>
 			<div className='nav-sub-container'>
-				<span id='logo'>{string.common.logoTitle}</span>
-				<span onClick={() => history.push('/')}>
+				<div id='logo'>{string.common.logoTitle}</div>
+				<div className="position-right">
+				<div className="nav-title" onClick={() => history.push('/')}>
 					{string.routes.homeTitle}
-				</span>
-				<span>{string.navigation.shopTitle}</span>
-				<span>{string.navigation.cartTitle}</span>
+				</div>
+				<div className="nav-title">{string.navigation.shopTitle}</div>
+				<div className="nav-title">{string.navigation.cartTitle}</div>
 				{/* Input */}
-				<span onClick={() => history.push('/login')}>
+				<CustomInput type={type.input.search} name={"search"} placeHolder={"Search"}  />
+				<div className="nav-title" onClick={() => history.push('/login')}>
 					{string.routes.loginTitle}
-				</span>
-				<span onClick={() => history.push('/register')}>
-					{' '}
+				</div>
+				<div  className="nav-title" onClick={() => history.push('/register')}>
 					{string.routes.registerTitle}
-				</span>
+				</div>
+				</div>
 			</div>
 			<div className='nav-sub-container'>
-				<span>{string.navigation.categoriesTitle}</span>
-				<span>
+				<div className="nav-title category">{string.navigation.categoriesTitle}</div>
+				<div className="nav-title category">
 					{string.navigation.subCategoriesTitle}
-				</span>
+				</div>
 			</div>
 		</nav>
 	);
