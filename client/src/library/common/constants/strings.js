@@ -19,4 +19,13 @@ export const string = {
 			exampleOfEmail : 'ex.johndoe@gmail.com',
 		},
 	},
+	label        : {
+		register : {
+			email : 'Register your email',
+		},
+		login    : {
+			email    : 'Email',
+			password : 'Password',
+		},
+	},
 };

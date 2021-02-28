@@ -3,6 +3,7 @@
   background-color: var(--light-gray-color);
   border-radius: 30px;
   border: none;
+  margin-bottom: 30px;
 }
 
 .error-border {
@@ -12,8 +13,8 @@
 .error-message {
   color: var(--error-red-color);
   font-size: var(--font-xsmall);
-  margin: 8px 15px;
   position: absolute;
+  margin: -23px 15px;
 }
 
 .fix-size {

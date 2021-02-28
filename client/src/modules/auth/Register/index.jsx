@@ -15,7 +15,7 @@ function Register() {
 	
 	return (
 		<div className="container default"> 
-			<CustomLabel variant={"register-label default-color"} title="Register your email"/>
+			<CustomLabel variant={"label default-color"} title={string.label.register.email}/>
 			<CustomInput
 				type={type.input.default}
 				value={values.email || ""}

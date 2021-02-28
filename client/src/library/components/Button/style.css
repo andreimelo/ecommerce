@@ -4,5 +4,6 @@
   padding: 11px;
   color: var(--white-color);
   font-weight: var(--font-poppins-600);
-  margin-top: 35px;
+  cursor: pointer;
+  margin-top: 5px;
 }
