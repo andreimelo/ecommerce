@@ -5,11 +5,12 @@
   --white-color: #ffffff;
   --light-gray-color: #f6f6f6;
   --med-dark-gray-color: #6d6d6d;
+  --lg-dark-gray-color: #969696;
   --error-red-color: #e74c3c;
 
   /* font size */
 
-  --font-xsmall: 1.8vh;
+  --font-xsmall: 1.2vh;
   --font-small: 3vh;
   --font-medium: 4vh;
   --font-large: 12vh;

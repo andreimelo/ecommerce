@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import '../Button/style.css';
 
 function Button({variant, title, onClick}){
-	return <button variant={variant} onClick={onClick}>{title}</button>;
+	return <button className={variant} onClick={onClick}>{title}</button>;
 }
 
 Button.propTypes = {

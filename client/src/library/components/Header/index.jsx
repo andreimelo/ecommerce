@@ -16,8 +16,8 @@ function Header(){
 				<div className="nav-title" onClick={() => history.push('/')}>
 					{string.routes.homeTitle}
 				</div>
-				<div className="nav-title">{string.navigation.shopTitle}</div>
-				<div className="nav-title">{string.navigation.cartTitle}</div>
+				<div className="nav-title" onClick={() => history.push('/shop')}>{string.navigation.shopTitle}</div>
+				<div className="nav-title" onClick={() => history.push('/cart')}>{string.navigation.cartTitle}</div>
 				{/* Input */}
 				<CustomInput type={type.input.search} name={"search"} placeHolder={"Search"} variant="inp fix-size" />
 				<div className="nav-title" onClick={() => history.push('/login')}>

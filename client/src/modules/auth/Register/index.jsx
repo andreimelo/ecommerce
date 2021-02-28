@@ -25,7 +25,7 @@ function Register() {
 				onChange={handleChange}
 				errorMessage={errors && errors.email}
 			/>
-			<CustomButton title={"Submit"} onClick={() => handleSubmit()} />
+			<CustomButton variant={"button bg-default-color no-size"} title={"Submit"} onClick={() => handleSubmit()} />
 		</div>
 	);
 }

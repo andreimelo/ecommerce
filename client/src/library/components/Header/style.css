@@ -13,19 +13,20 @@
   align-items: center;
 }
 
-.nav-title{
-   /* background: red;  */
-   display: inline-block;
-   padding:30px 40px 20px 40px;
-   font-weight: var(--font-poppins-400);
-   width:10vh;
+.nav-title {
+  /* background: red;  */
+  display: inline-block;
+  padding: 30px 40px 20px 40px;
+  font-weight: var(--font-poppins-400);
+  width: 10vh;
+  cursor: pointer;
 }
 
 .position-right {
-  float:right;
+  float: right;
 }
 
-.category{
+.category {
   padding: 5px 20px 30px 20px;
   width: auto;
 }
@@ -33,9 +34,8 @@
 #logo {
   font-size: var(--font-medium);
   display: inline-block;
-  padding:20px 
+  padding: 20px;
 }
-
 
 .shadow {
   box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.25);

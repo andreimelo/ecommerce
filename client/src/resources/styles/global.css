@@ -9,3 +9,7 @@
   height: auto;
   margin: 90px auto;
 }
+
+.bg-default-color {
+  background-color: var(--lg-dark-gray-color);
+}
