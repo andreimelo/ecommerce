@@ -1,6 +1,11 @@
 .inp {
-    padding: 15px;
-    background-color: var(--light-gray-color);
-    border-radius: 30px;
-    border: none;
+  padding: 15px;
+  background-color: var(--light-gray-color);
+  border-radius: 30px;
+  border: none;
+}
+
+.fix-size {
+  width: 320px;
+  max-width: 350px;
 }
