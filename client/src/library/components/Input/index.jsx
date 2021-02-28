@@ -2,8 +2,13 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import '../Input/style.css';
 
-function Input({ type, value, name, variant, onChange, placeHolder }) {
-	return <input type={type} value={value} name={name} className={variant} onChange={onChange} placeholder={placeHolder} />;
+function Input({ type, value, name, variant, onChange, placeHolder,errorMessage }) {
+	return (
+		<React.Fragment>
+			<input type={type} value={value} name={name} className={variant} onChange={onChange} placeholder={placeHolder} />
+			{ errorMessage && <div className="error-message">{errorMessage}</div>}
+		</React.Fragment>
+	);
 }
 
 Input.propTypes = {

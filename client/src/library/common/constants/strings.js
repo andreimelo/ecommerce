@@ -1,17 +1,22 @@
 export const string = {
-	common     : {
+	common       : {
 		logoTitle : 'Logo',
 	},
 
-	routes     : {
+	routes       : {
 		homeTitle     : 'Home',
 		loginTitle    : 'Login',
 		registerTitle : 'Register',
 	},
-	navigation : {
+	navigation   : {
 		shopTitle          : 'Shop',
 		cartTitle          : 'Cart',
 		categoriesTitle    : 'Categories',
 		subCategoriesTitle : 'Sub Categories',
+	},
+	placeHolders : {
+		input : {
+			exampleOfEmail : 'ex.johndoe@gmail.com',
+		},
 	},
 };

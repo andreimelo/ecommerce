@@ -5,7 +5,22 @@
   border: none;
 }
 
+.error-border{
+  border:solid 2px var(--error-red-color);
+}
+
+.error-message {
+  color: var(--error-red-color);
+  font-size: var(--font-xsmall);
+  margin: 10px 15px;
+}
+
 .fix-size {
   width: 320px;
   max-width: 350px;
+}
+
+.no-size {
+  width: 100%;
+  max-width: -webkit-fill-available;
 }

@@ -1,0 +1,11 @@
+.container {
+  box-shadow: 0px 0px 12px var(--container-shadow);
+  background: var(--color-white);
+  padding: 48px;
+}
+
+.default {
+  max-width: 567px;
+  height: auto;
+  margin: 90px auto;
+}
