@@ -13,3 +13,8 @@
 .bg-default-color {
   background-color: var(--lg-dark-gray-color);
 }
+
+.layout-default {
+  margin: auto;
+  width: 95%;
+}

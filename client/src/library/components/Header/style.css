@@ -5,8 +5,6 @@
 }
 
 .nav-sub-container {
-  margin: auto;
-  width: 95%;
   -moz-box-pack: justify;
   justify-content: space-between;
   -moz-box-align: center;

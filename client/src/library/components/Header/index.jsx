@@ -10,7 +10,7 @@ function Header(){
 
 	return (
 		<nav className='nav-container shadow'>
-			<div className='nav-sub-container'>
+			<div className='nav-sub-container layout-default'>
 				<div id='logo'>{string.common.logoTitle}</div>
 				<div className="position-right">
 				<div className="nav-title" onClick={() => history.push('/')}>
@@ -28,7 +28,7 @@ function Header(){
 				</div>
 				</div>
 			</div>
-			<div className='nav-sub-container'>
+			<div className='nav-sub-container layout-default'>
 				<div className="nav-title category">{string.navigation.categoriesTitle}</div>
 				<div className="nav-title category">
 					{string.navigation.subCategoriesTitle}
