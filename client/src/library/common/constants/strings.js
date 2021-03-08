@@ -21,7 +21,8 @@ export const string = {
 	},
 	label        : {
 		register : {
-			email : 'Register your email',
+			email    : 'Register your email',
+			complete : 'Register Complete',
 		},
 		login    : {
 			email    : 'Email',

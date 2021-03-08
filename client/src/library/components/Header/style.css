@@ -18,7 +18,6 @@
   display: inline-block;
   padding: 30px 40px 20px 40px;
   font-weight: var(--font-poppins-400);
-  width: 10vh;
   cursor: pointer;
 }
 

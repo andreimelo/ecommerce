@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import '../Input/style.css';
 
-function Input({ type, value, name, variant, onChange, placeHolder,errorMessage }) {
+function Input({ type, value, name, variant, disabled, onChange, placeHolder,errorMessage }) {
 	return (
 		<>
-			<input type={type} value={value} name={name} className={variant} onChange={onChange} placeholder={placeHolder} />
+			<input type={type} disabled={disabled} value={value} name={name} className={variant} onChange={onChange} placeholder={placeHolder} />
 			{errorMessage && <div className="error-message">{errorMessage}</div>}
 		</>
 	);
@@ -18,6 +18,7 @@ Input.propTypes = {
 	name    : PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
 	placeHolder : PropTypes.string,
+	disabled: PropTypes.bool
 };
 
 export default React.memo(Input);
