@@ -1,14 +1,25 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import '../../../resources/styles/global.css';
 import CustomInput from '../../../library/components/Input';
 import CustomButton from '../../../library/components/Button';
 import { string } from '../../../library/common/constants/strings';
 import { type } from '../../../library/common/constants/types';
+import { fetchFromStorage } from '../../../library/utilities/storage';
 import useInput from '../../../library/hooks/useInput';
 
 function CompleteRegistration() {
 
 	const { values, handleChange} = useInput("","");
+
+	function populateEmailInput() {
+		let email = fetchFromStorage("emailRegistration");
+		 handleChange("email", email);
+	}
+	useEffect(() => {
+	
+		return populateEmailInput();
+	}, []);
+
 
 	return(
 		<div className="container default">
@@ -28,7 +39,7 @@ function CompleteRegistration() {
 				value={values.password || ""}
 				name="password"
 				variant={"inp no-size"}
-				onChange={handleChange}
+				onChange={(event)=>handleChange(event.target.name, event.target.value)}
 				placeHolder={string.label.login.password}
 				// errorMessage={errors && errors.email}
 			/>

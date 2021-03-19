@@ -1,13 +1,12 @@
-import {auth, registerConfig} from '../../../library/common/config/firebase';
+import { auth, registerConfig } from '../../../library/common/config/firebase';
+import { saveToStorage } from '../storage';
 
 export async function registerUserEmail(values){
 	try {
-		const result = await auth.sendSignInLinkToEmail(
-			values.email,
-			registerConfig,
-		);
+		const result = await auth.sendSignInLinkToEmail(values.email, registerConfig);
 		// add component success
-		console.log(result, 'register email');
+		saveToStorage('emailRegistration', values.email);
+		alert(result);
 		return result;
 	} catch (error) {
 		// add component error

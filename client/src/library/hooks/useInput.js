@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 
 const useInput = (callback, validate) => {
 	const [
@@ -34,11 +34,10 @@ const useInput = (callback, validate) => {
 		setIsSubmitting(true);
 	};
 
-	const handleChange = (event) => {
-		event.persist();
+	const handleChange = (name, event) => {
 		setValues((values) => ({
 			...values,
-			[event.target.name]: event.target.value,
+			[name] : event,
 		}));
 	};
 

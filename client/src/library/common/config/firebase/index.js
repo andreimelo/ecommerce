@@ -11,7 +11,7 @@ const firebaseConfig = {
 };
 
 export const registerConfig = {
-	url             : process.env.REACT_APP_REGISTER_REDIRECT_URL,
+	url             : 'http://localhost:3000/register/complete',
 	handleCodeInApp : true,
 };
 

@@ -22,7 +22,7 @@ function Register() {
 				name="email"
 				variant={ errors && errors.email ?"inp no-size error-border":"inp no-size"}
 				placeHolder={string.placeHolders.input.exampleOfEmail}
-				onChange={handleChange}
+				onChange={(event)=>handleChange(event.target.name,event.target.value)}
 				errorMessage={errors && errors.email}
 			/>
 			<CustomButton variant={"button bg-default-color no-size"} title={"Submit"} onClick={() => handleSubmit()} />
