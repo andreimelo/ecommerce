@@ -34,10 +34,10 @@ const useInput = (callback, validate) => {
 		setIsSubmitting(true);
 	};
 
-	const handleChange = (name, event) => {
+	const handleChange = (name, value) => {
 		setValues((values) => ({
 			...values,
-			[name] : event,
+			[name] : value,
 		}));
 	};
 
