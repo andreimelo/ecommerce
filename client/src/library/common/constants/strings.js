@@ -25,8 +25,9 @@ export const string = {
 			complete : 'Register Complete',
 		},
 		login    : {
-			email    : 'Email',
-			password : 'Password',
+			email        : 'Email',
+			password     : 'Password',
+			orSignInWith : 'Or Sign in with',
 		},
 	},
 };

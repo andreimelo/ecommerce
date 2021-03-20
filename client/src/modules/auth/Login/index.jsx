@@ -3,6 +3,7 @@ import '../../../resources/styles/global.css';
 import CustomLabel from '../../../library/components/Label';
 import CustomInput from '../../../library/components/Input';
 import CustomButton from '../../../library/components/Button';
+import CustomSeparator from '../../../library/components/Separator';
 import { string } from '../../../library/common/constants/strings';
 import { type } from '../../../library/common/constants/types';
 import validateLogin from '../../../library/utilities/validators/loginValidator';
@@ -34,6 +35,7 @@ function Login() {
 				errorMessage={errors && errors.password}
 			/>
 			<CustomButton variant={"button bg-default-color no-size"} title={"Sign In"} onClick={() => handleSubmit()} />
+			<CustomSeparator title={string.label.login.orSignInWith}/>
 		</div>
 	)
 }
