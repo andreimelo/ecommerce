@@ -43,7 +43,7 @@ function CompleteRegistration() {
 				placeHolder={string.label.login.password}
 				// errorMessage={errors && errors.email}
 			/>
-			<CustomButton variant={"button bg-default-color no-size"} title={"Submit"}  />
+			<CustomButton variant={"button bg-default-color no-size"} title={"Complete registration"}  />
 		</div>
 	)
 }
