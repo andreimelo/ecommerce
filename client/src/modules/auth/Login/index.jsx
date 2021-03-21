@@ -35,7 +35,8 @@ function Login() {
 				errorMessage={errors && errors.password}
 			/>
 			<CustomButton variant={"button bg-default-color no-size"} title={"Sign In"} onClick={() => handleSubmit()} />
-			<CustomSeparator title={string.label.login.orSignInWith}/>
+			<CustomSeparator title={string.label.login.orSignInWith} />
+			<CustomButton variant={"button bg-google-red-color no-size"} title={"Sign In with Google"} onClick={() => handleSubmit()} />
 		</div>
 	)
 }
