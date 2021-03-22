@@ -6,7 +6,9 @@ export async function registerUserEmail(values){
 		const result = await auth.sendSignInLinkToEmail(values.email, registerConfig);
 		// add component success
 		saveToStorage('emailRegistration', values.email);
-		alert(result);
+		alert(
+			`Email is sent to ${values.email}. Click the link to complete your registration`,
+		);
 		return result;
 	} catch (error) {
 		// add component error
