@@ -6,11 +6,13 @@ import { string } from '../../../library/common/constants/strings';
 import { type } from '../../../library/common/constants/types';
 import { fetchFromStorage } from '../../../library/utilities/storage';
 import useInput from '../../../library/hooks/useInput';
+import { registerUserComplete } from '../../../library/utilities/auth/register';
+import validateRegisterComplete  from '../../../library/utilities/validators/registerUserComplete';
 
 function CompleteRegistration() {
 
-	const { values, handleChange} = useInput("","");
-
+	const { values, handleChange, errors, handleSubmit } = useInput(registerUserComplete, validateRegisterComplete);
+	
 	function populateEmailInput() {
 		let email = fetchFromStorage("emailRegistration");
 		 handleChange("email", email);
@@ -29,21 +31,21 @@ function CompleteRegistration() {
 				value={values.email || ""}
 				name="email"
 				disabled={true}
-				variant={"inp no-size"}
+				variant={ errors && errors.email ?"inp no-size error-border":"inp no-size"}
 				placeHolder={string.placeHolders.input.exampleOfEmail}
 				onChange={handleChange}
-				// errorMessage={errors && errors.email}
+				errorMessage={errors && errors.email}
 			/>
 			<CustomInput
 				type={type.input.password}
 				value={values.password || ""}
 				name="password"
-				variant={"inp no-size"}
+				variant={ errors && errors.password ?"inp no-size error-border":"inp no-size"}
 				onChange={(event)=>handleChange(event.target.name, event.target.value)}
 				placeHolder={string.label.login.password}
-				// errorMessage={errors && errors.email}
+				errorMessage={errors && errors.password}
 			/>
-			<CustomButton variant={"button bg-default-color no-size"} title={"Complete registration"}  />
+			<CustomButton variant={"button bg-default-color no-size"} title={"Complete registration"} onClick={()=>handleSubmit()} />
 		</div>
 	)
 }

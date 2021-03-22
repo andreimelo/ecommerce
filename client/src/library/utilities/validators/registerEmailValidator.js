@@ -1,4 +1,4 @@
-import {isEmail} from '../regex';
+import { isEmail } from '../regex';
 
 export default function validateRegisterEmail(values){
 	let errors = {};

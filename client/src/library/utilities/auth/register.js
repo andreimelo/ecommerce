@@ -13,3 +13,20 @@ export async function registerUserEmail(values){
 		alert(error.message);
 	}
 }
+
+export async function registerUserComplete(values){
+	try {
+		let { user: { emailVerified } } = await auth.signInWithEmailLink(
+			values.email,
+			window.location.href,
+		);
+		if (emailVerified) {
+			let user = auth.currentUser;
+			await user.updatePassword(values.password);
+			const idTokenResult = await user.getIdTokenResult();
+			return console.info(idTokenResult);
+		}
+	} catch (error) {
+		alert(error);
+	}
+}
