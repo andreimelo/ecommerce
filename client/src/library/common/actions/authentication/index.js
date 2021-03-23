@@ -1,3 +1,5 @@
+import firebase from 'firebase';
+
 export async function onAuthStateAction(user, dispatch){
 	const idTokenResult = await user.getIdTokenResult();
 	return dispatch({
@@ -7,4 +9,13 @@ export async function onAuthStateAction(user, dispatch){
 			token : idTokenResult,
 		},
 	});
+}
+
+export async function logOutAction(dispatch){
+	firebase.auth().signOut();
+	dispatch({
+		type    : 'LOGOUT',
+		payload : null,
+	});
+	// history.push('/login')
 }
