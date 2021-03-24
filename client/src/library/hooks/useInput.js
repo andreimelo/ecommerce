@@ -15,10 +15,6 @@ const useInput = (callback, validate) => {
 		isSubmitting,
 		setIsSubmitting,
 	] = useState(false);
-	const [
-		loading,
-		setLoading,
-	] = useState(false);
 
 	const history = useHistory();
 	const dispatch = useDispatch();
@@ -56,7 +52,6 @@ const useInput = (callback, validate) => {
 		handleChange,
 		handleSubmit,
 		values,
-		loading,
 		errors,
 	};
 };

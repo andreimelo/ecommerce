@@ -15,13 +15,12 @@ import { useHistory } from 'react-router-dom';
 function Login() {
 	
 	// Hooks
-	const { values, loading, handleChange, handleSubmit, errors } = useInput(logInAction, validateLogin);
+	const { values, handleChange, handleSubmit, errors } = useInput(logInAction, validateLogin);
 	const dispatch = useDispatch();
 	const history = useHistory();
 
 	return(
 		<div className="container default">
-			{loading && <div>LOADING....</div>}
 			<CustomLabel variant={"label default-color"} title={string.label.login.email} />
 			<CustomInput
 				type={type.input.email}
