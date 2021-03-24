@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 const Home = lazy(() => import('../../modules/default/Home'));
 const Login = lazy(() => import('../../modules/auth/Login'));
+const ForgotPassword = lazy(() => import('../../modules/auth/ForgotPassword'));
 const Register = lazy(() => import('../../modules/auth/Register'));
 const CompleteRegistration = lazy(() =>
 	import('../../modules/auth/CompleteRegistration'),
@@ -16,6 +17,10 @@ export const route = [
 	{
 		path      : '/login',
 		component : Login,
+	},
+	{
+		path      : '/forgot/password',
+		component : ForgotPassword,
 	},
 	{
 		path      : '/register',

@@ -22,6 +22,9 @@ export const string = {
 		},
 	},
 	label        : {
+		forgot   : {
+			password : 'Forgot Password',
+		},
 		register : {
 			email    : 'Register your email',
 			complete : 'Register Complete',
