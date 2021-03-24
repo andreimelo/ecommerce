@@ -16,7 +16,7 @@ export async function registerUserEmail(values){
 	}
 }
 
-export async function registerUserComplete(values){
+export async function registerUserComplete(values, history){
 	try {
 		let { user: { emailVerified } } = await auth.signInWithEmailLink(
 			values.email,
@@ -25,8 +25,8 @@ export async function registerUserComplete(values){
 		if (emailVerified) {
 			let user = auth.currentUser;
 			await user.updatePassword(values.password);
-			const idTokenResult = await user.getIdTokenResult();
-			return console.info(idTokenResult);
+			// const idTokenResult = await user.getIdTokenResult();
+			return history.push('/');
 		}
 	} catch (error) {
 		alert(error);

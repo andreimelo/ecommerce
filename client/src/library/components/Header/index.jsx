@@ -28,7 +28,7 @@ function Header() {
 					{ user && 
 						(<div className="settings">
 							<div className="nav-title list">
-								{ user && user.email || string.routes.userNamePlaceHolderTitle}
+							{(user && user.email) || (!user && string.routes.userNamePlaceHolderTitle)}
 							</div>
 							<div className="settings-content" onClick={() => logOutAction(history, dispatch)} >{string.routes.logOutTitle}</div>
 						</div>)
