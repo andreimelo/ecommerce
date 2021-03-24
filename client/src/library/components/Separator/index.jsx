@@ -4,7 +4,7 @@ import './style.css';
 
 function Separator({title}) {
     return (
-        <div class="separator">{title}</div>  
+        <div className="separator">{title}</div>  
     )
 }
 

@@ -4,9 +4,11 @@ export const string = {
 	},
 
 	routes       : {
-		homeTitle     : 'Home',
-		loginTitle    : 'Login',
-		registerTitle : 'Register',
+		homeTitle                : 'Home',
+		loginTitle               : 'Login',
+		registerTitle            : 'Register',
+		userNamePlaceHolderTitle : 'Username',
+		logOutTitle              : 'Logout',
 	},
 	navigation   : {
 		shopTitle          : 'Shop',

@@ -1,8 +1,8 @@
-import React, {Suspense} from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import React, { Suspense } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Footer from '../../library/components/Footer';
 import Header from '../../library/components/Header';
-import {route} from '../../library/utilities/routes';
+import { route } from '../../library/utilities/routes';
 
 function initialRoutes(){
 	return (
@@ -15,9 +15,7 @@ function initialRoutes(){
 							key={key}
 							exact
 							path={item.path}
-							component={
-								item.component
-							}
+							component={item.component}
 						/>
 					))}
 				</Switch>

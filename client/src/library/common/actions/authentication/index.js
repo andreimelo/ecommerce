@@ -1,4 +1,46 @@
 import firebase from 'firebase';
+import { auth, googleAuthProvider } from '../../config/firebase';
+
+export async function logInAction(values, history, dispatch){
+	try {
+		const result = await auth.signInWithEmailAndPassword(
+			values.email,
+			values.password,
+		);
+		const { user } = result;
+		const idTokenResult = await user.getIdTokenResult();
+
+		dispatch({
+			type    : 'LOGGED_IN_USER',
+			payload : {
+				email : user.email,
+				token : idTokenResult,
+			},
+		});
+		return history.push('/');
+	} catch (error) {
+		alert(error.message);
+	}
+}
+
+export async function googleLogInAction(history, dispatch){
+	try {
+		const result = await auth.signInWithPopup(googleAuthProvider);
+		const { user } = result;
+		const idTokenResult = await user.getIdTokenResult();
+
+		dispatch({
+			type    : 'LOGGED_IN_USER',
+			payload : {
+				email : user.email,
+				token : idTokenResult,
+			},
+		});
+		return history.push('/');
+	} catch (error) {
+		alert(error.message);
+	}
+}
 
 export async function onAuthStateAction(user, dispatch){
 	const idTokenResult = await user.getIdTokenResult();
@@ -11,11 +53,11 @@ export async function onAuthStateAction(user, dispatch){
 	});
 }
 
-export async function logOutAction(dispatch){
+export async function logOutAction(history, dispatch){
 	firebase.auth().signOut();
 	dispatch({
 		type    : 'LOGOUT',
 		payload : null,
 	});
-	// history.push('/login')
+	return history.push('/login');
 }

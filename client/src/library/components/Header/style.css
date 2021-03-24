@@ -1,3 +1,27 @@
+.list {
+  font-size: 16px;
+  border: none;
+}
+
+.settings {
+  position: relative;
+  display: inline-block;
+}
+
+.settings-content {
+  display: none;
+  position: absolute;
+  width: 100%;
+  padding: 10px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  cursor: pointer;
+}
+
+.settings:hover .settings-content {
+  display: block;
+}
+
 .nav-container {
   width: 100%;
   height: auto;
@@ -14,7 +38,7 @@
 .nav-title {
   /* background: red;  */
   display: inline-block;
-  padding: 30px 40px 20px 40px;
+  padding: 30px 30px 10px 30px;
   font-weight: var(--font-poppins-400);
   cursor: pointer;
 }

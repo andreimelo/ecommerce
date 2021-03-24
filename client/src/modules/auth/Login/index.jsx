@@ -8,13 +8,20 @@ import { string } from '../../../library/common/constants/strings';
 import { type } from '../../../library/common/constants/types';
 import validateLogin from '../../../library/utilities/validators/loginValidator';
 import useInput from '../../../library/hooks/useInput';
+import { logInAction, googleLogInAction } from '../../../library/common/actions/authentication';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 function Login() {
-
-	const { values, handleChange, handleSubmit, errors } = useInput("",validateLogin);
+	
+	// Hooks
+	const { values, loading, handleChange, handleSubmit, errors } = useInput(logInAction, validateLogin);
+	const dispatch = useDispatch();
+	const history = useHistory();
 
 	return(
 		<div className="container default">
+			{loading && <div>LOADING....</div>}
 			<CustomLabel variant={"label default-color"} title={string.label.login.email} />
 			<CustomInput
 				type={type.input.email}
@@ -36,7 +43,7 @@ function Login() {
 			/>
 			<CustomButton variant={"button bg-default-color no-size"} title={"Sign In"} onClick={() => handleSubmit()} />
 			<CustomSeparator title={string.label.login.orSignInWith} />
-			<CustomButton variant={"button bg-google-red-color no-size"} title={"Sign In with Google"} onClick={() => handleSubmit()} />
+			<CustomButton variant={"button bg-google-red-color no-size"} title={"Sign In with Google"} onClick={() => googleLogInAction(history,dispatch)} />
 		</div>
 	)
 }

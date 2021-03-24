@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const useInput = (callback, validate) => {
 	const [
@@ -13,17 +15,26 @@ const useInput = (callback, validate) => {
 		isSubmitting,
 		setIsSubmitting,
 	] = useState(false);
+	const [
+		loading,
+		setLoading,
+	] = useState(false);
+
+	const history = useHistory();
+	const dispatch = useDispatch();
 
 	useEffect(
 		() => {
 			if (Object.keys(errors).length === 0 && isSubmitting) {
-				callback(values);
+				callback(values, history, dispatch);
 			}
 		},
 		[
 			values,
 			errors,
+			dispatch,
 			callback,
+			history,
 			isSubmitting,
 		],
 	);
@@ -45,6 +56,7 @@ const useInput = (callback, validate) => {
 		handleChange,
 		handleSubmit,
 		values,
+		loading,
 		errors,
 	};
 };
