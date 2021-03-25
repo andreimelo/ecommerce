@@ -6,9 +6,14 @@ import CustomInput from '../../../library/components/Input';
 import useInput from '../../../library/hooks/useInput';
 import '../../../resources/styles/global.css';
 import { string } from '../../../library/common/constants/strings';
+import validateForgotPasswordEmail from '../../../library/utilities/validators/forgotPasswordValidator';
+import { forgotPassword } from '../../../library/utilities/auth/register';
 
 function ForgotPassword(){
-	const { values, handleChange, handleSubmit, errors } = useInput('', '');
+	const { values, handleChange, handleSubmit, errors } = useInput(
+		forgotPassword,
+		validateForgotPasswordEmail,
+	);
 
 	return (
 		<div className='container default'>

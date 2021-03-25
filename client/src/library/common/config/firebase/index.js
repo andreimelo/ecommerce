@@ -15,6 +15,11 @@ export const registerConfig = {
 	handleCodeInApp : true,
 };
 
+export const forgotPasswordConfig = {
+	url             : 'http://localhost:3000/login',
+	handleCodeInApp : true,
+};
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 

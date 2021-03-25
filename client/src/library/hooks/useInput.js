@@ -22,7 +22,7 @@ const useInput = (callback, validate) => {
 	useEffect(
 		() => {
 			if (Object.keys(errors).length === 0 && isSubmitting) {
-				callback(values, history, dispatch);
+				return callback(values, history, dispatch);
 			}
 		},
 		[

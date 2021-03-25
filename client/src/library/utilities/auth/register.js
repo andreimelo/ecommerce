@@ -1,5 +1,23 @@
-import { auth, registerConfig } from '../../../library/common/config/firebase';
+import {
+	auth,
+	registerConfig,
+	forgotPasswordConfig,
+} from '../../../library/common/config/firebase';
 import { saveToStorage } from '../storage';
+
+export async function forgotPassword(values){
+	try {
+		const result = await auth.sendPasswordResetEmail(
+			values.email,
+			forgotPasswordConfig,
+		);
+		// add component success
+		alert(`Check your email for password reset link`);
+		return result;
+	} catch (error) {
+		alert(error.message);
+	}
+}
 
 export async function registerUserEmail(values){
 	try {
