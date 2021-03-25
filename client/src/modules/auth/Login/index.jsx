@@ -10,7 +10,7 @@ import validateLogin from '../../../library/utilities/validators/loginValidator'
 import useInput from '../../../library/hooks/useInput';
 import { logInAction, googleLogInAction } from '../../../library/common/actions/authentication';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';	
 
 function Login() {
 	

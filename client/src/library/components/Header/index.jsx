@@ -9,9 +9,9 @@ import { logOutAction } from '../../common/actions/authentication';
 
 function Header() {
 	
-	let history = useHistory();
-	let dispatch = useDispatch();
-	let user = useSelector(({user}) => user)
+	const history = useHistory();
+	const dispatch = useDispatch();
+	const user = useSelector(({user}) => user)
 	
 	return (
 		<nav className='nav-container shadow'>
