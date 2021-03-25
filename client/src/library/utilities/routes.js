@@ -1,4 +1,5 @@
 import { lazy } from 'react';
+const NotFound = lazy(() => import('../../modules/default/404'));
 const Home = lazy(() => import('../../modules/default/Home'));
 const Login = lazy(() => import('../../modules/auth/Login'));
 const ForgotPassword = lazy(() => import('../../modules/auth/ForgotPassword'));
@@ -37,5 +38,9 @@ export const route = [
 	{
 		path      : '/cart',
 		component : Cart,
+	},
+	{
+		path      : '*',
+		component : NotFound,
 	},
 ];
