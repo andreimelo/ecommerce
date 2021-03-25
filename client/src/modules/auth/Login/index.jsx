@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useEffect} from 'react';
 import '../../../resources/styles/global.css';
 import CustomLabel from '../../../library/components/Label';
 import CustomInput from '../../../library/components/Input';
@@ -9,15 +9,23 @@ import { type } from '../../../library/common/constants/types';
 import validateLogin from '../../../library/utilities/validators/loginValidator';
 import useInput from '../../../library/hooks/useInput';
 import { logInAction, googleLogInAction } from '../../../library/common/actions/authentication';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';	
 
 function Login() {
 	
 	// Hooks
 	const { values, handleChange, handleSubmit, errors } = useInput(logInAction, validateLogin);
+	
+	const user = useSelector(({ user }) => user);
 	const dispatch = useDispatch();
 	const history = useHistory();
+
+	useEffect(() => {
+		if (user && user.token) {
+			return history.push('/')
+		}
+	}, [history, user]);
 
 	return(
 		<div className="container default">

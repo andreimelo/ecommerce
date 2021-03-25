@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useEffect } from 'react';
 import { type } from '../../../library/common/constants/types';
 import CustomButton from '../../../library/components/Button';
 import CustomLabel from '../../../library/components/Label';
@@ -8,11 +8,22 @@ import { registerUserEmail } from '../../../library/utilities/auth/register';
 import validateRegisterEmail from '../../../library/utilities/validators/registerEmailValidator';
 import '../../../resources/styles/global.css';
 import { string } from '../../../library/common/constants/strings';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 function Register() {
 	
 	const { values, handleChange, handleSubmit ,errors } = useInput(registerUserEmail,validateRegisterEmail);
 	
+	const user = useSelector(({ user }) => user);
+	const history = useHistory();
+
+	useEffect(() => {
+		if (user && user.token) {
+			return history.push('/')
+		}
+	}, [history, user]);
+
 	return (
 		<div className="container default"> 
 			<CustomLabel variant={"label default-color"} title={string.label.register.email}/>
