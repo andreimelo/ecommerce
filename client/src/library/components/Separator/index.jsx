@@ -12,4 +12,4 @@ Separator.propTypes = {
 	title: PropTypes.string.isRequired,
 };
 
-export default Separator;
+export default React.memo(Separator);
