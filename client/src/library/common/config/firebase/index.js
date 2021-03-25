@@ -11,12 +11,12 @@ const firebaseConfig = {
 };
 
 export const registerConfig = {
-	url             : 'http://localhost:3000/register/complete',
+	url             : process.env.REACT_APP_REGISTER_COMPLETE_REDIRECT_URL,
 	handleCodeInApp : true,
 };
 
 export const forgotPasswordConfig = {
-	url             : 'http://localhost:3000/login',
+	url             : process.env.REACT_APP_FORGOT_PASSWORD_REDIRECT_URL,
 	handleCodeInApp : true,
 };
 
