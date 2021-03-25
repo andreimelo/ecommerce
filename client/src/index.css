@@ -49,3 +49,8 @@ button,
 input {
   font-family: "Poppins", sans-serif;
 }
+
+button:focus,
+input:focus {
+  outline: 0;
+}
