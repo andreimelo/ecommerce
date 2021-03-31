@@ -1,9 +1,12 @@
 const string = {
-	common : {
+	common   : {
 		startServerMessage : 'Welcome to ecommerce api',
 	},
-	server : {
+	server   : {
 		listeningTo : 'Server listening at http://localhost:',
+	},
+	database : {
+		connectedToMongodb : 'Connected to MongoDb',
 	},
 };
 
