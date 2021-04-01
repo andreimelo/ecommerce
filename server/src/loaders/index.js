@@ -5,6 +5,7 @@ const string = require('../utilities/strings');
 const { connectToMongoDb } = require('../config/mongoDb');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const { readdirSync } = require('fs');
 
 //  Body parser json
 app.use(bodyParser.urlencoded({ extended: false, limit: '2mb' }));
@@ -21,6 +22,7 @@ app.use(cors());
 
 // Compression
 app.use(compression());
+readdirSync('src/routes').map((r) => app.use('/api', require('../routes/' + r)));
 
 app.get('/', (req, res) => {
 	res.send(string.common.startServerMessage);
