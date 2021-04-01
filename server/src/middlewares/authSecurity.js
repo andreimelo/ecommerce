@@ -9,7 +9,7 @@ exports.authCheck = async (req, res, next) => {
 		next();
 	} catch (error) {
 		res.status(401).json({
-			err : 'Invalid or expired token.',
+			error,
 		});
 	}
 };

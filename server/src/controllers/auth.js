@@ -10,6 +10,7 @@ exports.createOrUpdateUser = async (req, res) => {
 	const user = await User.findOneAndUpdate({ email }, { name, picture }, { new: true });
 
 	if (user) {
+		console.log(user, 'existing user');
 		return res.json(user);
 	}
 	else {
@@ -18,6 +19,7 @@ exports.createOrUpdateUser = async (req, res) => {
 			name,
 			picture,
 		}).save();
+		console.log(newUser, 'new user');
 		return res.json(newUser);
 	}
 };
