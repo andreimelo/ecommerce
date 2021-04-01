@@ -11,7 +11,7 @@ const options = {
 
 async function connectToMongoDb(){
 	try {
-		await mongoose.connect(database.uri, options);
+		await mongoose.connect(database.mongodb_uri, options);
 		console.log(string.database.connectedToMongodb);
 	} catch (error) {
 		console.log(error);
