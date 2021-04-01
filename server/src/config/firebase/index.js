@@ -1,9 +1,7 @@
 const admin = require('firebase-admin');
-const { database } = require('../../config/env');
-
-var serviceAccount = require('../firebase/fbServiceAccountKey.json');
+const { database, firebase } = require('../../config/env');
 
 admin.initializeApp({
-	credential  : admin.credential.cert(serviceAccount),
+	credential  : admin.credential.cert(firebase.credentials),
 	databaseURL : database.firebasedb_uri,
 });
