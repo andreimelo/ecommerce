@@ -4,7 +4,7 @@ node_modules/
 yarn.lock
 package-lock.json
 
-src/config/firebase/fbServiceAccessKey.json
+server/src/config/firebase/fbServiceAccountKey.json
 
 .env
 .env.swp
