@@ -5,8 +5,8 @@ const string = require('../../utilities/strings');
 const options = {
 	useNewUrlParser    : true,
 	useCreateIndex     : true,
-	useFindAndModify   : true,
 	useUnifiedTopology : true,
+	useFindAndModify   : false,
 };
 
 async function connectToMongoDb(){

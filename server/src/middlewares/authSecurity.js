@@ -1,9 +1,9 @@
 const admin = require('../config/firebase');
 
 exports.authCheck = async (req, res, next) => {
-	let { authToken } = req.headers;
+	let { authtoken } = req.headers;
 	try {
-		const firebaseUser = await admin.auth().verifyIdToken(authToken);
+		const firebaseUser = await admin.auth().verifyIdToken(authtoken);
 		console.log(firebaseUser);
 		req.user = firebaseUser;
 		next();
