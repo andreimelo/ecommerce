@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 import { auth, googleAuthProvider } from '../../config/firebase';
+import { createOrUpdateUser } from '../../../services/auth';
 
 export async function logInAction(values, history, dispatch){
 	try {
@@ -9,6 +10,8 @@ export async function logInAction(values, history, dispatch){
 		);
 		const { user } = result;
 		const idTokenResult = await user.getIdTokenResult();
+
+		createOrUpdateUser(idTokenResult.token);
 
 		dispatch({
 			type    : 'LOGGED_IN_USER',
