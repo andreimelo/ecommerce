@@ -1,7 +1,6 @@
 const { router } = require('../config/express');
+const { defaultAuthRoute } = require('../controllers/auth');
 
-router.get('/auth', (req, res) => {
-	return res.json({ data: 'This is auth route' });
-});
+router.get('/auth', defaultAuthRoute);
 
 module.exports = router;
