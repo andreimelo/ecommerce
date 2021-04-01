@@ -5,3 +5,5 @@ admin.initializeApp({
 	credential  : admin.credential.cert(firebase.credentials),
 	databaseURL : database.firebasedb_uri,
 });
+
+module.exports = admin;
