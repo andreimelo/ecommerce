@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import { auth, googleAuthProvider } from '../../config/firebase';
-import { createOrUpdateUser } from '../../../services/auth';
+import { createOrUpdateUser, currentUser } from '../../../services/auth';
 
 export async function logInAction(values, history, dispatch){
 	try {
@@ -56,11 +56,17 @@ export async function googleLogInAction(history, dispatch){
 
 export async function onAuthStateAction(user, dispatch){
 	const idTokenResult = await user.getIdTokenResult();
+
+	const { name, role, _id } = await currentUser(idTokenResult.token);
+
 	return dispatch({
 		type    : 'LOGGED_IN_USER',
 		payload : {
+			name  : name,
 			email : user.email,
 			token : idTokenResult.token,
+			role  : role,
+			_id   : _id,
 		},
 	});
 }
