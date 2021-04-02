@@ -4,7 +4,7 @@ import {
 	forgotPasswordConfig,
 } from '../../../library/common/config/firebase';
 import { saveToStorage } from '../storage';
-
+import { createOrUpdateUser } from '../../services/auth';
 export async function forgotPassword(values){
 	try {
 		const result = await auth.sendPasswordResetEmail(
@@ -34,7 +34,7 @@ export async function registerUserEmail(values){
 	}
 }
 
-export async function registerUserComplete(values, history){
+export async function registerUserComplete(values, history, dispatch){
 	try {
 		let { user: { emailVerified } } = await auth.signInWithEmailLink(
 			values.email,
@@ -43,7 +43,22 @@ export async function registerUserComplete(values, history){
 		if (emailVerified) {
 			let user = auth.currentUser;
 			await user.updatePassword(values.password);
-			// const idTokenResult = await user.getIdTokenResult();
+
+			const idTokenResult = await user.getIdTokenResult();
+
+			let { name, role, _id } = await createOrUpdateUser(idTokenResult.token);
+
+			dispatch({
+				type    : 'LOGGED_IN_USER',
+				payload : {
+					name  : name,
+					email : user.email,
+					token : idTokenResult.token,
+					role  : role,
+					_id   : _id,
+				},
+			});
+
 			return history.push('/');
 		}
 	} catch (error) {
