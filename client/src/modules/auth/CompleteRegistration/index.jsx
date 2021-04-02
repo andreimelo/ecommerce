@@ -19,7 +19,7 @@ function CompleteRegistration() {
 	}
 	useEffect(() => {
 	
-		return populateEmailInput();
+		 populateEmailInput();
 	}, []);
 
 
