@@ -11,15 +11,19 @@ export async function logInAction(values, history, dispatch){
 		const { user } = result;
 		const idTokenResult = await user.getIdTokenResult();
 
-		createOrUpdateUser(idTokenResult.token);
+		let { name, role, _id } = await createOrUpdateUser(idTokenResult.token);
 
 		dispatch({
 			type    : 'LOGGED_IN_USER',
 			payload : {
+				name  : name,
 				email : user.email,
-				token : idTokenResult,
+				token : idTokenResult.token,
+				role  : role,
+				_id   : _id,
 			},
 		});
+
 		return history.push('/');
 	} catch (error) {
 		alert(error.message);
@@ -32,11 +36,16 @@ export async function googleLogInAction(history, dispatch){
 		const { user } = result;
 		const idTokenResult = await user.getIdTokenResult();
 
+		let { name, role, _id } = await createOrUpdateUser(idTokenResult.token);
+
 		dispatch({
 			type    : 'LOGGED_IN_USER',
 			payload : {
+				name  : name,
 				email : user.email,
-				token : idTokenResult,
+				token : idTokenResult.token,
+				role  : role,
+				_id   : _id,
 			},
 		});
 		return history.push('/');
