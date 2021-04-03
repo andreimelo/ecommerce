@@ -9,6 +9,7 @@ const CompleteRegistration = lazy(() =>
 );
 const Shop = lazy(() => import('../../modules/default/Shop'));
 const Cart = lazy(() => import('../../modules/default/Cart'));
+const History = lazy(() => import('../../modules/user/History'));
 
 export const route = [
 	{
@@ -22,6 +23,10 @@ export const route = [
 	{
 		path      : '/forgot/password',
 		component : ForgotPassword,
+	},
+	{
+		path      : '/user/history',
+		component : History,
 	},
 	{
 		path      : '/register',
