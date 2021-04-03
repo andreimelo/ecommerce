@@ -1,6 +1,7 @@
 import firebase from 'firebase';
 import { auth, googleAuthProvider } from '../../config/firebase';
 import { createOrUpdateUser, currentUser } from '../../../services/auth';
+import { roleBasedRedirect } from '../../../utilities/auth/role';
 
 export async function logInAction(values, history, dispatch){
 	try {
@@ -24,7 +25,7 @@ export async function logInAction(values, history, dispatch){
 			},
 		});
 
-		return history.push('/');
+		return roleBasedRedirect(role, history);
 	} catch (error) {
 		alert(error.message);
 	}
@@ -48,7 +49,7 @@ export async function googleLogInAction(history, dispatch){
 				_id   : _id,
 			},
 		});
-		return history.push('/');
+		return roleBasedRedirect(role, history);
 	} catch (error) {
 		alert(error.message);
 	}
