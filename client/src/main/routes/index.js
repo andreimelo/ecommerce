@@ -11,27 +11,22 @@ function initialRoutes(){
 			<BrowserRouter>
 				<Header />
 				<Switch>
-					{route.map((item, key) => {
-						if (item.path === '/user/history') {
-							return (
+					{route.map(
+						(item, key) =>
+
+							item.path === '/user/history' ?
 								<PrivateRoute
 									key={key}
 									path={item.path}
 									component={item.component}
-								/>
-							);
-						}
-						else {
-							return (
+								/> :
 								<Route
 									key={key}
 									exact
 									path={item.path}
 									component={item.component}
-								/>
-							);
-						}
-					})}
+								/>,
+					)}
 				</Switch>
 				<Footer />
 			</BrowserRouter>
