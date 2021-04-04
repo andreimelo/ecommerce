@@ -19,7 +19,8 @@ function CompleteRegistration() {
 	}
 	useEffect(() => {
 	
-		 populateEmailInput();
+		populateEmailInput();
+		// eslint-disable-next-line
 	}, []);
 
 

@@ -25,13 +25,13 @@ const useInput = (callback, validate) => {
 				return callback(values, history, dispatch);
 			}
 		},
+		// eslint-disable-next-line
 		[
-			values,
+			isSubmitting,
+			callback,
 			errors,
 			dispatch,
-			callback,
 			history,
-			isSubmitting,
 		],
 	);
 
