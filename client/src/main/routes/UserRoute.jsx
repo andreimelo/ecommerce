@@ -3,7 +3,7 @@ import { Route, withRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import LoadingToRedirect from './LoadingToRedirect';
 
-const PrivateRoute = withRouter(({ component: Component, isLoggedIn, ...rest }) => {
+const UserRoute = withRouter(({ component: Component, isLoggedIn, ...rest }) => {
   const { user } = useSelector((state) => ({ ...state }));
     const componentCheck = props => {
     if (user && user.token) {
@@ -17,4 +17,4 @@ const PrivateRoute = withRouter(({ component: Component, isLoggedIn, ...rest }) 
   return <Route {...rest} render={props => componentCheck(props)} />;
 });
 
-export default PrivateRoute;
+export default UserRoute;

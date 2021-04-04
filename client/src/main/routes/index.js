@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Footer from '../../library/components/Footer';
 import Header from '../../library/components/Header';
 import { route } from '../../library/utilities/routes';
-import PrivateRoute from '../routes/PrivateRoute';
+import UserRoute from './UserRoute';
 
 function initialRoutes(){
 	return (
@@ -14,8 +14,7 @@ function initialRoutes(){
 					{route.map(
 						(item, key) =>
 
-							item.path === '/user/history' ?
-								<PrivateRoute
+								item.path === '/user/history' ? <UserRoute
 									key={key}
 									path={item.path}
 									component={item.component}
