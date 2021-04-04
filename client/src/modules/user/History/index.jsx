@@ -1,7 +1,7 @@
 import React from 'react';
 
 function History(){
-	return <div> Welcome to History</div>;
+	return <div className="layout-default"> Welcome to History</div>;
 }
 
 export default History;

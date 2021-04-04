@@ -48,14 +48,14 @@
 }
 
 .category {
-  padding: 5px 20px 30px 20px;
+  padding: 5px 20px 30px 0px;
   width: auto;
 }
 
 #logo {
   font-size: var(--font-medium);
   display: inline-block;
-  padding: 20px;
+  padding: 20px 0px;
 }
 
 .shadow {
