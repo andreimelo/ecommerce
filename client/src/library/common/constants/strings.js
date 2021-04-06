@@ -9,6 +9,9 @@ export const string = {
 		registerTitle            : 'Register',
 		userNamePlaceHolderTitle : 'Username',
 		logOutTitle              : 'Logout',
+		historyTitle             : 'History',
+		changePasswordTitle      : 'Change Password',
+		wishlistTitle            : 'Wishlist',
 	},
 	navigation   : {
 		shopTitle          : 'Shop',

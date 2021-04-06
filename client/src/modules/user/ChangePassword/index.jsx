@@ -1,13 +1,13 @@
 import React from 'react';
 import SideBar from '../../../library/components/SideBar';
 
-function History(){
+function ChangePassword(){
 	return (
 		<div className="layout-default"> 
-			<SideBar />
-			Welcome to History
-		</div>
-	);	
+            <SideBar />
+			Welcome to ChangePassword
+        </div>
+    );	
 }
 
-export default History;
+export default ChangePassword;

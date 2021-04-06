@@ -14,8 +14,11 @@ function initialRoutes(){
 					{route.map(
 						(item, key) =>
 
-								item.path === '/user/history' ? <UserRoute
+								item.path === '/user/history' ||
+								item.path === '/user/change-password' ||
+								item.path === '/user/wishlist' ? <UserRoute
 									key={key}
+									exact
 									path={item.path}
 									component={item.component}
 								/> :
