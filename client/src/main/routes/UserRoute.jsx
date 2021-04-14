@@ -11,6 +11,7 @@ const UserRoute = withRouter(({ component: Component, isLoggedIn, ...rest }) => 
     } else {
       return (
          <LoadingToRedirect/>
+        // <Redirect to={{ pathname: "/", state: { from: props.location } }} />
       );
     }
   };
