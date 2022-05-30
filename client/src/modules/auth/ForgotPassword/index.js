@@ -6,8 +6,8 @@ import CustomInput from '../../../library/components/Input';
 import useInput from '../../../library/hooks/useInput';
 import '../../../resources/styles/global.css';
 import { string } from '../../../library/common/constants/strings';
-import validateForgotPasswordEmail from '../../../library/utilities/validators/forgotPasswordValidator';
-import { forgotPassword } from '../../../library/utilities/auth/register';
+import validateForgotPasswordEmail from '../../../library/helpers/validators/forgotPasswordValidator';
+import { forgotPassword } from '../../../library/helpers/auth/register';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
