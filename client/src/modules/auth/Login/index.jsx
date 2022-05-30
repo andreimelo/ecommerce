@@ -6,7 +6,7 @@ import CustomButton from '../../../library/components/Button';
 import CustomSeparator from '../../../library/components/Separator';
 import { string } from '../../../library/common/constants/strings';
 import { type } from '../../../library/common/constants/types';
-import validateLogin from '../../../library/utilities/validators/loginValidator';
+import validateLogin from '../../../library/helpers/validators/loginValidator';
 import useInput from '../../../library/hooks/useInput';
 import { logInAction, googleLogInAction } from '../../../library/common/actions/authentication';
 import { useDispatch,useSelector } from 'react-redux';

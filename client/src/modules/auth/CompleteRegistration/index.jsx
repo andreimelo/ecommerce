@@ -4,10 +4,10 @@ import CustomInput from '../../../library/components/Input';
 import CustomButton from '../../../library/components/Button';
 import { string } from '../../../library/common/constants/strings';
 import { type } from '../../../library/common/constants/types';
-import { fetchFromStorage } from '../../../library/utilities/storage';
+import { fetchFromStorage } from '../../../library/helpers/storage';
 import useInput from '../../../library/hooks/useInput';
-import { registerUserComplete } from '../../../library/utilities/auth/register';
-import validateRegisterComplete  from '../../../library/utilities/validators/registerUserComplete';
+import { registerUserComplete } from '../../../library/helpers/auth/register';
+import validateRegisterComplete  from '../../../library/helpers/validators/registerUserComplete';
 
 function CompleteRegistration() {
 

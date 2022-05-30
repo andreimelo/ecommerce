@@ -1,7 +1,7 @@
 import firebase from 'firebase';
 import { auth, googleAuthProvider } from '../../config/firebase';
 import { createOrUpdateUser, currentUser } from '../../../services/auth';
-import { roleBasedRedirect } from '../../../utilities/auth/role';
+import { roleBasedRedirect } from '../../../helpers/auth/role';
 
 export async function logInAction(values, history, dispatch){
 	try {
