@@ -6,7 +6,9 @@ import LoadingToRedirect from './LoadingToRedirect';
 const UserRoute = withRouter(({ component: Component, isLoggedIn, ...rest }) => {
   const { user } = useSelector((state) => ({ ...state }));
     const componentCheck = props => {
-    if (user && user.token) {
+    let { role, token } = user || {};
+
+    if (role ==='subscriber' && token) {
       return <Component {...props} />;
     } else {
       return (

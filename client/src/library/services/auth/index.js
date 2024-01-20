@@ -39,3 +39,23 @@ export async function currentUser(token){
 		alert(error);
 	}
 }
+
+export async function currentAdmin(token){
+	try {
+		const options = {
+			method  : 'POST',
+			headers : {
+				Accept         : 'application/json',
+				'Content-Type' : 'application/json',
+				authToken      : token || '',
+			},
+		};
+		const result = await fetch(`${env.base_uri}/auth/current-admin`, options);
+
+		const data = await result.json();
+
+		return data;
+	} catch (error) {
+		alert(error);
+	}
+}

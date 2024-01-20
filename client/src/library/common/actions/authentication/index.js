@@ -56,20 +56,24 @@ export async function googleLogInAction(history, dispatch){
 }
 
 export async function onAuthStateAction(user, dispatch){
-	const idTokenResult = await user.getIdTokenResult();
+	try {
+		const idTokenResult = await user.getIdTokenResult();
 
-	const { name, role, _id } = await currentUser(idTokenResult.token);
+		const { name, role, _id } = await currentUser(idTokenResult.token);
 
-	return dispatch({
-		type    : 'LOGGED_IN_USER',
-		payload : {
-			name  : name,
-			email : user.email,
-			token : idTokenResult.token,
-			role  : role,
-			_id   : _id,
-		},
-	});
+		return dispatch({
+			type    : 'LOGGED_IN_USER',
+			payload : {
+				name  : name,
+				email : user.email,
+				token : idTokenResult.token,
+				role  : role,
+				_id   : _id,
+			},
+		});
+	} catch (error) {
+		console.log('Auth State Action Log', error);
+	}
 }
 
 export async function logOutAction(history, dispatch){
