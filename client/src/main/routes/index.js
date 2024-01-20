@@ -4,6 +4,7 @@ import Footer from '../../library/components/Footer';
 import Header from '../../library/components/Header';
 import { route } from '../../library/helpers/routes';
 import UserRoute from './UserRoute';
+import AdminRoute from './AdminRoute';
 
 function initialRoutes(){
 	return (
@@ -17,6 +18,12 @@ function initialRoutes(){
 								item.path === '/user/history' ||
 								item.path === '/user/change-password' ||
 								item.path === '/user/wishlist' ? <UserRoute
+									key={key}
+									exact
+									path={item.path}
+									component={item.component}
+								/> :
+								item.path === '/admin/dashboard' ? <AdminRoute
 									key={key}
 									exact
 									path={item.path}

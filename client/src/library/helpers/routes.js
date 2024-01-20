@@ -12,6 +12,7 @@ const CompleteRegistration = lazy(() =>
 const Shop = lazy(() => import('../../modules/default/Shop'));
 const Cart = lazy(() => import('../../modules/default/Cart'));
 const History = lazy(() => import('../../modules/user/History'));
+const AdminDashboard = lazy(() => import('../../modules/admin/AdminDashboard'));
 
 export const route = [
 	{
@@ -53,6 +54,10 @@ export const route = [
 	{
 		path      : '/cart',
 		component : Cart,
+	},
+	{
+		path      : '/admin/dashboard',
+		component : AdminDashboard,
 	},
 	{
 		path      : '*',
