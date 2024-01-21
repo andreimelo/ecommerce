@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import Routes from '../src/main/routes';
 import { auth } from '../src/library/common/config/firebase';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { onAuthStateAction } from './library/common/actions/authentication';
 
 function App(){
 	const dispatch = useDispatch();
+	const storeData = useSelector((state) => state);
 
 	useEffect(
 		() => {
@@ -23,7 +24,7 @@ function App(){
 
 	return (
 		<React.Fragment>
-			<Routes />
+			<Routes store={storeData} />
 		</React.Fragment>
 	);
 }

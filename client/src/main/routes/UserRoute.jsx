@@ -1,23 +1,36 @@
 import React from 'react';
-import { Route, withRouter } from 'react-router-dom';
+import { Route, withRouter, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import LoadingToRedirect from './LoadingToRedirect';
+// import LoadingToRedirect from './LoadingToRedirect';
 
 const UserRoute = withRouter(({ component: Component, isLoggedIn, ...rest }) => {
   const { user } = useSelector((state) => ({ ...state }));
-    const componentCheck = props => {
-    let { role, token } = user || {};
+  const { role, token } = user || {};
+  const history = useHistory();
 
-    if (role ==='subscriber' && token) {
-      return <Component {...props} />;
-    } else {
-      return (
-         <LoadingToRedirect/>
-        // <Redirect to={{ pathname: "/", state: { from: props.location } }} />
-      );
-    }
+  const componentCheck = props => {
+    let isSubscriber =
+      role === 'subscriber' &&
+      token;
+    let isSubscriberUndefined =
+      role === undefined &&
+      token === undefined;
+    let isAdmin =
+      role === "admin" &&
+      token; 
+    
+      if (isSubscriber || isSubscriberUndefined) {
+        return <Component {...props} />;
+      } 
+      if (isAdmin) {
+        return history.push('/admin/dashboard')
+      }
   };
-  return <Route {...rest} render={props => componentCheck(props)} />;
+  return (
+      <>
+        <Route {...rest} render={props => componentCheck(props)} />
+      </>
+  );
 });
-
+ 
 export default UserRoute;

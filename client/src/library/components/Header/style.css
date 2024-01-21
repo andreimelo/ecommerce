@@ -29,35 +29,33 @@
 }
 
 .nav-sub-container {
-  -moz-box-pack: justify;
+  display: flex;
   justify-content: space-between;
-  -moz-box-align: center;
   align-items: center;
+  padding: 20px 0px;
 }
 
 .nav-title {
   /* background: red;  */
-  display: inline-block;
-  padding: 30px 30px 10px 30px;
   font-weight: var(--font-poppins-400);
   cursor: pointer;
+  padding: 0px 20px;
 }
 
-.position-right {
-  float: right;
-}
-
-.category {
-  padding: 5px 20px 30px 0px;
-  width: auto;
-}
+/* .category {
+  padding-bottom: 30px;
+} */
 
 #logo {
   font-size: var(--font-medium);
   display: inline-block;
-  padding: 20px 0px;
 }
 
 .shadow {
   box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.25);
+}
+
+.nav-link-container {
+  display: inline-flex;
+  align-items: baseline;
 }
