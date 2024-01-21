@@ -1,37 +1,46 @@
 import React,{ useEffect, useState} from 'react';
-import { Route } from "react-router-dom";
+import { Route, useHistory } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import LoadingToRedirect from './LoadingToRedirect';
-import { currentAdmin } from '../../library/services/auth'
+// Commented might used this in the future
+// import LoadingToRedirect from './LoadingToRedirect';
 
-const AdminRoute = ({children, ...rest}) => {
+
+const AdminRoute = ({...rest}) => {
     const { user } = useSelector((state) => ({ ...state }));
     const [isAdmin, setIsAdmin] = useState(false);
-    
-    async function fetAdminData(user) {
+    const { role, token } = user || {};
+    const history = useHistory();
+
+    async function fetchAdminData() {
+        let isNotAdmin =
+            role !== "admin" &&
+            token && 
+            window.location.pathname === "/admin/dashboard";
+        let isAdminUndefined =
+            role === undefined &&
+            token === undefined &&
+            window.location.pathname === "/admin/dashboard";
+        
         // set default empty object value for user
-        let { role, token } = user || {};
-        if (role === 'admin' && token) {
-            console.log(user);
-            try {
-                let result = await currentAdmin(token);
-                
-                if (result) {
-                    setIsAdmin(true);
-                }
-            } catch (error) {
-                console.log('Admin route error log',error);
-                setIsAdmin(false);
-            }
+        if (isNotAdmin) {
+            return history.push('/')
+        } else if (isAdminUndefined) {
+            return history.push('/');
         }
-        return user;
+        else {
+            return setIsAdmin(true);
+        }
     }
 
     useEffect(() => {
-        fetAdminData(user);
-    }, [user]);
+        fetchAdminData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user, isAdmin]);
 
-    return isAdmin ? <Route {...rest} render={() => children} /> : <LoadingToRedirect />;
+    return isAdmin &&
+        (<> 
+            <Route {...rest} />
+        </>);
 }
 
 export default AdminRoute;
