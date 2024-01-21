@@ -34,7 +34,7 @@ function initialRoutes({ store }){
 				<Header role={role} />
 				<Switch>
 					<PublicRoute exact path='/' component={Home} />
-					<Route exact path='/home' component={Home} />
+					<PublicRoute exact path='/home' component={Home} />
 					{/* User Authentication */}
 					<PublicRoute exact path='/login' component={Login} />
 					<PublicRoute exact path='/register' component={Register} />
@@ -56,8 +56,8 @@ function initialRoutes({ store }){
 						component={ChangePassword}
 					/>
 					<UserRoute exact path='/user/wishlist' component={Wishlist} />
-					<Route exact path='/shop' component={Shop} />
-					<Route exact path='/cart' component={Cart} />
+					<PublicRoute exact path='/shop' component={Shop} />
+					<PublicRoute exact path='/cart' component={Cart} />
 					{/* Admin Dashboard*/}
 					<AdminRoute
 						exact

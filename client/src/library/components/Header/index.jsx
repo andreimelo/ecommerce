@@ -7,13 +7,13 @@ import CustomInput from '../Input';
 import './style.css';
 import { logOutAction } from '../../common/actions/authentication';
 
-function Header(role) {
+function Header({role}) {
 	
 	const history = useHistory();
 	const dispatch = useDispatch();
-    const { user } = useSelector((state) => ({ ...state }));
-
-	function renderRoleHeader(role) {
+	const { user } = useSelector((state) => ({ ...state }));
+	
+	function renderRoleHeader() {
 		switch (role) {
 			case 'admin':
 				return (
@@ -93,7 +93,7 @@ function Header(role) {
 		}
 	}
 
-	return renderRoleHeader(role)
+	return renderRoleHeader()
 }
 
 export default React.memo(Header);
