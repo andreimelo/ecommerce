@@ -4,16 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { string } from '../../common/constants/strings';
 import { type } from '../../common/constants/types';
 import CustomInput from '../Input';
+import PropTypes from 'prop-types';
 import './style.css';
 import { logOutAction } from '../../common/actions/authentication';
 
-function Header(role) {
+function Header({role}) {
 	
 	const history = useHistory();
 	const dispatch = useDispatch();
-    const { user } = useSelector((state) => ({ ...state }));
-
-	function renderRoleHeader(role) {
+	const { user } = useSelector((state) => ({ ...state }));
+	
+	function renderRoleHeader() {
 		switch (role) {
 			case 'admin':
 				return (
@@ -93,7 +94,11 @@ function Header(role) {
 		}
 	}
 
-	return renderRoleHeader(role)
+	return renderRoleHeader()
 }
+
+Header.propTypes = {
+	role: PropTypes.string.isRequired,
+};
 
 export default React.memo(Header);
