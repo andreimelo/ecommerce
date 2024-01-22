@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { string } from '../../common/constants/strings';
 import { type } from '../../common/constants/types';
 import CustomInput from '../Input';
+import PropTypes from 'prop-types';
 import './style.css';
 import { logOutAction } from '../../common/actions/authentication';
 
@@ -95,5 +96,9 @@ function Header({role}) {
 
 	return renderRoleHeader()
 }
+
+Header.propTypes = {
+	role: PropTypes.string.isRequired,
+};
 
 export default React.memo(Header);
