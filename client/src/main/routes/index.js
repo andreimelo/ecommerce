@@ -63,6 +63,7 @@ function initialRoutes({ store }){
 						exact
 						path='/admin/dashboard'
 						component={AdminDashboard}
+						{...user}
 					/>
 					<Route exact path='*' component={NotFound} />
 				</Switch>

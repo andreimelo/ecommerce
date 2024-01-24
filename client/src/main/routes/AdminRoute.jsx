@@ -1,14 +1,11 @@
 import React,{ useEffect, useState} from 'react';
-import { Route, useHistory } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { Route, useHistory, withRouter } from "react-router-dom";
 // Commented might used this in the future
 // import LoadingToRedirect from './LoadingToRedirect';
 
-
-const AdminRoute = ({...rest}) => {
-    const { user } = useSelector((state) => ({ ...state }));
+const AdminRoute = withRouter(({ component: Component, ...rest }) => {
     const [isAdmin, setIsAdmin] = useState(false);
-    const { role, token } = user || {};
+    const {role, token } = rest || {};
     const history = useHistory();
 
     async function fetchAdminData() {
@@ -22,11 +19,9 @@ const AdminRoute = ({...rest}) => {
             window.location.pathname === "/admin/dashboard";
         
         // set default empty object value for user
-        if (isNotAdmin) {
+        if (isNotAdmin || isAdminUndefined) {
             return history.push('/')
-        } else if (isAdminUndefined) {
-            return history.push('/');
-        }
+        } 
         else {
             return setIsAdmin(true);
         }
@@ -35,12 +30,13 @@ const AdminRoute = ({...rest}) => {
     useEffect(() => {
         fetchAdminData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user, isAdmin]);
+    }, [isAdmin]);
 
+    // might cause problem in role props
     return isAdmin &&
         (<> 
-            <Route {...rest} />
+        <Route render={() => <Component role={role}/>}/>
         </>);
-}
+  });
 
 export default AdminRoute;

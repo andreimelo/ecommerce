@@ -20,7 +20,7 @@ const UserRoute = withRouter(({ component: Component, isLoggedIn, ...rest }) => 
       token; 
     
       if (isSubscriber || isSubscriberUndefined) {
-        return <Component {...props} />;
+        return <Component {...props} role={role}/>;
       } 
       if (isAdmin) {
         return history.push('/admin/dashboard')
