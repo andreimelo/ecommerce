@@ -12,6 +12,13 @@ export const string = {
 		historyTitle             : 'History',
 		changePasswordTitle      : 'Change Password',
 		wishlistTitle            : 'Wishlist',
+		admin                    : {
+			productTitle     : 'Product',
+			productsTitle    : 'Products',
+			categoryTitle    : 'Category',
+			subCategoryTitle : 'Sub Category',
+			couponTitle      : 'Coupon',
+		},
 	},
 	navigation   : {
 		shopTitle          : 'Shop',
