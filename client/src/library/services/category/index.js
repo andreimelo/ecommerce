@@ -1,22 +1,18 @@
 import env from '../../common/config/env';
 
 export async function getCategories(){
-	try {
-		const options = {
-			method  : 'GET',
-			headers : {
-				Accept         : 'application/json',
-				'Content-Type' : 'application/json',
-			},
-		};
-		const result = await fetch(`${env.base_uri}/categories`, options);
+	const options = {
+		method  : 'GET',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json',
+		},
+	};
+	const result = await fetch(`${env.base_uri}/categories`, options);
 
-		const data = await result.json();
+	const data = await result.json();
 
-		return data;
-	} catch (error) {
-		alert(error);
-	}
+	return data;
 }
 
 export async function getCategory(slug){
@@ -79,21 +75,20 @@ export async function updateCategory(slug, category, token){
 }
 
 export async function createCategory(category, token){
-	try {
-		const options = {
-			method  : 'POST',
-			headers : {
-				Accept         : 'application/json',
-				'Content-Type' : 'application/json',
-				authToken      : token || '',
-			},
-		};
-		const result = await fetch(`${env.base_uri}/category`, category, options);
+	const options = {
+		method  : 'POST',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json',
+			authToken      : token || '',
+		},
+		body    : JSON.stringify({
+			name : category,
+		}),
+	};
+	const result = await fetch(`${env.base_uri}/category`, options);
 
-		const data = await result.json();
+	const data = await result.json();
 
-		return data;
-	} catch (error) {
-		alert(error);
-	}
+	return data;
 }
