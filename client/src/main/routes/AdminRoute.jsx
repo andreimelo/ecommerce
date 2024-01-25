@@ -7,8 +7,7 @@ const AdminRoute = withRouter(({ component: Component, ...rest }) => {
     const [isAdmin, setIsAdmin] = useState(false);
     const {role, token } = rest || {};
     const history = useHistory();
-
-    async function fetchAdminData() {
+async function fetchAdminData() {
         let isNotAdmin =
             role !== "admin" &&
             token && 

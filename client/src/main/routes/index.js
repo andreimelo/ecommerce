@@ -1,35 +1,93 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+//Components
+import Header from './../../library/components/Header';
 import Footer from '../../library/components/Footer';
-// import { route } from '../../library/helpers/routes';
+//Routes
 import UserRoute from './UserRoute';
 import AdminRoute from './AdminRoute';
-import Header from './../../library/components/Header';
 import PublicRoute from './PublicRoute';
+import env from '../../library/common/config/env';
+
 // Pages
-const Home = lazy(() => import('../../modules/default/Home'));
-const Login = lazy(() => import('../../modules/auth/Login'));
-const ForgotPassword = lazy(() => import('../../modules/auth/ForgotPassword'));
-const Register = lazy(() => import('../../modules/auth/Register'));
-const CompleteRegistration = lazy(() =>
-	import('../../modules/auth/CompleteRegistration'),
-);
-const ChangePassword = lazy(() => import('../../modules/user/ChangePassword'));
-const Wishlist = lazy(() => import('../../modules/user/Wishlist'));
-const NotFound = lazy(() => import('../../modules/default/404'));
+const Home = lazy(async () => {
+	const module = await import('../../modules/default/Home');
+	return module;
+});
+const Login = lazy(async () => {
+	const module = await import('../../modules/auth/Login');
+	return module;
+});
+const ForgotPassword = lazy(async () => {
+	const module = await import('../../modules/auth/ForgotPassword');
+	return module;
+});
+const Register = lazy(async () => {
+	const module = await import('../../modules/auth/Register');
+	return module;
+});
+const CompleteRegistration = lazy(async () => {
+	const module = await import('../../modules/auth/CompleteRegistration');
+	return module;
+});
+const ChangePassword = lazy(async () => {
+	const module = await import('../../modules/user/ChangePassword');
+	return module;
+});
+const Wishlist = lazy(async () => {
+	const module = await import('../../modules/user/Wishlist');
+	return module;
+});
 
-const Shop = lazy(() => import('../../modules/default/Shop'));
-const Cart = lazy(() => import('../../modules/default/Cart'));
-const History = lazy(() => import('../../modules/user/History'));
+const Shop = lazy(async () => {
+	const module = await import('../../modules/default/Shop');
+	return module;
+});
+const Cart = lazy(async () => {
+	const module = await import('../../modules/default/Cart');
+	return module;
+});
+const History = lazy(async () => {
+	const module = await import('../../modules/user/History');
+	return module;
+});
 
-const AdminDashboard = lazy(() => import('../../modules/admin/AdminDashboard'));
+const AdminDashboard = lazy(async () => {
+	const module = await import('../../modules/admin/AdminDashboard');
+	return module;
+});
+const AdminCategory = lazy(async () => {
+	const module = await import('../../modules/admin/Category');
+	return module;
+});
+
+const Error404 = lazy(async () => {
+	const module = await import('../../modules/default/Error/Error404');
+	return module;
+});
+
+const Error503 = lazy(async () => {
+	const module = await import('../../modules/default/Error/Error503');
+	return module;
+});
 
 function initialRoutes({ store }){
 	const { user } = store;
 	// Get role
 	const { role } = user || '';
+	const isUnderMaintenance = env.under_maintenance === true;
+
+	// 503 - Website under maintenance page
+	if (isUnderMaintenance) {
+		return (
+			<Suspense fallback={<h2>🌀 Loading....</h2>}>
+				<Error503 />
+			</Suspense>
+		);
+	}
+
 	return (
-		<Suspense fallback={<div>Loading....</div>}>
+		<Suspense fallback={<h2>🌀 Loading....</h2>}>
 			<BrowserRouter>
 				<Header role={role} />
 				<Switch>
@@ -65,7 +123,13 @@ function initialRoutes({ store }){
 						component={AdminDashboard}
 						{...user}
 					/>
-					<Route exact path='*' component={NotFound} />
+					<AdminRoute
+						exact
+						path='/admin/category'
+						component={AdminCategory}
+						{...user}
+					/>
+					<Route exact path='*' component={Error404} />
 				</Switch>
 				<Footer />
 			</BrowserRouter>
