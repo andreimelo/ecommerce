@@ -1,6 +1,6 @@
 const env = {
-	base_uri : process.env.REACT_APP_BASE_URL,
-	firebase : {
+	base_uri          : process.env.REACT_APP_BASE_URL,
+	firebase          : {
 		register    : {
 			complete_registration_uri :
 				process.env.REACT_APP_REGISTER_COMPLETE_REDIRECT_URL,
@@ -17,6 +17,7 @@ const env = {
 			measurement_id      : process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 		},
 	},
+	under_maintenance : process.env.REACT_APP_UNDER_MAINTENANCE,
 };
 
 export default env;
