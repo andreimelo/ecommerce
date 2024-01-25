@@ -22,7 +22,8 @@ const useInput = (callback, validate) => {
 	useEffect(
 		() => {
 			if (Object.keys(errors).length === 0 && isSubmitting) {
-				return callback(values, history, dispatch);
+				setIsSubmitting(false);
+				callback(values, history, dispatch);
 			}
 		},
 		// eslint-disable-next-line
@@ -36,7 +37,7 @@ const useInput = (callback, validate) => {
 	);
 
 	const handleSubmit = (event) => {
-		if (event) event.preventDefault();
+		event.preventDefault();
 		setErrors(validate(values));
 		setIsSubmitting(true);
 	};

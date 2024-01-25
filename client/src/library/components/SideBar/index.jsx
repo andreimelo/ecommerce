@@ -52,7 +52,7 @@ function Sidebar({ role }) {
                 </>
             )
             default:
-                break;
+                return null;
         }
     }
     return (
