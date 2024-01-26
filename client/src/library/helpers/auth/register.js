@@ -3,11 +3,19 @@ import {
 	registerConfig,
 	forgotPasswordConfig,
 } from '../../../library/common/config/firebase';
+import { updatePassword } from 'firebase/auth';
 import { saveToStorage } from '../storage';
 import { createOrUpdateUser } from '../../services/auth';
+import {
+	sendPasswordResetEmail,
+	sendSignInLinkToEmail,
+	signInWithEmailLink,
+} from 'firebase/auth';
+
 export async function forgotPassword(values){
 	try {
-		const result = await auth.sendPasswordResetEmail(
+		const result = await sendPasswordResetEmail(
+			auth,
 			values.email,
 			forgotPasswordConfig,
 		);
@@ -21,7 +29,7 @@ export async function forgotPassword(values){
 
 export async function registerUserEmail(values){
 	try {
-		const result = await auth.sendSignInLinkToEmail(values.email, registerConfig);
+		const result = await sendSignInLinkToEmail(auth, values.email, registerConfig);
 		// add component success
 		saveToStorage('emailRegistration', values.email);
 		alert(
@@ -36,13 +44,14 @@ export async function registerUserEmail(values){
 
 export async function registerUserComplete(values, history, dispatch){
 	try {
-		let { user: { emailVerified } } = await auth.signInWithEmailLink(
+		let { user: { emailVerified } } = await signInWithEmailLink(
+			auth,
 			values.email,
 			window.location.href,
 		);
 		if (emailVerified) {
 			let user = auth.currentUser;
-			await user.updatePassword(values.password);
+			await updatePassword(auth, values.password);
 
 			const idTokenResult = await user.getIdTokenResult();
 

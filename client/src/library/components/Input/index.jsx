@@ -6,7 +6,7 @@ function Input({ type, value, name, variant, disabled, onChange, placeHolder,err
 	return (
 		<>
 			<input type={type} disabled={disabled} value={value} name={name} className={variant} onChange={onChange} placeholder={placeHolder} />
-			{errorMessage && <div className="error-message">{errorMessage}</div>}
+			{errorMessage && <div className="error-message absolute pt-2">{errorMessage}</div>}
 		</>
 	);
 }

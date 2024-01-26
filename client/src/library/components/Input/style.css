@@ -1,8 +1,6 @@
 .inp {
   padding: 15px;
-  background-color: var(--light-gray-color);
-  border-radius: 30px;
-  border: none;
+  border-radius: 5px;
 }
 
 .error-border {
@@ -12,13 +10,11 @@
 .error-message {
   color: var(--error-red-color);
   font-size: var(--font-xsmall);
-  position: absolute;
-  margin: -23px 15px;
 }
 
 .fix-size {
-  width: 320px;
-  max-width: 350px;
+  width: 550px;
+  max-width: 550px;
 }
 
 .no-size {

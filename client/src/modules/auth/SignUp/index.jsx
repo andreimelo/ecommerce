@@ -11,7 +11,7 @@ import { string } from '../../../library/common/constants/strings';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-function Register() {
+function SignUp() {
 	
 	const { values, handleChange, handleSubmit ,errors } = useInput(registerUserEmail,validateRegisterEmail);
 	
@@ -31,14 +31,14 @@ function Register() {
 				type={type.input.default}
 				value={values.email || ""}
 				name="email"
-				variant={ errors && errors.email ?"inp no-size error-border":"inp no-size"}
+				variant={ errors && errors.email ?"inp no-size error-border":"inp border border-gray-500 no-size"}
 				placeHolder={string.placeHolders.input.exampleOfEmail}
 				onChange={(event)=>handleChange(event.target.name,event.target.value)}
 				errorMessage={errors && errors.email}
 			/>
-			<CustomButton variant={"button bg-default-color no-size"} title={"Submit"} onClick={() => handleSubmit()} />
+			<CustomButton variant={"button mt-10 bg-default-color no-size"} title={"Submit"} onClick={() => handleSubmit()} />
 		</div>
 	);
 }
 
-export default Register;
+export default SignUp;

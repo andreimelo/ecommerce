@@ -1,27 +1,35 @@
 import React from 'react';
 import './style.css';
 import { 
-    Link
+    NavLink,
+    useLocation
  } from 'react-router-dom';
 import { string } from '../../common/constants/strings';
 import PropTypes from 'prop-types';
 
-
 function Sidebar({ role }) {
+    const {pathname} = useLocation();
+    const active = 'text-lg font-semibold';
+    const inactive = 'text-lg font-semibold text-gray-500';
+
+    function isActiveLink(currentPath, staticPath) {
+        //@return boolean
+        return currentPath === staticPath;
+    }
+
     function renderSideBar() {
         switch (role) {
             case 'subscriber':
-                
                 return (
                     <>
-                        <div>   
-                                <Link to="/user/history" >{string.routes.historyTitle}</Link>
+                        <div >   
+                            <NavLink to="/user/history" className="text-lg font-semibold">{string.routes.historyTitle}</NavLink>
                         </div>
                         <div>
-                                <Link to='/user/change-password'>{string.routes.changePasswordTitle}</Link>
+                            <NavLink to='/user/change-password' className="text-lg font-semibold">{string.routes.changePasswordTitle}</NavLink>
                         </div>
                         <div>
-                                <Link to='/user/wishlist'>{string.routes.wishlistTitle}</Link>
+                            <NavLink to='/user/wishlist' className="text-lg font-semibold">{string.routes.wishlistTitle}</NavLink>
                         </div>
                     </>
                 )
@@ -29,26 +37,23 @@ function Sidebar({ role }) {
             return (
                 <>
                     <div>   
-                            <Link to="/admin/dashboard" >{string.routes.homeTitle}</Link>
+                        <NavLink to="/admin/dashboard" className={() => (isActiveLink(pathname, '/admin/dashboard') ? active : inactive)}>{string.routes.homeTitle}</NavLink>
                     </div>
                     <div>   
-                            <Link to="/admin/product" >{string.routes.admin.productTitle}</Link>
+                        <NavLink to="/admin/product" className={() => (isActiveLink(pathname, '/admin/product') ? active : inactive)}>{string.routes.admin.productTitle}</NavLink>
                     </div>
                     <div>   
-                            <Link to="/admin/products" >{string.routes.admin.productsTitle}</Link>
+                        <NavLink to="/admin/products" className={() => (isActiveLink(pathname, '/admin/products') ? active : inactive)}>{string.routes.admin.productsTitle}</NavLink>
                     </div>
                     <div>   
-                            <Link to="/admin/category" >{string.routes.admin.categoryTitle}</Link>
+                        <NavLink to="/admin/category" className={() => (isActiveLink(pathname, '/admin/category') ? active : inactive)}>{string.routes.admin.categoryTitle}</NavLink>
                     </div>
                     <div>   
-                            <Link to="/admin/sub" >{string.routes.admin.subCategoryTitle}</Link>
+                        <NavLink to="/admin/sub" className={() => (isActiveLink(pathname, '/admin/sub') ? active : inactive)}>{string.routes.admin.subCategoryTitle}</NavLink>
                     </div>
                     <div>   
-                            <Link to="/admin/sub" >{string.routes.admin.couponTitle}</Link>
+                        <NavLink to="/admin/coupon" className={() => (isActiveLink(pathname, '/admin/coupon') ? active : inactive)}>{string.routes.admin.couponTitle}</NavLink>
                     </div>
-                    {/* <div>   
-                            <Link to="/user/password" >Welcome to change password</Link>
-                    </div> */}
                 </>
             )
             default:
@@ -62,7 +67,6 @@ function Sidebar({ role }) {
 
 Sidebar.propTypes = {
     role: PropTypes.string.isRequired,
-    
 }
 
 export default React.memo(Sidebar);
