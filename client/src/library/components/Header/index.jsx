@@ -7,6 +7,7 @@ import CustomInput from '../Input';
 import PropTypes from 'prop-types';
 import './style.css';
 import { logOutAction } from '../../common/actions/authentication';
+import icons from '../../../resources/icons';
 
 function Header({role}) {
 	
@@ -20,7 +21,7 @@ function Header({role}) {
 				return (
 					<nav className='nav-container shadow'>
 					<div className='nav-sub-container layout-default'>
-						<div id='logo'>{string.common.logoTitle}</div>
+						<div id='logo' onClick={()=>history.push('/')}>{string.common.logoTitle}</div>
 						<div className="nav-link-container">
 							{/* Input */}
 							{user &&
@@ -51,19 +52,19 @@ function Header({role}) {
 				return (
 					<nav className='nav-container shadow'>
 						<div className='nav-sub-container layout-default'>
-							<div id='logo'>{string.common.logoTitle}</div>
+							<div id='logo'  onClick={()=>history.push('/')}>{string.common.logoTitle}</div>
 							<div className="nav-link-container">
-								<div className="nav-title" onClick={() => history.push('/')}>
+								{/* <div className="nav-title" onClick={() => history.push('/')}>
 									{string.routes.homeTitle}
-								</div>
-								<div className="nav-title" onClick={() => history.push('/shop')}>{string.navigation.shopTitle}</div>
-								<div className="nav-title" onClick={() => history.push('/cart')}>{string.navigation.cartTitle}</div>
+								</div> */}
 								{/* Input */}
-								<CustomInput type={type.input.search} name={"search"} placeHolder={"Search"} variant="inp fix-size" onChange={(event) => console.log(event)} />
+								<CustomInput type={type.input.search} name={"search"} placeHolder={"Search"} variant="inp mx-20 rounded-full border border-gray-500 fix-size" onChange={(event) => console.log(event)} />
+								<div className="nav-title" onClick={() => history.push('/shop')}>{icons['shop']}</div>
+								<div className="nav-title" onClick={() => history.push('/cart')}>{icons['cart']}</div>
 								{user &&
 									(<div className="settings">
 										<div className="nav-title list">
-											{(user && user.email) || (!user && string.routes.userNamePlaceHolderTitle)}
+											{(user && icons['user']) || (!user && string.routes.userNamePlaceHolderTitle)}
 										</div>
 										<div className="settings-content" onClick={() => logOutAction(history, dispatch)} >{string.routes.logOutTitle}</div>
 									</div>)
@@ -74,9 +75,9 @@ function Header({role}) {
 											<div className="nav-title" onClick={() => history.push('/login')}>
 												{string.routes.loginTitle}
 											</div>
-											<div className="nav-title" onClick={() => history.push('/register')}>
+											{/* <div className="nav-title" onClick={() => history.push('/register')}>
 												{string.routes.registerTitle}
-											</div>
+											</div> */}
 										</>
 									)
 								}

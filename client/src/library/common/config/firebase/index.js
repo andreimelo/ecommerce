@@ -1,4 +1,7 @@
-import firebase from 'firebase';
+import { initializeApp } from 'firebase/app';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+import { getAnalytics } from 'firebase/analytics';
+
 import env from '../env';
 
 const firebaseConfig = {
@@ -22,10 +25,10 @@ export const forgotPasswordConfig = {
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
-firebase.analytics();
+getAnalytics(app);
 
-export const auth = firebase.auth();
+export const auth = getAuth();
 
-export const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+export const googleAuthProvider = new GoogleAuthProvider();

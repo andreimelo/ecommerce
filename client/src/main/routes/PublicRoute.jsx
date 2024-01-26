@@ -6,18 +6,15 @@ const PublicRoute = ({...rest}) => {
     const { user } = useSelector((state) => ({ ...state }));
     const history = useHistory();
     const { role, token } = user || {};
-
+   
     async function redirectTo() {
         let isAdmin =
             role === "admin" &&
-            token && 
-            window.location.pathname === "/";
-        
+            token;
         // if Admin is active route to /admin path
         if (isAdmin) {
             return history.push('/admin/dashboard');
         } 
-  
     }
 
     useEffect(() => {

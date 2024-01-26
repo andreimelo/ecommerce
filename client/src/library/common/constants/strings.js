@@ -5,7 +5,7 @@ export const string = {
 
 	routes       : {
 		homeTitle                : 'Home',
-		loginTitle               : 'Login',
+		loginTitle               : 'Log in',
 		registerTitle            : 'Register',
 		userNamePlaceHolderTitle : 'Username',
 		logOutTitle              : 'Logout',
@@ -21,8 +21,6 @@ export const string = {
 		},
 	},
 	navigation   : {
-		shopTitle          : 'Shop',
-		cartTitle          : 'Cart',
 		categoriesTitle    : 'Categories',
 		subCategoriesTitle : 'Sub Categories',
 	},
@@ -36,13 +34,13 @@ export const string = {
 			password : 'Forgot Password',
 		},
 		register : {
-			email    : 'Register your email',
+			email    : 'Email',
 			complete : 'Register Complete',
 		},
 		login    : {
 			email        : 'Email',
 			password     : 'Password',
-			orSignInWith : 'Or Sign in with',
+			orSignInWith : 'Or Log in to your account',
 		},
 	},
 };

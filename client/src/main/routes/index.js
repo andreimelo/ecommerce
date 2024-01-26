@@ -22,8 +22,8 @@ const ForgotPassword = lazy(async () => {
 	const module = await import('../../modules/auth/ForgotPassword');
 	return module;
 });
-const Register = lazy(async () => {
-	const module = await import('../../modules/auth/Register');
+const SignUp = lazy(async () => {
+	const module = await import('../../modules/auth/SignUp');
 	return module;
 });
 const CompleteRegistration = lazy(async () => {
@@ -95,7 +95,7 @@ function initialRoutes({ store }){
 					<PublicRoute exact path='/home' component={Home} />
 					{/* User Authentication */}
 					<PublicRoute exact path='/login' component={Login} />
-					<PublicRoute exact path='/register' component={Register} />
+					<PublicRoute exact path='/signup' component={SignUp} />
 					<PublicRoute
 						exact
 						path='/register/complete'
@@ -107,13 +107,19 @@ function initialRoutes({ store }){
 						component={ForgotPassword}
 					/>
 					{/* User Profile */}
-					<UserRoute exact path='/user/history' component={History} />
+					<UserRoute exact path='/user/history' component={History} {...user} />
 					<UserRoute
 						exact
 						path='/user/change-password'
 						component={ChangePassword}
+						{...user}
 					/>
-					<UserRoute exact path='/user/wishlist' component={Wishlist} />
+					<UserRoute
+						exact
+						path='/user/wishlist'
+						component={Wishlist}
+						{...user}
+					/>
 					<PublicRoute exact path='/shop' component={Shop} />
 					<PublicRoute exact path='/cart' component={Cart} />
 					{/* Admin Dashboard*/}

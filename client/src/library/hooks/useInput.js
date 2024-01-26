@@ -37,7 +37,7 @@ const useInput = (callback, validate) => {
 	);
 
 	const handleSubmit = (event) => {
-		event.preventDefault();
+		// event.preventDefault();
 		setErrors(validate(values));
 		setIsSubmitting(true);
 	};

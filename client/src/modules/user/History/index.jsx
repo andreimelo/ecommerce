@@ -5,8 +5,16 @@ import PropTypes from 'prop-types';
 function History({role}) {
 	return (
 		<div className="layout-default"> 
-            <SideBar role={role}/>
-			Welcome to History
+			<div className="flex mt-10">
+				<div class="flex-none w-40">
+					<SideBar role={role} />
+				</div>
+                <div class="flex-auto w-64">
+					<label className="text-2xl font-semibold">
+                        History
+                    </label>
+				</div>
+			</div>
 		</div>
 	);	
 }

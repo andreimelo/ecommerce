@@ -7,16 +7,13 @@ const AdminRoute = withRouter(({ component: Component, ...rest }) => {
     const [isAdmin, setIsAdmin] = useState(false);
     const {role, token } = rest || {};
     const history = useHistory();
-async function fetchAdminData() {
+    async function redirectTo() {
         let isNotAdmin =
             role !== "admin" &&
-            token && 
-            window.location.pathname === "/admin/dashboard";
+            token
         let isAdminUndefined =
             role === undefined &&
-            token === undefined &&
-            window.location.pathname === "/admin/dashboard";
-        
+            token === undefined;
         // set default empty object value for user
         if (isNotAdmin || isAdminUndefined) {
             return history.push('/')
@@ -27,7 +24,7 @@ async function fetchAdminData() {
     }
 
     useEffect(() => {
-        fetchAdminData();
+        redirectTo();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isAdmin]);
 
