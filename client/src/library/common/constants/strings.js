@@ -5,6 +5,7 @@ export const string = {
 
 	routes       : {
 		homeTitle                : 'Home',
+		signUpTitle              : 'Sign up',
 		loginTitle               : 'Log in',
 		registerTitle            : 'Register',
 		userNamePlaceHolderTitle : 'Username',
@@ -12,6 +13,8 @@ export const string = {
 		historyTitle             : 'History',
 		changePasswordTitle      : 'Change Password',
 		wishlistTitle            : 'Wishlist',
+		noAccountTitle           : `Don't have an account?`,
+		googleTitle              : 'Continue with Google',
 		admin                    : {
 			productTitle     : 'Product',
 			productsTitle    : 'Products',

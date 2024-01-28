@@ -74,7 +74,7 @@ const Error503 = lazy(async () => {
 function initialRoutes({ store }){
 	const { user } = store;
 	// Get role
-	const { role } = user || '';
+	const { role, imageURL } = user || '';
 	const isUnderMaintenance = env.under_maintenance === true;
 
 	// 503 - Website under maintenance page
@@ -89,7 +89,7 @@ function initialRoutes({ store }){
 	return (
 		<Suspense fallback={<h2>🌀 Loading....</h2>}>
 			<BrowserRouter>
-				<Header role={role} />
+				<Header role={role} imageURL={imageURL} />
 				<Switch>
 					<PublicRoute exact path='/' component={Home} />
 					<PublicRoute exact path='/home' component={Home} />

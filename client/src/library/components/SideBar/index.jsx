@@ -9,8 +9,8 @@ import PropTypes from 'prop-types';
 
 function Sidebar({ role }) {
     const {pathname} = useLocation();
-    const active = 'text-lg font-semibold';
-    const inactive = 'text-lg font-semibold text-gray-500';
+    const active = 'text-sm';
+    const inactive = 'text-sm text-gray-500';
 
     function isActiveLink(currentPath, staticPath) {
         //@return boolean
@@ -23,13 +23,13 @@ function Sidebar({ role }) {
                 return (
                     <>
                         <div >   
-                            <NavLink to="/user/history" className="text-lg font-semibold">{string.routes.historyTitle}</NavLink>
+                            <NavLink to="/user/history" className={() => (isActiveLink(pathname, '/user/history') ? active : inactive)}>{string.routes.historyTitle}</NavLink>
                         </div>
                         <div>
-                            <NavLink to='/user/change-password' className="text-lg font-semibold">{string.routes.changePasswordTitle}</NavLink>
+                            <NavLink to='/user/change-password' className={() => (isActiveLink(pathname, '/user/change-password') ? active : inactive)}>{string.routes.changePasswordTitle}</NavLink>
                         </div>
                         <div>
-                            <NavLink to='/user/wishlist' className="text-lg font-semibold">{string.routes.wishlistTitle}</NavLink>
+                            <NavLink to='/user/wishlist' className={() => (isActiveLink(pathname, '/user/wishlist') ? active : inactive)}>{string.routes.wishlistTitle}</NavLink>
                         </div>
                     </>
                 )
