@@ -38,16 +38,17 @@ export async function googleLogInAction(history, dispatch){
 		const { user } = result;
 		const idTokenResult = await user.getIdTokenResult();
 
-		let { name, role, _id } = await createOrUpdateUser(idTokenResult.token);
+		const { name, role, _id } = await createOrUpdateUser(idTokenResult.token);
 
 		dispatch({
 			type    : 'LOGGED_IN_USER',
 			payload : {
-				name  : name,
-				email : user.email,
-				token : idTokenResult.token,
-				role  : role,
-				_id   : _id,
+				name     : name,
+				email    : user.email,
+				token    : idTokenResult.token,
+				role     : role,
+				_id      : _id,
+				imageURL : user.photoURL,
 			},
 		});
 		return roleBasedRedirect(role, history);
@@ -64,11 +65,12 @@ export async function onAuthStateAction(user, dispatch){
 		return dispatch({
 			type    : 'LOGGED_IN_USER',
 			payload : {
-				name  : name,
-				email : user.email,
-				token : idTokenResult.token,
-				role  : role,
-				_id   : _id,
+				name     : name,
+				email    : user.email,
+				token    : idTokenResult.token,
+				role     : role,
+				_id      : _id,
+				imageURL : user.photoURL,
 			},
 		});
 	} catch (error) {

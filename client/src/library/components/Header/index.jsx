@@ -8,13 +8,14 @@ import PropTypes from 'prop-types';
 import './style.css';
 import { logOutAction } from '../../common/actions/authentication';
 import icons from '../../../resources/icons';
+import Profile from '../../components/Profile';
 
-function Header({role}) {
+function Header({role, imageURL}) {
 	
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const { user } = useSelector((state) => ({ ...state }));
-	
+
 	function renderRoleHeader() {
 		switch (role) {
 			case 'admin':
@@ -27,9 +28,9 @@ function Header({role}) {
 							{user &&
 								(<div className="settings">
 									<div className="nav-title list">
-										{(user && user.email) || (!user && string.routes.userNamePlaceHolderTitle)}
+										{(user && <Profile imageURL={imageURL}/>) || (!user && string.routes.userNamePlaceHolderTitle)}
 									</div>
-									<div className="settings-content" onClick={() => logOutAction(history, dispatch)} >{string.routes.logOutTitle}</div>
+									<div className="settings-content bg-white border" onClick={() => logOutAction(history, dispatch)} >{string.routes.logOutTitle}</div>
 								</div>)
 							}
 							{!user &&
@@ -64,15 +65,15 @@ function Header({role}) {
 								{user &&
 									(<div className="settings">
 										<div className="nav-title list">
-											{(user && icons['user']) || (!user && string.routes.userNamePlaceHolderTitle)}
+											{(user && <Profile imageURL={imageURL}/>) || (!user && string.routes.userNamePlaceHolderTitle)}
 										</div>
-										<div className="settings-content" onClick={() => logOutAction(history, dispatch)} >{string.routes.logOutTitle}</div>
+										<div className="settings-content bg-white border" onClick={() => logOutAction(history, dispatch)} >{string.routes.logOutTitle}</div>
 									</div>)
 								}
 								{!user &&
 									(
 										<>
-											<div className="nav-title" onClick={() => history.push('/login')}>
+											<div className="nav-title text-sm" onClick={() => history.push('/login')}>
 												{string.routes.loginTitle}
 											</div>
 											{/* <div className="nav-title" onClick={() => history.push('/register')}>
@@ -100,6 +101,7 @@ function Header({role}) {
 
 Header.propTypes = {
 	role: PropTypes.string.isRequired,
+	imageURL: PropTypes.string,
 };
 
 export default React.memo(Header);
