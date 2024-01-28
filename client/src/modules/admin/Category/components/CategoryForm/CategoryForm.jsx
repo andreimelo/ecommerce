@@ -6,7 +6,7 @@ import CustomInput from '../../../../../library/components/Input';
 import { type } from '../../../../../library/common/constants/types';
 import validateAdminCategory from '../../../../../library/helpers/validators/adminCategory';
 import { createCategory, getCategories } from '../../../../../library/services/category';
-import icons from './../../../../../resources/icons';
+import CategoryTable from '../CategoryTable';
 
 const CategoryForm = () => {
     const { values, handleChange, errors, handleSubmit } = useInput(clickedSubmit, validateAdminCategory);
@@ -55,18 +55,7 @@ const CategoryForm = () => {
             </div>
             <hr className="w-3/5" />
             {/* Refactor - Create Table Component in Category */}
-            <table className="w-3/5 my-5 min-w-max table-auto text-right">
-                {categories.map((item) =>
-                    (
-                            <tbody key={item._id}>
-                                <tr>
-                                    <td className="text-left">{item.name}</td>
-                                    <td>{icons['delete']}</td>
-                                    <td>{icons['edit']}</td>
-                                </tr>
-                            </tbody>
-                    ))}
-            </table>
+            <CategoryTable data={categories} />
         </form>
     )
 };
