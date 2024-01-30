@@ -57,6 +57,10 @@ const AdminCategory = lazy(async () => {
 	const module = await import('../../modules/admin/Category');
 	return module;
 });
+const AdminCategoryUpdate = lazy(async () => {
+	const module = await import('../../modules/admin/Category/Update');
+	return module;
+});
 
 // Error Pages
 const Error404 = lazy(async () => {
@@ -92,6 +96,10 @@ function initialRoutes({ store }){
 			{
 				path    : '/admin/category',
 				element : AdminCategory,
+			},
+			{
+				path    : '/admin/category/:slug',
+				element : AdminCategoryUpdate,
 			},
 			{
 				path    : '*',
@@ -184,7 +192,7 @@ function initialRoutes({ store }){
 								key={index}
 								exact
 								path={route.path}
-								render={() => <route.element {...user} />}
+								render={(props) => <route.element {...props} {...user} />}
 							/>
 						);
 					})}

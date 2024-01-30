@@ -54,6 +54,7 @@ const useInput = (callback, validate) => {
 		handleSubmit,
 		values,
 		errors,
+		setValues,
 	};
 };
 

@@ -1,13 +1,6 @@
 import React from 'react';
 import Sidebar from '../../../library/components/SideBar';
 import PropTypes from 'prop-types';
-// import {
-//     getCategories,
-//     getCategory,
-//     removeCategory,
-//     updateCategory,
-//     createCategory
-// } from '../../../library/services/category';
 import CategoryForm from '../Category/components/CategoryForm';
 
 const Category = ({ role }) => {

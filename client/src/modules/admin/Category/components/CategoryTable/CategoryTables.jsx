@@ -12,7 +12,7 @@ const CategoryTable = ({data, onClick}) => {
                         <tr>
                             <td className="text-left">{item.name}</td>
                             <td onClick={()=>onClick(item.slug)}>{icons['delete']}</td>
-                            <Link to={`/admin/dashboard/${item.slug}`}>
+                            <Link to={`/admin/category/${item.slug}`}>
                                 <td>{icons['edit']}</td>
                             </Link>
                         </tr>
