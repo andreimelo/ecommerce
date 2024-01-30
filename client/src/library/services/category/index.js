@@ -16,22 +16,18 @@ export async function getCategories(){
 }
 
 export async function getCategory(slug){
-	try {
-		const options = {
-			method  : 'GET',
-			headers : {
-				Accept         : 'application/json',
-				'Content-Type' : 'application/json',
-			},
-		};
-		const result = await fetch(`${env.base_uri}/category/${slug}`, options);
+	const options = {
+		method  : 'GET',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json',
+		},
+	};
+	const result = await fetch(`${env.base_uri}/category/${slug}`, options);
 
-		const data = await result.json();
+	const data = await result.json();
 
-		return data;
-	} catch (error) {
-		alert(error);
-	}
+	return data;
 }
 
 export async function removeCategory(slug, token){
@@ -59,6 +55,9 @@ export async function updateCategory(slug, category, token){
 				'Content-Type' : 'application/json',
 				authToken      : token || '',
 			},
+			body    : JSON.stringify({
+				name : category,
+			}),
 		};
 		const result = await fetch(`${env.base_uri}/category/${slug}`, options);
 
