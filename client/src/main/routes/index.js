@@ -3,13 +3,9 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 //Components
 import Header from './../../library/components/Header';
 import Footer from '../../library/components/Footer';
-//Routes
-import UserRoute from './UserRoute';
-import AdminRoute from './AdminRoute';
-import PublicRoute from './PublicRoute';
 import env from '../../library/common/config/env';
 
-// Pages
+// User/Subscriber pages
 const Home = lazy(async () => {
 	const module = await import('../../modules/default/Home');
 	return module;
@@ -52,6 +48,7 @@ const History = lazy(async () => {
 	return module;
 });
 
+// Admin pages
 const AdminDashboard = lazy(async () => {
 	const module = await import('../../modules/admin/AdminDashboard');
 	return module;
@@ -61,11 +58,11 @@ const AdminCategory = lazy(async () => {
 	return module;
 });
 
+// Error Pages
 const Error404 = lazy(async () => {
 	const module = await import('../../modules/default/Error/Error404');
 	return module;
 });
-
 const Error503 = lazy(async () => {
 	const module = await import('../../modules/default/Error/Error503');
 	return module;
@@ -75,7 +72,7 @@ function initialRoutes({ store }){
 	const { user } = store;
 	// Get role
 	const { role, imageURL } = user || '';
-	const isUnderMaintenance = env.under_maintenance === true;
+	const isUnderMaintenance = env.under_maintenance === 'true';
 
 	// 503 - Website under maintenance page
 	if (isUnderMaintenance) {
@@ -86,56 +83,111 @@ function initialRoutes({ store }){
 		);
 	}
 
+	const roleRoutes = {
+		admin      : [
+			{
+				path    : '/',
+				element : AdminDashboard,
+			},
+			{
+				path    : '/admin/category',
+				element : AdminCategory,
+			},
+			{
+				path    : '*',
+				element : Error404,
+			},
+		],
+		subscriber : [
+			{
+				path    : '/',
+				element : History,
+			},
+			{
+				path    : '/user/change-password',
+				element : ChangePassword,
+			},
+			{
+				path    : '/user/wishlist',
+				element : Wishlist,
+			},
+			// needs to be in subscriber page as well
+			{
+				path    : '/shop',
+				element : Shop,
+			},
+			{
+				path    : '/cart',
+				element : Cart,
+			},
+			//
+			{
+				path    : '*',
+				element : Error404,
+			},
+		],
+	};
+
+	const publicRoutes = [
+		{
+			path    : '/',
+			element : Home,
+		},
+		{
+			path    : '/home',
+			element : Home,
+		},
+		{
+			path    : '/login',
+			element : Login,
+		},
+		{
+			path    : 'signup',
+			element : SignUp,
+		},
+		{
+			path    : '/register/complete',
+			element : CompleteRegistration,
+		},
+		{
+			path    : '/forgot/password',
+			element : ForgotPassword,
+		},
+		{
+			path    : '/shop',
+			element : Shop,
+		},
+		{
+			path    : '/cart',
+			element : Cart,
+		},
+		{
+			path    : '*',
+			element : Error404,
+		},
+	];
+
+	const noRole = role === undefined || !role;
+	const userRoutes = roleRoutes[role] || [];
+	const mappingRoutes =
+		noRole ? publicRoutes :
+		userRoutes;
+
 	return (
 		<Suspense fallback={<h2>🌀 Loading....</h2>}>
 			<BrowserRouter>
 				<Header role={role} imageURL={imageURL} />
 				<Switch>
-					<PublicRoute exact path='/' component={Home} />
-					<PublicRoute exact path='/home' component={Home} />
-					{/* User Authentication */}
-					<PublicRoute exact path='/login' component={Login} />
-					<PublicRoute exact path='/signup' component={SignUp} />
-					<PublicRoute
-						exact
-						path='/register/complete'
-						component={CompleteRegistration}
-					/>
-					<PublicRoute
-						exact
-						path='/forgot/password'
-						component={ForgotPassword}
-					/>
-					{/* User Profile */}
-					<UserRoute exact path='/user/history' component={History} {...user} />
-					<UserRoute
-						exact
-						path='/user/change-password'
-						component={ChangePassword}
-						{...user}
-					/>
-					<UserRoute
-						exact
-						path='/user/wishlist'
-						component={Wishlist}
-						{...user}
-					/>
-					<PublicRoute exact path='/shop' component={Shop} />
-					<PublicRoute exact path='/cart' component={Cart} />
-					{/* Admin Dashboard*/}
-					<AdminRoute
-						exact
-						path='/admin/dashboard'
-						component={AdminDashboard}
-						{...user}
-					/>
-					<AdminRoute
-						exact
-						path='/admin/category'
-						component={AdminCategory}
-						{...user}
-					/>
-					<Route exact path='*' component={Error404} />
+					{mappingRoutes.map((route, index) => {
+						return (
+							<Route
+								key={index}
+								exact
+								path={route.path}
+								render={() => <route.element {...user} />}
+							/>
+						);
+					})}
 				</Switch>
 				<Footer />
 			</BrowserRouter>

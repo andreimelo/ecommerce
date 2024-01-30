@@ -23,7 +23,7 @@ function Sidebar({ role }) {
                 return (
                     <>
                         <div >   
-                            <NavLink to="/user/history" className={() => (isActiveLink(pathname, '/user/history') ? active : inactive)}>{string.routes.historyTitle}</NavLink>
+                            <NavLink to="/" className={() => (isActiveLink(pathname, '/') ? active : inactive)}>{string.routes.historyTitle}</NavLink>
                         </div>
                         <div>
                             <NavLink to='/user/change-password' className={() => (isActiveLink(pathname, '/user/change-password') ? active : inactive)}>{string.routes.changePasswordTitle}</NavLink>
@@ -37,7 +37,7 @@ function Sidebar({ role }) {
             return (
                 <>
                     <div>   
-                        <NavLink to="/admin/dashboard" className={() => (isActiveLink(pathname, '/admin/dashboard') ? active : inactive)}>{string.routes.homeTitle}</NavLink>
+                        <NavLink to="/" className={() => (isActiveLink(pathname, '/') ? active : inactive)}>{string.routes.homeTitle}</NavLink>
                     </div>
                     <div>   
                         <NavLink to="/admin/product" className={() => (isActiveLink(pathname, '/admin/product') ? active : inactive)}>{string.routes.admin.productTitle}</NavLink>
