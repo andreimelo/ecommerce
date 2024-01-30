@@ -5,15 +5,13 @@ import useInput from '../../../../../library/hooks/useInput';
 import CustomInput from '../../../../../library/components/Input';
 import { type } from '../../../../../library/common/constants/types';
 import validateAdminCategory from '../../../../../library/helpers/validators/adminCategory';
-import { createCategory, getCategories } from '../../../../../library/services/category';
+import { createCategory, getCategories, removeCategory } from '../../../../../library/services/category';
 import CategoryTable from '../CategoryTable';
 
 const CategoryForm = () => {
     const { values, handleChange, errors, handleSubmit } = useInput(clickedSubmit, validateAdminCategory);
     const user = useSelector(state => state.user);
     const [categories, setCategories] = useState([]);
-
-    useEffect(() => { getCategoriesData() }, []);
 
     async function getCategoriesData() {
         try {
@@ -23,13 +21,12 @@ const CategoryForm = () => {
             alert(err);
         }
     }
-
     async function clickedSubmit() {
         try {
             const name = values.name;
             const result = await createCategory(name, user.token);
             if (result !== undefined) {
-                getCategoriesData() 
+                await getCategoriesData() 
                 alert(`${name} successfully created`)
             }
             return result;
@@ -38,6 +35,23 @@ const CategoryForm = () => {
             alert('Create category failed')
         }
     }
+
+    async function handleRemove(slug) {
+        try {
+            let confirmation = window.confirm('Delete?'); 
+            if (confirmation) {
+                await removeCategory(slug, user.token);
+                await getCategoriesData();
+            }
+        } catch (err) {
+            console.log(err);
+            alert(err);
+        }
+    }
+
+    useEffect(() => { getCategoriesData() }, []);
+
+
     return (
         <form onSubmit={(e)=>handleSubmit(e)}>
             <div>
@@ -55,7 +69,7 @@ const CategoryForm = () => {
             </div>
             <hr className="w-3/5" />
             {/* Refactor - Create Table Component in Category */}
-            <CategoryTable data={categories} />
+            <CategoryTable data={categories} onClick={handleRemove} />
         </form>
     )
 };
