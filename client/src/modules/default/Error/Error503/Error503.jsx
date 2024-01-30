@@ -2,12 +2,19 @@ import React from 'react';
 
 function Error503(){
     return (
-        <div className="layout-default">
-        	<h1>Site Under Maintenance</h1>
-				<p>
-					We are working hard to improve your experience. Please check back
-					later.
-				</p>
+		<div className="layout-default">
+			<div class="flex h-screen min-h-full flex-col justify-center">
+				<main class="flex flex-col flex-grow place-content-center">
+					<div class="text-center">
+						<div className="text-5xl font-bold">
+							WE'RE DOWN FOR MAINTENANCE
+						</div>
+						<span>
+							This page is undergoing maintenance and will be back soon.
+						</span>
+					</div>
+				</main>
+			</div>
         </div>
     );
 }
