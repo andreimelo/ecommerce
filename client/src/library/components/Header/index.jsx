@@ -21,8 +21,8 @@ function Header({role, imageURL}) {
 			case 'admin':
 				return (
 					<nav className='nav-container shadow'>
-					<div className='nav-sub-container layout-default'>
-						<div id='logo' onClick={()=>history.push('/')}>{string.common.logoTitle}</div>
+					<div className='nav-sub-container w-full max-w-screen-xl mx-auto'>
+						<div className="self-center text-2xl font-semibold whitespace-nowrap" id='logo' onClick={()=>history.push('/')}>{string.common.logoTitle}</div>
 						<div className="nav-link-container">
 							{/* Input */}
 							{user &&
@@ -52,8 +52,8 @@ function Header({role, imageURL}) {
 			default:
 				return (
 					<nav className='nav-container shadow'>
-						<div className='nav-sub-container layout-default'>
-							<div id='logo'  onClick={()=>history.push('/')}>{string.common.logoTitle}</div>
+						<div className='nav-sub-container w-full max-w-screen-xl mx-auto'>
+							<div className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white" id='logo'  onClick={()=>history.push('/')}>{string.common.logoTitle}</div>
 							<div className="nav-link-container">
 								{/* <div className="nav-title" onClick={() => history.push('/')}>
 									{string.routes.homeTitle}

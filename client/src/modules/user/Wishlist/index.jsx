@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 function Wishlist({ role }) {
 	return (
-        <div className="layout-default"> 
+        <div className="w-full max-w-screen-xl mx-auto"> 
             <div className="flex my-10">
                  <div class="flex-none w-40 border-r border-gray-200">
                     <SideBar role={role} />
