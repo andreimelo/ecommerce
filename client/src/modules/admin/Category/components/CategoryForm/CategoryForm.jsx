@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import CustomInput from '../../../../../library/components/Input';
 import { type } from '../../../../../library/common/constants/types';
 
-const CategoryForm = ({values, handleChange, errors, handleSubmit}) => {
-    // const [keyword, setKeyWord] = useState('');
+const CategoryForm = ({values, handleChange, errors, handleSubmit, searchValue, handleSearchFilterChange}) => {
 
     return (
         <form onSubmit={(e)=>handleSubmit(e)}>
@@ -21,7 +20,7 @@ const CategoryForm = ({values, handleChange, errors, handleSubmit}) => {
                 />
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 border border-blue-700 rounded my-5 text-sm mx-5">Submit</button>
             </div>
-            <hr className="w-3/5" />
+            <hr className="w-3/5 mb-4" />
         </form>
     )
 };
@@ -30,6 +29,7 @@ CategoryForm.propTypes = {
     values: PropTypes.object,
     handleChange: PropTypes.func,
     errors: PropTypes.object,
-    handleSubmit: PropTypes.func
+    handleSubmit: PropTypes.func,
+    searchValue: PropTypes.string,
 }
 export default React.memo(CategoryForm);

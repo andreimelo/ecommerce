@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Sidebar from '../../../library/components/SideBar';
+import SearchFilter from '../../../library/components/SearchFilter';
 import PropTypes from 'prop-types';
 import {
     getCategories,
@@ -14,8 +15,9 @@ import validateAdminCategory from '../../../library/helpers/validators/adminCate
 
 const Category = ({ role }) => {
     const { values, handleChange, errors, handleSubmit } = useInput(clickedSubmit, validateAdminCategory);
-    const [categories, setCategories] = useState([]);
     const user = useSelector(state => state.user);
+    const [categories, setCategories] = useState([]);
+    const [search, setSearch] = useState('');
 
     async function clickedSubmit() {
         try {
@@ -54,6 +56,13 @@ const Category = ({ role }) => {
         }
     }
 
+    function handleSearchFilterChange(e) {
+        e.preventDefault();
+        setSearch(e.target.value.toLowerCase());
+    }
+
+    const searchBy = (search) => (values)=> values.name.toLowerCase().includes(search);
+
     useEffect(() => { getCategoriesData() }, []);
 
     return (
@@ -66,9 +75,10 @@ const Category = ({ role }) => {
                     <label className="text-2xl font-semibold">
                         Category
                     </label>
-                        <CategoryForm values={values} handleChange={handleChange} errors={errors} handleSubmit={handleSubmit}/>
+                        <CategoryForm values={values} handleChange={handleChange} errors={errors} handleSubmit={handleSubmit} />
+                        <SearchFilter searchValue={search} handleSearchFilterChange={handleSearchFilterChange} />
                         {/* Refactor - Create Table Component in Category */}
-                        <CategoryTable data={categories} onClick={handleRemove} />
+                        <CategoryTable searchFilter={searchBy} data={categories} onClick={handleRemove} searchValue={search} />
                 </div>
             </div>
         </div>
