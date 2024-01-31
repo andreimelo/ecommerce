@@ -77,7 +77,6 @@ const Category = ({ role }) => {
                     </label>
                         <CategoryForm values={values} handleChange={handleChange} errors={errors} handleSubmit={handleSubmit} />
                         <SearchFilter searchValue={search} handleSearchFilterChange={handleSearchFilterChange} />
-                        {/* Refactor - Create Table Component in Category */}
                         <CategoryTable searchFilter={searchBy} data={categories} onClick={handleRemove} searchValue={search} />
                 </div>
             </div>

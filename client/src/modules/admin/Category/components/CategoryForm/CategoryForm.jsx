@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import CustomInput from '../../../../../library/components/Input';
 import { type } from '../../../../../library/common/constants/types';
 
-const CategoryForm = ({values, handleChange, errors, handleSubmit, searchValue, handleSearchFilterChange}) => {
+const CategoryForm = ({values, handleChange, errors, handleSubmit }) => {
 
     return (
         <form onSubmit={(e)=>handleSubmit(e)}>
@@ -30,6 +30,5 @@ CategoryForm.propTypes = {
     handleChange: PropTypes.func,
     errors: PropTypes.object,
     handleSubmit: PropTypes.func,
-    searchValue: PropTypes.string,
 }
 export default React.memo(CategoryForm);
