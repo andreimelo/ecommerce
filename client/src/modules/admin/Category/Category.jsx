@@ -75,7 +75,7 @@ const Category = ({ role }) => {
                     <label className="text-2xl font-semibold">
                         Category
                     </label>
-                        <CategoryForm values={values} handleChange={handleChange} errors={errors} handleSubmit={handleSubmit} />
+                        <CategoryForm values={values} handleChange={handleChange} errors={errors} handleSubmit={handleSubmit} separator/>
                         <SearchFilter searchValue={search} handleSearchFilterChange={handleSearchFilterChange} />
                         <CategoryTable searchFilter={searchBy} data={categories} onClick={handleRemove} searchValue={search} />
                 </div>
