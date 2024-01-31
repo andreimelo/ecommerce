@@ -49,7 +49,7 @@ function Sidebar({ role }) {
                         <NavLink to="/admin/category" className={() => (isActiveLink(pathname, '/admin/category') ? active : inactive)}>{string.routes.admin.categoryTitle}</NavLink>
                     </div>
                     <div>   
-                        <NavLink to="/admin/sub" className={() => (isActiveLink(pathname, '/admin/sub') ? active : inactive)}>{string.routes.admin.subCategoryTitle}</NavLink>
+                        <NavLink to="/admin/sub-category" className={() => (isActiveLink(pathname, '/admin/sub-category') ? active : inactive)}>{string.routes.admin.subCategoryTitle}</NavLink>
                     </div>
                     <div>   
                         <NavLink to="/admin/coupon" className={() => (isActiveLink(pathname, '/admin/coupon') ? active : inactive)}>{string.routes.admin.couponTitle}</NavLink>
