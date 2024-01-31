@@ -2,7 +2,7 @@ import React from 'react';
 
 function Error503(){
     return (
-		<div className="layout-default">
+		<div className="w-full max-w-screen-xl mx-auto">
 			<div class="flex h-screen min-h-full flex-col justify-center">
 				<main class="flex flex-col flex-grow place-content-center">
 					<div class="text-center">

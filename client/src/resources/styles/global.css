@@ -16,8 +16,3 @@
 .bg-google-red-color {
   background-color: var(--google-red-color);
 }
-
-.layout-default {
-  margin: auto;
-  width: 95%;
-}
