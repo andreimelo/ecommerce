@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import icons from './../../../../../resources/icons';
 import {Link} from 'react-router-dom';
 
-const CategoryTable = ({data, onClick}) => {
+const CategoryTable = ({data, onClick, searchFilter, searchValue }) => {
     return (
         <table className="w-3/5 my-5 min-w-max table-auto text-right">
-        {data.map((item) =>
+        {data.filter(searchFilter(searchValue)).map((item) =>
             (
                     <tbody key={item._id}>
                         <tr>
@@ -25,6 +25,8 @@ const CategoryTable = ({data, onClick}) => {
 CategoryTable.propTypes = {
     data: PropTypes.array.isRequired,
     onClick: PropTypes.func,
+    searchFilter: PropTypes.func,
+    searchValue: PropTypes.string,
 }
 
 export default React.memo(CategoryTable);
