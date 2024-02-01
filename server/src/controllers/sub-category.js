@@ -3,10 +3,11 @@ const slugify = require('slugify');
 
 exports.create = async (req, res) => {
 	try {
-		const { name } = req.body;
+		const { name, parent } = req.body;
 		let createSubCategory = await new SubCategory({
 			name,
-			slug : slugify(name),
+			parent,
+			slug   : slugify(name),
 		}).save();
 		res.json(createSubCategory);
 	} catch (err) {

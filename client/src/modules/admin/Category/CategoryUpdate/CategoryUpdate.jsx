@@ -2,12 +2,12 @@ import React,{useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import Sidebar from '../../../../library/components/SideBar';
 import PropTypes from 'prop-types';
-import CategoryForm from '../components/CategoryForm';
+import Form from '../../../../library/components/Form';
 import useInput from '../../../../library/hooks/useInput';
 import { updateCategory, getCategory } from '../../../../library/services/category';
 import validateAdminCategory from '../../../../library/helpers/validators/adminCategory';
 
-const Update = ({ role, match }) => {
+const CategoryUpdate = ({ role, match }) => {
     const {slug} = match.params;
     const { values, handleChange, errors, handleSubmit, setValues } = useInput(handleUpdateSubmit, validateAdminCategory);
     const user = useSelector(state => state.user);
@@ -51,7 +51,7 @@ const Update = ({ role, match }) => {
                         Update Category
                     </label>
                     <div>
-                    <CategoryForm values={values} handleChange={handleChange} errors={errors} handleSubmit={handleSubmit} />
+                    <Form values={values} handleChange={handleChange} errors={errors} handleSubmit={handleSubmit} category/>
                     </div>
                 </div>
             </div>
@@ -59,9 +59,9 @@ const Update = ({ role, match }) => {
     )
 }
 
-Update.propTypes = {
+CategoryUpdate.propTypes = {
     role: PropTypes.string,
     match: PropTypes.object
 }
 
-export default Update;
+export default CategoryUpdate;
