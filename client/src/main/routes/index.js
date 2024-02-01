@@ -58,11 +58,15 @@ const AdminCategory = lazy(async () => {
 	return module;
 });
 const AdminCategoryUpdate = lazy(async () => {
-	const module = await import('../../modules/admin/Category/Update');
+	const module = await import('../../modules/admin/Category/CategoryUpdate');
 	return module;
 });
 const AdminSubCategory = lazy(async () => {
 	const module = await import('../../modules/admin/SubCategory');
+	return module;
+});
+const AdminSubCategoryUpdate = lazy(async () => {
+	const module = await import('../../modules/admin/SubCategory/SubCategoryUpdate');
 	return module;
 });
 
@@ -76,7 +80,7 @@ const Error503 = lazy(async () => {
 	return module;
 });
 
-function initialRoutes({ store }){
+function initialRoutes({ store, isLoading }){
 	const { user } = store;
 	// Get role
 	const { role, imageURL } = user || '';
@@ -108,6 +112,10 @@ function initialRoutes({ store }){
 			{
 				path    : '/admin/sub-category',
 				element : AdminSubCategory,
+			},
+			{
+				path    : '/admin/sub-category/:slug',
+				element : AdminSubCategoryUpdate,
 			},
 			{
 				path    : '*',

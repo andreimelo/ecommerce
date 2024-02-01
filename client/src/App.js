@@ -9,7 +9,7 @@ import './index.css';
 function App(){
 	const dispatch = useDispatch();
 	const storeData = useSelector((state) => state);
-
+	
 	useEffect(
 		() => {
 			const unsubscribe = onAuthStateChanged(auth, async (user) => {

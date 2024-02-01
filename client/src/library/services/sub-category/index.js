@@ -78,7 +78,7 @@ export async function createSubCategory(category, token){
 			authToken      : token || '',
 		},
 		body    : JSON.stringify({
-			name : category,
+			...category,
 		}),
 	};
 	const result = await fetch(`${env.base_uri}/sub-category`, options);

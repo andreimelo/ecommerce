@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Sidebar from '../../../library/components/SideBar';
-import SearchFilter from '../../../library/components/SearchFilter';
 import PropTypes from 'prop-types';
 import {
     getCategories,
@@ -9,9 +8,10 @@ import {
     createCategory
 } from '../../../library/services/category';
 import useInput from '../../../library/hooks/useInput';
-import CategoryForm from '../Category/components/CategoryForm';
-import CategoryTable from '../Category/components/CategoryTable';
+import Form from '../../../library/components/Form';
+import Table from '../../../library/components/Table';
 import validateAdminCategory from '../../../library/helpers/validators/adminCategory';
+import SearchFilter from '../../../library/components/SearchFilter';
 
 const Category = ({ role }) => {
     const { values, handleChange, errors, handleSubmit } = useInput(clickedSubmit, validateAdminCategory);
@@ -24,7 +24,7 @@ const Category = ({ role }) => {
             const name = values.name;
             const result = await createCategory(name, user.token);
             if (result !== undefined) {
-                await getCategoriesData() 
+                await fetchCategoriesData() 
                 alert(`${name} successfully created`)
             }
             return result;
@@ -34,7 +34,7 @@ const Category = ({ role }) => {
         }
     }
 
-    async function getCategoriesData() {
+    async function fetchCategoriesData() {
         try {
             const result = await getCategories();
             setCategories(result);
@@ -48,7 +48,7 @@ const Category = ({ role }) => {
             let confirmation = window.confirm('Delete?'); 
             if (confirmation) {
                 await removeCategory(slug, user.token);
-                await getCategoriesData();
+                await fetchCategoriesData();
             }
         } catch (err) {
             console.log(err);
@@ -63,7 +63,7 @@ const Category = ({ role }) => {
 
     const searchBy = (search) => (values)=> values.name.toLowerCase().includes(search);
 
-    useEffect(() => { getCategoriesData() }, []);
+    useEffect(() => { fetchCategoriesData() }, []);
 
     return (
         <div className="w-full max-w-screen-xl mx-auto">
@@ -75,9 +75,9 @@ const Category = ({ role }) => {
                     <label className="text-2xl font-semibold">
                         Category
                     </label>
-                        <CategoryForm values={values} handleChange={handleChange} errors={errors} handleSubmit={handleSubmit} separator/>
+                        <Form values={values} handleChange={handleChange} errors={errors} handleSubmit={handleSubmit} separator category/>
                         <SearchFilter searchValue={search} handleSearchFilterChange={handleSearchFilterChange} />
-                        <CategoryTable searchFilter={searchBy} data={categories} onClick={handleRemove} searchValue={search} />
+                        <Table searchFilter={searchBy} data={categories} onClick={handleRemove} searchValue={search} linkTo={'/admin/category'} category />
                 </div>
             </div>
         </div>
