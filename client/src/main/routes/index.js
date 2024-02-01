@@ -7,76 +7,76 @@ import env from '../../library/common/config/env';
 
 // User/Subscriber pages
 const Home = lazy(async () => {
-	const module = await import('../../modules/default/Home');
+	const module = await import('../../pages/default/Home');
 	return module;
 });
 const Login = lazy(async () => {
-	const module = await import('../../modules/auth/Login');
+	const module = await import('../../pages/auth/Login');
 	return module;
 });
 const ForgotPassword = lazy(async () => {
-	const module = await import('../../modules/auth/ForgotPassword');
+	const module = await import('../../pages/auth/ForgotPassword');
 	return module;
 });
 const SignUp = lazy(async () => {
-	const module = await import('../../modules/auth/SignUp');
+	const module = await import('../../pages/auth/SignUp');
 	return module;
 });
 const CompleteRegistration = lazy(async () => {
-	const module = await import('../../modules/auth/CompleteRegistration');
+	const module = await import('../../pages/auth/CompleteRegistration');
 	return module;
 });
 const ChangePassword = lazy(async () => {
-	const module = await import('../../modules/user/ChangePassword');
+	const module = await import('../../pages/user/ChangePassword');
 	return module;
 });
 const Wishlist = lazy(async () => {
-	const module = await import('../../modules/user/Wishlist');
+	const module = await import('../../pages/user/Wishlist');
 	return module;
 });
 
 const Shop = lazy(async () => {
-	const module = await import('../../modules/default/Shop');
+	const module = await import('../../pages/default/Shop');
 	return module;
 });
 const Cart = lazy(async () => {
-	const module = await import('../../modules/default/Cart');
+	const module = await import('../../pages/default/Cart');
 	return module;
 });
 const History = lazy(async () => {
-	const module = await import('../../modules/user/History');
+	const module = await import('../../pages/user/History');
 	return module;
 });
 
 // Admin pages
 const AdminDashboard = lazy(async () => {
-	const module = await import('../../modules/admin/AdminDashboard');
+	const module = await import('../../pages/admin/AdminDashboard');
 	return module;
 });
 const AdminCategory = lazy(async () => {
-	const module = await import('../../modules/admin/Category');
+	const module = await import('../../pages/admin/Category');
 	return module;
 });
 const AdminCategoryUpdate = lazy(async () => {
-	const module = await import('../../modules/admin/Category/CategoryUpdate');
+	const module = await import('../../pages/admin/Category/CategoryUpdate');
 	return module;
 });
 const AdminSubCategory = lazy(async () => {
-	const module = await import('../../modules/admin/SubCategory');
+	const module = await import('../../pages/admin/SubCategory');
 	return module;
 });
 const AdminSubCategoryUpdate = lazy(async () => {
-	const module = await import('../../modules/admin/SubCategory/SubCategoryUpdate');
+	const module = await import('../../pages/admin/SubCategory/SubCategoryUpdate');
 	return module;
 });
 
 // Error Pages
 const Error404 = lazy(async () => {
-	const module = await import('../../modules/default/Error/Error404');
+	const module = await import('../../pages/default/Error/Error404');
 	return module;
 });
 const Error503 = lazy(async () => {
-	const module = await import('../../modules/default/Error/Error503');
+	const module = await import('../../pages/default/Error/Error503');
 	return module;
 });
 
