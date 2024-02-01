@@ -34,7 +34,6 @@ const Wishlist = lazy(async () => {
 	const module = await import('../../pages/user/Wishlist');
 	return module;
 });
-
 const Shop = lazy(async () => {
 	const module = await import('../../pages/default/Shop');
 	return module;
@@ -80,7 +79,7 @@ const Error503 = lazy(async () => {
 	return module;
 });
 
-function initialRoutes({ store, isLoading }){
+function initialRoutes({ store }){
 	const { user } = store;
 	// Get role
 	const { role, imageURL } = user || '';
@@ -166,7 +165,7 @@ function initialRoutes({ store, isLoading }){
 			element : Login,
 		},
 		{
-			path    : 'signup',
+			path    : '/signup',
 			element : SignUp,
 		},
 		{
