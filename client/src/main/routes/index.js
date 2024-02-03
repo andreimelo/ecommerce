@@ -34,6 +34,7 @@ const Wishlist = lazy(async () => {
 	const module = await import('../../pages/user/Wishlist');
 	return module;
 });
+
 const Shop = lazy(async () => {
 	const module = await import('../../pages/default/Shop');
 	return module;
