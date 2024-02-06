@@ -5,5 +5,6 @@ export const type = {
 		password : 'password',
 		default  : 'text',
 		search   : 'search',
+		number   : 'number',
 	},
 };
