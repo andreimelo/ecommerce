@@ -70,6 +70,11 @@ const AdminSubCategoryUpdate = lazy(async () => {
 	return module;
 });
 
+const AdminProduct = lazy(async () => {
+	const module = await import('../../pages/admin/Product');
+	return module;
+});
+
 // Error Pages
 const Error404 = lazy(async () => {
 	const module = await import('../../pages/default/Error/Error404');
@@ -116,6 +121,10 @@ function initialRoutes({ store }){
 			{
 				path    : '/admin/sub-category/:slug',
 				element : AdminSubCategoryUpdate,
+			},
+			{
+				path    : '/admin/product',
+				element : AdminProduct,
 			},
 			{
 				path    : '*',
