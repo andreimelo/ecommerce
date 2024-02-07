@@ -5,9 +5,18 @@ const slugify = require('slugify');
 exports.create = async (req, res) => {
 	try {
 		req.body.slug = slugify(req.body.title);
-		const newProduct = await new Product(req.body).save();
+		let newProduct = await new Product(req.body).save();
 		res.json(newProduct);
 	} catch (err) {
 		res.status(400).send('Create product failed');
+	}
+};
+
+exports.read = async (req, res) => {
+	try {
+		let getAllProducts = await Product.find({});
+		res.json(getAllProducts);
+	} catch (err) {
+		res.status(400).send('Read products failed');
 	}
 };
