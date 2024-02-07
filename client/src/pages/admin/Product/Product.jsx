@@ -1,8 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Sidebar from '../../../library/components/SideBar';
 import PropTypes from 'prop-types';
 import useInput from '../../../library/hooks/useInput';
-// import { createProduct } from '../../../library/services/product';
+import { createProduct } from '../../../library/services/product';
 import { productOptions } from '../../../library/common/constants/selectOptions';
 import CustomInput from '../../../library/components/Input';
 import CustomTextArea from '../../../library/components/TextArea';
@@ -14,14 +15,21 @@ const Product = ({ role }) => {
 		values,
 		handleChange,
 		// errors,
-		// handleSubmit,
-		// setValues,
-	} = useInput(() => {}, 'validateAdminCategory');
+		handleSubmit,
+	} = useInput(clickedSubmit, () => {
+		return {};
+	});
+	const user = useSelector((state) => state.user);
 
-	const { title, description, price, quantity, shipping, colors, brands } = values;
+	const { title, description, price, quantity, shipping, color, brand } = values;
 
-	function clickedSubmit(){
-		return null;
+	async function clickedSubmit(){
+		try {
+			await createProduct(values, user.token);
+			alert(`Product successfully created`);
+		} catch (error) {
+			alert('Create product failed');
+		}
 	}
 
 	return (
@@ -32,13 +40,14 @@ const Product = ({ role }) => {
 				</div>
 				<div class='flex-auto w-64 mx-10'>
 					<label className='text-2xl font-semibold'>Create Product </label>
-					{/* set components */}
-					<form className='my-10' onSubmit={clickedSubmit}>
+					<form className='w-2/4 my-10' onSubmit={handleSubmit}>
 						<CustomInput
 							type={type.input.default}
 							value={title}
 							name='title'
-							variant={'inp border border-gray-500 no-size mb-4'}
+							variant={
+								'inp border-2 border-gray-200 no-size mb-4 focus:outline-none focus:bg-white focus:border-gray-500'
+							}
 							placeHolder='Enter a title'
 							onChange={(event) =>
 								handleChange(event.target.name, event.target.value)}
@@ -48,7 +57,9 @@ const Product = ({ role }) => {
 							value={description}
 							name='description'
 							placeHolder='Enter a description'
-							variant={'inp border border-gray-500 no-size mb-4'}
+							variant={
+								'inp border-2 border-gray-200 no-size mb-4 focus:outline-none focus:bg-white focus:border-gray-500'
+							}
 							cols={50}
 							rows={4}
 							onChange={(event) =>
@@ -58,7 +69,9 @@ const Product = ({ role }) => {
 							type={type.input.number}
 							value={price}
 							name='price'
-							variant={'inp border border-gray-500 no-size'}
+							variant={
+								'inp border-2 border-gray-200 no-size focus:outline-none focus:bg-white focus:border-gray-500'
+							}
 							placeHolder='Enter a price'
 							onChange={(event) =>
 								handleChange(event.target.name, event.target.value)}
@@ -76,15 +89,17 @@ const Product = ({ role }) => {
 							type={type.input.number}
 							value={quantity}
 							name='quantity'
-							variant={'inp border border-gray-500 no-size'}
+							variant={
+								'inp border-2 border-gray-200 no-size focus:outline-none focus:bg-white focus:border-gray-500'
+							}
 							placeHolder='Enter a quantity'
 							onChange={(event) =>
 								handleChange(event.target.name, event.target.value)}
 						/>
 						<SelectOption
 							variant=''
-							value={colors}
-							name={'colors'}
+							value={color}
+							name={'color'}
 							placeHolder='Select a color'
 							data={productOptions['colors']}
 							onChange={(event) =>
@@ -92,8 +107,8 @@ const Product = ({ role }) => {
 						/>
 						<SelectOption
 							variant=''
-							value={brands}
-							name={'brands'}
+							value={brand}
+							name={'brand'}
 							placeHolder='Select a brand'
 							data={productOptions['brands']}
 							onChange={(event) =>
