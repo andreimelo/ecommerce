@@ -1,6 +1,7 @@
 const SubCategory = require('../models/sub-category');
 const slugify = require('slugify');
 
+// refactor and fix the error message
 exports.create = async (req, res) => {
 	try {
 		const { name, parent } = req.body;
