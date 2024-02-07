@@ -1,5 +1,7 @@
 const User = require('../models/user');
 
+// refactor and fix the error message
+
 exports.defaultAuthRoute = (req, res) => {
 	return res.json({ data: 'This is auth route' });
 };

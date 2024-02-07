@@ -1,6 +1,7 @@
 import env from '../../common/config/env';
 
 export async function createProduct(product, token){
+	// refactor
 	const options = {
 		method  : 'POST',
 		headers : {
