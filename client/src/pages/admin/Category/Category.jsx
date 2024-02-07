@@ -83,7 +83,7 @@ const Category = ({ role }) => {
 					<Sidebar role={role} />
 				</div>
 				<div class='flex-auto w-64 mx-10'>
-					<label className='text-2xl font-semibold'>Category</label>
+					<label className='text-2xl font-semibold'>Create Category</label>
 					<Form
 						values={values}
 						handleChange={handleChange}

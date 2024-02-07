@@ -115,10 +115,11 @@ const SubCategory = ({ role }) => {
 					<Sidebar role={role} />
 				</div>
 				<div class='flex-auto w-64 mx-10'>
-					<label className='text-2xl font-semibold'>Sub Category</label>
+					<label className='text-2xl font-semibold'>Create Sub Category</label>
 					<SelectOption
 						data={categories}
 						onChange={handleSelectedCategoryChange}
+						placeHolder='Select a category'
 					/>
 					<Form
 						values={values}
