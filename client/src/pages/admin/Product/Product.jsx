@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Sidebar from '../../../library/components/SideBar';
 import Form from '../../../library/components/Form';
 import PropTypes from 'prop-types';
 import useInput from '../../../library/hooks/useInput';
 import { createProduct } from '../../../library/services/product';
+import { getCategories } from '../../../library/services/category';
 
 const Product = ({ role }) => {
 	const {
@@ -16,6 +17,10 @@ const Product = ({ role }) => {
 		return {};
 	});
 	const user = useSelector((state) => state.user);
+	const [
+		categoriesData,
+		setCategoriesData,
+	] = useState([]);
 
 	async function clickedSubmit(){
 		try {
@@ -25,6 +30,20 @@ const Product = ({ role }) => {
 			alert('Create product failed');
 		}
 	}
+
+	async function fetchCategoriesData(){
+		try {
+			const result = await getCategories();
+			setCategoriesData(result);
+		} catch (err) {
+			alert(err);
+		}
+	}
+
+	useEffect(() => {
+		fetchCategoriesData();
+		// eslint-disable-next-line
+	}, []);
 
 	return (
 		<div className='w-full max-w-screen-xl mx-auto'>
@@ -40,6 +59,7 @@ const Product = ({ role }) => {
 						handleChange={handleChange}
 						// errors={errors}
 						handleSubmit={handleSubmit}
+						categoriesDataOption={categoriesData}
 						product
 					/>
 				</div>
