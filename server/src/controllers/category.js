@@ -1,4 +1,5 @@
 const Category = require('../models/category');
+const SubCategory = require('../models/sub-category');
 const slugify = require('slugify');
 
 // refactor and fix the error message
@@ -55,5 +56,14 @@ exports.remove = async (req, res) => {
 	} catch (err) {
 		// console.log(err);
 		res.status(400).send('Delete category failed');
+	}
+};
+
+exports.getSubCategory = async (req, res) => {
+	try {
+		const getSub = await SubCategory.find({ parent: req.params._id }).exec();
+		res.json(getSub);
+	} catch (error) {
+		res.status(400).send('Fetch sub category failed');
 	}
 };

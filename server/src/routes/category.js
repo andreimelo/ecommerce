@@ -8,5 +8,6 @@ router.get('/categories', list);
 router.get('/category/:slug', read);
 router.put('/category/:slug', authCheck, adminCheck, update);
 router.delete('/category/:slug', authCheck, adminCheck, remove);
+router.get('/category/sub-category/:id', getSubCategory);
 
 module.exports = router;
