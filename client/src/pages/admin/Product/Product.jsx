@@ -5,7 +5,7 @@ import Form from '../../../library/components/Form';
 import PropTypes from 'prop-types';
 import useInput from '../../../library/hooks/useInput';
 import { createProduct } from '../../../library/services/product';
-import { getCategories } from '../../../library/services/category';
+import { getCategories, getSubCategory } from '../../../library/services/category';
 
 const Product = ({ role }) => {
 	const {
@@ -20,6 +20,10 @@ const Product = ({ role }) => {
 	const [
 		categoriesData,
 		setCategoriesData,
+	] = useState([]);
+	const [
+		subCategoryData,
+		setSubCategoryData,
 	] = useState([]);
 
 	async function clickedSubmit(){
@@ -40,10 +44,28 @@ const Product = ({ role }) => {
 		}
 	}
 
-	useEffect(() => {
-		fetchCategoriesData();
-		// eslint-disable-next-line
-	}, []);
+	async function fetchSubCategoryData(id){
+		try {
+			if (id) {
+				const result = await getSubCategory(id);
+				setSubCategoryData(result);
+			}
+			return;
+		} catch (err) {
+			alert(err);
+		}
+	}
+
+	useEffect(
+		() => {
+			fetchCategoriesData();
+			fetchSubCategoryData(values.category);
+			// eslint-disable-next-line
+		},
+		[
+			values.category,
+		],
+	);
 
 	return (
 		<div className='w-full max-w-screen-xl mx-auto'>
@@ -60,6 +82,7 @@ const Product = ({ role }) => {
 						// errors={errors}
 						handleSubmit={handleSubmit}
 						categoriesDataOption={categoriesData}
+						subCategoryDataOption={subCategoryData}
 						product
 					/>
 				</div>

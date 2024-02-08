@@ -17,6 +17,7 @@ const Form = ({
 	category,
 	product,
 	categoriesDataOption,
+	subCategoryDataOption,
 }) => {
 	const { name, title, description, price, quantity, shipping, color, brand } = values;
 
@@ -129,6 +130,14 @@ const Form = ({
 						onChange={(event) =>
 							handleChange(event.target.name, event.target.value)}
 					/>
+					<SelectOption
+						variant=''
+						name={'subCategory'}
+						placeHolder='Select a sub category'
+						data={subCategoryDataOption}
+						onChange={(event) =>
+							handleChange(event.target.name, event.target.value)}
+					/>
 					<button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 border border-blue-700 rounded my-5 text-sm '>
 						Submit
 					</button>
@@ -140,27 +149,29 @@ const Form = ({
 };
 
 Form.propTypes = {
-	values               : PropTypes.object,
-	formClass            : PropTypes.string,
-	handleChange         : PropTypes.func,
-	errors               : PropTypes.object,
-	handleSubmit         : PropTypes.func,
-	separator            : PropTypes.bool,
-	placeHolder          : PropTypes.string,
-	category             : PropTypes.bool,
-	categoriesDataOption : PropTypes.array,
+	values                : PropTypes.object,
+	formClass             : PropTypes.string,
+	handleChange          : PropTypes.func,
+	errors                : PropTypes.object,
+	handleSubmit          : PropTypes.func,
+	separator             : PropTypes.bool,
+	placeHolder           : PropTypes.string,
+	category              : PropTypes.bool,
+	categoriesDataOption  : PropTypes.array,
+	subCategoryDataOption : PropTypes.array,
 };
 
 Form.defaultProps = {
-	values               : {},
-	formClass            : '',
-	handleChange         : () => {},
-	errors               : {},
-	handleSubmit         : () => {},
-	separator            : false,
-	placeHolder          : '',
-	category             : false,
-	categoriesDataOption : [],
+	values                : {},
+	formClass             : '',
+	handleChange          : () => {},
+	errors                : {},
+	handleSubmit          : () => {},
+	separator             : false,
+	placeHolder           : '',
+	category              : false,
+	categoriesDataOption  : [],
+	subCategoryDataOption : [],
 };
 
 export default React.memo(Form);
