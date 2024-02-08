@@ -123,7 +123,7 @@ const Form = ({
 					/>
 					<SelectOption
 						variant=''
-						name={'categories'}
+						name={'category'}
 						placeHolder='Select a categories'
 						data={categoriesDataOption}
 						onChange={(event) =>
