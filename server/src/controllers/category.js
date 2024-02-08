@@ -61,7 +61,7 @@ exports.remove = async (req, res) => {
 
 exports.getSubCategory = async (req, res) => {
 	try {
-		const getSub = await SubCategory.find({ parent: req.params._id }).exec();
+		const getSub = await SubCategory.find({ parent: req.params.id }).exec();
 		res.json(getSub);
 	} catch (error) {
 		res.status(400).send('Fetch sub category failed');

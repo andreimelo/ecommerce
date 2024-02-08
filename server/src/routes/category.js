@@ -1,6 +1,13 @@
 const { router } = require('../config/express');
 const { authCheck, adminCheck } = require('../middlewares/authSecurity');
-const { create, read, update, remove, list } = require('../controllers/category');
+const {
+	create,
+	read,
+	update,
+	remove,
+	list,
+	getSubCategory,
+} = require('../controllers/category');
 
 //routes
 router.post('/category', authCheck, adminCheck, create);
