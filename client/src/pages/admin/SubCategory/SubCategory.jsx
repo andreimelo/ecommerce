@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from '../../../library/components/SideBar';
 import SelectOption from '../../../library/components/SelectOption';
 import { useSelector } from 'react-redux';
-import { getCategories } from '../../../library/services/category';
+import { getCategories, getSubCategory } from '../../../library/services/category';
 import {
 	createSubCategory,
-	getSubCategories,
 	removeSubCategory,
 } from '../../../library/services/sub-category';
 import validateAdminCategory from '../../../library/helpers/validators/adminCategory';
@@ -64,9 +63,9 @@ const SubCategory = ({ role }) => {
 		}
 	}
 
-	async function fetchSubCategoriesData(){
+	async function fetchSubCategoriesData(id){
 		try {
-			const result = await getSubCategories();
+			const result = await getSubCategory(id);
 			setSubCategories(result);
 		} catch (err) {
 			alert(err);
@@ -95,18 +94,19 @@ const SubCategory = ({ role }) => {
 		setSearch(e.target.value.toLowerCase());
 	}
 
-	const searchBy = (search) => (values) =>
-		// filter by search and select option
-		// needs refactor
+	const searchBy = (search) => (values) => values.name.toLowerCase().includes(search);
 
-
-			search ? values.name.toLowerCase().includes(search) && selectedCategory :
-			selectedCategory === values.parent;
-
-	useEffect(() => {
-		fetchCategoriesData();
-		fetchSubCategoriesData();
-	}, []);
+	useEffect(
+		() => {
+			if (!selectedCategory) {
+				fetchCategoriesData();
+			}
+			fetchSubCategoriesData(selectedCategory);
+		},
+		[
+			selectedCategory,
+		],
+	);
 
 	return (
 		<div className='w-full max-w-screen-xl mx-auto'>

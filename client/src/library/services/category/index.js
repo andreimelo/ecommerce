@@ -87,3 +87,18 @@ export async function createCategory(category, token){
 
 	return data;
 }
+
+export async function getSubCategory(id){
+	const options = {
+		method  : 'GET',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json',
+		},
+	};
+	const result = await fetch(`${env.base_uri}/category/sub-category/${id}`, options);
+
+	const data = await result.json();
+
+	return data;
+}
