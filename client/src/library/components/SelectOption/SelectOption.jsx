@@ -35,7 +35,7 @@ SelectOption.propTypes = {
 	variant       : PropTypes.string,
 	name          : PropTypes.string,
 	onChange      : PropTypes.func,
-	selectedValue : PropTypes.bool,
+	selectedValue : PropTypes.string,
 	placeHolder   : PropTypes.string,
 	selectClass   : PropTypes.string,
 };
@@ -45,7 +45,7 @@ SelectOption.defaultProps = {
 	variant       : 'w-2/4',
 	name          : 'name',
 	onChange      : () => {},
-	selectedValue : false,
+	selectedValue : '',
 	placeHolder   : 'Select an option',
 	selectClass   :
 		'border-2 border-gray-200 text-gray-400 text-sm rounded-lg block w-full p-2.5 focus:outline-none focus:bg-white focus:border-gray-500',
