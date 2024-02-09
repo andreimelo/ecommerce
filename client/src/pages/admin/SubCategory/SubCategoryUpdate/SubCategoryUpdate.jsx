@@ -22,10 +22,6 @@ const SubCategoryUpdate = ({ role, match, history }) => {
 		categories,
 		setCategories,
 	] = useState([]);
-	const [
-		selectedCategory,
-		setSelectedCategory,
-	] = useState('');
 
 	async function clickedSubmit(){
 		try {
@@ -60,10 +56,6 @@ const SubCategoryUpdate = ({ role, match, history }) => {
 		}
 	}
 
-	async function handleSelectedCategoryChange(e){
-		setSelectedCategory(e.target.value);
-	}
-
 	useEffect(() => {
 		fetchSubCategory();
 		fetchCategoriesData();
@@ -78,11 +70,12 @@ const SubCategoryUpdate = ({ role, match, history }) => {
 				</div>
 				<div class='flex-auto w-64 mx-10'>
 					<label className='text-2xl font-semibold'>Sub Category</label>
+					{/* Needs refactor - it can be change based on category */}
 					<SelectOption
-						value={selectedCategory}
+						value={values.parent}
 						data={categories}
-						onChange={handleSelectedCategoryChange}
 						selectedValue={values.parent}
+						disabled
 					/>
 					<Form
 						values={values}
