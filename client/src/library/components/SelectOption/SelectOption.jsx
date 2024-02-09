@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const SelectOption = ({
+	value,
 	data,
 	variant,
 	name,
@@ -13,7 +14,7 @@ const SelectOption = ({
 	return (
 		<div className={variant}>
 			<label for='name' class='block mt-5 mb-3 text-sm font-medium text-gray-900' />
-			<select onChange={onChange} name={name} className={selectClass}>
+			<select value={value} onChange={onChange} name={name} className={selectClass}>
 				<option value=''>{placeHolder}</option>
 				{data.length > 0 &&
 					data.map((item) => (
@@ -31,6 +32,7 @@ const SelectOption = ({
 };
 
 SelectOption.propTypes = {
+	value         : PropTypes.any,
 	data          : PropTypes.array,
 	variant       : PropTypes.string,
 	name          : PropTypes.string,
@@ -41,6 +43,7 @@ SelectOption.propTypes = {
 };
 
 SelectOption.defaultProps = {
+	value         : '',
 	data          : [],
 	variant       : 'w-2/4',
 	name          : 'name',
@@ -48,7 +51,7 @@ SelectOption.defaultProps = {
 	selectedValue : '',
 	placeHolder   : 'Select an option',
 	selectClass   :
-		'border-2 border-gray-200 text-gray-400 text-sm rounded-lg block w-full p-2.5 focus:outline-none focus:bg-white focus:border-gray-500',
+		'border border-gray-300 text-gray-400 text-sm rounded-lg block w-full p-2.5 focus:outline-none focus:bg-white focus:border-gray-500',
 };
 
 export default SelectOption;

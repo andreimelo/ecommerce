@@ -117,6 +117,7 @@ const SubCategory = ({ role }) => {
 				<div class='flex-auto w-64 mx-10'>
 					<label className='text-2xl font-semibold'>Create Sub Category</label>
 					<SelectOption
+						value={selectedCategory}
 						data={categories}
 						onChange={handleSelectedCategoryChange}
 						placeHolder='Select a category'
