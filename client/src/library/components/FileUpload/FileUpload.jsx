@@ -1,19 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const FileUpload = ({ variant }) => {
-	const handleFileUploadAndResize = () => {
-		// resize
-		// send back to server to upload to cloudinary
-		// set url to images
-	};
+const FileUpload = ({ variant, handleFileUploadAndResize }) => {
 	return (
 		<div className={variant}>
-			<label>Choose File</label>
 			<input
 				type='file'
 				multiple
-				hidden
 				accept='images/*'
 				onChange={handleFileUploadAndResize}
 			/>
@@ -21,9 +14,11 @@ const FileUpload = ({ variant }) => {
 	);
 };
 FileUpload.propTypes = {
-	variant : PropTypes.string,
+	variant                   : PropTypes.string,
+	handleFileUploadAndResize : PropTypes.func,
 };
 FileUpload.defaultProps = {
-	variant : '',
+	variant                   : '',
+	handleFileUploadAndResize : () => {},
 };
 export default FileUpload;

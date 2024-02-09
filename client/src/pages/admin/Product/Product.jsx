@@ -6,6 +6,10 @@ import PropTypes from 'prop-types';
 import useInput from '../../../library/hooks/useInput';
 import { createProduct } from '../../../library/services/product';
 import { getCategories, getSubCategory } from '../../../library/services/category';
+import FileUpload from '../../../library/components/FileUpload/FileUpload';
+import { imageUpload } from '../../../library/services/image';
+import Resizer from 'react-image-file-resizer';
+import ImagePreview from '../../../library/components/ImagePreview';
 
 const Product = ({ role }) => {
 	const {
@@ -13,6 +17,7 @@ const Product = ({ role }) => {
 		handleChange,
 		// errors,
 		handleSubmit,
+		setValues,
 	} = useInput(clickedSubmit, () => {
 		return {};
 	});
@@ -25,6 +30,7 @@ const Product = ({ role }) => {
 		subCategoryData,
 		setSubCategoryData,
 	] = useState([]);
+	const { images } = values || {};
 
 	async function clickedSubmit(){
 		try {
@@ -56,6 +62,33 @@ const Product = ({ role }) => {
 		}
 	}
 
+	const handleFileUploadAndResize = (e) => {
+		let files = e.target.files;
+		let allUploadFiles = [];
+		if (files) {
+			for (let i = 0; i < files.length; i++) {
+				Resizer.imageFileResizer(
+					files[i],
+					720,
+					720,
+					'JPEG',
+					100,
+					0,
+					async (uri) => {
+						try {
+							let result = await imageUpload({ image: uri }, user.token);
+							allUploadFiles.push(result);
+							setValues({ images: allUploadFiles });
+						} catch (error) {
+							alert(error);
+						}
+					},
+					'base64',
+				);
+			}
+		}
+	};
+
 	useEffect(
 		() => {
 			fetchCategoriesData();
@@ -73,8 +106,16 @@ const Product = ({ role }) => {
 				<div class='flex-none w-40 border-r border-gray-200'>
 					<Sidebar role={role} />
 				</div>
+				{/* {console.log(values)} */}
 				<div class='flex-auto w-64 mx-10'>
 					<label className='text-2xl font-semibold'>Create Product </label>
+					<ImagePreview imagesData={images} alt='productImagePreview' />
+					<FileUpload
+						handleFileUploadAndResize={handleFileUploadAndResize}
+						values={values}
+						setValues={setValues}
+						variant='mt-5'
+					/>
 					<Form
 						formClass='w-2/4 my-10 '
 						values={values}
