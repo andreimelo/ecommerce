@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 
 const FileUpload = ({ variant }) => {
 	const handleFileUploadAndResize = () => {
-		// temporary
-		// event
+		// resize
+		// send back to server to upload to cloudinary
+		// set url to images
 	};
 	return (
 		<div className={variant}>
