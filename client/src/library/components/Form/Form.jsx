@@ -5,6 +5,7 @@ import CustomTextArea from '../TextArea';
 import SelectOption from '../SelectOption';
 import { productOptions } from '../../common/constants/selectOptions';
 import { type } from '../../../library/common/constants/types';
+import Select from 'react-select';
 
 const Form = ({
 	values,
@@ -19,8 +20,24 @@ const Form = ({
 	categoriesDataOption,
 	subCategoryDataOption,
 }) => {
-	const { name, title, description, price, quantity, shipping, color, brand } = values;
+	const {
+		name,
+		title,
+		description,
+		price,
+		quantity,
+		shipping,
+		color,
+		brand,
+		category    : categories,
+		subCategory,
+	} = values;
 
+	const transformedSubOptions = subCategoryDataOption.map((option) => ({
+		_id   : option._id,
+		value : option.name.toLowerCase(),
+		label : option.name,
+	}));
 	return (
 		<form className={formClass} onSubmit={(e) => handleSubmit(e)}>
 			{/* refactor */}
@@ -34,8 +51,8 @@ const Form = ({
 						variant={
 
 								errors &&
-								errors.name ? 'bg-white-200 appearance-none border-2 border-gray-200 rounded w-2/4 py-2 px-4 text-gray-700 leading-tight focus:outline-none error-border' :
-								'bg-white-200 appearance-none border-2 border-gray-200 rounded w-2/4 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
+								errors.name ? 'bg-white-200 appearance-none border border-gray-300 rounded w-2/4 py-2 px-4 text-gray-700 leading-tight focus:outline-none error-border' :
+								'bg-white-200 appearance-none border border-gray-300 rounded w-2/4 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500'
 						}
 						placeHolder={placeHolder}
 						onChange={(event) =>
@@ -54,7 +71,7 @@ const Form = ({
 						value={title}
 						name='title'
 						variant={
-							'inp border-2 border-gray-200 no-size mb-4 focus:outline-none focus:bg-white focus:border-gray-500'
+							'inp border border-gray-300 no-size mb-4 focus:outline-none focus:bg-white focus:border-gray-500'
 						}
 						placeHolder='Enter a title'
 						onChange={(event) =>
@@ -66,7 +83,7 @@ const Form = ({
 						name='description'
 						placeHolder='Enter a description'
 						variant={
-							'inp border-2 border-gray-200 no-size mb-4 focus:outline-none focus:bg-white focus:border-gray-500'
+							'inp border border-gray-300 no-size mb-4 focus:outline-none focus:bg-white focus:border-gray-500'
 						}
 						cols={50}
 						rows={4}
@@ -78,7 +95,7 @@ const Form = ({
 						value={price}
 						name='price'
 						variant={
-							'inp border-2 border-gray-200 no-size focus:outline-none focus:bg-white focus:border-gray-500'
+							'inp border border-gray-300 no-size focus:outline-none focus:bg-white focus:border-gray-500'
 						}
 						placeHolder='Enter a price'
 						onChange={(event) =>
@@ -98,7 +115,7 @@ const Form = ({
 						value={quantity}
 						name='quantity'
 						variant={
-							'inp border-2 border-gray-200 no-size focus:outline-none focus:bg-white focus:border-gray-500'
+							'inp border border-gray-300 no-size focus:outline-none focus:bg-white focus:border-gray-500'
 						}
 						placeHolder='Enter a quantity'
 						onChange={(event) =>
@@ -124,20 +141,30 @@ const Form = ({
 					/>
 					<SelectOption
 						variant=''
+						// rename to categories - duplicate category
+						value={categories}
 						name={'category'}
-						placeHolder='Select a categories'
+						placeHolder='Select a category'
 						data={categoriesDataOption}
-						onChange={(event) =>
-							handleChange(event.target.name, event.target.value)}
+						onChange={(event) => {
+							// empty state when click another category
+							handleChange('subCategory', []);
+							handleChange(event.target.name, event.target.value);
+						}}
 					/>
-					<SelectOption
-						variant=''
-						name={'subCategory'}
-						placeHolder='Select a sub category'
-						data={subCategoryDataOption}
-						onChange={(event) =>
-							handleChange(event.target.name, event.target.value)}
-					/>
+					{categories && (
+						<Select
+							isMulti
+							isSearchable
+							className='text-gray-400 text-sm rounded-lg block w-full mt-5 focus:outline-none focus:bg-white focus:border-gray-500'
+							name='subCategory'
+							value={subCategory}
+							onChange={(event) => {
+								handleChange('subCategory', event);
+							}}
+							options={transformedSubOptions}
+						/>
+					)}
 					<button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 border border-blue-700 rounded my-5 text-sm '>
 						Submit
 					</button>
