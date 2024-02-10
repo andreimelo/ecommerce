@@ -12,11 +12,21 @@ exports.create = async (req, res) => {
 	}
 };
 
-exports.read = async (req, res) => {
+exports.list = async (req, res) => {
 	try {
-		let getAllProducts = await Product.find({});
+		let getAllProducts = await Product.find({})
+			.limit(parseInt(req.params.count))
+			.populate('category')
+			.populate('subCategory')
+			.sort([
+				[
+					'createdAt',
+					'desc',
+				],
+			])
+			.exec();
 		res.json(getAllProducts);
 	} catch (err) {
-		res.status(400).send('Read products failed');
+		res.status(400).send('Fetch all products failed');
 	}
 };
