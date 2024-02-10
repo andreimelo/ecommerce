@@ -1,7 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ImagePreview = ({ variant, imagesData, alt }) => {
+const ImagePreview = ({
+	values,
+	data,
+	handleImageRemove,
+	variant,
+	imagesData,
+	setValues,
+	alt,
+}) => {
 	return (
 		<figure className={variant}>
 			{imagesData &&
@@ -13,7 +21,23 @@ const ImagePreview = ({ variant, imagesData, alt }) => {
 							src={image.url}
 							alt={alt}
 						/>
-						<figcaption class='text-sm'>
+						<figcaption
+							key={image.public_id}
+							onClick={async () => {
+								const { images } = values;
+								try {
+									await handleImageRemove(image.public_id, data.token);
+									// filter remove based on specific image preview
+									let filteredImages = images.filter((item) => {
+										return item.public_id !== image.public_id;
+									});
+									setValues({ images: filteredImages });
+								} catch (err) {
+									alert(err);
+								}
+							}}
+							class='text-sm'
+						>
 							<p>Remove</p>
 						</figcaption>
 					</div>
@@ -23,14 +47,24 @@ const ImagePreview = ({ variant, imagesData, alt }) => {
 };
 
 ImagePreview.propTypes = {
-	variant    : PropTypes.string,
-	imagesData : PropTypes.array,
-	alt        : PropTypes.string,
+	title             : PropTypes.string,
+	values            : PropTypes.object,
+	data              : PropTypes.object,
+	variant           : PropTypes.string,
+	imagesData        : PropTypes.array,
+	handleImageRemove : PropTypes.func,
+	setValues         : PropTypes.func,
+	alt               : PropTypes.string,
 };
 
 ImagePreview.defaultProps = {
-	variant    : 'grid gap-4 grid-cols-3 max-w-sm cursor-pointer',
-	imagesData : [],
-	alt        : '',
+	title             : '',
+	values            : {},
+	data              : {},
+	variant           : 'grid gap-4 grid-cols-3 max-w-sm cursor-pointer',
+	imagesData        : [],
+	handleImageRemove : () => {},
+	setValues         : () => {},
+	alt               : '',
 };
 export default ImagePreview;
