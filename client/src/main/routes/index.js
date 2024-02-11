@@ -69,9 +69,12 @@ const AdminSubCategoryUpdate = lazy(async () => {
 	const module = await import('../../pages/admin/SubCategory/SubCategoryUpdate');
 	return module;
 });
-
 const AdminProduct = lazy(async () => {
 	const module = await import('../../pages/admin/Product');
+	return module;
+});
+const AdminProducts = lazy(async () => {
+	const module = await import('../../pages/admin/Products');
 	return module;
 });
 
@@ -125,6 +128,10 @@ function initialRoutes({ store }){
 			{
 				path    : '/admin/product',
 				element : AdminProduct,
+			},
+			{
+				path    : '/admin/products',
+				element : AdminProducts,
 			},
 			{
 				path    : '*',

@@ -47,7 +47,6 @@ const ImagePreview = ({
 };
 
 ImagePreview.propTypes = {
-	title             : PropTypes.string,
 	values            : PropTypes.object,
 	data              : PropTypes.object,
 	variant           : PropTypes.string,
@@ -58,7 +57,6 @@ ImagePreview.propTypes = {
 };
 
 ImagePreview.defaultProps = {
-	title             : '',
 	values            : {},
 	data              : {},
 	variant           : 'grid gap-4 grid-cols-3 max-w-sm cursor-pointer',
