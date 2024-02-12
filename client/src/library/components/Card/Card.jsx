@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { images } from '../../../resources/images';
+import icons from '../../../resources/icons';
 
 const Card = ({
 	containerClass,
@@ -28,12 +29,14 @@ const Card = ({
 				<h5 className='text-xl font-semibold tracking-tight text-slate-900'>
 					{title}
 				</h5>
-				<span className='text-sm'>{description}</span>
+				<span className='text-sm'>
+					{description && `${description.substring(0, 60)}...`}
+				</span>
 			</div>
-			{/* <div className='grid grid-cols-2'>
-				<div>Delete</div>
-				<div>Edit</div>
-			</div> */}
+			<div className='grid grid-cols-2 my-4 place-items-center'>
+				<div className='cursor-pointer'>{icons.delete}</div>
+				<div className='cursor-pointer'>{icons.edit}</div>
+			</div>
 		</div>
 	);
 };
