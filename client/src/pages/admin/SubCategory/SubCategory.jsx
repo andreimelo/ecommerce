@@ -74,7 +74,7 @@ const SubCategory = ({ role }) => {
 
 	async function handleRemove(slug){
 		try {
-			let confirmation = window.confirm('Delete?');
+			let confirmation = window.confirm('Are sure you want to delete?');
 			if (confirmation) {
 				await removeSubCategory(slug, user.token);
 				await fetchSubCategoriesData();

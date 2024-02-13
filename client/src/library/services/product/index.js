@@ -32,3 +32,20 @@ export async function getProductsByCount(count){
 
 	return data;
 }
+
+export async function removeProduct(slug, token){
+	// refactor
+	const options = {
+		method  : 'DELETE',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json',
+			authToken      : token || '',
+		},
+	};
+	const result = await fetch(`${env.base_uri}/product/${slug}`, options);
+
+	const data = await result.json();
+
+	return data;
+}
