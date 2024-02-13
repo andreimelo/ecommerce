@@ -11,6 +11,8 @@ const Card = ({
 	imgSrc,
 	title,
 	description,
+	onClickRemove,
+	onClickEdit,
 }) => {
 	return (
 		<div class={containerClass}>
@@ -34,8 +36,12 @@ const Card = ({
 				</span>
 			</div>
 			<div className='grid grid-cols-2 my-4 place-items-center'>
-				<div className='cursor-pointer'>{icons.delete}</div>
-				<div className='cursor-pointer'>{icons.edit}</div>
+				<div className='cursor-pointer' onClick={onClickRemove}>
+					{icons.delete}
+				</div>
+				<div className='cursor-pointer' onClick={onClickEdit}>
+					{icons.edit}
+				</div>
 			</div>
 		</div>
 	);
@@ -48,6 +54,8 @@ Card.propTypes = {
 	imgSrc            : PropTypes.string,
 	title             : PropTypes.string,
 	description       : PropTypes.string,
+	onClickRemove     : PropTypes.func,
+	onClickEdit       : PropTypes.func,
 };
 
 Card.defaultProps = {
@@ -58,6 +66,8 @@ Card.defaultProps = {
 	imgSrc            : '',
 	title             : '',
 	description       : 'Lorem Ipsum Dolor',
+	onClickRemove     : () => {},
+	onClickEdit       : () => {},
 };
 
 export default Card;
