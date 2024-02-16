@@ -2,16 +2,20 @@ import React from 'react';
 import Avatar from './components/Avatar';
 import PropTypes from 'prop-types';
 
-const Profile =({imageURL})=> {
-    return (
-        <div>
-            <Avatar src={imageURL} alt="Rounded Avatar"/>
-        </div>
-    );
-}
+const Profile = ({ imageURL }) => {
+	return (
+		<div>
+			<Avatar src={imageURL} alt='Rounded Avatar' />
+		</div>
+	);
+};
 
 Profile.propTypes = {
-    imageURL: PropTypes.string
-}
+	imageURL : PropTypes.string,
+};
+
+Profile.defaultProps = {
+	imageURL : '',
+};
 
 export default Profile;
