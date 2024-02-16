@@ -77,6 +77,10 @@ const AdminProducts = lazy(async () => {
 	const module = await import('../../pages/admin/Products');
 	return module;
 });
+const AdminProductsUpdate = lazy(async () => {
+	const module = await import('../../pages/admin/Products/ProductsUpdate');
+	return module;
+});
 const AdminCoupon = lazy(async () => {
 	const module = await import('../../pages/admin/Coupon');
 	return module;
@@ -136,6 +140,10 @@ function initialRoutes({ store }){
 			{
 				path    : '/admin/products',
 				element : AdminProducts,
+			},
+			{
+				path    : '/admin/products/:slug',
+				element : AdminProductsUpdate,
 			},
 			{
 				path    : '/admin/coupon',
