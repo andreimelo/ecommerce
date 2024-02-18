@@ -39,3 +39,15 @@ exports.remove = async (req, res) => {
 		res.status(400).send('Product delete failed');
 	}
 };
+
+exports.read = async () => {
+	try {
+		const getProduct = await Product.findOne({ slug: req.params.slug })
+			.populate('category')
+			.populate('subCategory')
+			.exec();
+		res.json(getProduct);
+	} catch (error) {
+		res.status(400).send('Fetch product failed');
+	}
+};
