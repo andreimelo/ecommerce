@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { images } from '../../../resources/images';
 import icons from '../../../resources/icons';
 
@@ -12,7 +13,8 @@ const Card = ({
 	title,
 	description,
 	onClickRemove,
-	onClickEdit,
+	linkTo,
+	slug,
 }) => {
 	return (
 		<div class={containerClass}>
@@ -39,9 +41,9 @@ const Card = ({
 				<div className='cursor-pointer' onClick={onClickRemove}>
 					{icons.delete}
 				</div>
-				<div className='cursor-pointer' onClick={onClickEdit}>
-					{icons.edit}
-				</div>
+				<Link to={`${linkTo}/${slug}`}>
+					<div className='cursor-pointer'>{icons.edit}</div>
+				</Link>
 			</div>
 		</div>
 	);
@@ -55,7 +57,8 @@ Card.propTypes = {
 	title             : PropTypes.string,
 	description       : PropTypes.string,
 	onClickRemove     : PropTypes.func,
-	onClickEdit       : PropTypes.func,
+	linkTo            : PropTypes.string,
+	slug              : PropTypes.string,
 };
 
 Card.defaultProps = {
@@ -67,7 +70,8 @@ Card.defaultProps = {
 	title             : '',
 	description       : 'Lorem Ipsum Dolor',
 	onClickRemove     : () => {},
-	onClickEdit       : () => {},
+	linkTo            : '',
+	slug              : '',
 };
 
 export default Card;

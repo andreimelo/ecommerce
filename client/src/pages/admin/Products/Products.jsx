@@ -53,6 +53,8 @@ const Products = ({ role }) => {
 									title={item.title}
 									description={item.description}
 									onClickRemove={() => handleRemove(item.slug)}
+									linkTo={'/admin/products'}
+									slug={item.slug}
 								/>
 							))}
 					</div>
