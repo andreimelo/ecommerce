@@ -59,7 +59,7 @@ SelectOption.defaultProps = {
 	selectedValue : '',
 	placeHolder   : 'Select an option',
 	selectClass   :
-		'border border-gray-300 text-gray-400 text-sm rounded-lg block w-full p-2.5 focus:outline-none focus:bg-white focus:border-gray-500',
+		'border border-gray-300 text-sm rounded-lg block w-full p-2.5 focus:outline-none focus:bg-white focus:border-gray-500',
 	disabled      : false,
 };
 
