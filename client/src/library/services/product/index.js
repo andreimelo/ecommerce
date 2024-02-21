@@ -49,3 +49,18 @@ export async function removeProduct(slug, token){
 
 	return data;
 }
+
+export async function getProductBySlug(slug){
+	const options = {
+		method  : 'GET',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json',
+		},
+	};
+	const result = await fetch(`${env.base_uri}/product/${slug}`, options);
+
+	const data = await result.json();
+
+	return data;
+}

@@ -40,7 +40,7 @@ exports.remove = async (req, res) => {
 	}
 };
 
-exports.read = async () => {
+exports.read = async (req, res) => {
 	try {
 		const getProduct = await Product.findOne({ slug: req.params.slug })
 			.populate('category')
