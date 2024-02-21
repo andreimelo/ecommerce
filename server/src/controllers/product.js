@@ -51,3 +51,19 @@ exports.read = async (req, res) => {
 		res.status(400).send('Fetch product failed');
 	}
 };
+
+exports.update = async (req, res) => {
+	try {
+		if (req.body.title) {
+			req.body.slug = slugify(req.body.title);
+		}
+		const update = await Product.findOneAndUpdate(
+			{ slug: req.params.slug },
+			req.body,
+			{ new: true },
+		).exec();
+		res.json(update);
+	} catch (error) {
+		res.status(400).send('Update product failed');
+	}
+};
