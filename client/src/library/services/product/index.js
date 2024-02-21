@@ -64,3 +64,21 @@ export async function getProductBySlug(slug){
 
 	return data;
 }
+
+export async function updateProductBySlug(slug, product, token){
+	// refactor
+	const options = {
+		method  : 'PUT',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json',
+			authToken      : token || '',
+		},
+		body    : JSON.stringify(product),
+	};
+	const result = await fetch(`${env.base_uri}/product/${slug}`, options);
+
+	const data = await result.json();
+
+	return data;
+}

@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import Sidebar from '../../../../library/components/SideBar';
-import { getProductBySlug } from '../../../../library/services/product';
+import {
+	getProductBySlug,
+	updateProductBySlug,
+} from '../../../../library/services/product';
 import { getCategories, getSubCategory } from '../../../../library/services/category';
 import useInput from '../../../../library/hooks/useInput';
 import Form from '../../../../library/components/Form';
@@ -12,6 +16,7 @@ import ImagePreview from '../../../../library/components/ImagePreview';
 
 const ProductsUpdate = ({ role, match }) => {
 	const user = useSelector((state) => state.user);
+	const history = useHistory();
 	const { slug } = match.params;
 	const {
 		values,
@@ -19,12 +24,9 @@ const ProductsUpdate = ({ role, match }) => {
 		// errors,
 		handleSubmit,
 		setValues,
-	} = useInput(
-		() => {},
-		() => {
-			return {};
-		},
-	);
+	} = useInput(clickedSubmit, () => {
+		return {};
+	});
 	const { images } = values || {};
 	const [
 		categoriesData,
@@ -102,6 +104,16 @@ const ProductsUpdate = ({ role, match }) => {
 			}
 		}
 	};
+
+	async function clickedSubmit(){
+		try {
+			await updateProductBySlug(slug, values, user.token);
+			alert('Successfully updated the product');
+			history.push('/admin/products');
+		} catch (error) {
+			alert('Update product failed');
+		}
+	}
 
 	useEffect(() => {
 		fetchProductBySlug();
