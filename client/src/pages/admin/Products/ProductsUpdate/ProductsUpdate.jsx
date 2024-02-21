@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Sidebar from '../../../../library/components/SideBar';
 import { getProductBySlug } from '../../../../library/services/product';
 import { getCategories, getSubCategory } from '../../../../library/services/category';
 import useInput from '../../../../library/hooks/useInput';
 import Form from '../../../../library/components/Form';
+import FileUpload from '../../../../library/components/FileUpload/';
+import { imageUpload, removeImageUpload } from '../../../../library/services/image';
+import Resizer from 'react-image-file-resizer';
+import ImagePreview from '../../../../library/components/ImagePreview';
 
 const ProductsUpdate = ({ role, match }) => {
+	const user = useSelector((state) => state.user);
 	const { slug } = match.params;
 	const {
 		values,
@@ -19,6 +25,7 @@ const ProductsUpdate = ({ role, match }) => {
 			return {};
 		},
 	);
+	const { images } = values || {};
 	const [
 		categoriesData,
 		setCategoriesData,
@@ -66,6 +73,36 @@ const ProductsUpdate = ({ role, match }) => {
 		}
 	}
 
+	const handleFileUploadAndResize = (e) => {
+		let files = e.target.files;
+		let allUploadFiles = [];
+		if (files) {
+			for (let i = 0; i < files.length; i++) {
+				Resizer.imageFileResizer(
+					files[i],
+					720,
+					720,
+					'JPEG',
+					100,
+					0,
+					async (uri) => {
+						try {
+							let result = await imageUpload({ image: uri }, user.token);
+							allUploadFiles.push(result);
+							setValues({
+								...values,
+								images : allUploadFiles.concat(images),
+							});
+						} catch (error) {
+							alert(error);
+						}
+					},
+					'base64',
+				);
+			}
+		}
+	};
+
 	useEffect(() => {
 		fetchProductBySlug();
 		fetchCategoriesData();
@@ -90,6 +127,24 @@ const ProductsUpdate = ({ role, match }) => {
 				</div>
 				<div class='flex-auto w-64 mx-10'>
 					<label className='text-2xl font-semibold'>Product Update</label>
+					<ImagePreview
+						data={user}
+						values={values}
+						handleImageRemove={removeImageUpload}
+						imagesData={images}
+						setValues={setValues}
+						alt='productImagePreview'
+					/>
+					<FileUpload
+						handleFileUploadAndResize={handleFileUploadAndResize}
+						variant='mt-5'
+						inputClass='block w-full text-sm text-slate-500
+						file:mr-4 file:py-2 file:px-4
+						file:rounded-full file:border-0
+						file:text-sm file:font-semibold
+						file:bg-sky-50 file:text-sky-700
+						hover:file:bg-sky-100'
+					/>
 					<Form
 						formClass='w-2/4 my-10 '
 						values={values}

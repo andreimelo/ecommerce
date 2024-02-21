@@ -10,28 +10,35 @@ const ImagePreview = ({
 	setValues,
 	alt,
 }) => {
+	const { images } = values;
+
 	return (
 		<figure className={variant}>
+			{/* Needs to refactor */}
 			{imagesData &&
 				imagesData.map((image) => (
 					<div>
-						<img
-							// class='rounded-lg'
-							key={image.public_id}
-							src={image.url}
-							alt={alt}
-						/>
+						{images
+							.filter((item) => item.public_id === image.public_id)
+							.map((item) => (
+								<img
+									// class='rounded-lg'
+									key={item.public_id}
+									src={item.url}
+									alt={alt}
+								/>
+							))}
+
 						<figcaption
 							key={image.public_id}
 							onClick={async () => {
-								const { images } = values;
 								try {
 									await handleImageRemove(image.public_id, data.token);
 									// filter remove based on specific image preview
 									let filteredImages = images.filter((item) => {
 										return item.public_id !== image.public_id;
 									});
-									setValues({ images: filteredImages });
+									setValues({ ...values, images: filteredImages });
 								} catch (err) {
 									alert(err);
 								}
