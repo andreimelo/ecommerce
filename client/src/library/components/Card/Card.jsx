@@ -37,14 +37,16 @@ const Card = ({
 					{description && `${description.substring(0, 60)}...`}
 				</span>
 			</div>
-			<div className='grid grid-cols-2 my-4 place-items-center'>
-				<div className='cursor-pointer' onClick={onClickRemove}>
-					{icons.delete}
+			{linkTo && (
+				<div className='grid grid-cols-2 my-4 place-items-center'>
+					<div className='cursor-pointer' onClick={onClickRemove}>
+						{icons.delete}
+					</div>
+					<Link to={`${linkTo}/${slug}`}>
+						<div className='cursor-pointer'>{icons.edit}</div>
+					</Link>
 				</div>
-				<Link to={`${linkTo}/${slug}`}>
-					<div className='cursor-pointer'>{icons.edit}</div>
-				</Link>
-			</div>
+			)}
 		</div>
 	);
 };
