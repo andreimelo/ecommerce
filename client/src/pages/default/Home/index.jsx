@@ -24,16 +24,19 @@ const Home = () => {
 	return (
 		<div className='w-full max-w-screen-xl mx-auto whitespace-pre-wrap break-words'>
 			<div className='flex my-5'>
-				<div className='grid grid-cols-3 gap-4'>
-					{products &&
-						products.map((item) => (
-							<Card
-								imgSrc={item.images}
-								title={item.title}
-								description={item.description}
-								// slug={item.slug}
-							/>
-						))}
+				<div>
+					<label className='text-2xl font-semibold'>All Products</label>
+					<div className='grid grid-cols-3 gap-4'>
+						{products &&
+							products.map((item) => (
+								<Card
+									imgSrc={item.images}
+									title={item.title}
+									description={item.description}
+									// slug={item.slug}
+								/>
+							))}
+					</div>
 				</div>
 			</div>
 		</div>
