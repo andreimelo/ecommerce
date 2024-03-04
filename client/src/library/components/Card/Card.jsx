@@ -15,6 +15,8 @@ const Card = ({
 	onClickRemove,
 	linkTo,
 	slug,
+	isProductAndCart,
+	isDeleteAndEdit,
 }) => {
 	return (
 		<div class={containerClass}>
@@ -37,7 +39,24 @@ const Card = ({
 					{description && `${description.substring(0, 60)}...`}
 				</span>
 			</div>
-			{linkTo && (
+			{isProductAndCart && (
+				<div className='grid grid-cols-2 my-4 place-items-center'>
+					<Link to={`${linkTo}/${slug}`}>
+						<div
+							className='flex flex-col items-center cursor-pointer'
+							onClick={onClickRemove}
+						>
+							{icons.show}
+							<div>View Product</div>
+						</div>
+					</Link>
+					<div className='flex flex-col items-center  cursor-pointer'>
+						{icons.cardSolid}
+						Add to Cart
+					</div>
+				</div>
+			)}
+			{isDeleteAndEdit && (
 				<div className='grid grid-cols-2 my-4 place-items-center'>
 					<div className='cursor-pointer' onClick={onClickRemove}>
 						{icons.delete}
@@ -61,6 +80,8 @@ Card.propTypes = {
 	onClickRemove     : PropTypes.func,
 	linkTo            : PropTypes.string,
 	slug              : PropTypes.string,
+	isProductAndCart  : PropTypes.bool,
+	isDeleteAndEdit   : PropTypes.bool,
 };
 
 Card.defaultProps = {
@@ -74,6 +95,8 @@ Card.defaultProps = {
 	onClickRemove     : () => {},
 	linkTo            : '',
 	slug              : '',
+	isProductAndCart  : false,
+	isDeleteAndEdit   : false,
 };
 
 export default Card;

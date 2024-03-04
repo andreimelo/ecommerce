@@ -47,6 +47,10 @@ const History = lazy(async () => {
 	const module = await import('../../pages/user/History');
 	return module;
 });
+const ViewProduct = lazy(async () => {
+	const module = await import('../../pages/default/ViewProduct');
+	return module;
+});
 
 // Admin pages
 const AdminDashboard = lazy(async () => {
@@ -216,6 +220,10 @@ function initialRoutes({ store }){
 		{
 			path    : '/cart',
 			element : Cart,
+		},
+		{
+			path    : '/product/:slug',
+			element : ViewProduct,
 		},
 		{
 			path    : '*',
