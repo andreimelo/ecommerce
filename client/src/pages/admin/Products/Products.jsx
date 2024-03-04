@@ -55,6 +55,7 @@ const Products = ({ role }) => {
 									onClickRemove={() => handleRemove(item.slug)}
 									linkTo={'/admin/products'}
 									slug={item.slug}
+									isDeleteAndEdit
 								/>
 							))}
 					</div>
