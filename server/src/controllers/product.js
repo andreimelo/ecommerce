@@ -67,3 +67,23 @@ exports.update = async (req, res) => {
 		res.status(400).send('Update product failed');
 	}
 };
+
+exports.listAll = async (req, res) => {
+	try {
+		const { sort, order, limit } = req.body;
+		const products = await Product.find({})
+			.populate('category')
+			.populate('subCategory')
+			.sort([
+				[
+					sort,
+					order,
+				],
+			])
+			.limit(limit)
+			.exec();
+		res.json(products);
+	} catch (error) {
+		res.status(400).send('Fetch products failed');
+	}
+};
