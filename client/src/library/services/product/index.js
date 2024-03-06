@@ -82,3 +82,26 @@ export async function updateProductBySlug(slug, product, token){
 
 	return data;
 }
+
+export async function getProductsBySortAndOrder(sort, order, limit, token){
+	const transformData = {
+		sort,
+		order,
+		limit,
+	};
+	// refactor
+	const options = {
+		method  : 'POST',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json',
+			authToken      : token || '',
+		},
+		body    : JSON.stringify(transformData),
+	};
+	const result = await fetch(`${env.base_uri}/products`, options);
+
+	const data = await result.json();
+
+	return data;
+}
