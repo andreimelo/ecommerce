@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getProductsByCount } from '../../../library/services/product';
+import { getProductsBySortAndOrder } from '../../../library/services/product';
 import Card from '../../../library/components/Card';
 
 const Home = () => {
@@ -15,7 +15,7 @@ const Home = () => {
 	async function fetchProductsByCount(){
 		try {
 			setLoading(true);
-			const result = await getProductsByCount(3);
+			const result = await getProductsBySortAndOrder('createdAt', 'desc', 3);
 			setProducts(result);
 			setLoading(false);
 		} catch (error) {

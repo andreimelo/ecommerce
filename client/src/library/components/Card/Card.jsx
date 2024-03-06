@@ -40,7 +40,7 @@ const Card = ({
 				</span>
 			</div>
 			{isProductAndCart && (
-				<div className='grid grid-cols-2 my-4 place-items-center'>
+				<div className='grid grid-cols-2 mb-4 place-items-center'>
 					<Link to={`${linkTo}/${slug}`}>
 						<div
 							className='flex flex-col items-center cursor-pointer'
