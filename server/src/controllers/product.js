@@ -112,11 +112,11 @@ exports.listAll = async (req, res) => {
 	}
 };
 
-exports.productsCount = async (req, res) => {
-	try {
-		let total = await Product.find({}).estimatedDocumentCount().exec();
-		res.json(total);
-	} catch (error) {
-		res.status(400).send('Fetch products count failed');
-	}
-};
+// exports.productsCount = async (req, res) => {
+// 	try {
+// 		let total = await Product.find({}).estimatedDocumentCount().exec();
+// 		res.json(total);
+// 	} catch (error) {
+// 		res.status(400).send('Fetch products count failed');
+// 	}
+// };

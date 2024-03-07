@@ -7,12 +7,12 @@ const {
 	read,
 	update,
 	listAll,
-	productsCount,
+	// productsCount,
 } = require('../controllers/product');
 
 //routes
 router.post('/product', authCheck, adminCheck, create);
-router.get('/products/total', productsCount);
+// router.get('/products/total', productsCount);
 router.get('/products/:count', list);
 router.delete('/product/:slug', authCheck, adminCheck, remove);
 router.get('/product/:slug', read);
