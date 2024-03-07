@@ -67,11 +67,35 @@ exports.update = async (req, res) => {
 		res.status(400).send('Update product failed');
 	}
 };
+// Without pagination
+// exports.listAll = async (req, res) => {
+// 	try {
+// 		const { sort, order, limit } = req.body;
+// 		const products = await Product.find({})
+// 			.populate('category')
+// 			.populate('subCategory')
+// 			.sort([
+// 				[
+// 					sort,
+// 					order,
+// 				],
+// 			])
+// 			.limit(limit)
+// 			.exec();
+// 		res.json(products);
+// 	} catch (error) {
+// 		res.status(400).send('Fetch products failed');
+// 	}
+// };
 
+// With pagination
 exports.listAll = async (req, res) => {
 	try {
-		const { sort, order, limit } = req.body;
+		const { sort, order, page } = req.body;
+		const currentPage = page || 1;
+		const perPage = 3;
 		const products = await Product.find({})
+			.skip((currentPage - 1) * perPage)
 			.populate('category')
 			.populate('subCategory')
 			.sort([
@@ -80,10 +104,19 @@ exports.listAll = async (req, res) => {
 					order,
 				],
 			])
-			.limit(limit)
+			.limit(perPage)
 			.exec();
 		res.json(products);
 	} catch (error) {
-		res.status(400).send('Fetch products failed');
+		res.status(400).send('Fetch list of products failed');
+	}
+};
+
+exports.productsCount = async (req, res) => {
+	try {
+		let total = await Product.find({}).estimatedDocumentCount().exec();
+		res.json(total);
+	} catch (error) {
+		res.status(400).send('Fetch products count failed');
 	}
 };
