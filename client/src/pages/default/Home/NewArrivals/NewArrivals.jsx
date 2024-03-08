@@ -25,7 +25,11 @@ const NewArrivals = () => {
 	async function fetchProductsByCount(){
 		try {
 			setLoading(true);
-			const result = await getProductsBySortAndOrder('createdAt', 'desc', 3);
+			const result = await getProductsBySortAndOrder(
+				'createdAt',
+				'desc',
+				pagination,
+			);
 			setProducts(result);
 			setLoading(false);
 		} catch (error) {
@@ -36,25 +40,28 @@ const NewArrivals = () => {
 
 	useEffect(() => {
 		fetchProductsByCount();
+		// eslint-disable-next-line
 	}, []);
 
 	return (
-		<div>
+		<div className='my-5'>
 			<label className='text-2xl font-semibold'>New Arrivals</label>
-			<div className='grid grid-cols-3 gap-4'>
-				{
-					loading ? <h2>🌀 Loading....</h2> :
-					dataResult &&
-					dataResult.map((item) => (
-						<Card
-							imgSrc={item.images}
-							title={item.title}
-							description={item.description}
-							slug={item.slug}
-							linkTo={'/product'}
-							isProductAndCart
-						/>
-					))}
+			<div className='flex'>
+				<div className='grid grid-cols-3 gap-4'>
+					{
+						loading ? <h2>🌀 Loading....</h2> :
+						dataResult &&
+						dataResult.map((item) => (
+							<Card
+								imgSrc={item.images}
+								title={item.title}
+								description={item.description}
+								slug={item.slug}
+								linkTo={'/product'}
+								isProductAndCart
+							/>
+						))}
+				</div>
 			</div>
 			<Pagination
 				pagination={pagination}

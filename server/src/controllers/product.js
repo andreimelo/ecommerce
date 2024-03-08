@@ -91,7 +91,7 @@ exports.update = async (req, res) => {
 // With pagination
 exports.listAll = async (req, res) => {
 	try {
-		const { sort, order, page } = req.body;
+		let { sort, order, page } = req.body;
 		const currentPage = page || 1;
 		const perPage = 3;
 		const products = await Product.find({})

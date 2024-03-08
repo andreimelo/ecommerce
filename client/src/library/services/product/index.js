@@ -83,11 +83,11 @@ export async function updateProductBySlug(slug, product, token){
 	return data;
 }
 
-export async function getProductsBySortAndOrder(sort, order, limit, token){
+export async function getProductsBySortAndOrder(sort, order, page){
 	const transformData = {
 		sort,
 		order,
-		limit,
+		page,
 	};
 	// refactor
 	const options = {
@@ -95,7 +95,7 @@ export async function getProductsBySortAndOrder(sort, order, limit, token){
 		headers : {
 			Accept         : 'application/json',
 			'Content-Type' : 'application/json',
-			authToken      : token || '',
+			authToken      : '',
 		},
 		body    : JSON.stringify(transformData),
 	};
