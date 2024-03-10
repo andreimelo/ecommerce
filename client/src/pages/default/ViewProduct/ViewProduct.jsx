@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getProductBySlug } from '../../../library/services/product';
+import Carousel from '../../../library/components/Carousel';
 
 const ViewProduct = ({ match }) => {
 	const { slug } = match.params;
@@ -23,19 +24,29 @@ const ViewProduct = ({ match }) => {
 			alert(error);
 		}
 	}
+
 	useEffect(() => {
 		fetchProductBySlug();
 		// eslint-disable-next-line
 	}, []);
+
 	const { title, description } = product || {};
+	const images = [
+		'https://media.istockphoto.com/id/1434947710/photo/businessman-headphones-and-laptop-webinar-in-office-with-coffee-on-table-video-call-or.jpg?s=1024x1024&w=is&k=20&c=NvC5p29pg1jBXw-IEzCTYg3Mv1A11k8BGVFqRw-DCDk=',
+		'https://media.istockphoto.com/id/1500285927/photo/young-woman-a-university-student-studying-online.jpg?s=1024x1024&w=is&k=20&c=CVhpekieDK_UB8vtEDw-dKKGWzDpsxcQt-XEQIkgm3Y=',
+		'https://via.placeholder.com/600x400',
+	];
+
 	return (
 		<div className='w-full max-w-screen-xl mx-auto whitespace-pre-wrap break-words'>
 			{
 				loading ? <h2>🌀 Loading....</h2> :
 				<div>
 					<section className='grid grid-cols-[50%_auto] gap-3 my-10'>
-						<div className='col-span-1'> Image Carousel</div>
 						<div className='col-span-1'>
+							<Carousel images={images} />
+						</div>
+						<div className='col-span-1 mt-5'>
 							<label className='text-2xl font-bold'>{title}</label>
 							<p className='my-5'>{description}</p>
 							<button
