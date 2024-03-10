@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { getProductsBySortAndOrder } from '../../../../library/services/product';
-import Card from '../../../../library/components/Card';
-import Pagination from '../../../../library/components/Pagination';
-import usePagination from '../../../../library/hooks/usePagination';
+import { getProductsBySortAndOrder } from '../../../../../library/services/product';
+import Card from '../../../../../library/components/Card';
+import Pagination from '../../../../../library/components/Pagination';
+import usePagination from '../../../../../library/hooks/usePagination';
 
 const BestSellers = () => {
 	const [
@@ -20,7 +20,7 @@ const BestSellers = () => {
 		previousPage,
 		nextPage,
 		dataResult,
-	} = usePagination(products);
+	} = usePagination(products, 4);
 
 	async function fetchProductsByCount(){
 		try {
@@ -40,15 +40,16 @@ const BestSellers = () => {
 	}, []);
 
 	return (
-		<div className='my-5'>
+		<div className='my-10'>
 			<label className='text-2xl font-semibold'>Best Sellers</label>
 			<div className='flex'>
 				{
 					loading ? <h2>🌀 Loading....</h2> :
-					<div className='grid grid-cols-3 gap-4'>
+					<div className='grid grid-cols-4 gap-4'>
 						{dataResult &&
 							dataResult.map((item) => (
 								<Card
+									imgContainerClass='relative flex h-60 overflow-hidden rounded-xl'
 									imgSrc={item.images}
 									title={item.title}
 									description={item.description}
