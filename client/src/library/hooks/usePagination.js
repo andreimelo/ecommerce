@@ -1,8 +1,5 @@
 import { useState } from 'react';
-const usePagination = (data) => {
-	const [
-		count,
-	] = useState(3);
+const usePagination = (data, count) => {
 	const [
 		pagination,
 		setPagination,

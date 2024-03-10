@@ -1,6 +1,6 @@
 import React from 'react';
-import NewArrivals from './NewArrivals';
-import BestSellers from './BestSellers';
+import NewArrivals from './components/NewArrivals';
+import BestSellers from './components/BestSellers';
 
 const Home = () => {
 	return (
