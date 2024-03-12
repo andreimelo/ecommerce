@@ -42,7 +42,7 @@ const ViewProduct = ({ match }) => {
 						<div className='col-span-1'>
 							<Carousel images={images} />
 						</div>
-						<div className='col-span-1 mx-5'>
+						<div className='col-span-1 mx-5 my-5'>
 							<div className='text-gray-400 text-xs'>{brand}</div>
 							<label className='text-2xl font-bold'>{title}</label>
 							<p className='my-5'>{description}</p>

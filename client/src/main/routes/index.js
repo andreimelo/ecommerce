@@ -112,7 +112,7 @@ const InitialRoutes = ({ store }) => {
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			setLoading(false);
-		}, 500); // timeout in milliseconds
+		}, 1000); // timeout in milliseconds
 
 		return () => clearTimeout(timer);
 	}, []);
