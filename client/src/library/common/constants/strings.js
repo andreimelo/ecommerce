@@ -21,6 +21,7 @@ export const string = {
 			categoryTitle    : 'Category',
 			subCategoryTitle : 'Sub Category',
 			couponTitle      : 'Coupon',
+			accountsTile     : 'Accounts',
 		},
 	},
 	navigation   : {

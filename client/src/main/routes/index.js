@@ -89,6 +89,10 @@ const AdminCoupon = lazy(async () => {
 	const module = await import('../../pages/admin/Coupon');
 	return module;
 });
+const AdminAccounts = lazy(async () => {
+	const module = await import('../../pages/admin/Accounts');
+	return module;
+});
 
 // Error Pages
 const Error404 = lazy(async () => {
@@ -162,6 +166,10 @@ const InitialRoutes = ({ store }) => {
 			{
 				path    : '/admin/coupon',
 				element : AdminCoupon,
+			},
+			{
+				path    : '/admin/accounts',
+				element : AdminAccounts,
 			},
 			{
 				path    : '*',
