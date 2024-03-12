@@ -52,7 +52,7 @@ const Carousel = ({ images }) => {
 						alt={`Carousel ${index}`}
 					/>
 				)) :
-				<img src={image.default} />}
+				<img src={image.default} alt={`Carousel default_image`} />}
 			{/* </div> */}
 			{/* <div className='absolute top-1/2 -mt-4 left-0 right-0 flex justify-between'>
 				{images &&
