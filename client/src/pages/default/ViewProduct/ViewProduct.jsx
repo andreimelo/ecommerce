@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getProductBySlug } from '../../../library/services/product';
 import Carousel from '../../../library/components/Carousel';
 import ProductListItem from './components/ProductListItem/ProductListItem';
+// import RatingIcon from '../../../library/components/RatingIcon';
 
 const ViewProduct = ({ match }) => {
 	const { slug } = match.params;
@@ -13,6 +14,31 @@ const ViewProduct = ({ match }) => {
 		loading,
 		setLoading,
 	] = useState(false);
+	// const [
+	// 	rating,
+	// 	setRating,
+	// ] = useState(0);
+	// const [
+	// 	hoverRating,
+	// 	setHoverRating,
+	// ] = useState(0);
+	// const onMouseEnter = (index) => {
+	// 	setHoverRating(index);
+	// };
+	// const onMouseLeave = () => {
+	// 	setHoverRating(0);
+	// };
+	// const onSaveRating = (index) => {
+	// 	setRating(index);
+	// };
+
+	// const star = [
+	// 	1,
+	// 	2,
+	// 	3,
+	// 	4,
+	// 	5,
+	// ];
 
 	async function fetchProductBySlug(){
 		try {
@@ -48,6 +74,21 @@ const ViewProduct = ({ match }) => {
 							<label className='text-2xl font-bold'>{title}</label>
 							<p className='my-5'>{description}</p>
 							<ProductListItem data={product} />
+							{/* <div class='place-items-center'>
+								{star.map((index) => {
+									return (
+										<RatingIcon
+											star={star}
+											index={index}
+											rating={rating}
+											hoverRating={hoverRating}
+											onMouseEnter={onMouseEnter}
+											onMouseLeave={onMouseLeave}
+											onSaveRating={onSaveRating}
+										/>
+									);
+								})}
+							</div> */}
 							<button
 								type='button'
 								class='inline-flex text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
