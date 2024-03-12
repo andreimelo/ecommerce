@@ -112,11 +112,34 @@ exports.listAll = async (req, res) => {
 	}
 };
 
-// exports.productsCount = async (req, res) => {
-// 	try {
-// 		let total = await Product.find({}).estimatedDocumentCount().exec();
-// 		res.json(total);
-// 	} catch (error) {
-// 		res.status(400).send('Fetch products count failed');
-// 	}
-// };
+exports.productRatingStar = async (req, res) => {
+	try {
+		const product = await Product.findById(req.params.productId).exec();
+		const user = await user.findOne({ email: req.user.email }).exec();
+		const { star } = req.body;
+
+		let existingRating = product.ratings.find(
+			(item) => item.postedBy.toString() === user._id,
+		);
+		if (existingRating === undefined) {
+			let ratingAdded = await Product.findByIdAndUpdate(
+				product._id,
+				{
+					$push : { ratings: { star, postedBy: user._id } },
+				},
+				{ new: true },
+			).exec();
+			res.json(ratingAdded);
+		}
+		const ratingUpdated = await Product.updateOne(
+			{
+				ratings : { $elemMatch: existingRating },
+			},
+			{ $set: { 'ratings.$.star': star } },
+			{ new: true },
+		).exec();
+		res.json(ratingUpdated);
+	} catch (error) {
+		res.status(400).send('Fetch products count failed');
+	}
+};
