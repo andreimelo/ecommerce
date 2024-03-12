@@ -1,44 +1,60 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { Carousel as ImageCarousel } from 'react-responsive-carousel';
+import { images as image } from '../../../resources/images';
 
 const Carousel = ({ images }) => {
-	const [
-		currentImageIndex,
-		setCurrentImageIndex,
-	] = useState(0);
+	// const [
+	// 	currentImageIndex,
+	// 	setCurrentImageIndex,
+	// ] = useState(0);
 
-	const nextImage = () => {
-		setCurrentImageIndex(
-			(prevIndex) =>
+	// const nextImage = () => {
+	// 	setCurrentImageIndex(
+	// 		(prevIndex) =>
 
-					prevIndex === images.length - 1 ? 0 :
-					prevIndex + 1,
-		);
-	};
+	// 				prevIndex === images.length - 1 ? 0 :
+	// 				prevIndex + 1,
+	// 	);
+	// };
 
-	const prevImage = () => {
-		setCurrentImageIndex(
-			(prevIndex) =>
+	// const prevImage = () => {
+	// 	setCurrentImageIndex(
+	// 		(prevIndex) =>
 
-					prevIndex === 0 ? images.length - 1 :
-					prevIndex - 1,
-		);
-	};
+	// 				prevIndex === 0 ? images.length - 1 :
+	// 				prevIndex - 1,
+	// 	);
+	// };
 
 	return (
-		<div className='relative'>
-			<div className='overflow-hidden rounded-lg w-full h-[calc(10/16*100)%] md:h-80'>
-				{images &&
-					images.map((item) => (
-						<img
-							key={item.url}
-							className='w-full h-full object-cover'
-							src={item.url}
-							alt={`Carousel ${currentImageIndex + 1}`}
-						/>
-					))}
-			</div>
-			<div className='absolute top-1/2 -mt-4 left-0 right-0 flex justify-between'>
+		<ImageCarousel
+			showArrow
+			showStatus={
+
+					images.length ? true :
+					false
+			}
+			showIndicator
+			showThumbs={
+
+					images.length ? true :
+					false
+			}
+		>
+			{/* <div className='overflow-hidden rounded-lg w-full h-[calc(10/16*100)%] md:h-80'> */}
+			{
+				images && images.length ? images.map((item, index) => (
+					<img
+						key={item.url}
+						// className='w-full'
+						src={item.url}
+						alt={`Carousel ${index}`}
+					/>
+				)) :
+				<img src={image.default} />}
+			{/* </div> */}
+			{/* <div className='absolute top-1/2 -mt-4 left-0 right-0 flex justify-between'>
 				{images &&
 				images.length <= 0 && (
 					<div>
@@ -56,8 +72,8 @@ const Carousel = ({ images }) => {
 						</button>
 					</div>
 				)}
-			</div>
-		</div>
+			</div> */}
+		</ImageCarousel>
 	);
 };
 
