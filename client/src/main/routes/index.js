@@ -1,10 +1,10 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-//Components
 import Header from './../../library/components/Header';
 import Footer from '../../library/components/Footer';
 import env from '../../library/common/config/env';
 
+//Lazy-loaded pages
 // User/Subscriber pages
 const Home = lazy(async () => {
 	const module = await import('../../pages/default/Home');
@@ -100,13 +100,23 @@ const Error503 = lazy(async () => {
 	return module;
 });
 
-function initialRoutes({ store }){
+const InitialRoutes = ({ store }) => {
 	const { user } = store;
-	// Get role
 	const { role, imageURL } = user || '';
 	const isUnderMaintenance = env.under_maintenance === 'true';
+	const [
+		loading,
+		setLoading,
+	] = useState(true);
 
-	// 503 - Website under maintenance page
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setLoading(false);
+		}, 500); // timeout in milliseconds
+
+		return () => clearTimeout(timer);
+	}, []);
+
 	if (isUnderMaintenance) {
 		return (
 			<Suspense fallback={<h2>🌀 Loading....</h2>}>
@@ -230,33 +240,34 @@ function initialRoutes({ store }){
 			element : Error404,
 		},
 	];
-
 	const noRole = role === undefined || !role;
-	const userRoutes = roleRoutes[role] || [];
 	const mappingRoutes =
 		noRole ? publicRoutes :
-		userRoutes;
+		roleRoutes[role];
 
 	return (
 		<Suspense fallback={<h2>🌀 Loading....</h2>}>
 			<BrowserRouter>
 				<Header role={role} imageURL={imageURL} />
 				<Switch>
-					{mappingRoutes.map((route, index) => {
-						return (
-							<Route
-								key={index}
-								exact
-								path={route.path}
-								render={(props) => <route.element {...props} {...user} />}
-							/>
-						);
-					})}
+					{mappingRoutes.map((route, index) => (
+						<Route
+							key={index}
+							exact
+							path={route.path}
+							render={(props) =>
+								// refactor
+
+
+									loading ? '' :
+									<route.element {...props} {...user} />}
+						/>
+					))}
 				</Switch>
 				<Footer />
 			</BrowserRouter>
 		</Suspense>
 	);
-}
+};
 
-export default initialRoutes;
+export default InitialRoutes;
