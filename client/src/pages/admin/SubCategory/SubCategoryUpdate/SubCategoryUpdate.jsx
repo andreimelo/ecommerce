@@ -22,11 +22,19 @@ const SubCategoryUpdate = ({ role, match, history }) => {
 		categories,
 		setCategories,
 	] = useState([]);
+	const [
+		selectedCategory,
+		setSelectedCategory,
+	] = useState('');
 
 	async function clickedSubmit(){
 		try {
-			const { name, parent } = values;
-			const result = await updateSubCategory(slug, { name, parent }, user.token);
+			const { name } = values;
+			const result = await updateSubCategory(
+				slug,
+				{ name, parent: selectedCategory || values.parent },
+				user.token,
+			);
 			if (result !== undefined) {
 				// await fetchSubCategoriesData();
 				alert(`${name} successfully updated`);
@@ -56,6 +64,10 @@ const SubCategoryUpdate = ({ role, match, history }) => {
 		}
 	}
 
+	function handleSelectedCategoryChange(e){
+		setSelectedCategory(e.target.value || values.parent);
+	}
+
 	useEffect(() => {
 		fetchSubCategory();
 		fetchCategoriesData();
@@ -72,10 +84,10 @@ const SubCategoryUpdate = ({ role, match, history }) => {
 					<label className='text-2xl font-semibold'>Sub Category</label>
 					{/* Needs refactor - it can be change based on category */}
 					<SelectOption
-						value={values.parent}
+						value={selectedCategory || values.parent}
 						data={categories}
 						selectedValue={values.parent}
-						disabled
+						onChange={handleSelectedCategoryChange}
 					/>
 					<Form
 						values={values}
