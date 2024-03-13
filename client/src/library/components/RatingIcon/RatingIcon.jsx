@@ -9,6 +9,7 @@ const RatingIcon = ({
 	onMouseLeave,
 	onSaveRating,
 	onMouseEnter,
+	starClass,
 }) => {
 	const fill = React.useMemo(
 		() => {
@@ -33,7 +34,7 @@ const RatingIcon = ({
 			onMouseLeave={() => onMouseLeave()}
 			onClick={() => onSaveRating(index)}
 		>
-			<StarIcon fill={fill} />
+			<StarIcon fill={fill} starClass={starClass} />
 		</div>
 	);
 };
@@ -46,6 +47,7 @@ RatingIcon.propTypes = {
 	onMouseLeave : PropTypes.func,
 	onSaveRating : PropTypes.func,
 	onMouseEnter : PropTypes.func,
+	starClass    : PropTypes.string,
 };
 
 RatingIcon.defaultProps = {
@@ -57,6 +59,7 @@ RatingIcon.defaultProps = {
 	onMouseLeave         : () => {},
 	onSaveRating         : () => {},
 	onMouseEnter         : () => {},
+	starClass            : 'w-6 h-6 cursor-pointer border-gray-500',
 };
 
 export default RatingIcon;

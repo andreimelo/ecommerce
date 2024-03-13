@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const StarIcon = ({ fill }) => {
+const StarIcon = ({ fill, starClass }) => {
 	return (
 		<span>
 			<svg
@@ -9,7 +9,7 @@ const StarIcon = ({ fill }) => {
 				viewBox='0 0 24 24'
 				stroke='gray'
 				fill={fill}
-				className={`w-6 h-6 cursor-pointer border-gray-500`}
+				className={starClass}
 			>
 				<path
 					fill-rule='evenodd'
@@ -22,11 +22,13 @@ const StarIcon = ({ fill }) => {
 };
 
 StarIcon.propTypes = {
-	fill : PropTypes.string,
+	fill      : PropTypes.string,
+	starClass : PropTypes.string,
 };
 
 StarIcon.defaultProps = {
-	fill : '',
+	fill      : '',
+	starClass : 'w-6 h-6 cursor-pointer border-gray-500',
 };
 
 export default StarIcon;
