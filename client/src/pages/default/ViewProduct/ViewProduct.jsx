@@ -2,10 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { getProductBySlug } from '../../../library/services/product';
 import Carousel from '../../../library/components/Carousel';
 import ProductListItem from './components/ProductListItem/ProductListItem';
-// import RatingIcon from '../../../library/components/RatingIcon';
+import RatingIcon from '../../../library/components/RatingIcon';
+import Modal from '../../../library/components/Modal';
 
 const ViewProduct = ({ match }) => {
 	const { slug } = match.params;
+	const [
+		modalOpen,
+		setModalOpen,
+	] = useState(false);
 	const [
 		product,
 		setProduct,
@@ -14,31 +19,22 @@ const ViewProduct = ({ match }) => {
 		loading,
 		setLoading,
 	] = useState(false);
-	// const [
-	// 	rating,
-	// 	setRating,
-	// ] = useState(0);
-	// const [
-	// 	hoverRating,
-	// 	setHoverRating,
-	// ] = useState(0);
-	// const onMouseEnter = (index) => {
-	// 	setHoverRating(index);
-	// };
-	// const onMouseLeave = () => {
-	// 	setHoverRating(0);
-	// };
-	// const onSaveRating = (index) => {
-	// 	setRating(index);
-	// };
+	const [
+		rating,
+		setRating,
+	] = useState(0);
+	const [
+		hoverRating,
+		setHoverRating,
+	] = useState(0);
 
-	// const star = [
-	// 	1,
-	// 	2,
-	// 	3,
-	// 	4,
-	// 	5,
-	// ];
+	const star = [
+		1,
+		2,
+		3,
+		4,
+		5,
+	];
 
 	async function fetchProductBySlug(){
 		try {
@@ -50,6 +46,23 @@ const ViewProduct = ({ match }) => {
 			setLoading(false);
 			alert(error);
 		}
+	}
+	function onMouseEnter(index){
+		setHoverRating(index);
+	}
+	function onMouseLeave(){
+		setHoverRating(0);
+	}
+	function onSaveRating(index){
+		setRating(index);
+	}
+
+	function openModal(){
+		setModalOpen(true);
+	}
+
+	function closeModal(){
+		setModalOpen(false);
 	}
 
 	useEffect(() => {
@@ -72,9 +85,7 @@ const ViewProduct = ({ match }) => {
 						<div className='col-span-1 mx-5 my-5'>
 							<div className='text-gray-400 text-xs'>{brand}</div>
 							<label className='text-2xl font-bold'>{title}</label>
-							<p className='my-5'>{description}</p>
-							<ProductListItem data={product} />
-							{/* <div class='place-items-center'>
+							<div class='place-items-center my-2'>
 								{star.map((index) => {
 									return (
 										<RatingIcon
@@ -85,13 +96,17 @@ const ViewProduct = ({ match }) => {
 											onMouseEnter={onMouseEnter}
 											onMouseLeave={onMouseLeave}
 											onSaveRating={onSaveRating}
+											starClass='w-6 h-6 cursor-pointer border-gray-500 mx-auto'
 										/>
 									);
 								})}
-							</div> */}
+							</div>
+							<p className='mb-5'>{description}</p>
+							<ProductListItem data={product} />
+
 							<button
 								type='button'
-								class='inline-flex text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
+								class='text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
 							>
 								Add to Cart
 							</button>
@@ -101,9 +116,39 @@ const ViewProduct = ({ match }) => {
 							>
 								Add to Wishlist
 							</button>
+							<button
+								onClick={openModal}
+								type='button'
+								class='text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
+							>
+								Leave Rate
+							</button>
 						</div>
 					</section>
 					<section className='my-5'>Related Products</section>
+					<Modal
+						modalContainerClass='relative bg-white rounded-lg shadow-xl w-80 mx-auto'
+						modalTitle='Rate'
+						isOpen={modalOpen}
+						onClose={closeModal}
+					>
+						<div class='place-items-center my-2'>
+							{star.map((index) => {
+								return (
+									<RatingIcon
+										star={star}
+										index={index}
+										rating={rating}
+										hoverRating={hoverRating}
+										onMouseEnter={onMouseEnter}
+										onMouseLeave={onMouseLeave}
+										onSaveRating={onSaveRating}
+										starClass='w-12 h-12 cursor-pointer border-gray-500 mx-auto'
+									/>
+								);
+							})}
+						</div>
+					</Modal>
 				</div>}
 		</div>
 	);
