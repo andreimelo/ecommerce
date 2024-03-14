@@ -3,7 +3,7 @@ import { getProductBySlug } from '../../../library/services/product';
 import Carousel from '../../../library/components/Carousel';
 import ProductListItem from './components/ProductListItem/ProductListItem';
 import RatingIcon from '../../../library/components/RatingIcon';
-import Modal from '../../../library/components/Modal';
+import RatingModal from './components/RatingModal';
 
 const ViewProduct = ({ match }) => {
 	const { slug } = match.params;
@@ -96,14 +96,12 @@ const ViewProduct = ({ match }) => {
 											onMouseEnter={onMouseEnter}
 											onMouseLeave={onMouseLeave}
 											onSaveRating={onSaveRating}
-											starClass='w-6 h-6 cursor-pointer border-gray-500 mx-auto'
 										/>
 									);
 								})}
 							</div>
 							<p className='mb-5'>{description}</p>
 							<ProductListItem data={product} />
-
 							<button
 								type='button'
 								class='text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
@@ -126,29 +124,16 @@ const ViewProduct = ({ match }) => {
 						</div>
 					</section>
 					<section className='my-5'>Related Products</section>
-					<Modal
-						modalContainerClass='relative bg-white rounded-lg shadow-xl w-80 mx-auto'
-						modalTitle='Rate'
-						isOpen={modalOpen}
-						onClose={closeModal}
-					>
-						<div class='place-items-center my-2'>
-							{star.map((index) => {
-								return (
-									<RatingIcon
-										star={star}
-										index={index}
-										rating={rating}
-										hoverRating={hoverRating}
-										onMouseEnter={onMouseEnter}
-										onMouseLeave={onMouseLeave}
-										onSaveRating={onSaveRating}
-										starClass='w-12 h-12 cursor-pointer border-gray-500 mx-auto'
-									/>
-								);
-							})}
-						</div>
-					</Modal>
+					<RatingModal
+						star={star}
+						rating={rating}
+						hoverRating={hoverRating}
+						onMouseEnter={onMouseEnter}
+						onMouseLeave={onMouseLeave}
+						onSaveRating={onSaveRating}
+						modalOpen={modalOpen}
+						closeModal={closeModal}
+					/>
 				</div>}
 		</div>
 	);
