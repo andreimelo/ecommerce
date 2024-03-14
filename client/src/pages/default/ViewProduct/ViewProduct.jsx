@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { getProductBySlug } from '../../../library/services/product';
 import Carousel from '../../../library/components/Carousel';
 import ProductListItem from './components/ProductListItem/ProductListItem';
 import RatingIcon from '../../../library/components/RatingIcon';
 import RatingModal from './components/RatingModal';
+import { useSelector } from 'react-redux';
 
 const ViewProduct = ({ match }) => {
 	const { slug } = match.params;
+	const history = useHistory();
 	const [
 		modalOpen,
 		setModalOpen,
@@ -15,6 +18,7 @@ const ViewProduct = ({ match }) => {
 		product,
 		setProduct,
 	] = useState();
+	const user = useSelector((item) => item.user);
 	const [
 		loading,
 		setLoading,
@@ -58,7 +62,10 @@ const ViewProduct = ({ match }) => {
 	}
 
 	function openModal(){
-		setModalOpen(true);
+		if (user && user.token) {
+			return setModalOpen(true);
+		}
+		return history.push('/login');
 	}
 
 	function closeModal(){
