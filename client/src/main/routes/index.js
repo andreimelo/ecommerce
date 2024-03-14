@@ -179,7 +179,15 @@ const InitialRoutes = ({ store }) => {
 		subscriber : [
 			{
 				path    : '/',
+				element : Home,
+			},
+			{
+				path    : '/history',
 				element : History,
+			},
+			{
+				path    : '/product/:slug',
+				element : ViewProduct,
 			},
 			{
 				path    : '/user/change-password',

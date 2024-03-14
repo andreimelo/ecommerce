@@ -21,10 +21,10 @@ function Sidebar({ role }){
 					<nav>
 						<div>
 							<NavLink
-								to='/'
+								to='/history'
 								className={() =>
 
-										isActiveLink(pathname, '/') ? active :
+										isActiveLink(pathname, '/history') ? active :
 										inactive}
 							>
 								{string.routes.historyTitle}
