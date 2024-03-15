@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { getProductBySlug } from '../../../library/services/product';
+import {
+	getProductBySlug,
+	putProductStarRating,
+} from '../../../library/services/product';
 import Carousel from '../../../library/components/Carousel';
 import ProductListItem from './components/ProductListItem/ProductListItem';
 import RatingIcon from '../../../library/components/RatingIcon';
 import RatingModal from './components/RatingModal';
 import { useSelector } from 'react-redux';
+import { showAverageRating, numberOfStar } from '../../../library/helpers/rating';
 
 const ViewProduct = ({ match }) => {
 	const { slug } = match.params;
@@ -31,14 +35,8 @@ const ViewProduct = ({ match }) => {
 		hoverRating,
 		setHoverRating,
 	] = useState(0);
-
-	const star = [
-		1,
-		2,
-		3,
-		4,
-		5,
-	];
+	const average = showAverageRating(product);
+	const { title, description, brand, images, _id, ratings } = product || {};
 
 	async function fetchProductBySlug(){
 		try {
@@ -57,15 +55,20 @@ const ViewProduct = ({ match }) => {
 	function onMouseLeave(){
 		setHoverRating(0);
 	}
-	function onSaveRating(index){
+	function onSaveRating(index, name){
 		setRating(index);
+		putProductStarRating(name, index, user.token);
 	}
-
 	function openModal(){
 		if (user && user.token) {
 			return setModalOpen(true);
 		}
-		return history.push('/login');
+		return history.push({
+			pathname : '/login',
+			state    : {
+				from : `/product/${slug}`,
+			},
+		});
 	}
 
 	function closeModal(){
@@ -77,9 +80,22 @@ const ViewProduct = ({ match }) => {
 		// eslint-disable-next-line
 	}, []);
 
-	const { title, description, brand, images } = product || {};
+	useEffect(
+		() => {
+			if (ratings && user) {
+				let existingRating = ratings
+					.reverse()
+					.find((item) => item.postedBy.toString() === user._id.toString());
 
-	// console.log(product);
+				existingRating && setRating(existingRating.star);
+			}
+		},
+		[
+			ratings,
+			user,
+		],
+	);
+
 	return (
 		<div className='w-full max-w-screen-xl mx-auto whitespace-pre-wrap break-words'>
 			{
@@ -93,16 +109,12 @@ const ViewProduct = ({ match }) => {
 							<div className='text-gray-400 text-xs'>{brand}</div>
 							<label className='text-2xl font-bold'>{title}</label>
 							<div class='place-items-center my-2'>
-								{star.map((index) => {
+								{numberOfStar.map((index) => {
 									return (
 										<RatingIcon
-											star={star}
+											star={numberOfStar}
 											index={index}
-											rating={rating}
-											hoverRating={hoverRating}
-											onMouseEnter={onMouseEnter}
-											onMouseLeave={onMouseLeave}
-											onSaveRating={onSaveRating}
+											rating={average}
 										/>
 									);
 								})}
@@ -126,13 +138,16 @@ const ViewProduct = ({ match }) => {
 								type='button'
 								class='text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
 							>
-								Leave Rate
+								{
+									user && user.token ? 'Leave Rate' :
+									'Login to leave rating'}
 							</button>
 						</div>
 					</section>
 					<section className='my-5'>Related Products</section>
 					<RatingModal
-						star={star}
+						id={_id}
+						star={numberOfStar}
 						rating={rating}
 						hoverRating={hoverRating}
 						onMouseEnter={onMouseEnter}

@@ -1,4 +1,5 @@
 const Product = require('../models/product');
+const User = require('../models/user');
 const slugify = require('slugify');
 
 // refactor and fix the error message
@@ -115,7 +116,7 @@ exports.listAll = async (req, res) => {
 exports.productRatingStar = async (req, res) => {
 	try {
 		const product = await Product.findById(req.params.productId).exec();
-		const user = await user.findOne({ email: req.user.email }).exec();
+		const user = await User.findOne({ email: req.user.email }).exec();
 		const { star } = req.body;
 
 		let existingRating = product.ratings.find(
@@ -129,7 +130,7 @@ exports.productRatingStar = async (req, res) => {
 				},
 				{ new: true },
 			).exec();
-			res.json(ratingAdded);
+			return res.json(ratingAdded);
 		}
 		const ratingUpdated = await Product.updateOne(
 			{
@@ -138,7 +139,7 @@ exports.productRatingStar = async (req, res) => {
 			{ $set: { 'ratings.$.star': star } },
 			{ new: true },
 		).exec();
-		res.json(ratingUpdated);
+		return res.json(ratingUpdated);
 	} catch (error) {
 		res.status(400).send('Fetch products count failed');
 	}

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import StarIcon from './StarIcon/StarIcon';
 
 const RatingIcon = ({
+	id,
 	index,
 	rating,
 	hoverRating,
@@ -32,7 +33,7 @@ const RatingIcon = ({
 			class='inline-flex items-center'
 			onMouseEnter={() => onMouseEnter(index)}
 			onMouseLeave={() => onMouseLeave()}
-			onClick={() => onSaveRating(index)}
+			onClick={() => onSaveRating(index, id)}
 		>
 			<StarIcon fill={fill} starClass={starClass} />
 		</div>
@@ -40,6 +41,7 @@ const RatingIcon = ({
 };
 
 RatingIcon.propTypes = {
+	id           : PropTypes.string,
 	star         : PropTypes.array,
 	index        : PropTypes.number,
 	rating       : PropTypes.number,
@@ -51,6 +53,7 @@ RatingIcon.propTypes = {
 };
 
 RatingIcon.defaultProps = {
+	id                   : '',
 	ratingContainerClass : 'place-items-center',
 	star                 : [],
 	index                : 0,
