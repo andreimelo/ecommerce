@@ -35,7 +35,7 @@ const ViewProduct = ({ match }) => {
 		hoverRating,
 		setHoverRating,
 	] = useState(0);
-	const average = showAverageRating(product);
+	const { average, length } = showAverageRating(product) || {};
 	const { title, description, brand, images, _id, ratings } = product || {};
 
 	async function fetchProductBySlug(){
@@ -108,16 +108,17 @@ const ViewProduct = ({ match }) => {
 						<div className='col-span-1 mx-5 my-5'>
 							<div className='text-gray-400 text-xs'>{brand}</div>
 							<label className='text-2xl font-bold'>{title}</label>
-							<div class='place-items-center my-2'>
+							<div class='flex place-items-center my-2'>
 								{numberOfStar.map((index) => {
 									return (
 										<RatingIcon
-											star={numberOfStar}
+											length={length}
 											index={index}
 											rating={average}
 										/>
 									);
 								})}
+								<div>{length && ` (${length}) `}</div>
 							</div>
 							<p className='mb-5'>{description}</p>
 							<ProductListItem data={product} />
