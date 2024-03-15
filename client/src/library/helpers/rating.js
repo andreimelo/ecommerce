@@ -3,13 +3,13 @@ export const showAverageRating = (data) => {
 		let ratingsArray = data && data.ratings;
 		let total = [];
 		let length = ratingsArray.length;
-		console.log(length, 'length');
+		// console.log(length, 'length');
 
 		ratingsArray.map((item) => total.push(item.star));
 		let totalReduced = total.reduce((item, index) => item + index, 0);
-		console.log(totalReduced, 'totalReduced');
+		// console.log(totalReduced, 'totalReduced');
 		let highest = length + 5;
-		console.log(highest, 'highest');
+		// console.log(highest, 'highest');
 
 		let average = totalReduced * 5 / highest;
 		return {

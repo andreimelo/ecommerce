@@ -110,13 +110,7 @@ const ViewProduct = ({ match }) => {
 							<label className='text-2xl font-bold'>{title}</label>
 							<div class='flex place-items-center my-2'>
 								{numberOfStar.map((index) => {
-									return (
-										<RatingIcon
-											length={length}
-											index={index}
-											rating={average}
-										/>
-									);
+									return <RatingIcon index={index} rating={average} />;
 								})}
 								<div>{length && ` (${length}) `}</div>
 							</div>
