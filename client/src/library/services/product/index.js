@@ -105,3 +105,24 @@ export async function getProductsBySortAndOrder(sort, order, page){
 
 	return data;
 }
+
+export async function putProductStarRating(productId, star, token){
+	const transformData = {
+		star,
+	};
+	// refactor
+	const options = {
+		method  : 'PUT',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json',
+			authToken      : token,
+		},
+		body    : JSON.stringify(transformData),
+	};
+	const result = await fetch(`${env.base_uri}/product/star/${productId}`, options);
+
+	const data = await result.json();
+
+	return data;
+}

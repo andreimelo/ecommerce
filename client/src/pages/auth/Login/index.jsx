@@ -28,6 +28,8 @@ function Login(){
 
 	useEffect(
 		() => {
+			let intended = history && history.location.state;
+			if (intended) return;
 			if (user && user.token) {
 				return history.push('/');
 			}

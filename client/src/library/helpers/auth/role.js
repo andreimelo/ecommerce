@@ -6,5 +6,9 @@ export function roleBasedRedirect(role, history){
 	// else {
 	// 	return history.push('/user/history');
 	// }
+	let intended = history.location.state && history.location.state.from;
+	if (intended) {
+		return history.push(history.location.state.from);
+	}
 	return history.push('/');
 }

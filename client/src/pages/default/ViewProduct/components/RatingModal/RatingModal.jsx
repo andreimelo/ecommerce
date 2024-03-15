@@ -4,6 +4,7 @@ import RatingIcon from '../../../../../library/components/RatingIcon';
 import PropTypes from 'prop-types';
 
 const RatingModal = ({
+	id,
 	modalOpen,
 	closeModal,
 	star,
@@ -25,6 +26,7 @@ const RatingModal = ({
 				{star.map((index) => {
 					return (
 						<RatingIcon
+							id={id}
 							star={star}
 							index={index}
 							rating={rating}
@@ -42,6 +44,7 @@ const RatingModal = ({
 };
 
 RatingModal.propTypes = {
+	id           : PropTypes.string,
 	modalOpen    : PropTypes.bool,
 	closeModal   : PropTypes.func,
 	star         : PropTypes.array,
@@ -54,6 +57,7 @@ RatingModal.propTypes = {
 };
 
 RatingModal.defaultProps = {
+	id           : '',
 	modalOpen    : false,
 	closeModal   : () => {},
 	star         : [],
