@@ -11,9 +11,11 @@ export const showAverageRating = (data) => {
 		let highest = length + 5;
 		console.log(highest, 'highest');
 
-		let result = totalReduced * 5 / highest;
-
-		return result;
+		let average = totalReduced * 5 / highest;
+		return {
+			average,
+			length,
+		};
 	}
 	return;
 };
