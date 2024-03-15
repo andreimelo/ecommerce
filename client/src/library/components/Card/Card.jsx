@@ -38,19 +38,21 @@ const Card = ({
 				<h5 className='text-xl font-semibold tracking-tight text-slate-900'>
 					{title}
 				</h5>
-				{star && (
-					<div class='flex place-items-center my-2'>
-						{star.map((index) => {
-							return (
-								<RatingIcon
-									index={index}
-									rating={rating && rating.average}
-								/>
-							);
-						})}
-						<div>{rating && rating.length && ` (${rating.length}) `}</div>
-					</div>
-				)}
+				{star &&
+					(
+						rating &&
+						rating.length > 0 ? <div class='flex place-items-center my-2'>
+							{star.map((index) => {
+								return (
+									<RatingIcon
+										index={index}
+										rating={rating && rating.average}
+									/>
+								);
+							})}
+							<div>{rating && rating.length && ` (${rating.length}) `}</div>
+						</div> :
+						<div class='flex place-items-center my-2'>No rating yet</div>)}
 				<span className='text-sm'>
 					{description && `${description.substring(0, 60)}...`}
 				</span>
