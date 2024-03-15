@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { images } from '../../../resources/images';
 import icons from '../../../resources/icons';
+import RatingIcon from '../RatingIcon';
 
 const Card = ({
 	containerClass,
@@ -17,6 +18,8 @@ const Card = ({
 	slug,
 	isProductAndCart,
 	isDeleteAndEdit,
+	star,
+	rating,
 }) => {
 	return (
 		<div class={containerClass}>
@@ -35,6 +38,19 @@ const Card = ({
 				<h5 className='text-xl font-semibold tracking-tight text-slate-900'>
 					{title}
 				</h5>
+				{star && (
+					<div class='flex place-items-center my-2'>
+						{star.map((index) => {
+							return (
+								<RatingIcon
+									index={index}
+									rating={rating && rating.average}
+								/>
+							);
+						})}
+						<div>{rating && rating.length && ` (${rating.length}) `}</div>
+					</div>
+				)}
 				<span className='text-sm'>
 					{description && `${description.substring(0, 60)}...`}
 				</span>
@@ -82,6 +98,8 @@ Card.propTypes = {
 	slug              : PropTypes.string,
 	isProductAndCart  : PropTypes.bool,
 	isDeleteAndEdit   : PropTypes.bool,
+	star              : PropTypes.array,
+	rating            : PropTypes.number,
 };
 
 Card.defaultProps = {
@@ -97,6 +115,8 @@ Card.defaultProps = {
 	slug              : '',
 	isProductAndCart  : false,
 	isDeleteAndEdit   : false,
+	star              : [],
+	rating            : 0,
 };
 
 export default Card;

@@ -3,6 +3,7 @@ import { getProductsBySortAndOrder } from '../../../../../library/services/produ
 import Card from '../../../../../library/components/Card';
 import Pagination from '../../../../../library/components/Pagination';
 import usePagination from '../../../../../library/hooks/usePagination';
+import { showAverageRating, numberOfStar } from '../../../../../library/helpers/rating';
 
 const NewArrivals = () => {
 	const [
@@ -60,6 +61,8 @@ const NewArrivals = () => {
 								slug={item.slug}
 								linkTo={'/product'}
 								isProductAndCart
+								star={numberOfStar}
+								rating={showAverageRating(item)}
 							/>
 						))}
 				</div>
