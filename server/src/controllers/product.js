@@ -144,3 +144,23 @@ exports.productRatingStar = async (req, res) => {
 		res.status(400).send('Fetch products count failed');
 	}
 };
+
+exports.listRelated = async (req, res) => {
+	try {
+		const product = await Product.findById(req.params.productId).exec();
+		const related = await Product.find({
+			_id      : {
+				$ne : product._id,
+			},
+			category : product.category,
+		})
+			.limit(3)
+			.populate('category')
+			.populate('subCategory')
+			.populate('postedBy')
+			.exec();
+		return res.json(related);
+	} catch (error) {
+		res.status(400).send('Fetch related product failed');
+	}
+};
