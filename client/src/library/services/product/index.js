@@ -126,3 +126,18 @@ export async function putProductStarRating(productId, star, token){
 
 	return data;
 }
+
+export async function getRelatedProducts(productId){
+	const options = {
+		method  : 'GET',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json',
+		},
+	};
+	const result = await fetch(`${env.base_uri}/product/related/${productId}`, options);
+
+	const data = await result.json();
+
+	return data;
+}
