@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import {
 	getProductBySlug,
 	putProductStarRating,
+	getRelatedProducts,
 } from '../../../library/services/product';
 import Carousel from '../../../library/components/Carousel';
 import ProductListItem from './components/ProductListItem/ProductListItem';
@@ -10,6 +11,7 @@ import RatingIcon from '../../../library/components/RatingIcon';
 import RatingModal from './components/RatingModal';
 import { useSelector } from 'react-redux';
 import { showAverageRating, numberOfStar } from '../../../library/helpers/rating';
+import RelatedProducts from './components/RelatedProducts';
 
 const ViewProduct = ({ match }) => {
 	const { slug } = match.params;
@@ -35,14 +37,22 @@ const ViewProduct = ({ match }) => {
 		hoverRating,
 		setHoverRating,
 	] = useState(0);
+	const [
+		relatedProduct,
+		setRelatedProduct,
+	] = useState([]);
 	const { average, length } = showAverageRating(product) || {};
 	const { title, description, brand, images, _id, ratings } = product || {};
 
 	async function fetchProductBySlug(){
 		try {
 			setLoading(true);
-			const result = await getProductBySlug(slug);
-			setProduct(result);
+			const resultProductBySlug = await getProductBySlug(slug);
+			setProduct(resultProductBySlug);
+			if (resultProductBySlug && resultProductBySlug._id) {
+				const result = await getRelatedProducts(resultProductBySlug._id);
+				setRelatedProduct(result);
+			}
 			setLoading(false);
 		} catch (error) {
 			setLoading(false);
@@ -139,7 +149,12 @@ const ViewProduct = ({ match }) => {
 							</button>
 						</div>
 					</section>
-					<section className='my-5 text-xl'>Related Products</section>
+					<RelatedProducts
+						data={relatedProduct}
+						loading={loading}
+						numberOfStar={numberOfStar}
+						showAverageRating={showAverageRating}
+					/>
 					<RatingModal
 						id={_id}
 						star={numberOfStar}
