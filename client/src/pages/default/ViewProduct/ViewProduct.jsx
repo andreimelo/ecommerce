@@ -139,7 +139,7 @@ const ViewProduct = ({ match }) => {
 							</button>
 						</div>
 					</section>
-					<section className='my-5'>Related Products</section>
+					<section className='my-5 text-xl'>Related Products</section>
 					<RatingModal
 						id={_id}
 						star={numberOfStar}
