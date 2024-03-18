@@ -1,87 +1,170 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useHistory, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { string } from '../../common/constants/strings';
 import { type } from '../../common/constants/types';
 import CustomInput from '../Input';
 import PropTypes from 'prop-types';
 import './style.css';
+import { getCategories } from '../../services/category';
 import { logOutAction } from '../../common/actions/authentication';
 import icons from '../../../resources/icons';
 import Profile from '../../components/Profile';
 
-function Header({role, imageURL}) {
-	
+function Header({ role, imageURL }){
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const { user } = useSelector((state) => ({ ...state }));
+	const [
+		category,
+		setCategory,
+	] = useState([]);
 
-	function renderRoleHeader() {
+	async function fetchCategoriesData(){
+		try {
+			const result = await getCategories();
+			setCategory(result);
+		} catch (err) {
+			alert(err);
+		}
+	}
+	console.log(category);
+	useEffect(() => {
+		fetchCategoriesData();
+	}, []);
+	function renderRoleHeader(){
 		switch (role) {
 			case 'admin':
 				return (
 					<nav className='nav-container shadow'>
-					<div className='nav-sub-container w-full max-w-screen-xl mx-auto'>
-						<div className="self-center text-2xl font-semibold whitespace-nowrap" id='logo' onClick={()=>history.push('/')}>{string.common.logoTitle}</div>
-						<div className="nav-link-container">
-							{/* Input */}
-							{user &&
-								(<div className="settings">
-									<div className="nav-title list">
-										{(user && <Profile imageURL={imageURL}/>) || (!user && string.routes.userNamePlaceHolderTitle)}
+						<div className='nav-sub-container w-full max-w-screen-xl mx-auto'>
+							<div
+								className='self-center text-2xl font-semibold whitespace-nowrap'
+								id='logo'
+								onClick={() => history.push('/')}
+							>
+								{string.common.logoTitle}
+							</div>
+							<div className='nav-link-container'>
+								{/* Input */}
+								{user && (
+									<div className='settings'>
+										<div className='nav-title list'>
+											{(user && <Profile imageURL={imageURL} />) ||
+												(!user &&
+													string.routes
+														.userNamePlaceHolderTitle)}
+										</div>
+										<div
+											className='settings-content bg-white border'
+											onClick={() =>
+												logOutAction(history, dispatch)}
+										>
+											{string.routes.logOutTitle}
+										</div>
 									</div>
-									<div className="settings-content bg-white border" onClick={() => logOutAction(history, dispatch)} >{string.routes.logOutTitle}</div>
-								</div>)
-							}
-							{!user &&
-								(
-									<>
-										<div className="nav-title" onClick={() => history.push('/login')}>
+								)}
+								{!user && (
+									<div>
+										<div
+											className='nav-title'
+											onClick={() => history.push('/login')}
+										>
 											{string.routes.loginTitle}
 										</div>
-										<div className="nav-title" onClick={() => history.push('/register')}>
+										<div
+											className='nav-title'
+											onClick={() => history.push('/register')}
+										>
 											{string.routes.registerTitle}
 										</div>
-									</>
-								)
-							}
+									</div>
+								)}
+							</div>
 						</div>
-					</div>
-				</nav>
+					</nav>
 				);
 			default:
 				return (
 					<nav className='nav-container shadow'>
 						<div className='nav-sub-container w-full max-w-screen-xl mx-auto'>
-							<div className="self-center text-2xl font-semibold whitespace-nowrap" id='logo'  onClick={()=>history.push('/')}>{string.common.logoTitle}</div>
-							<div className="nav-link-container">
-								{/* <div className="nav-title" onClick={() => history.push('/')}>
-									{string.routes.homeTitle}
-								</div> */}
-								{/* Input */}
-								<CustomInput type={type.input.search} name={"search"} placeHolder={"Search"} variant="inp mx-20 rounded-full border border-gray-500 fix-size" onChange={(event) => console.log(event)} />
-								<div className="nav-title" onClick={() => history.push('/shop')}>{icons['shop']}</div>
-								<div className="nav-title" onClick={() => history.push('/cart')}>{icons['cart']}</div>
-								{user &&
-									(<div className="settings">
-										<div className="nav-title list">
-											{(user && <Profile imageURL={imageURL}/>) || (!user && string.routes.userNamePlaceHolderTitle)}
+							<div
+								className='self-center text-2xl font-semibold whitespace-nowrap'
+								id='logo'
+								onClick={() => history.push('/')}
+							>
+								{string.common.logoTitle}
+							</div>
+							<div className='nav-link-container'>
+								{category && (
+									<div className='settings'>
+										<div className='nav-title list'>
+											Shop By Category
 										</div>
-										<div className="settings-content bg-white border" onClick={() => logOutAction(history, dispatch)} >{string.routes.logOutTitle}</div>
-									</div>)
-								}
-								{!user &&
-									(
-										<>
-											<div className="nav-title text-sm" onClick={() => history.push('/login')}>
-												{string.routes.loginTitle}
-											</div>
-											{/* <div className="nav-title" onClick={() => history.push('/register')}>
+										<div className='z-10 settings-content bg-white border'>
+											{category.map((item) => (
+												<div>
+													<Link
+														key={item._id}
+														to={`/category/${item.slug}`}
+													>
+														{item.name}
+													</Link>
+												</div>
+											))}
+										</div>
+									</div>
+								)}
+								{/* Input */}
+								<CustomInput
+									type={type.input.search}
+									name={'search'}
+									placeHolder={'Search'}
+									variant='inp mx-10 rounded-full border border-gray-500 fix-size'
+									onChange={(event) => console.log(event)}
+								/>
+								<div
+									className='nav-title'
+									onClick={() => history.push('/shop')}
+								>
+									{icons['shop']}
+								</div>
+								<div
+									className='nav-title'
+									onClick={() => history.push('/cart')}
+								>
+									{icons['cart']}
+								</div>
+								{user && (
+									<div className='settings'>
+										<div className='nav-title list'>
+											{(user && <Profile imageURL={imageURL} />) ||
+												(!user &&
+													string.routes
+														.userNamePlaceHolderTitle)}
+										</div>
+										<div
+											className='settings-content bg-white border'
+											onClick={() =>
+												logOutAction(history, dispatch)}
+										>
+											{string.routes.logOutTitle}
+										</div>
+									</div>
+								)}
+								{!user && (
+									<div>
+										<div
+											className='nav-title text-sm'
+											onClick={() => history.push('/login')}
+										>
+											{string.routes.loginTitle}
+										</div>
+										{/* <div className="nav-title" onClick={() => history.push('/register')}>
 												{string.routes.registerTitle}
 											</div> */}
-										</>
-									)
-								}
+									</div>
+								)}
 							</div>
 						</div>
 						{/*  .category
@@ -96,12 +179,12 @@ function Header({role, imageURL}) {
 		}
 	}
 
-	return renderRoleHeader()
+	return renderRoleHeader();
 }
 
 Header.propTypes = {
-	role: PropTypes.string.isRequired,
-	imageURL: PropTypes.string,
+	role     : PropTypes.string.isRequired,
+	imageURL : PropTypes.string,
 };
 
 export default React.memo(Header);
