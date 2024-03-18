@@ -28,10 +28,11 @@ function Header({ role, imageURL }){
 			alert(err);
 		}
 	}
-	console.log(category);
+
 	useEffect(() => {
 		fetchCategoriesData();
 	}, []);
+
 	function renderRoleHeader(){
 		switch (role) {
 			case 'admin':
