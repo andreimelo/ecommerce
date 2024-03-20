@@ -99,7 +99,7 @@ function Header({ role, imageURL }){
 							<div className='nav-link-container'>
 								{category && (
 									<div className='settings'>
-										<div className='nav-title list'>
+										<div className='nav-title text-sm list'>
 											Shop By Category
 										</div>
 										<div className='z-10 settings-content bg-white border'>

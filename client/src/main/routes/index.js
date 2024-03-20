@@ -47,6 +47,10 @@ const History = lazy(async () => {
 	const module = await import('../../pages/user/History');
 	return module;
 });
+const ShopByCategory = lazy(async () => {
+	const module = await import('../../pages/default/ShopByCategory');
+	return module;
+});
 const ViewProduct = lazy(async () => {
 	const module = await import('../../pages/default/ViewProduct');
 	return module;
@@ -190,6 +194,10 @@ const InitialRoutes = ({ store }) => {
 				element : ViewProduct,
 			},
 			{
+				path    : '/category/:slug',
+				element : ShopByCategory,
+			},
+			{
 				path    : '/user/change-password',
 				element : ChangePassword,
 			},
@@ -250,6 +258,10 @@ const InitialRoutes = ({ store }) => {
 		{
 			path    : '/product/:slug',
 			element : ViewProduct,
+		},
+		{
+			path    : '/category/:slug',
+			element : ShopByCategory,
 		},
 		{
 			path    : '*',
