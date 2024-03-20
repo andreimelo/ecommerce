@@ -1,4 +1,5 @@
 const Category = require('../models/category');
+const Product = require('../models/product');
 const SubCategory = require('../models/sub-category');
 const slugify = require('slugify');
 
@@ -26,8 +27,12 @@ exports.list = async (req, res) => {
 
 exports.read = async (req, res) => {
 	try {
-		let readCategory = await Category.findOne({ slug: req.params.slug }).exec();
-		res.json(readCategory);
+		let category = await Category.findOne({ slug: req.params.slug }).exec();
+		const products = await Product.find({ category }).populate('category').exec();
+		res.json({
+			category,
+			products,
+		});
 	} catch (err) {
 		// console.log(err);
 		res.status(400).send('Read category failed');
