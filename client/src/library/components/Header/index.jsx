@@ -99,7 +99,7 @@ function Header({ role, imageURL }){
 							<div className='nav-link-container'>
 								{category && (
 									<div className='settings'>
-										<div className='nav-title text-sm list'>
+										<div className='nav-title text-sm font-semibold list'>
 											Shop By Category
 										</div>
 										<div className='z-10 settings-content bg-white border'>
@@ -156,7 +156,7 @@ function Header({ role, imageURL }){
 								{!user && (
 									<div>
 										<div
-											className='nav-title text-sm'
+											className='nav-title font-semibold text-sm'
 											onClick={() => history.push('/login')}
 										>
 											{string.routes.loginTitle}
