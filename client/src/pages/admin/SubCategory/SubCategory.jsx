@@ -99,9 +99,10 @@ const SubCategory = ({ role }) => {
 	useEffect(
 		() => {
 			if (!selectedCategory) {
+				setSubCategories([]);
 				fetchCategoriesData();
 			}
-			fetchSubCategoriesData(selectedCategory);
+			selectedCategory && fetchSubCategoriesData(selectedCategory);
 		},
 		[
 			selectedCategory,
