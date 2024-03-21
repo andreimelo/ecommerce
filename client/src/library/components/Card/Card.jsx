@@ -34,7 +34,7 @@ const Card = ({
 					alt={imgAlt}
 				/>
 			</div>
-			<div className='mt-4 px-5 pb-5'>
+			<div className='mt-4 px-5'>
 				<h5 className='text-xl font-semibold tracking-tight text-slate-900'>
 					{title}
 				</h5>
@@ -58,17 +58,17 @@ const Card = ({
 				</span>
 			</div>
 			{isProductAndCart && (
-				<div className='grid grid-cols-2 mb-4 place-items-center'>
+				<div className='grid grid-cols-2 my-4 place-items-center'>
 					<Link to={`${linkTo}/${slug}`}>
 						<div
-							className='flex flex-col items-center cursor-pointer'
+							className='flex flex-col items-center text-xs cursor-pointer'
 							onClick={onClickRemove}
 						>
 							{icons.show}
 							<div>View Product</div>
 						</div>
 					</Link>
-					<div className='flex flex-col items-center  cursor-pointer'>
+					<div className='flex flex-col items-center text-xs cursor-pointer'>
 						{icons.cardSolid}
 						Add to Cart
 					</div>

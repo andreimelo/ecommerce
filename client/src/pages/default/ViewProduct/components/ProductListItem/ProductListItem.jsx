@@ -26,7 +26,7 @@ const ProductListItem = ({ data }) => {
 						>
 							Category
 						</th>
-						<td class='px-6 py-4 text-black'>
+						<td class='px-6 py-4 text-blue-600'>
 							{category && (
 								<Link to={`/category/${category.slug}`}>
 									{category.name}
@@ -41,7 +41,7 @@ const ProductListItem = ({ data }) => {
 						>
 							Sub Category
 						</th>
-						<td class='px-6 py-4 text-black'>
+						<td class='px-6 py-4 text-blue-600'>
 							{subCategory && (
 								<Link to={`/sub-category/${subCategory[0].slug}`}>
 									{subCategory[0].name}

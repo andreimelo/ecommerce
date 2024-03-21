@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 function Sidebar({ role }){
 	const { pathname } = useLocation();
-	const active = 'text-sm';
+	const active = 'text-sm font-semibold';
 	const inactive = 'text-sm text-gray-500';
 
 	function isActiveLink(currentPath, staticPath){

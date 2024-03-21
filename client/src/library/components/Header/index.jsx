@@ -99,7 +99,7 @@ function Header({ role, imageURL }){
 							<div className='nav-link-container'>
 								{category && (
 									<div className='settings'>
-										<div className='nav-title text-sm list'>
+										<div className='nav-title text-sm font-semibold list'>
 											Shop By Category
 										</div>
 										<div className='z-10 settings-content bg-white border'>
@@ -131,10 +131,14 @@ function Header({ role, imageURL }){
 									{icons['shop']}
 								</div>
 								<div
-									className='nav-title'
+									className='nav-title relative flex'
 									onClick={() => history.push('/cart')}
 								>
+									<li class="font-sans block mt-4 lg:inline-block lg:mt-0 align-middle text-black hover:text-gray-700">
 									{icons['cart']}
+										<span class="absolute left-8 bottom-3 rounded-full bg-red-600 w-4 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center">O
+										</span>
+									</li>
 								</div>
 								{user && (
 									<div className='settings'>
@@ -156,7 +160,7 @@ function Header({ role, imageURL }){
 								{!user && (
 									<div>
 										<div
-											className='nav-title text-sm'
+											className='nav-title font-semibold text-sm'
 											onClick={() => history.push('/login')}
 										>
 											{string.routes.loginTitle}
