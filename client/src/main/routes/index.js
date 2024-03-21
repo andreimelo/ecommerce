@@ -51,6 +51,10 @@ const ShopByCategory = lazy(async () => {
 	const module = await import('../../pages/default/ShopByCategory');
 	return module;
 });
+const SubCategory = lazy(async () => {
+	const module = await import('../../pages/default/SubCategory');
+	return module;
+});
 const ViewProduct = lazy(async () => {
 	const module = await import('../../pages/default/ViewProduct');
 	return module;
@@ -262,6 +266,10 @@ const InitialRoutes = ({ store }) => {
 		{
 			path    : '/category/:slug',
 			element : ShopByCategory,
+		},
+		{
+			path    : '/sub-category/:slug',
+			element : SubCategory,
 		},
 		{
 			path    : '*',
