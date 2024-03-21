@@ -2,19 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { string } from '../../common/constants/strings';
-import { type } from '../../common/constants/types';
-import CustomInput from '../Input';
 import PropTypes from 'prop-types';
 import './style.css';
 import { getCategories } from '../../services/category';
 import { logOutAction } from '../../common/actions/authentication';
 import icons from '../../../resources/icons';
 import Profile from '../../components/Profile';
+import SearchFilter from '../SearchFilter';
 
 function Header({ role, imageURL }){
 	const history = useHistory();
 	const dispatch = useDispatch();
-	const { user } = useSelector((state) => ({ ...state }));
+	const { user, search } = useSelector((state) => ({ ...state }));
+	const { text } = search;
 	const [
 		category,
 		setCategory,
@@ -29,6 +29,10 @@ function Header({ role, imageURL }){
 		}
 	}
 
+	async function handleSubmitSearch(e){
+		e.preventDefault();
+		history.push(`/shop?${text}`);
+	}
 	useEffect(() => {
 		fetchCategoriesData();
 	}, []);
@@ -117,13 +121,19 @@ function Header({ role, imageURL }){
 									</div>
 								)}
 								{/* Input */}
-								<CustomInput
-									type={type.input.search}
-									name={'search'}
-									placeHolder={'Search'}
-									variant='inp mx-10 rounded-full border border-gray-500 fix-size'
-									onChange={(event) => console.log(event)}
-								/>
+								<form onSubmit={handleSubmitSearch}>
+									<SearchFilter
+										type='search'
+										searchValue={text}
+										placeHolder='Search'
+										searchClass='inp mx-10 rounded-full border border-gray-500 fix-size'
+										handleSearchFilterChange={(event) =>
+											dispatch({
+												type    : 'SEARCH_QUERY',
+												payload : { text: event.target.value },
+											})}
+									/>
+								</form>
 								<div
 									className='nav-title'
 									onClick={() => history.push('/shop')}
@@ -134,9 +144,10 @@ function Header({ role, imageURL }){
 									className='nav-title relative flex'
 									onClick={() => history.push('/cart')}
 								>
-									<li class="font-sans block mt-4 lg:inline-block lg:mt-0 align-middle text-black hover:text-gray-700">
-									{icons['cart']}
-										<span class="absolute left-8 bottom-3 rounded-full bg-red-600 w-4 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center">O
+									<li class='font-sans block mt-4 lg:inline-block lg:mt-0 align-middle text-black hover:text-gray-700'>
+										{icons['cart']}
+										<span class='absolute left-8 bottom-3 rounded-full bg-red-600 w-4 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center'>
+											O
 										</span>
 									</li>
 								</div>
