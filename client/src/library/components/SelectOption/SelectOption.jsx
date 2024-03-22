@@ -14,7 +14,7 @@ const SelectOption = ({
 }) => {
 	return (
 		<div className={variant}>
-			<label for='name' class='block mt-5 mb-3 text-sm font-medium text-gray-900' />
+			<label for='name' className='block mt-5 mb-3 text-sm font-medium text-gray-900' />
 			<select
 				disabled={disabled}
 				value={value}

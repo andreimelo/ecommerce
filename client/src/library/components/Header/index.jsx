@@ -144,9 +144,9 @@ function Header({ role, imageURL }){
 									className='nav-title relative flex'
 									onClick={() => history.push('/cart')}
 								>
-									<li class='font-sans block mt-4 lg:inline-block lg:mt-0 align-middle text-black hover:text-gray-700'>
+									<li className='font-sans block mt-4 lg:inline-block lg:mt-0 align-middle text-black hover:text-gray-700'>
 										{icons['cart']}
-										<span class='absolute left-8 bottom-3 rounded-full bg-red-600 w-4 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center'>
+										<span className='absolute left-8 bottom-3 rounded-full bg-red-600 w-4 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center'>
 											O
 										</span>
 									</li>
@@ -201,6 +201,11 @@ function Header({ role, imageURL }){
 Header.propTypes = {
 	role     : PropTypes.string.isRequired,
 	imageURL : PropTypes.string,
+};
+
+Header.defaultProps = {
+	role     : '',
+	imageURL : '',
 };
 
 export default React.memo(Header);

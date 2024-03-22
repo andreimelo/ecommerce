@@ -5,11 +5,11 @@ import icons from '../../../resources/icons';
 
 const BreadCrumbs = ({ category }) => {
 	return (
-		<nav class='flex mt-5 ' aria-label='Breadcrumb'>
-			<ol class='inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse'>
-				<li class='inline-flex items-center'>
+		<nav className='flex mt-5 ' aria-label='Breadcrumb'>
+			<ol className='inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse'>
+				<li className='inline-flex items-center'>
 					<Link
-						class='inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:hover:text-blue-600'
+						className='inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:hover:text-blue-600'
 						to={'/'}
 					>
 						{icons['home']}
@@ -18,7 +18,7 @@ const BreadCrumbs = ({ category }) => {
 				</li>
 				{category && (
 					<li>
-						<div class='flex items-center'>
+						<div className='flex items-center'>
 							{icons['nextArrow']}
 							<Link
 								className='ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:hover:text-blue-600'

@@ -118,30 +118,30 @@ const ViewProduct = ({ match }) => {
 						<div className='col-span-1 mx-5 my-5'>
 							<div className='text-gray-400 text-xs'>{brand}</div>
 							<label className='text-2xl font-bold'>{title}</label>
-							<div class='flex place-items-center my-2'>
+							<div className='flex place-items-center my-2'>
 								{numberOfStar.map((index) => {
 									return <RatingIcon index={index} rating={average} />;
 								})}
 								<div>{length && ` (${length}) `}</div>
 							</div>
 							<p className='mb-5'>{description}</p>
-							<ProductListItem data={product} /> 
+							<ProductListItem data={product} />
 							<button
 								type='button'
-								class='text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
+								className='text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
 							>
 								Add to Cart
 							</button>
 							<button
 								type='button'
-								class='text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
+								className='text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
 							>
 								Add to Wishlist
 							</button>
 							<button
 								onClick={openModal}
 								type='button'
-								class='text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
+								className='text-gray-900 bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
 							>
 								{
 									user && user.token ? 'Leave Rate' :

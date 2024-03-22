@@ -56,7 +56,10 @@ const ShopByCategory = ({ match }) => {
 							{product &&
 								product.map((item) => (
 									<Card
-										imgContainerClass='relative flex h-60 overflow-hidden rounded-xl'
+										containerClass={
+											'relative my-5 flex w-full max-w-xs flex-col '
+										}
+										imgContainerClass='relative flex h-60 overflow-hidden'
 										imgSrc={item.images}
 										title={item.title}
 										description={item.description}

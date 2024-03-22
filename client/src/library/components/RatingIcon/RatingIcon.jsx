@@ -30,7 +30,7 @@ const RatingIcon = ({
 	);
 	return (
 		<div
-			class='inline-flex items-center'
+			className='inline-flex items-center'
 			onMouseEnter={() => onMouseEnter(index)}
 			onMouseLeave={() => onMouseLeave()}
 			onClick={() => onSaveRating(index, id)}

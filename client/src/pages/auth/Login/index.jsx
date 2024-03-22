@@ -41,9 +41,9 @@ function Login(){
 	);
 
 	return (
-		<div class='grid grid-cols-[50%_auto] gap-3 my-10'>
-			<div class='col-span-1' />
-			<div class='container col-span-1 border-l-2 border-gray-200'>
+		<div className='grid grid-cols-[50%_auto] gap-3 my-10'>
+			<div className='col-span-1' />
+			<div className='container col-span-1 border-l-2 border-gray-200'>
 				<div className='w-8/12 mx-auto'>
 					<label className='text-4xl font-bold'>
 						{string.routes.loginTitle}

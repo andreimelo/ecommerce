@@ -4,12 +4,12 @@ const icons = {
 			xmlns='http://www.w3.org/2000/svg'
 			viewBox='0 0 20 20'
 			fill='currentColor'
-			class='w-5 h-5'
+			className='w-5 h-5'
 		>
 			<path
-				fill-rule='evenodd'
+				fillRule='evenodd'
 				d='M8.75 1A2.75 2.75 0 0 0 6 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 1 0 .23 1.482l.149-.022.841 10.518A2.75 2.75 0 0 0 7.596 19h4.807a2.75 2.75 0 0 0 2.742-2.53l.841-10.52.149.023a.75.75 0 0 0 .23-1.482A41.03 41.03 0 0 0 14 4.193V3.75A2.75 2.75 0 0 0 11.25 1h-2.5ZM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4ZM8.58 7.72a.75.75 0 0 0-1.5.06l.3 7.5a.75.75 0 1 0 1.5-.06l-.3-7.5Zm4.34.06a.75.75 0 1 0-1.5-.06l-.3 7.5a.75.75 0 1 0 1.5.06l.3-7.5Z'
-				clip-rule='evenodd'
+				clipRule='evenodd'
 			/>
 		</svg>
 	),
@@ -77,13 +77,13 @@ const icons = {
 			xmlns='http://www.w3.org/2000/svg'
 			viewBox='0 0 24 24'
 			fill='currentColor'
-			class='w-6 h-6'
+			className='w-6 h-6'
 		>
 			<path d='M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z' />
 			<path
-				fill-rule='evenodd'
+				fillRule='evenodd'
 				d='M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z'
-				clip-rule='evenodd'
+				clipRule='evenodd'
 			/>
 		</svg>
 	),
@@ -92,14 +92,14 @@ const icons = {
 			xmlns='http://www.w3.org/2000/svg'
 			viewBox='0 0 24 24'
 			fill='currentColor'
-			class='w-6 h-6'
+			className='w-6 h-6'
 		>
 			<path d='M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z' />
 		</svg>
 	),
 	previousArrow : (
 		<svg
-			class='w-2.5 h-2.5 rtl:rotate-180'
+			className='w-2.5 h-2.5 rtl:rotate-180'
 			aria-hidden='true'
 			xmlns='http://www.w3.org/2000/svg'
 			fill='none'
@@ -109,14 +109,14 @@ const icons = {
 				stroke='currentColor'
 				stroke-linecap='round'
 				stroke-linejoin='round'
-				stroke-width='2'
+				strokeWidth='2'
 				d='M5 1 1 5l4 4'
 			/>
 		</svg>
 	),
 	nextArrow     : (
 		<svg
-			class='w-2.5 h-2.5 rtl:rotate-180'
+			className='w-2.5 h-2.5 rtl:rotate-180'
 			aria-hidden='true'
 			xmlns='http://www.w3.org/2000/svg'
 			fill='none'
@@ -126,14 +126,14 @@ const icons = {
 				stroke='currentColor'
 				stroke-linecap='round'
 				stroke-linejoin='round'
-				stroke-width='2'
+				strokeWidth='2'
 				d='m1 9 4-4-4-4'
 			/>
 		</svg>
 	),
 	home          : (
 		<svg
-			class='w-3 h-3 me-2.5'
+			className='w-3 h-3 me-2.5'
 			aria-hidden='true'
 			xmlns='http://www.w3.org/2000/svg'
 			fill='currentColor'

@@ -39,11 +39,11 @@ const Products = ({ role }) => {
 	return (
 		<div className='w-full max-w-screen-xl mx-auto'>
 			<div className='flex my-10'>
-				<div class='flex-none w-40 border-r border-gray-200'>
+				<div className='flex-none w-40 border-r border-gray-200'>
 					<Sidebar role={role} />
 				</div>
 
-				<div class='mx-10'>
+				<div className='mx-10'>
 					<label className='text-2xl font-semibold'>Products</label>
 					<div className='grid grid-cols-3 gap-4'>
 						{products &&

@@ -23,7 +23,7 @@ const TextArea = ({
 			disabled={disabled}
 			rows={rows}
 			cols={cols}
-			autofocus
+			autoFocus
 		/>
 	);
 };

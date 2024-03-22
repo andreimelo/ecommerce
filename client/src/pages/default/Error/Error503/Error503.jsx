@@ -1,12 +1,12 @@
 import React from 'react';
 
 function Error503(){
-    return (
-		<div className="w-full max-w-screen-xl mx-auto">
-			<div class="flex h-screen min-h-full flex-col justify-center">
-				<main class="flex flex-col flex-grow place-content-center">
-					<div class="text-center">
-						<div className="text-5xl font-bold">
+	return (
+		<div className='w-full max-w-screen-xl mx-auto'>
+			<div className='flex h-screen min-h-full flex-col justify-center'>
+				<main className='flex flex-col flex-grow place-content-center'>
+					<div className='text-center'>
+						<div className='text-5xl font-bold'>
 							WE'RE DOWN FOR MAINTENANCE
 						</div>
 						<span>
@@ -15,8 +15,8 @@ function Error503(){
 					</div>
 				</main>
 			</div>
-        </div>
-    );
+		</div>
+	);
 }
 
 export default Error503;
