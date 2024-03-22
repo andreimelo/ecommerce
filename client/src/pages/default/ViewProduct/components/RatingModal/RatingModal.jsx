@@ -22,7 +22,7 @@ const RatingModal = ({
 			isOpen={modalOpen}
 			onClose={closeModal}
 		>
-			<div class='place-items-center my-2'>
+			<div className='place-items-center my-2'>
 				{star.map((index) => {
 					return (
 						<RatingIcon

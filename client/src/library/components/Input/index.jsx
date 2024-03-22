@@ -5,7 +5,7 @@ import '../Input/style.css';
 function Input({ type, value, name, variant, disabled, onChange, placeHolder,errorMessage }) {
 	return (
 		<>
-			<input type={type} disabled={disabled} value={value} name={name} className={variant} onChange={onChange} placeholder={placeHolder} autofocus/>
+			<input type={type} disabled={disabled} value={value} name={name} className={variant} onChange={onChange} placeholder={placeHolder} autoFocus/>
 			{errorMessage && <div className="error-message absolute pt-2">{errorMessage}</div>}
 		</>
 	);

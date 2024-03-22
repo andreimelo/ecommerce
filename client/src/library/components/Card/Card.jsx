@@ -22,7 +22,7 @@ const Card = ({
 	rating,
 }) => {
 	return (
-		<div class={containerClass}>
+		<div className={containerClass}>
 			<div className={imgContainerClass}>
 				<img
 					className={imgClass}
@@ -41,7 +41,7 @@ const Card = ({
 				{star &&
 					(
 						rating &&
-						rating.length > 0 ? <div class='flex place-items-center my-2'>
+						rating.length > 0 ? <div className='flex place-items-center my-2'>
 							{star.map((index) => {
 								return (
 									<RatingIcon
@@ -52,7 +52,7 @@ const Card = ({
 							})}
 							<div>{rating && rating.length && ` (${rating.length}) `}</div>
 						</div> :
-						<div class='flex place-items-center my-2'>No rating yet</div>)}
+						<div className='flex place-items-center my-2'>No rating yet</div>)}
 				<span className='text-sm'>
 					{description && `${description.substring(0, 60)}...`}
 				</span>

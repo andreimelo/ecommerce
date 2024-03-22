@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { getCategory } from '../../../library/services/category';
+import { getSubCategory } from '../../../library/services/sub-category';
 import BreadCrumbs from '../../../library/components/BreadCrumbs';
 import { showAverageRating, numberOfStar } from '../../../library/helpers/rating';
 import Card from '../../../library/components/Card';
 
-const ShopByCategory = ({ match }) => {
+const SubCategory = ({ match }) => {
 	const [
 		category,
 		setCategory,
@@ -22,8 +22,8 @@ const ShopByCategory = ({ match }) => {
 	async function fetchCategoryBySlug(path){
 		try {
 			setLoading(true);
-			const result = await getCategory(path);
-			setCategory(result.category);
+			const result = await getSubCategory(path);
+			setCategory(result.subCategory);
 			setProduct(result.products);
 			setLoading(false);
 		} catch (error) {
@@ -77,4 +77,4 @@ const ShopByCategory = ({ match }) => {
 	);
 };
 
-export default ShopByCategory;
+export default SubCategory;

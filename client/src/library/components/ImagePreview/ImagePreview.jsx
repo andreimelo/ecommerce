@@ -43,7 +43,7 @@ const ImagePreview = ({
 									alert(err);
 								}
 							}}
-							class='text-sm'
+							className='text-sm'
 						>
 							<p>Remove</p>
 						</figcaption>

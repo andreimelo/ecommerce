@@ -1,4 +1,5 @@
 const SubCategory = require('../models/sub-category');
+const Product = require('../models/product');
 const slugify = require('slugify');
 
 // refactor and fix the error message
@@ -29,8 +30,14 @@ exports.list = async (req, res) => {
 
 exports.read = async (req, res) => {
 	try {
-		let readSubCategory = await SubCategory.findOne({ slug: req.params.slug }).exec();
-		res.json(readSubCategory);
+		let subCategory = await SubCategory.findOne({ slug: req.params.slug }).exec();
+		const products = await Product.find({ subCategory: subCategory })
+			.populate('category')
+			.exec();
+		res.json({
+			subCategory,
+			products,
+		});
 	} catch (err) {
 		// console.log(err);
 		res.status(400).send('Read sub category failed');

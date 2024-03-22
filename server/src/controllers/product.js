@@ -164,3 +164,24 @@ exports.listRelated = async (req, res) => {
 		res.status(400).send('Fetch related product failed');
 	}
 };
+
+const handleQuery = async (req, res, query) => {
+	const products = await Product.find({ $text: { $search: query } })
+		.populate('category', '_id name')
+		.populate('subCategory', '_id name')
+		.populate('postedBy', '_id name')
+		.exec();
+	res.json(products);
+};
+
+exports.searchFilters = async (req, res) => {
+	try {
+		const { query } = req.body;
+		if (query) {
+			console.log(query, query);
+			await handleQuery(req, res, query);
+		}
+	} catch (error) {
+		res.status(400).send('Search filter failed');
+	}
+};

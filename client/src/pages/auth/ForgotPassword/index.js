@@ -35,7 +35,7 @@ function ForgotPassword(){
 	return (
 		<div className='container default'>
 			<CustomLabel
-				variant={'label default-color'}
+				variant={'text-lg font-semibold'}
 				title={string.label.forgot.password}
 			/>
 			<CustomInput
@@ -45,16 +45,16 @@ function ForgotPassword(){
 				variant={
 
 						errors && errors.email ? 'inp no-size error-border' :
-						'inp no-size'
+						'inp no-size my-5'
 				}
 				placeHolder={string.placeHolders.input.exampleOfEmail}
 				onChange={(event) => handleChange(event.target.name, event.target.value)}
 				errorMessage={errors && errors.email}
 			/>
 			<CustomButton
-				variant={'button bg-default-color no-size'}
+				variant={'button bg-google-red-color no-size'}
 				title={'Submit'}
-				onClick={() => handleSubmit()}
+				onClick={(e) => handleSubmit(e)}
 			/>
 		</div>
 	);

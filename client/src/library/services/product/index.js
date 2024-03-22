@@ -141,3 +141,20 @@ export async function getRelatedProducts(productId){
 
 	return data;
 }
+
+export async function getProductsByFilter(arg){
+	// refactor
+	const options = {
+		method  : 'POST',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json',
+		},
+		body    : JSON.stringify(arg),
+	};
+	const result = await fetch(`${env.base_uri}/search/filters`, options);
+
+	const data = await result.json();
+
+	return data;
+}

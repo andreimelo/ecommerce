@@ -42,9 +42,9 @@ const Accounts = ({ role }) => {
 					{/* will refactor */}
 					{
 						loading ? <h2 className='my-10'>🌀 Loading....</h2> :
-						<div class='relative overflow-x-auto shadow-md sm:rounded-lg mt-5'>
-							<table class='w-full text-sm text-left rtl:text-right  bg-gray-100'>
-								<thead class='text-xs text-white uppercase bg-gray-900 dark:text-white'>
+						<div className='relative overflow-x-auto shadow-md sm:rounded-lg mt-5'>
+							<table className='w-full text-sm text-left rtl:text-right  bg-gray-100'>
+								<thead className='text-xs text-white uppercase bg-gray-900 dark:text-white'>
 									<tr>
 										<th scope='col' class='px-6 py-3'>
 											Name
@@ -66,13 +66,15 @@ const Accounts = ({ role }) => {
 											<tr className='text-gray-600'>
 												<th
 													scope='row'
-													class='px-6 py-4 font-medium text-gray-600 whitespace-nowrap'
+													className='px-6 py-4 font-medium text-gray-600 whitespace-nowrap'
 												>
 													{item.name}
 												</th>
-												<td class='px-6 py-4'>{item.email}</td>
-												<td class='px-6 py-4'>{item.role}</td>
-												<td class='px-6 py-4'>Edit</td>
+												<td className='px-6 py-4'>
+													{item.email}
+												</td>
+												<td className='px-6 py-4'>{item.role}</td>
+												<td className='px-6 py-4'>Edit</td>
 											</tr>
 										))}
 								</tbody>
