@@ -6,6 +6,7 @@ import {
 import { useSelector } from 'react-redux';
 import { numberOfStar, showAverageRating } from '../../../library/helpers/rating';
 import Card from '../../../library/components/Card';
+import Accordion from '../../../library/components/Accordion';
 
 const Shop = () => {
 	const [
@@ -30,7 +31,13 @@ const Shop = () => {
 						setProducts(result);
 					}
 					else {
-						result = await getProductsByFilter({ query: text });
+						result = await getProductsByFilter({
+							query : text,
+							price : [
+								0,
+								999,
+							],
+						});
 						setProducts(result);
 					}
 					setLoading(false);
@@ -50,11 +57,49 @@ const Shop = () => {
 		],
 	);
 
+	const items = [
+		{
+			title   : 'Price',
+			content : <div>2292929</div>,
+		},
+		{
+			title   : 'Category',
+			content :
+				'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+		},
+		{
+			title   : 'Rating',
+			content :
+				'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+		},
+		{
+			title   : 'Sub Category',
+			content :
+				'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+		},
+		{
+			title   : 'Brands',
+			content :
+				'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+		},
+		{
+			title   : 'Color',
+			content :
+				'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+		},
+		{
+			title   : 'Shipping',
+			content :
+				'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+		},
+	];
+
 	return (
 		<div className='w-full max-w-screen-xl mx-auto'>
 			<div className='flex my-10'>
 				<div className='flex-none w-40 border-r border-gray-200'>
-					Search/Filter
+					<div className='text-l mb-3 font-semibold'>Filter</div>
+					<Accordion data={items} />
 				</div>
 
 				<div className='flex mx-10'>
@@ -65,13 +110,18 @@ const Shop = () => {
 							products.map((item, index) => (
 								<Card
 									key={index}
-									imgContainerClass='relative flex h-60 overflow-hidden rounded-xl'
+									containerClass={
+										'relative my-5 flex w-full max-w-xs flex-col border h-96'
+									}
+									imgClass='object-contain bg-gray-100'
+									imgContainerClass='relative flex overflow-hidden'
 									imgSrc={item.images}
 									title={item.title}
 									description={item.description}
 									slug={item.slug}
 									linkTo={'/product'}
 									isProductAndCart
+									price={`$${item.price}`}
 									star={numberOfStar}
 									rating={showAverageRating(item)}
 								/>

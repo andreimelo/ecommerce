@@ -20,6 +20,7 @@ const Card = ({
 	isDeleteAndEdit,
 	star,
 	rating,
+	price,
 }) => {
 	return (
 		<div className={containerClass}>
@@ -35,9 +36,15 @@ const Card = ({
 				/>
 			</div>
 			<div className='mt-4 px-5'>
-				<h5 className='text-xl font-semibold tracking-tight text-slate-900'>
+				<div className='text-xl font-semibold tracking-tight text-slate-900'>
 					{title}
-				</h5>
+				</div>
+				<span className='text-sm'>
+					{description && `${description.substring(0, 60)}...`}
+				</span>
+				<div className='text-xl font-semibold tracking-tight text-slate-900'>
+					{price}
+				</div>
 				{star &&
 					(
 						rating &&
@@ -52,18 +59,14 @@ const Card = ({
 							})}
 							<div>{rating && rating.length && ` (${rating.length}) `}</div>
 						</div> :
-						<div className='flex place-items-center my-2'>No rating yet</div>)}
-				<span className='text-sm'>
-					{description && `${description.substring(0, 60)}...`}
-				</span>
+						<div className='flex place-items-center my-2'>
+							No rating yet
+						</div>)}
 			</div>
 			{isProductAndCart && (
 				<div className='grid grid-cols-2 my-4 place-items-center'>
 					<Link to={`${linkTo}/${slug}`}>
-						<div
-							className='flex flex-col items-center text-xs cursor-pointer'
-							onClick={onClickRemove}
-						>
+						<div className='flex flex-col items-center text-xs cursor-pointer'>
 							{icons.show}
 							<div>View Product</div>
 						</div>
@@ -102,6 +105,7 @@ Card.propTypes = {
 	isDeleteAndEdit   : PropTypes.bool,
 	star              : PropTypes.array,
 	rating            : PropTypes.number,
+	price             : PropTypes.string,
 };
 
 Card.defaultProps = {
@@ -119,6 +123,7 @@ Card.defaultProps = {
 	isDeleteAndEdit   : false,
 	star              : [],
 	rating            : 0,
+	price             : '0',
 };
 
 export default Card;

@@ -23,6 +23,7 @@ const RelatedProducts = ({ data, loading, numberOfStar, showAverageRating }) => 
 								slug={item.slug}
 								linkTo={'/product'}
 								isProductAndCart
+								price={`$${item.price}`}
 								star={numberOfStar}
 								rating={showAverageRating(item)}
 							/>

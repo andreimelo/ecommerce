@@ -165,8 +165,13 @@ exports.listRelated = async (req, res) => {
 	}
 };
 
-const handleQuery = async (req, res, query) => {
-	const products = await Product.find({ $text: { $search: query } })
+const handleQuery = async (req, res, query, price) => {
+	const products = await Product.find({
+		$and : [
+			{ $text: { $search: query } }, // Match the query (case-insensitive)
+			{ price: { $gte: price[0], $lte: price[1] } }, // Match the price range
+		],
+	})
 		.populate('category', '_id name')
 		.populate('subCategory', '_id name')
 		.populate('postedBy', '_id name')
@@ -176,10 +181,9 @@ const handleQuery = async (req, res, query) => {
 
 exports.searchFilters = async (req, res) => {
 	try {
-		const { query } = req.body;
-		if (query) {
-			console.log(query, query);
-			await handleQuery(req, res, query);
+		const { query, price } = req.body;
+		if (req.body) {
+			await handleQuery(req, res, query, price);
 		}
 	} catch (error) {
 		res.status(400).send('Search filter failed');
