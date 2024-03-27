@@ -153,7 +153,6 @@ export async function getProductsByFilter(arg){
 		body    : JSON.stringify(arg),
 	};
 	const result = await fetch(`${env.base_uri}/search/filters`, options);
-
 	const data = await result.json();
 
 	return data;
