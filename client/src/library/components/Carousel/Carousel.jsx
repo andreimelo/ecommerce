@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Carousel as ImageCarousel } from 'react-responsive-carousel';
 import { images as image } from '../../../resources/images';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const Carousel = ({ images }) => {
 	// const [
@@ -29,13 +30,17 @@ const Carousel = ({ images }) => {
 
 	return (
 		<ImageCarousel
-			showArrow
+			showArrow={true}
 			showStatus={
 
 					images.length ? true :
 					false
 			}
-			showIndicator
+			showIndicator={
+
+					images.length ? true :
+					false
+			}
 			showThumbs={
 
 					images.length ? true :
@@ -45,12 +50,14 @@ const Carousel = ({ images }) => {
 			{/* <div className='overflow-hidden rounded-lg w-full h-[calc(10/16*100)%] md:h-80'> */}
 			{
 				images && images.length ? images.map((item, index) => (
-					<img
-						key={item.url}
-						// className='w-full'
-						src={item.url}
-						alt={`Carousel ${index}`}
-					/>
+					<div>
+						<img
+							key={item.url}
+							// className='w-full'
+							src={item.url}
+							alt={`Carousel ${index}`}
+						/>
+					</div>
 				)) :
 				<img src={image.default} alt={`Carousel default_image`} />}
 			{/* </div> */}

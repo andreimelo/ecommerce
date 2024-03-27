@@ -1,23 +1,21 @@
 export const showAverageRating = (data) => {
 	if (data && data.ratings) {
-		let ratingsArray = data && data.ratings;
-		let total = [];
-		let length = ratingsArray.length;
-		// console.log(length, 'length');
+		const ratingsArray = data.ratings;
+		const totalRatings = ratingsArray.reduce(
+			(total, rating) => total + rating.star,
+			0,
+		);
+		const numberOfRatings = ratingsArray.length;
 
-		ratingsArray.map((item) => total.push(item.star));
-		let totalReduced = total.reduce((item, index) => item + index, 0);
-		// console.log(totalReduced, 'totalReduced');
-		let highest = length + 5;
-		// console.log(highest, 'highest');
+		// Calculate the average rating
+		const averageRating = totalRatings / numberOfRatings;
 
-		let average = totalReduced * 5 / highest;
 		return {
-			average,
-			length,
+			average : averageRating, // Round to one decimal place
+			length  : numberOfRatings,
 		};
 	}
-	return;
+	return 0;
 };
 
 export const numberOfStar = [

@@ -57,6 +57,7 @@ const BestSellers = () => {
 									slug={item.slug}
 									linkTo={'/product'}
 									isProductAndCart
+									price={`$${item.price}`}
 									star={numberOfStar}
 									rating={showAverageRating(item)}
 								/>

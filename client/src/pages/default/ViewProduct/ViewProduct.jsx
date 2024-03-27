@@ -122,7 +122,7 @@ const ViewProduct = ({ match }) => {
 								{numberOfStar.map((index) => {
 									return <RatingIcon index={index} rating={average} />;
 								})}
-								<div>{length && ` (${length}) `}</div>
+								<div>{length > 0 && ` (${length}) `}</div>
 							</div>
 							<p className='mb-5'>{description}</p>
 							<ProductListItem data={product} />
