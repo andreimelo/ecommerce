@@ -116,7 +116,12 @@ const Shop = () => {
 		{
 			title   : 'Price',
 			content : (
-				<MultiRangeSlider value={rangeValues} onChange={handleSliderChange} />
+				<MultiRangeSlider
+					min={0}
+					max={10000}
+					value={rangeValues}
+					onChange={handleSliderChange}
+				/>
 			),
 		},
 		{
