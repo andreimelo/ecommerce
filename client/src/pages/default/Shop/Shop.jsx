@@ -77,13 +77,6 @@ const Shop = () => {
 				let result;
 				try {
 					setLoading(true);
-					// if (text === '') {
-					// 	result = await getProductsByCount(10);
-					// 	console.log(result, 'pepe');
-					// 	setProducts(result);
-					// 	console.log('pepe');
-					// }
-					// else {
 
 					result = await getProductsByFilter({
 						query    : text,
@@ -91,7 +84,6 @@ const Shop = () => {
 						category,
 					});
 					setProducts(result);
-					// }
 
 					setLoading(false);
 				} catch (error) {
