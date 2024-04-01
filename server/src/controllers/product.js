@@ -166,8 +166,7 @@ exports.listRelated = async (req, res) => {
 };
 
 const handleQuery = async (req, res) => {
-	const { query, price, category } = req.body;
-
+	const { query, price, category, subCategory } = req.body;
 	let productQuery = {};
 	if (query || query !== '') {
 		productQuery.$text = { $search: query };
@@ -179,6 +178,29 @@ const handleQuery = async (req, res) => {
 	if (category && category.length > 0) {
 		productQuery.category = category;
 	}
+
+	if (subCategory) {
+		productQuery.subCategory = subCategory;
+	}
+
+	// if (stars) {
+	// 	console.log(stars, 'AGGREGATE STARS');
+	// 	let aggregateStars = await Product.aggregate([
+	// 		{
+	// 			$project : {
+	// 				document     : '$$ROOT',
+	// 				floorAverage : {
+	// 					$floor : { $avg: '$rating.star' },
+	// 				},
+	// 			},
+	// 		},
+	// 		{ $match: { floorAverage: stars } },
+	// 	])
+	// 		.limit(12)
+	// 		.exec();
+	// 	console.log(aggregateStars, 'AGGREGATE STARS');
+	// 	productQuery.stars = aggregateStars;
+	// }
 
 	const products = await Product.find({
 		$and : [
