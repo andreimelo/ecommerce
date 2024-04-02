@@ -179,7 +179,7 @@ const handleQuery = async (req, res) => {
 		productQuery.category = category;
 	}
 
-	if (subCategory) {
+	if (subCategory && subCategory.length > 0) {
 		productQuery.subCategory = subCategory;
 	}
 

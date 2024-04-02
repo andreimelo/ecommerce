@@ -4,6 +4,7 @@ import {
 	getProductsByFilter,
 } from '../../../library/services/product';
 import { getCategories } from '../../../library/services/category';
+import { getSubCategories } from '../../../library/services/sub-category';
 import { type } from '../../../library/common/constants/types';
 import { useSelector } from 'react-redux';
 import { numberOfStar, showAverageRating } from '../../../library/helpers/rating';
@@ -26,8 +27,16 @@ const Shop = () => {
 		setCategoryList,
 	] = useState([]);
 	const [
+		subCategoryList,
+		setSubCategoryList,
+	] = useState([]);
+	const [
 		category,
 		setCategory,
+	] = useState([]);
+	const [
+		subCategory,
+		setSubCategory,
 	] = useState([]);
 	const { search } = useSelector((state) => state);
 	const { text } = search;
@@ -43,7 +52,7 @@ const Shop = () => {
 		setRangeValues(newValues);
 	};
 
-	const handleCheckChange = (e) => {
+	const handleCategoryChange = (e) => {
 		let inTheState = [
 			...category,
 		];
@@ -56,14 +65,39 @@ const Shop = () => {
 		else {
 			inTheState.splice(foundInTheState, 1);
 		}
+
 		setCategory(inTheState);
+	};
+
+	const handleSubCategoryChange = (e) => {
+		let inTheState = [
+			...subCategory,
+		];
+		let justChecked = e.target.value;
+		let foundInTheState = inTheState.indexOf(justChecked);
+
+		if (foundInTheState === -1) {
+			inTheState.push(justChecked);
+		}
+		else {
+			inTheState.splice(foundInTheState, 1);
+		}
+
+		setSubCategory(inTheState);
 	};
 
 	useEffect(() => {
 		async function fetchCategories(){
 			try {
-				const result = await getCategories();
-				setCategoryList(result);
+				const [
+					resultCategory,
+					resultSubCategory,
+				] = await Promise.all([
+					getCategories(),
+					getSubCategories(),
+				]);
+				setCategoryList(resultCategory);
+				setSubCategoryList(resultSubCategory);
 			} catch (error) {
 				alert(error);
 			}
@@ -79,9 +113,10 @@ const Shop = () => {
 					setLoading(true);
 
 					result = await getProductsByFilter({
-						query    : text,
-						price    : rangeValues,
+						query       : text,
+						price       : rangeValues,
 						category,
+						subCategory,
 					});
 					setProducts(result);
 
@@ -101,6 +136,7 @@ const Shop = () => {
 			text,
 			rangeValues,
 			category,
+			subCategory,
 		],
 	);
 
@@ -124,7 +160,8 @@ const Shop = () => {
 					<div key={item._id} class='flex items-center'>
 						<Input
 							value={item._id}
-							onChange={handleCheckChange}
+							name='category'
+							onChange={handleCategoryChange}
 							type={type.input['checkbox']}
 							variant={
 								'w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
@@ -142,7 +179,21 @@ const Shop = () => {
 		{
 			title   : 'Sub Category',
 			content :
-				'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+				subCategoryList &&
+				subCategoryList.map((item) => (
+					<div key={item._id} class='flex items-center'>
+						<Input
+							value={item._id}
+							name='subCategory'
+							onChange={handleSubCategoryChange}
+							type={type.input['checkbox']}
+							variant={
+								'w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+							}
+						/>
+						<label class='ms-2 text-sm font-medium '>{item.name}</label>
+					</div>
+				)),
 		},
 		{
 			title   : 'Brands',
