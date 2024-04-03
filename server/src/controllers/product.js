@@ -166,11 +166,14 @@ exports.listRelated = async (req, res) => {
 };
 
 const handleQuery = async (req, res) => {
-	const { query, price, category, subCategory } = req.body;
+	const { query, price, category, subCategory, shipping, color, brand } = req.body;
+
 	let productQuery = {};
+
 	if (query || query !== '') {
 		productQuery.$text = { $search: query };
 	}
+
 	if (price) {
 		productQuery.price = { $gte: price[0], $lte: price[1] };
 	}
@@ -181,6 +184,18 @@ const handleQuery = async (req, res) => {
 
 	if (subCategory && subCategory.length > 0) {
 		productQuery.subCategory = subCategory;
+	}
+
+	if (shipping && shipping.length > 0) {
+		productQuery.shipping = shipping;
+	}
+
+	if (color && color.length > 0) {
+		productQuery.color = color;
+	}
+
+	if (brand && brand.length > 0) {
+		productQuery.brand = brand;
 	}
 
 	// if (stars) {
