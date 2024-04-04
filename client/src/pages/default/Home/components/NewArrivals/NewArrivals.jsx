@@ -4,8 +4,11 @@ import Card from '../../../../../library/components/Card';
 import Pagination from '../../../../../library/components/Pagination';
 import usePagination from '../../../../../library/hooks/usePagination';
 import { showAverageRating, numberOfStar } from '../../../../../library/helpers/rating';
+import { addToCart } from '../../../../../library/helpers/cart';
+import { useDispatch } from 'react-redux';
 
 const NewArrivals = () => {
+	const dispatch = useDispatch();
 	const [
 		products,
 		setProducts,
@@ -64,7 +67,7 @@ const NewArrivals = () => {
 								price={`$${item.price}`}
 								star={numberOfStar}
 								rating={showAverageRating(item)}
-								product={item}
+								handleAddToCart={()=>addToCart(item,dispatch)}
 							/>
 						))}
 				</div>

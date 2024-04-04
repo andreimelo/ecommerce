@@ -147,10 +147,10 @@ function Header({ role, imageURL }){
 								>
 									<li className='font-sans block mt-4 lg:inline-block lg:mt-0 align-middle text-black hover:text-gray-700'>
 										{icons['cart']}
-										<span className='absolute left-8 bottom-3 rounded-full bg-red-600 w-4 h-4 top right p-0 m-0 text-white font-mono text-sm  leading-tight text-center'>
+										<span className='absolute text-xs left-8 bottom-3 rounded-full bg-red-600 top right p-1 m-0 text-white font-mono text-sm  leading-tight text-center'>
 											{
 												cart.length > 0 ? totalCount :
-												'0'}
+												0}
 										</span>
 									</li>
 								</div>
