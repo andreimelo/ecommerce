@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { images } from '../../../resources/images';
 import icons from '../../../resources/icons';
 import RatingIcon from '../RatingIcon';
+import { uniqWith, isEqual } from 'lodash';
 
 const Card = ({
 	containerClass,
@@ -21,7 +22,23 @@ const Card = ({
 	star,
 	rating,
 	price,
+	product,
 }) => {
+	function handleAddToCart(){
+		let cart = [];
+
+		if (typeof window !== 'undefined') {
+			if (localStorage.getItem('cart')) {
+				cart = JSON.parse(localStorage.getItem('cart'));
+			}
+			cart.push({
+				...product,
+				count : 1,
+			});
+			let unique = uniqWith(cart, isEqual);
+			localStorage.setItem('cart', JSON.stringify(unique));
+		}
+	}
 	return (
 		<div className={containerClass}>
 			<div className={imgContainerClass}>
@@ -71,7 +88,10 @@ const Card = ({
 							<div>View Product</div>
 						</div>
 					</Link>
-					<div className='flex flex-col items-center text-xs cursor-pointer'>
+					<div
+						className='flex flex-col items-center text-xs cursor-pointer'
+						onClick={handleAddToCart}
+					>
 						{icons.cardSolid}
 						Add to Cart
 					</div>
@@ -106,6 +126,7 @@ Card.propTypes = {
 	star              : PropTypes.array,
 	rating            : PropTypes.number,
 	price             : PropTypes.string,
+	product           : PropTypes.any,
 };
 
 Card.defaultProps = {
@@ -124,6 +145,7 @@ Card.defaultProps = {
 	star              : [],
 	rating            : 0,
 	price             : '0',
+	product           : [],
 };
 
 export default Card;

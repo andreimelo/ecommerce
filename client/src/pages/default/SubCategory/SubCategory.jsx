@@ -49,7 +49,8 @@ const SubCategory = ({ match }) => {
 					{/* <div>{JSON.stringify(category)}</div> */}
 					<BreadCrumbs category={category} />
 					<div className='my-5 p-5 text-xl font-semibold bg-gray-200'>
-						({product.length}) Products found in "{category.name}" category
+						({product.length}) Products found in "{category.name}" sub
+						category
 					</div>
 					<div className='flex'>
 						<div className='grid grid-cols-4 gap-4'>
