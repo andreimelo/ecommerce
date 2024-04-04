@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { getCategory } from '../../../library/services/category';
 import BreadCrumbs from '../../../library/components/BreadCrumbs';
 import { showAverageRating, numberOfStar } from '../../../library/helpers/rating';
 import Card from '../../../library/components/Card';
+import { addToCart } from '../../../library/helpers/cart';
 
 const ShopByCategory = ({ match }) => {
+	const dispatch = useDispatch();
 	const [
 		category,
 		setCategory,
@@ -69,6 +72,7 @@ const ShopByCategory = ({ match }) => {
 										price={`$${item.price}`}
 										star={numberOfStar}
 										rating={showAverageRating(item)}
+										handleAddToCart={() => addToCart(item, dispatch)}
 									/>
 								))}
 						</div>

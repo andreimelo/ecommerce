@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import {
 	// getProductsByCount,
 	getProductsByFilter,
@@ -7,6 +8,7 @@ import { getCategories } from '../../../library/services/category';
 import { getSubCategories } from '../../../library/services/sub-category';
 import { type } from '../../../library/common/constants/types';
 import { productOptions } from '../../../library/common/constants/selectOptions';
+import { addToCart } from '../../../library/helpers/cart';
 import { useSelector } from 'react-redux';
 import { numberOfStar, showAverageRating } from '../../../library/helpers/rating';
 import Card from '../../../library/components/Card';
@@ -15,6 +17,7 @@ import Accordion from '../../../library/components/Accordion';
 import MultiRangeSlider from '../../../library/components/MultiRangeSlider';
 
 const Shop = () => {
+	const dispatch = useDispatch();
 	const [
 		products,
 		setProducts,
@@ -360,6 +363,7 @@ const Shop = () => {
 									price={`$${item.price}`}
 									star={numberOfStar}
 									rating={showAverageRating(item)}
+									handleAddToCart={() => addToCart(item, dispatch)}
 								/>
 							))}
 						{!loading && products.length <= 0 && <h2>No Products Found</h2>}

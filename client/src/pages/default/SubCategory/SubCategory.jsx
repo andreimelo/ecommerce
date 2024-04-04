@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { getSubCategory } from '../../../library/services/sub-category';
 import BreadCrumbs from '../../../library/components/BreadCrumbs';
 import { showAverageRating, numberOfStar } from '../../../library/helpers/rating';
 import Card from '../../../library/components/Card';
+import { addToCart } from '../../../library/helpers/cart';
 
 const SubCategory = ({ match }) => {
+	const dispatch = useDispatch();
 	const [
 		category,
 		setCategory,
@@ -69,6 +72,7 @@ const SubCategory = ({ match }) => {
 										isProductAndCart
 										star={numberOfStar}
 										rating={showAverageRating(item)}
+										handleAddToCart={() => addToCart(item, dispatch)}
 									/>
 								))}
 						</div>
