@@ -6,6 +6,7 @@ import {
 import { getCategories } from '../../../library/services/category';
 import { getSubCategories } from '../../../library/services/sub-category';
 import { type } from '../../../library/common/constants/types';
+import { productOptions } from '../../../library/common/constants/selectOptions';
 import { useSelector } from 'react-redux';
 import { numberOfStar, showAverageRating } from '../../../library/helpers/rating';
 import Card from '../../../library/components/Card';
@@ -30,6 +31,30 @@ const Shop = () => {
 		subCategoryList,
 		setSubCategoryList,
 	] = useState([]);
+	const [
+		brand,
+		setBrand,
+	] = useState([]);
+	// const [
+	// 	brandList,
+	// 	setBrandList,
+	// ] = useState([]);
+	const [
+		color,
+		setColor,
+	] = useState([]);
+	// const [
+	// 	colorList,
+	// 	setColorList,
+	// ] = useState([]);
+	const [
+		shipping,
+		setShipping,
+	] = useState([]);
+	// const [
+	// 	shippingList,
+	// 	setShippingList,
+	// ] = useState([]);
 	const [
 		category,
 		setCategory,
@@ -86,6 +111,57 @@ const Shop = () => {
 		setSubCategory(inTheState);
 	};
 
+	const handleBrandChange = (e) => {
+		let inTheState = [
+			...brand,
+		];
+		let justChecked = e.target.value;
+		let foundInTheState = inTheState.indexOf(justChecked);
+
+		if (foundInTheState === -1) {
+			inTheState.push(justChecked);
+		}
+		else {
+			inTheState.splice(foundInTheState, 1);
+		}
+
+		setBrand(inTheState);
+	};
+
+	const handleColorChange = (e) => {
+		let inTheState = [
+			...color,
+		];
+		let justChecked = e.target.value;
+		let foundInTheState = inTheState.indexOf(justChecked);
+
+		if (foundInTheState === -1) {
+			inTheState.push(justChecked);
+		}
+		else {
+			inTheState.splice(foundInTheState, 1);
+		}
+
+		setColor(inTheState);
+	};
+
+	const handleShippingChange = (e) => {
+		let inTheState = [
+			...shipping,
+		];
+		let justChecked = e.target.value;
+		let foundInTheState = inTheState.indexOf(justChecked);
+
+		if (foundInTheState === -1) {
+			inTheState.push(justChecked);
+		}
+		else {
+			inTheState.splice(foundInTheState, 1);
+		}
+
+		setShipping(inTheState);
+	};
+
 	useEffect(() => {
 		async function fetchCategories(){
 			try {
@@ -117,6 +193,9 @@ const Shop = () => {
 						price       : rangeValues,
 						category,
 						subCategory,
+						brand,
+						color,
+						shipping,
 					});
 					setProducts(result);
 
@@ -137,6 +216,9 @@ const Shop = () => {
 			rangeValues,
 			category,
 			subCategory,
+			brand,
+			color,
+			shipping,
 		],
 	);
 
@@ -171,11 +253,11 @@ const Shop = () => {
 					</div>
 				)),
 		},
-		{
-			title   : 'Rating',
-			content :
-				'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-		},
+		// {
+		// 	title   : 'Rating',
+		// 	content :
+		// 		'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+		// },
 		{
 			title   : 'Sub Category',
 			content :
@@ -197,18 +279,54 @@ const Shop = () => {
 		},
 		{
 			title   : 'Brands',
-			content :
-				'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+			content : productOptions['brands'].map((item) => (
+				<div key={item.name} class='flex items-center'>
+					<Input
+						value={item.value}
+						name='brand'
+						onChange={handleBrandChange}
+						type={type.input['checkbox']}
+						variant={
+							'w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+						}
+					/>
+					<label class='ms-2 text-sm font-medium '>{item.name}</label>
+				</div>
+			)),
 		},
 		{
 			title   : 'Color',
-			content :
-				'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+			content : productOptions['colors'].map((item) => (
+				<div key={item.name} class='flex items-center'>
+					<Input
+						value={item.value}
+						name='brand'
+						onChange={handleColorChange}
+						type={type.input['checkbox']}
+						variant={
+							'w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+						}
+					/>
+					<label class='ms-2 text-sm font-medium '>{item.name}</label>
+				</div>
+			)),
 		},
 		{
 			title   : 'Shipping',
-			content :
-				'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+			content : productOptions['shipping'].map((item) => (
+				<div key={item.name} class='flex items-center'>
+					<Input
+						value={item.value}
+						name='brand'
+						onChange={handleShippingChange}
+						type={type.input['checkbox']}
+						variant={
+							'w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+						}
+					/>
+					<label class='ms-2 text-sm font-medium '>{item.name}</label>
+				</div>
+			)),
 		},
 	];
 

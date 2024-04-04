@@ -64,6 +64,7 @@ const NewArrivals = () => {
 								price={`$${item.price}`}
 								star={numberOfStar}
 								rating={showAverageRating(item)}
+								product={item}
 							/>
 						))}
 				</div>
