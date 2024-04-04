@@ -1,44 +1,56 @@
 export const productOptions = {
 	shipping : [
 		{
-			name : 'Yes',
+			name  : 'Yes',
+			value : 'Yes',
 		},
 		{
-			name : 'No',
+			name  : 'No',
+			value : 'No',
 		},
 	],
 	colors   : [
 		{
-			name : 'Black',
+			name  : 'Black',
+			value : 'Black',
 		},
 		{
-			name : 'Brown',
+			name  : 'Brown',
+			value : 'Brown',
 		},
 		{
-			name : 'Silver',
+			name  : 'Silver',
+			value : 'Silver',
 		},
 		{
-			name : 'White',
+			name  : 'White',
+			value : 'White',
 		},
 		{
-			name : 'Blue',
+			name  : 'Blue',
+			value : 'Blue',
 		},
 	],
 	brands   : [
 		{
-			name : 'Apple',
+			name  : 'Apple',
+			value : 'Apple',
 		},
 		{
-			name : 'Samsung',
+			name  : 'Samsung',
+			value : 'Samsung',
 		},
 		{
-			name : 'Microsoft',
+			name  : 'Microsoft',
+			value : 'Microsoft',
 		},
 		{
-			name : 'Lenovo',
+			name  : 'Lenovo',
+			value : ':enovo',
 		},
 		{
-			name : 'ASUS',
+			name  : 'ASUS',
+			value : 'ASUS',
 		},
 	],
 };
