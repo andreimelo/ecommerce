@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { images } from '../../../resources/images';
 import icons from '../../../resources/icons';
 import RatingIcon from '../RatingIcon';
-import { uniqWith, isEqual } from 'lodash';
+import { useDispatch } from 'react-redux';
 
 const Card = ({
 	containerClass,
@@ -24,6 +24,7 @@ const Card = ({
 	price,
 	product,
 }) => {
+	const dispatch = useDispatch();
 	function handleAddToCart(){
 		let cart = [];
 
@@ -31,14 +32,39 @@ const Card = ({
 			if (localStorage.getItem('cart')) {
 				cart = JSON.parse(localStorage.getItem('cart'));
 			}
-			cart.push({
-				...product,
-				count : 1,
-			});
-			let unique = uniqWith(cart, isEqual);
+
+			// Check if the product already exists in the cart
+			const existingProductIndex = cart.findIndex(
+				(item) => item._id === product._id,
+			);
+			if (existingProductIndex !== -1) {
+				// Update count and price of existing product
+				cart[existingProductIndex].count++;
+				cart[existingProductIndex].price =
+					product.price * cart[existingProductIndex].count;
+			}
+			else {
+				// Add the product to the cart with count = 1
+				cart.push({
+					...product,
+					count : 1,
+				});
+			}
+
+			// Remove duplicates
+			let unique = cart.filter(
+				(item, index, self) =>
+					index === self.findIndex((t) => t._id === item._id),
+			);
+
 			localStorage.setItem('cart', JSON.stringify(unique));
+			dispatch({
+				type    : 'ADD_TO_CART',
+				payload : unique,
+			});
 		}
 	}
+
 	return (
 		<div className={containerClass}>
 			<div className={imgContainerClass}>
