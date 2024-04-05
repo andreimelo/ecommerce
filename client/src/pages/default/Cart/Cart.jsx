@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 function Cart(){
 	// const dispatch = useDispatch();
@@ -68,9 +69,16 @@ function Cart(){
 							user ? <button className='w-full text-center font-semibold text-white bg-black p-3'>
 								Proceed to Checkout
 							</button> :
-							<button className='w-full text-center font-semibold text-white bg-black p-3'>
-								Login to Checkout
-							</button>}
+							<Link
+								to={{
+									pathname : '/login',
+									state    : { from: 'cart' },
+								}}
+							>
+								<button className='w-full text-center font-semibold text-white bg-black p-3'>
+									Login to Checkout
+								</button>
+							</Link>}
 					</div>
 				</div>
 			</section>
