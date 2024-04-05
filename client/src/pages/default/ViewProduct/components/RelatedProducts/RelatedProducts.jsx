@@ -1,8 +1,13 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import Card from '../../../../../library/components/Card';
+import { addToCart } from '../../../../../library/helpers/cart';
+
 import PropTypes from 'prop-types';
 
 const RelatedProducts = ({ data, loading, numberOfStar, showAverageRating }) => {
+	const dispatch = useDispatch();
+
 	return (
 		<div>
 			<section className='my-5 text-xl font-semibold'>Related Products</section>
@@ -26,6 +31,7 @@ const RelatedProducts = ({ data, loading, numberOfStar, showAverageRating }) => 
 								price={`$${item.price}`}
 								star={numberOfStar}
 								rating={showAverageRating(item)}
+								handleAddToCart={() => addToCart(item, dispatch)}
 							/>
 						))}
 				</div>

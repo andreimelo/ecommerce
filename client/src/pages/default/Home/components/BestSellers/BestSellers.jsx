@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { getProductsBySortAndOrder } from '../../../../../library/services/product';
 import Card from '../../../../../library/components/Card';
 import Pagination from '../../../../../library/components/Pagination';
 import usePagination from '../../../../../library/hooks/usePagination';
 import { showAverageRating, numberOfStar } from '../../../../../library/helpers/rating';
+import { addToCart } from '../../../../../library/helpers/cart';
 
 const BestSellers = () => {
+	const dispatch = useDispatch();
 	const [
 		products,
 		setProducts,
@@ -60,6 +63,7 @@ const BestSellers = () => {
 									price={`$${item.price}`}
 									star={numberOfStar}
 									rating={showAverageRating(item)}
+									handleAddToCart={() => addToCart(item, dispatch)}
 								/>
 							))}
 					</div>}

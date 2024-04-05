@@ -9,12 +9,14 @@ import Carousel from '../../../library/components/Carousel';
 import ProductListItem from './components/ProductListItem/ProductListItem';
 import RatingIcon from '../../../library/components/RatingIcon';
 import RatingModal from './components/RatingModal';
-import { useSelector } from 'react-redux';
-import { showAverageRating, numberOfStar } from '../../../library/helpers/rating';
 import RelatedProducts from './components/RelatedProducts';
+import { useSelector, useDispatch } from 'react-redux';
+import { showAverageRating, numberOfStar } from '../../../library/helpers/rating';
+import { addToCart } from '../../../library/helpers/cart';
 
 const ViewProduct = ({ match }) => {
 	const { slug } = match.params;
+	const dispatch = useDispatch();
 	const history = useHistory();
 	const [
 		modalOpen,
@@ -129,6 +131,7 @@ const ViewProduct = ({ match }) => {
 							<button
 								type='button'
 								className='text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
+								onClick={() => addToCart(product, dispatch)}
 							>
 								Add to Cart
 							</button>
