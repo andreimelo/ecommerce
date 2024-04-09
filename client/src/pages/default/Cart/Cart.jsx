@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
+import Modal from '../../../library/components/Modal';
 
 function Cart(){
 	// const dispatch = useDispatch();
 	const { user, cart } = useSelector((state) => ({ ...state }));
 	const total = cart.reduce((acc, curr) => acc + curr.count * curr.price, 0);
+	const [
+		modalOpen,
+		setModalOpen,
+	] = useState(false);
+
+	function openModal(){
+		setModalOpen(true);
+	}
+
+	function closeModal(){
+		setModalOpen(false);
+	}
 	return (
 		<div className='w-full max-w-screen-xl mx-auto'>
 			<section className='grid grid-cols-3 gap-3 gap-4 my-10'>
@@ -21,11 +34,13 @@ function Cart(){
 						cart.map((item) => {
 							return (
 								<div className='flex border my-5'>
-									<img
-										className='w-40 h-40'
-										src={item.images[0].url}
-										alt='cartProductPreview'
-									/>
+									<div id='clickPreview' onClick={openModal}>
+										<img
+											className='w-40 h-40'
+											src={item.images[0].url}
+											alt='cartProductPreview'
+										/>
+									</div>
 									<div className='mx-10 my-5'>
 										<label className='font-semibold'>
 											{item.title}
@@ -42,6 +57,17 @@ function Cart(){
 											Shipping: {item.shipping}
 										</div>
 									</div>
+									<Modal
+										modalContainerClass='relative bg-white rounded-lg shadow-xl w-auto mx-auto'
+										isOpen={modalOpen}
+										onClose={closeModal}
+										modalTitle='Preview'
+									>
+										<img
+											src={item.images[0].url}
+											alt='cartProductPreview'
+										/>
+									</Modal>
 								</div>
 							);
 						})}
