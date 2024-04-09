@@ -36,23 +36,29 @@ function Cart(){
 			}
 			cart.map((product, i) => {
 				if (product._id === id) {
-				  cart[i].color = e.target.value;
+					cart[i].color = e.target.value;
 				}
 				return null;
 			});
 			localStorage.setItem('cart', JSON.stringify(cart));
-			 dispatch({
+			dispatch({
 				type    : 'ADD_TO_CART',
 				payload : cart,
 			});
 		}
 	}
 
-	async function handleCountChange(e, id){
+	async function handleCountChange(e, id, quantity){
 		let cart = [];
 		if (e.code === 'Minus') {
 			e.preventDefault();
 		}
+
+		if (e.target.value > quantity) {
+			alert(`Max available quantity: ${quantity}`);
+			return null;
+		}
+
 		if (typeof window !== 'undefined') {
 			if (localStorage.getItem('cart')) {
 				cart = JSON.parse(localStorage.getItem('cart'));
@@ -124,8 +130,18 @@ function Cart(){
 										</div>
 										<div className='flex text-sm'>
 											{' '}
-											<div className="mr-2">Qty:</div>
-											<Input onChange={(e) =>handleCountChange(e, item._id)} value={item.count} min="0" type={type['input']['number']} />
+											<div className='mr-2'>Qty:</div>
+											<Input
+												onChange={(e) =>
+													handleCountChange(
+														e,
+														item._id,
+														item.quantity,
+													)}
+												value={item.count}
+												min='0'
+												type={type['input']['number']}
+											/>
 										</div>
 									</div>
 									<Modal
