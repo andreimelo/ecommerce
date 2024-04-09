@@ -11,10 +11,12 @@ const SelectOption = ({
 	placeHolder,
 	selectClass,
 	disabled,
+	labelClass,
+	defaultValue,
 }) => {
 	return (
 		<div className={variant}>
-			<label for='name' className='block mt-5 mb-3 text-sm font-medium text-gray-900' />
+			<label for='name' className={labelClass} />
 			<select
 				disabled={disabled}
 				value={value}
@@ -22,7 +24,8 @@ const SelectOption = ({
 				name={name}
 				className={selectClass}
 			>
-				<option value=''>{placeHolder}</option>
+				{defaultValue && <option value={defaultValue}>{defaultValue}</option>}
+				{placeHolder && !defaultValue && <option value=''>{placeHolder}</option>}
 				{data.length > 0 &&
 					data.map((item) => (
 						<option
@@ -48,6 +51,8 @@ SelectOption.propTypes = {
 	placeHolder   : PropTypes.string,
 	selectClass   : PropTypes.string,
 	disabled      : PropTypes.bool,
+	labelClass    : PropTypes.string,
+	defaultValue  : PropTypes.string,
 };
 
 SelectOption.defaultProps = {
@@ -61,6 +66,8 @@ SelectOption.defaultProps = {
 	selectClass   :
 		'border border-gray-300 text-sm rounded-lg block w-full p-2.5 focus:outline-none focus:bg-white focus:border-gray-500',
 	disabled      : false,
+	labelClass    : 'block mt-5 mb-3 text-sm font-medium text-gray-900',
+	defaultValue  : '',
 };
 
 export default SelectOption;
