@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 import Modal from '../../../library/components/Modal';
 import { images } from '../../../resources/images';
 import SelectOption from '../../../library/components/SelectOption';
 import Input from '../../../library/components/Input';
 import { productOptions } from '../../../library/common/constants/selectOptions';
-import { useDispatch } from 'react-redux';
 import { type } from '../../../library/common/constants/types';
+import { removeToCart } from '../../../library/helpers/cart';
 
 function Cart(){
-	// const dispatch = useDispatch();
 	const { user, cart } = useSelector((state) => ({ ...state }));
 	const total = cart.reduce((acc, curr) => acc + curr.count * curr.price, 0);
 	const dispatch = useDispatch();
@@ -142,6 +141,11 @@ function Cart(){
 												min='0'
 												type={type['input']['number']}
 											/>
+										</div>
+									</div>
+									<div className='cursor-pointer text-red-700 mx-10 my-5'>
+										<div onClick={() => removeToCart(item, dispatch)}>
+											Remove
 										</div>
 									</div>
 									<Modal
