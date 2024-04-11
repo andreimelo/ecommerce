@@ -2,16 +2,23 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 import Modal from '../../../library/components/Modal';
+import { images } from '../../../resources/images';
+import SelectOption from '../../../library/components/SelectOption';
+import Input from '../../../library/components/Input';
+import { productOptions } from '../../../library/common/constants/selectOptions';
+import { useDispatch } from 'react-redux';
+import { type } from '../../../library/common/constants/types';
 
 function Cart(){
 	// const dispatch = useDispatch();
 	const { user, cart } = useSelector((state) => ({ ...state }));
 	const total = cart.reduce((acc, curr) => acc + curr.count * curr.price, 0);
+	const dispatch = useDispatch();
+
 	const [
 		modalOpen,
 		setModalOpen,
 	] = useState(false);
-
 	function openModal(){
 		setModalOpen(true);
 	}
@@ -19,6 +26,58 @@ function Cart(){
 	function closeModal(){
 		setModalOpen(false);
 	}
+
+	async function handleSelectedColorChange(e, id){
+		let cart = [];
+
+		if (typeof window !== 'undefined') {
+			if (localStorage.getItem('cart')) {
+				cart = JSON.parse(localStorage.getItem('cart'));
+			}
+			cart.map((product, i) => {
+				if (product._id === id) {
+					cart[i].color = e.target.value;
+				}
+				return null;
+			});
+			localStorage.setItem('cart', JSON.stringify(cart));
+			dispatch({
+				type    : 'ADD_TO_CART',
+				payload : cart,
+			});
+		}
+	}
+
+	async function handleCountChange(e, id, quantity){
+		let cart = [];
+		if (e.code === 'Minus') {
+			e.preventDefault();
+		}
+
+		if (e.target.value > quantity) {
+			alert(`Max available quantity: ${quantity}`);
+			return null;
+		}
+
+		if (typeof window !== 'undefined') {
+			if (localStorage.getItem('cart')) {
+				cart = JSON.parse(localStorage.getItem('cart'));
+			}
+			cart.map((product, i) => {
+				if (product._id === id) {
+					cart[i].count = parseInt(e.target.value);
+				}
+				return null;
+			});
+
+			localStorage.setItem('cart', JSON.stringify(cart));
+			dispatch({
+				type    : 'ADD_TO_CART',
+				payload : cart,
+			});
+		}
+	}
+
 	return (
 		<div className='w-full max-w-screen-xl mx-auto'>
 			<section className='grid grid-cols-3 gap-3 gap-4 my-10'>
@@ -35,26 +94,54 @@ function Cart(){
 							return (
 								<div className='flex border my-5'>
 									<div id='clickPreview' onClick={openModal}>
-										<img
-											className='w-40 h-40'
-											src={item.images[0].url}
-											alt='cartProductPreview'
-										/>
+										{
+											item.images.length ? <img
+												className='w-40 h-40 object-cover'
+												src={item.images[0].url}
+												alt='cartProductPreview'
+											/> :
+											<img
+												src={images['default']}
+												className='w-40 h-40 object-cover'
+												alt={`cartDefaultImage`}
+											/>}
 									</div>
 									<div className='mx-10 my-5'>
 										<label className='font-semibold'>
 											{item.title}
 										</label>
 										<div className='my-1'>${item.price}</div>
-										<div className='text-sm my-1'>{item.color}</div>
-										<div className='text-sm my-1'>
-											Qty: {item.count}
-										</div>
+										<SelectOption
+											labelClass
+											selectClass
+											defaultValue={item.color}
+											value={item.color}
+											onChange={(e) =>
+												handleSelectedColorChange(e, item._id)}
+											data={productOptions['colors']}
+										/>
 									</div>
 									<div className='mx-10 my-5'>
-										<div className='text-sm'>Brand: {item.brand}</div>
-										<div className='text-sm'>
+										<div className='text-sm my-1'>
+											Brand: {item.brand}
+										</div>
+										<div className='text-sm my-1'>
 											Shipping: {item.shipping}
+										</div>
+										<div className='flex text-sm'>
+											{' '}
+											<div className='mr-2'>Qty:</div>
+											<Input
+												onChange={(e) =>
+													handleCountChange(
+														e,
+														item._id,
+														item.quantity,
+													)}
+												value={item.count}
+												min='0'
+												type={type['input']['number']}
+											/>
 										</div>
 									</div>
 									<Modal
