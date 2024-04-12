@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from './../../library/components/Header';
 import Footer from '../../library/components/Footer';
 import env from '../../library/common/config/env';
+import SideDrawer from '../../library/components/SideDrawer';
 
 //Lazy-loaded pages
 // User/Subscriber pages
@@ -285,6 +286,7 @@ const InitialRoutes = ({ store }) => {
 		<Suspense fallback={<h2>🌀 Loading....</h2>}>
 			<BrowserRouter>
 				<Header role={role} imageURL={imageURL} />
+				<SideDrawer />
 				<Switch>
 					{mappingRoutes.map((route, index) => (
 						<Route

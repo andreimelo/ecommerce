@@ -28,9 +28,14 @@ export const addToCart = (product, dispatch) => {
 		);
 
 		localStorage.setItem('cart', JSON.stringify(unique));
-		return dispatch({
+		dispatch({
 			type    : 'ADD_TO_CART',
 			payload : unique,
+		});
+
+		dispatch({
+			type    : 'SET_VISIBLE_DRAWER',
+			payload : true,
 		});
 	}
 };
