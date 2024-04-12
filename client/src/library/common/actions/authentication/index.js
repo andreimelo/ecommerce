@@ -84,5 +84,5 @@ export async function logOutAction(history, dispatch){
 		type    : 'LOGOUT',
 		payload : null,
 	});
-	return history.push('/login');
+	return history.push('/');
 }
