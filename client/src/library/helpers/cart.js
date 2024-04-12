@@ -60,12 +60,14 @@ export const removeToCart = (product, dispatch) => {
 				(item, index, self) =>
 					index === self.findIndex((t) => t._id === item._id),
 			);
-
-			localStorage.setItem('cart', JSON.stringify(unique));
-			return dispatch({
-				type    : 'ADD_TO_CART',
-				payload : unique,
-			});
+			let confirmation = window.confirm('Are sure you want to remove this item?');
+			if (confirmation) {
+				localStorage.setItem('cart', JSON.stringify(unique));
+				return dispatch({
+					type    : 'ADD_TO_CART',
+					payload : unique,
+				});
+			}
 		}
 	}
 };
