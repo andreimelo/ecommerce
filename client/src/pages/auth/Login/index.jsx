@@ -46,11 +46,11 @@ function Login(){
 				<div className='col-span-1' />
 				<div className='container col-span-1 border-l-2 border-gray-200'>
 					<div className='w-8/12 mx-auto'>
-						<label className='text-4xl font-bold'>
+						<label className='text-3xl font-semibold'>
 							{string.routes.loginTitle}
 						</label>
 						<CustomLabel
-							variant={'label text-sm default-color mt-10'}
+							variant={'label text-sm default-color mt-5'}
 							title={string.label.login.email}
 						/>
 						<CustomInput
