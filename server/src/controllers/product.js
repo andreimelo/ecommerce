@@ -95,7 +95,13 @@ exports.listAll = async (req, res) => {
 		let { sort, order, page } = req.body;
 		const currentPage = page || 1;
 		const perPage = 3;
-		const products = await Product.find({})
+		let noSold;
+
+		if (sort === 'sold') {
+			noSold = { sold: { $gt: 0 } };
+		}
+
+		const products = await Product.find({ ...noSold })
 			.skip((currentPage - 1) * perPage)
 			.populate('category')
 			.populate('subCategory')
