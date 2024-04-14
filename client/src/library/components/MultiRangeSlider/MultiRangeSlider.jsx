@@ -6,7 +6,14 @@ import PropTypes from 'prop-types';
 const MultiRangeSlider = ({ value, min, max, onChange }) => {
 	return (
 		<div className='mx-3'>
-			<Slider min={min} max={max} defaultValue={value} onChange={onChange} range />
+			<Slider
+				// trackStyle={{ backgroundColor: 'bg-gray-900' }}
+				min={min}
+				max={max}
+				defaultValue={value}
+				onChange={onChange}
+				range
+			/>
 			<div className='flex justify-between mt-2'>
 				{value && value.map((item, index) => <span key={index}>$ {item}</span>)}
 			</div>

@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from './../../library/components/Header';
 import Footer from '../../library/components/Footer';
 import env from '../../library/common/config/env';
+import SideDrawer from '../../library/components/SideDrawer';
 
 //Lazy-loaded pages
 // User/Subscriber pages
@@ -57,6 +58,10 @@ const SubCategory = lazy(async () => {
 });
 const ViewProduct = lazy(async () => {
 	const module = await import('../../pages/default/ViewProduct');
+	return module;
+});
+const Checkout = lazy(async () => {
+	const module = await import('../../pages/default/Checkout');
 	return module;
 });
 
@@ -202,6 +207,10 @@ const InitialRoutes = ({ store }) => {
 				element : ShopByCategory,
 			},
 			{
+				path    : '/sub-category/:slug',
+				element : SubCategory,
+			},
+			{
 				path    : '/user/change-password',
 				element : ChangePassword,
 			},
@@ -209,7 +218,6 @@ const InitialRoutes = ({ store }) => {
 				path    : '/user/wishlist',
 				element : Wishlist,
 			},
-			// needs to be in subscriber page as well
 			{
 				path    : '/shop',
 				element : Shop,
@@ -218,7 +226,10 @@ const InitialRoutes = ({ store }) => {
 				path    : '/cart',
 				element : Cart,
 			},
-			//
+			{
+				path    : '/checkout',
+				element : Checkout,
+			},
 			{
 				path    : '*',
 				element : Error404,
@@ -272,6 +283,10 @@ const InitialRoutes = ({ store }) => {
 			element : SubCategory,
 		},
 		{
+			path    : '/checkout',
+			element : Checkout,
+		},
+		{
 			path    : '*',
 			element : Error404,
 		},
@@ -285,6 +300,7 @@ const InitialRoutes = ({ store }) => {
 		<Suspense fallback={<h2>🌀 Loading....</h2>}>
 			<BrowserRouter>
 				<Header role={role} imageURL={imageURL} />
+				<SideDrawer />
 				<Switch>
 					{mappingRoutes.map((route, index) => (
 						<Route

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom/cjs/react-router-dom';
 import Modal from '../../../library/components/Modal';
@@ -13,7 +14,7 @@ function Cart(){
 	const { user, cart } = useSelector((state) => ({ ...state }));
 	const total = cart.reduce((acc, curr) => acc + curr.count * curr.price, 0);
 	const dispatch = useDispatch();
-
+	const history = useHistory();
 	const [
 		modalOpen,
 		setModalOpen,
@@ -181,22 +182,27 @@ function Cart(){
 					<div className='text-gray-500 text-xs p-1'>
 						Tax calculated during checkout
 					</div>
-					<div className='my-2 p-1'>
-						{
-							user ? <button className='w-full text-center font-semibold text-white bg-black p-3'>
-								Proceed to Checkout
-							</button> :
-							<Link
-								to={{
-									pathname : '/login',
-									state    : { from: 'cart' },
-								}}
-							>
-								<button className='w-full text-center font-semibold text-white bg-black p-3'>
-									Login to Checkout
-								</button>
-							</Link>}
-					</div>
+					{cart.length !== 0 && (
+						<div className='my-2 p-1'>
+							{
+								user ? <button
+									className='w-full text-center font-semibold text-white bg-black p-3'
+									onClick={() => history.push('/checkout')}
+								>
+									Proceed to Checkout
+								</button> :
+								<Link
+									to={{
+										pathname : '/login',
+										state    : { from: 'cart' },
+									}}
+								>
+									<button className='w-full text-center font-semibold text-white bg-black p-3'>
+										Login to Checkout
+									</button>
+								</Link>}
+						</div>
+					)}
 				</div>
 			</section>
 		</div>

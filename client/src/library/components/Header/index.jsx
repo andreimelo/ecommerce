@@ -127,7 +127,7 @@ function Header({ role, imageURL }){
 										type='search'
 										searchValue={text}
 										placeHolder='Search'
-										searchClass='inp mx-10 rounded-full border border-gray-500 fix-size'
+										searchClass=' mx-10 border p-2 border-gray-300'
 										handleSearchFilterChange={(event) =>
 											dispatch({
 												type    : 'SEARCH_QUERY',
