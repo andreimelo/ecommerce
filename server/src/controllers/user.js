@@ -51,6 +51,6 @@ exports.userCart = async (req, res) => {
 		res.json({ ok: true });
 	} catch (error) {
 		// console.log(err);
-		res.status(400).send('Fetch list user accounts failed');
+		res.status(400).send('Saving user cart failed');
 	}
 };
