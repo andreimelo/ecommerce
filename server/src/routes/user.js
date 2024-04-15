@@ -1,5 +1,5 @@
 const { router } = require('../config/express');
-const { list } = require('../controllers/user');
+const { list, userCart } = require('../controllers/user');
 const { authCheck, adminCheck } = require('../middlewares/authSecurity');
 
 router.get('/user', (req, res) => {
@@ -7,5 +7,6 @@ router.get('/user', (req, res) => {
 });
 
 router.get('/user/accounts', authCheck, adminCheck, list);
+router.get('/user/cart', authCheck, userCart);
 
 module.exports = router;
