@@ -53,3 +53,22 @@ exports.userCart = async (req, res) => {
 		res.status(400).send('Saving user cart failed');
 	}
 };
+
+exports.getUserCart = async (req, res) => {
+	try {
+		const user = await User.findOne({ email: req.user.email }).exec();
+		let cart = await Cart.findOne({ orderedBy: user._id })
+			.populate('products.product', '_id title price totalDiscount')
+			.exec();
+		console.log(cart);
+		const { products, cartTotal, totalDiscount } = cart;
+		res.json({
+			products,
+			cartTotal,
+			totalDiscount,
+		});
+	} catch (error) {
+		console.log(error);
+		res.status(400).send('Get user cart failed');
+	}
+};

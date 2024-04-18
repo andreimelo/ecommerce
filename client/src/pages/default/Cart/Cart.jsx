@@ -13,7 +13,8 @@ import { removeToCart } from '../../../library/helpers/cart';
 
 function Cart(){
 	const { user, cart } = useSelector((state) => ({ ...state }));
-	const total = cart.reduce((acc, curr) => acc + curr.count * curr.price, 0);
+	console.log(cart);
+	const total = cart.reduce((acc, curr) => acc + curr.price * curr.count, 0);
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const [
@@ -82,7 +83,6 @@ function Cart(){
 	async function saveUserCartToDb(userCart, userToken){
 		try {
 			const result = await saveUserCart(userCart, userToken);
-			console.log(result);
 			if (result.ok) {
 				return history.push('/checkout');
 			}

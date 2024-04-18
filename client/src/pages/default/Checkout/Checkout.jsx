@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 // import { Link } from 'react-router-dom/cjs/react-router-dom';
 // import Modal from '../../../library/components/Modal';
@@ -6,14 +6,34 @@ import { useSelector } from 'react-redux';
 // import SelectOption from '../../../library/components/SelectOption';
 import Input from '../../../library/components/Input';
 import SelectOption from '../../../library/components/SelectOption';
-// import { productOptions } from '../../../library/common/constants/selectOptions';
+import { getUserCart } from '../../../library/services/user';
 // import { type } from '../../../library/common/constants/types';
 // import { removeToCart } from '../../../library/helpers/cart';
 
 const Checkout = () => {
-	const { cart } = useSelector((state) => ({ ...state }));
+	const { cart, user } = useSelector((state) => ({ ...state }));
 	// const dispatch = useDispatch();
-	const total = cart.reduce((acc, curr) => acc + curr.count * curr.price, 0);
+	const [
+		total,
+		setTotal,
+	] = useState(0);
+	useEffect(
+		() => {
+			async function fetchUserCart(){
+				try {
+					const result = await getUserCart(user.token);
+					console.log(result);
+					setTotal(result.cartTotal);
+				} catch (error) {
+					alert(error);
+				}
+			}
+			fetchUserCart();
+		},
+		[
+			user.token,
+		],
+	);
 
 	return (
 		<div className='w-full max-w-screen-xl mx-auto whitespace-pre-wrap break-words'>

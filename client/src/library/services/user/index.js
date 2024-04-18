@@ -32,3 +32,19 @@ export async function saveUserCart(cart, token){
 
 	return data;
 }
+
+export async function getUserCart(token){
+	const options = {
+		method  : 'GET',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json',
+			authToken      : token || '',
+		},
+	};
+	const result = await fetch(`${env.base_uri}/user/save-cart`, options);
+
+	const data = await result.json();
+
+	return data;
+}
