@@ -23,12 +23,10 @@ export async function saveUserCart(cart, token){
 			Accept         : 'application/json',
 			'Content-Type' : 'application/json',
 			authToken      : token || '',
-			body           : JSON.stringify({
-				cart,
-			}),
 		},
+		body    : JSON.stringify({ cart }),
 	};
-	const result = await fetch(`${env.base_uri}/user/cart`, options);
+	const result = await fetch(`${env.base_uri}/user/save-cart`, options);
 
 	const data = await result.json();
 

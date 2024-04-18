@@ -15,7 +15,6 @@ exports.list = async (req, res) => {
 exports.userCart = async (req, res) => {
 	try {
 		const { cart } = req.body;
-		let product = [];
 		const user = await User.findOne({ email: req.user.email }).exec();
 
 		let cartExistByThisUser = await Cart.findOne({ orderedBy: user._id }).exec();
@@ -23,11 +22,12 @@ exports.userCart = async (req, res) => {
 		if (cartExistByThisUser) {
 			cartExistByThisUser.remove();
 		}
+		let product = [];
 
 		for (let i = 0; i < cart.length; i++) {
 			let object = {};
-
 			object.product = cart[i]._id;
+			console.log(cart[i].count, 'COUNT');
 			object.product = cart[i].count;
 			object.product = cart[i].color;
 			let { price } = await Product.findById(cart[i]._id).select('price').exec();
@@ -38,19 +38,20 @@ exports.userCart = async (req, res) => {
 		let cartTotal;
 
 		for (let i = 0; i < product.length; i++) {
-			cartTotal = products[i].price * products[i].count;
+			cartTotal = cartTotal + product[i].price * product[i].count;
 		}
-
+		let total = parseFloat(cartTotal);
 		let newCart = await Cart({
 			product,
-			cartTotal,
+			total,
 			orderedBy : user._id,
 		}).save();
 
-		console.log(newCart);
+		console.log(newCart, 'HELLO');
 		res.json({ ok: true });
 	} catch (error) {
 		// console.log(err);
+		console.log(error);
 		res.status(400).send('Saving user cart failed');
 	}
 };
