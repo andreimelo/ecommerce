@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const Product = require('../models/product');
+const Cart = require('../models/cart');
 
 exports.list = async (req, res) => {
 	try {
@@ -7,5 +9,49 @@ exports.list = async (req, res) => {
 	} catch (error) {
 		// console.log(err);
 		res.status(400).send('Fetch list user accounts failed');
+	}
+};
+
+exports.userCart = async (req, res) => {
+	try {
+		const { cart } = req.body;
+		const user = await User.findOne({ email: req.user.email }).exec();
+
+		let cartExistByThisUser = await Cart.findOne({ orderedBy: user._id }).exec();
+
+		if (cartExistByThisUser) {
+			cartExistByThisUser.remove();
+		}
+		let product = [];
+
+		for (let i = 0; i < cart.length; i++) {
+			let object = {};
+			object.product = cart[i]._id;
+			console.log(cart[i].count, 'COUNT');
+			object.product = cart[i].count;
+			object.product = cart[i].color;
+			let { price } = await Product.findById(cart[i]._id).select('price').exec();
+			object.price = price;
+			product.push(object);
+		}
+
+		let cartTotal;
+
+		for (let i = 0; i < product.length; i++) {
+			cartTotal = cartTotal + product[i].price * product[i].count;
+		}
+		let total = parseFloat(cartTotal);
+		let newCart = await Cart({
+			product,
+			total,
+			orderedBy : user._id,
+		}).save();
+
+		console.log(newCart, 'HELLO');
+		res.json({ ok: true });
+	} catch (error) {
+		// console.log(err);
+		console.log(error);
+		res.status(400).send('Saving user cart failed');
 	}
 };

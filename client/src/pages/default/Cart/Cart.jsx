@@ -7,6 +7,7 @@ import { images } from '../../../resources/images';
 import SelectOption from '../../../library/components/SelectOption';
 import Input from '../../../library/components/Input';
 import { productOptions } from '../../../library/common/constants/selectOptions';
+import { saveUserCart } from '../../../library/services/user';
 import { type } from '../../../library/common/constants/types';
 import { removeToCart } from '../../../library/helpers/cart';
 
@@ -75,6 +76,18 @@ function Cart(){
 				type    : 'ADD_TO_CART',
 				payload : cart,
 			});
+		}
+	}
+
+	async function saveUserCartToDb(userCart, userToken){
+		try {
+			const result = await saveUserCart(userCart, userToken);
+			console.log(result);
+			if (result.ok) {
+				return history.push('/checkout');
+			}
+		} catch (error) {
+			alert(error);
 		}
 	}
 
@@ -187,7 +200,7 @@ function Cart(){
 							{
 								user ? <button
 									className='w-full text-center font-semibold text-white bg-black p-3'
-									onClick={() => history.push('/checkout')}
+									onClick={() => saveUserCartToDb(cart, user.token)}
 								>
 									Proceed to Checkout
 								</button> :

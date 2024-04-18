@@ -15,3 +15,20 @@ export async function getUserAccounts(token){
 
 	return data;
 }
+
+export async function saveUserCart(cart, token){
+	const options = {
+		method  : 'POST',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json',
+			authToken      : token || '',
+		},
+		body    : JSON.stringify({ cart }),
+	};
+	const result = await fetch(`${env.base_uri}/user/save-cart`, options);
+
+	const data = await result.json();
+
+	return data;
+}
