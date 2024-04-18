@@ -13,6 +13,7 @@ import { getUserCart } from '../../../library/services/user';
 const Checkout = () => {
 	const { cart, user } = useSelector((state) => ({ ...state }));
 	// const dispatch = useDispatch();
+	const subTotal = cart.reduce((acc, curr) => acc + curr.count, 0);
 	const [
 		total,
 		setTotal,
@@ -110,7 +111,7 @@ const Checkout = () => {
 					<div className='flex justify-between text-gray-800 p-1'>
 						<div>
 							Subtotal
-							<span className='bg-gray-100 text-xs mx-1 p-1 rounded'>{`${cart.length} item`}</span>
+							<span className='bg-gray-100 text-xs mx-1 p-1 rounded'>{`${subTotal} item`}</span>
 						</div>
 						<div className='text-sm'>{`$${total}`}</div>
 					</div>

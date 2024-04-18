@@ -13,7 +13,6 @@ import { removeToCart } from '../../../library/helpers/cart';
 
 function Cart(){
 	const { user, cart } = useSelector((state) => ({ ...state }));
-	console.log(cart);
 	const total = cart.reduce((acc, curr) => acc + curr.price * curr.count, 0);
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -180,13 +179,26 @@ function Cart(){
 				<div className='col-span-1 my-5 h-fit p-4 border-solid border'>
 					<label className='text-l font-semibold'>Order Summary</label>
 					<hr className='my-2' />
-					<div className='flex justify-between text-gray-800 p-1'>
+					{!cart.length && (
+						<div className='flex justify-between font-semibold text-gray-800 p-1'>
+							<span>Product</span>
+							<div className='font-normal text-sm'>0</div>
+						</div>
+					)}
+					{cart.map((item) => (
+						<div className='flex justify-between font-semibold text-gray-800 p-1'>
+							<span>{item.title}</span>
+							<span className='bg-gray-100 font-normal text-xs mx-1 p-1 rounded'>{`${item.count} item`}</span>
+							<div className='font-normal text-sm'>${item.price}</div>
+						</div>
+					))}
+					{/* <div className='flex justify-between text-gray-800 p-1'>
 						<div>
-							Subtotal
+							<span className='text-m'>Subtotal</span>
 							<span className='bg-gray-100 text-xs mx-1 p-1 rounded'>{`${cart.length} item`}</span>
 						</div>
 						<div className='text-sm'>{`$${total}`}</div>
-					</div>
+					</div> */}
 					<hr className='my-2' />
 					<div className='flex justify-between font-semibold text-gray-800 p-1'>
 						<div>Estimated total</div>
