@@ -11,8 +11,7 @@ export const addToCart = (product, dispatch) => {
 		if (existingProductIndex !== -1) {
 			// Update count and price of existing product
 			cart[existingProductIndex].count++;
-			cart[existingProductIndex].price =
-				product.price * cart[existingProductIndex].count;
+			cart[existingProductIndex].price = product.price;
 		}
 		else {
 			// Add the product to the cart with count = 1

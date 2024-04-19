@@ -22,36 +22,53 @@ exports.userCart = async (req, res) => {
 		if (cartExistByThisUser) {
 			cartExistByThisUser.remove();
 		}
-		let product = [];
+		let products = [];
 
 		for (let i = 0; i < cart.length; i++) {
 			let object = {};
 			object.product = cart[i]._id;
-			console.log(cart[i].count, 'COUNT');
-			object.product = cart[i].count;
-			object.product = cart[i].color;
+			object.count = cart[i].count;
+			object.color = cart[i].color;
 			let { price } = await Product.findById(cart[i]._id).select('price').exec();
 			object.price = price;
-			product.push(object);
+			products.push(object);
+		}
+		let cartTotal = 0;
+
+		for (let i = 0; i < products.length; i++) {
+			cartTotal = cartTotal + products[i].price * products[i].count;
 		}
 
-		let cartTotal;
-
-		for (let i = 0; i < product.length; i++) {
-			cartTotal = cartTotal + product[i].price * product[i].count;
-		}
-		let total = parseFloat(cartTotal);
 		let newCart = await Cart({
-			product,
-			total,
+			products,
+			cartTotal,
 			orderedBy : user._id,
 		}).save();
+		console.log(newCart, 'save');
 
-		console.log(newCart, 'HELLO');
 		res.json({ ok: true });
 	} catch (error) {
 		// console.log(err);
 		console.log(error);
 		res.status(400).send('Saving user cart failed');
+	}
+};
+
+exports.getUserCart = async (req, res) => {
+	try {
+		const user = await User.findOne({ email: req.user.email }).exec();
+		let cart = await Cart.findOne({ orderedBy: user._id })
+			.populate('products.product', '_id title price totalDiscount')
+			.exec();
+		console.log(cart);
+		const { products, cartTotal, totalDiscount } = cart;
+		res.json({
+			products,
+			cartTotal,
+			totalDiscount,
+		});
+	} catch (error) {
+		console.log(error);
+		res.status(400).send('Get user cart failed');
 	}
 };
