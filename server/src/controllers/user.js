@@ -60,7 +60,6 @@ exports.getUserCart = async (req, res) => {
 		let cart = await Cart.findOne({ orderedBy: user._id })
 			.populate('products.product', '_id title price totalDiscount')
 			.exec();
-		console.log(cart);
 		const { products, cartTotal, totalDiscount } = cart;
 		res.json({
 			products,
