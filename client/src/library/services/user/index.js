@@ -48,3 +48,21 @@ export async function getUserCart(token){
 
 	return data;
 }
+
+//
+export async function saveUserAddress(userDetails, token){
+	const options = {
+		method  : 'POST',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json',
+			authToken      : token || '',
+		},
+		body    : JSON.stringify({ ...userDetails }),
+	};
+	const result = await fetch(`${env.base_uri}/user/address`, options);
+
+	const data = await result.json();
+
+	return data;
+}

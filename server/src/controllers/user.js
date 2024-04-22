@@ -71,3 +71,24 @@ exports.getUserCart = async (req, res) => {
 		res.status(400).send('Get user cart failed');
 	}
 };
+
+exports.saveAddress = async (req, res) => {
+	try {
+		const userSaveAddress = await User.findOneAndUpdate(
+			{
+				email : req.user.email,
+			},
+			{
+				address1 : req.user.address1,
+				address2 : req.user.address2,
+				state    : req.user.state,
+				city     : req.user.city,
+				zip_code : req.user.zip_code,
+			},
+		).exec();
+		res.json({ ok: true });
+	} catch (error) {
+		console.log(error);
+		res.status(400).send('Save user details failed');
+	}
+};

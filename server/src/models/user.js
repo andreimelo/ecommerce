@@ -3,21 +3,25 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema(
 	{
-		name    : String,
-		email   : {
+		name     : String,
+		email    : {
 			type     : String,
 			required : true,
 			index    : true,
 		},
-		role    : {
+		role     : {
 			type    : String,
 			default : 'subscriber',
 		},
-		cart    : {
+		cart     : {
 			type    : Array,
 			default : [],
 		},
-		address : String,
+		address1 : String,
+		address2 : String,
+		state    : String,
+		city     : String,
+		zip_code : String,
 		// wishlist : [
 		// 	{ type: ObjectId, ref: 'Product' },
 		// ],
