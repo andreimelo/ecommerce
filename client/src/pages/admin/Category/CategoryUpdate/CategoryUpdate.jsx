@@ -18,7 +18,7 @@ const CategoryUpdate = ({ role, match }) => {
 	async function fetchCategoryBySlug(){
 		try {
 			const result = await getCategory(slug);
-			setValues({ name: result.name });
+			setValues({ name: result.category.name });
 		} catch (err) {
 			alert(err);
 		}

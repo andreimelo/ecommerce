@@ -50,7 +50,7 @@ const SubCategoryUpdate = ({ role, match, history }) => {
 	async function fetchSubCategory(){
 		try {
 			const result = await getSubCategory(slug);
-			setValues({ ...result });
+			setValues({ ...result.subCategory });
 		} catch (err) {
 			alert(err);
 		}

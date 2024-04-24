@@ -102,6 +102,23 @@ const Category = ({ role }) => {
 						onClick={handleRemove}
 						searchValue={search}
 						linkTo={'/admin/category'}
+						thead={
+							categories.length > 0 && (
+								<thead className='text-xs text-white uppercase bg-gray-900 dark:text-white'>
+									<tr>
+										<th scope='col' class='px-6 py-3'>
+											Name
+										</th>
+										<th scope='col' class='px-6 py-3'>
+											Delete
+										</th>
+										<th scope='col' class='px-6 py-3'>
+											Edit
+										</th>
+									</tr>
+								</thead>
+							)
+						}
 						category
 					/>
 				</div>
