@@ -66,7 +66,6 @@ const Coupon = ({ role }) => {
 
 	useEffect(
 		() => {
-			// eslint-disable-next-line
 			fetchCouponList(user.token);
 		},
 		[
