@@ -13,6 +13,7 @@ const Table = ({
 	linkTo,
 	category,
 	thead,
+	tbody,
 }) => {
 	return (
 		<div className={tableContainerClass}>
@@ -38,6 +39,7 @@ const Table = ({
 							</tr>
 						</tbody>
 					))}
+				{tbody}
 			</table>
 		</div>
 	);
@@ -53,6 +55,7 @@ Table.propTypes = {
 	linkTo              : PropTypes.string,
 	category            : PropTypes.bool,
 	thead               : PropTypes.any,
+	tbody               : PropTypes.any,
 };
 
 Table.defaultProps = {
@@ -65,6 +68,7 @@ Table.defaultProps = {
 	linkTo              : '',
 	category            : false,
 	thead               : '',
+	tbody               : '',
 };
 
 export default React.memo(Table);

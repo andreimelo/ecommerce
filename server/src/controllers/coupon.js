@@ -9,7 +9,7 @@ exports.create = async (req, res) => {
 			ok   : true,
 		});
 	} catch (error) {
-		res.status(400).json(err);
+		res.status(400).json(error);
 	}
 };
 
