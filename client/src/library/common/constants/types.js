@@ -6,6 +6,7 @@ export const type = {
 		default  : 'text',
 		search   : 'search',
 		number   : 'number',
-		checkbox   : 'checkbox',
+		checkbox : 'checkbox',
+		date     : 'date',
 	},
 };
