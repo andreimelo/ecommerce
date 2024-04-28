@@ -43,7 +43,7 @@ const Checkout = () => {
 			async function fetchUserCart(){
 				try {
 					const result = await getUserCart(user.token);
-					console.log(result);
+					// console.log(result);
 					setTotal(result.cartTotal);
 				} catch (error) {
 					alert(error);
@@ -62,8 +62,9 @@ const Checkout = () => {
 			if (result.err) {
 				alert(result.err);
 			}
-			setTotalDiscount(result.totalDiscount);
-			console.log(totalDiscount);
+			setTotalDiscount(result);
+			console.log(result);
+			// console.log(totalDiscount);
 		} catch (error) {
 			alert(error);
 		}
@@ -190,12 +191,32 @@ const Checkout = () => {
 							Subtotal
 							<span className='bg-gray-100 text-xs mx-1 p-1 rounded'>{`${subTotal} item`}</span>
 						</div>
-						<div className='text-sm'>{`$${total}`}</div>
+						<div
+							className={
+
+									totalDiscount.discount ? 'line-through text-sm' :
+									'text-sm'
+							}
+						>{`$${total}`}</div>
 					</div>
+					{totalDiscount &&
+					totalDiscount.discount && (
+						<div className='flex justify-between text-xs text-gray-800 p-1'>
+							<div>
+								Discount
+								<span className='bg-gray-100 mx-1 p-1 rounded'>{`${totalDiscount.discount}%`}</span>
+							</div>
+							{/* <div className='text-sm'>{`-${totalDiscount.discount}%`}</div> */}
+						</div>
+					)}
 					<hr className='my-2' />
 					<div className='flex justify-between font-semibold text-gray-800 p-1'>
 						<div>Estimated total</div>
-						<div className='text-sm'>{`$${total}`}</div>
+						<div>
+							{
+								totalDiscount.discount ? totalDiscount.totalDiscount :
+								total}
+						</div>
 					</div>
 					<div className='text-gray-500 text-xs p-1'>
 						Tax calculated during checkout

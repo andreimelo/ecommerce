@@ -112,6 +112,7 @@ exports.applyCouponToCart = async (req, res) => {
 		})
 			.populate('products.product', '_id title price')
 			.exec();
+
 		console.log(cartTotal, ' cartTotal');
 
 		let totalDiscount = (cartTotal - cartTotal * validCoupon.discount / 100).toFixed(
@@ -122,6 +123,7 @@ exports.applyCouponToCart = async (req, res) => {
 
 		res.json({
 			totalDiscount,
+			discount      : validCoupon.discount,
 			ok            : true,
 		});
 	} catch (error) {
