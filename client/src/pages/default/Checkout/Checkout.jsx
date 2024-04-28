@@ -8,6 +8,7 @@ import Input from '../../../library/components/Input';
 import SelectOption from '../../../library/components/SelectOption';
 import { getUserCart, saveUserAddress } from '../../../library/services/user';
 import useInput from '../../../library/hooks/useInput';
+import { applyCoupon } from '../../../library/services/coupon';
 // import { type } from '../../../library/common/constants/types';
 // import { removeToCart } from '../../../library/helpers/cart';
 
@@ -19,9 +20,17 @@ const Checkout = () => {
 		handleChange,
 		// errors,
 		handleSubmit,
-	} = useInput(handleSubmitSaveAddress, () => {
+	} = useInput(handleSaveAddress, () => {
 		return {};
 	});
+	const [
+		coupon,
+		setCoupon,
+	] = useState('');
+	const [
+		totalDiscount,
+		setTotalDiscount,
+	] = useState('');
 	const { address1, address2, state, city, zip_code } = values;
 	const subTotal = cart.reduce((acc, curr) => acc + curr.count, 0);
 	const [
@@ -47,7 +56,20 @@ const Checkout = () => {
 		],
 	);
 
-	async function handleSubmitSaveAddress(){
+	async function handleApplyCoupon(){
+		try {
+			const result = await applyCoupon(coupon, user.token);
+			if (result.err) {
+				alert(result.err);
+			}
+			setTotalDiscount(result.totalDiscount);
+			console.log(totalDiscount);
+		} catch (error) {
+			alert(error);
+		}
+	}
+
+	async function handleSaveAddress(){
 		try {
 			await saveUserAddress(values, user.token);
 			alert('Successfully save');
@@ -181,11 +203,19 @@ const Checkout = () => {
 					<hr className='my-2' />
 					<div className='p-1'>
 						<div className='mb-3 font-semibold text-gray-800'>Coupon</div>
-						<div className='flex-none'>
+						<div className='flex '>
 							<Input
 								variant='border p-2 w-full text-sm'
+								name='coupon'
+								onChange={(event) => setCoupon(event.target.value)}
 								placeHolder='Enter coupon'
 							/>
+							<button
+								onClick={() => handleApplyCoupon()}
+								className='w-full text-center font-semibold text-white bg-black p-3'
+							>
+								Apply
+							</button>
 						</div>
 					</div>
 					<div className='my-3 p-1'>

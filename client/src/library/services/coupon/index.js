@@ -48,3 +48,20 @@ export async function getCoupons(token){
 
 	return data;
 }
+
+export async function applyCoupon(coupon, token){
+	const options = {
+		method  : 'POST',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json',
+			authToken      : token || '',
+		},
+		body    : JSON.stringify({ coupon }),
+	};
+	const result = await fetch(`${env.base_uri}/user/cart/coupon`, options);
+
+	const data = await result.json();
+
+	return data;
+}

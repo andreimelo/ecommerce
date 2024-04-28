@@ -105,17 +105,26 @@ exports.applyCouponToCart = async (req, res) => {
 		}
 		console.log(validCoupon, 'VALID COUPON');
 
+		const user = await User.findOne({ email: req.user.email }).exec();
+
 		let { cartTotal } = await Cart.findOne({
 			orderedBy : user._id,
 		})
 			.populate('products.product', '_id title price')
 			.exec();
+		console.log(cartTotal, ' cartTotal');
 
 		let totalDiscount = (cartTotal - cartTotal * validCoupon.discount / 100).toFixed(
 			2,
 		);
+
 		Cart.findOneAndUpdate({ orderedBy: user._id }, { totalDiscount }, { new: true });
 
-		res.json(totalAfterDiscount);
-	} catch (error) {}
+		res.json({
+			totalDiscount,
+			ok            : true,
+		});
+	} catch (error) {
+		res.status(400).send('Apply coupon failed');
+	}
 };
