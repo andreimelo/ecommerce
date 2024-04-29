@@ -94,7 +94,10 @@ function Cart(){
 		<div className='w-full max-w-screen-xl mx-auto'>
 			<section className='grid grid-cols-3 gap-3 gap-4 my-10'>
 				<div className='col-span-2'>
-					<label className='text-2xl font-semibold'>My Cart</label>
+					{cart &&
+					cart.length !== 0 && (
+						<label className='text-2xl font-semibold'>My Cart</label>
+					)}
 					{cart &&
 					cart.length <= 0 && (
 						<div className='border my-5 text-center text-2xl font-semibold p-10'>

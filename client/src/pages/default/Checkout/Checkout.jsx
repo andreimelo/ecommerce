@@ -8,6 +8,7 @@ import Input from '../../../library/components/Input';
 import SelectOption from '../../../library/components/SelectOption';
 import { getUserCart, saveUserAddress } from '../../../library/services/user';
 import useInput from '../../../library/hooks/useInput';
+import { applyCoupon } from '../../../library/services/coupon';
 // import { type } from '../../../library/common/constants/types';
 // import { removeToCart } from '../../../library/helpers/cart';
 
@@ -19,9 +20,17 @@ const Checkout = () => {
 		handleChange,
 		// errors,
 		handleSubmit,
-	} = useInput(handleSubmitSaveAddress, () => {
+	} = useInput(handleSaveAddress, () => {
 		return {};
 	});
+	const [
+		coupon,
+		setCoupon,
+	] = useState('');
+	const [
+		totalDiscount,
+		setTotalDiscount,
+	] = useState('');
 	const { address1, address2, state, city, zip_code } = values;
 	const subTotal = cart.reduce((acc, curr) => acc + curr.count, 0);
 	const [
@@ -34,7 +43,7 @@ const Checkout = () => {
 			async function fetchUserCart(){
 				try {
 					const result = await getUserCart(user.token);
-					console.log(result);
+					// console.log(result);
 					setTotal(result.cartTotal);
 				} catch (error) {
 					alert(error);
@@ -47,7 +56,21 @@ const Checkout = () => {
 		],
 	);
 
-	async function handleSubmitSaveAddress(){
+	async function handleApplyCoupon(){
+		try {
+			const result = await applyCoupon(coupon, user.token);
+			if (result.err) {
+				alert(result.err);
+			}
+			setTotalDiscount(result);
+			console.log(result);
+			// console.log(totalDiscount);
+		} catch (error) {
+			alert(error);
+		}
+	}
+
+	async function handleSaveAddress(){
 		try {
 			await saveUserAddress(values, user.token);
 			alert('Successfully save');
@@ -168,12 +191,32 @@ const Checkout = () => {
 							Subtotal
 							<span className='bg-gray-100 text-xs mx-1 p-1 rounded'>{`${subTotal} item`}</span>
 						</div>
-						<div className='text-sm'>{`$${total}`}</div>
+						<div
+							className={
+
+									totalDiscount.discount ? 'line-through text-sm' :
+									'text-sm'
+							}
+						>{`$${total}`}</div>
 					</div>
+					{totalDiscount &&
+					totalDiscount.discount && (
+						<div className='flex justify-between text-xs text-gray-800 p-1'>
+							<div>
+								Discount
+								<span className='bg-gray-100 mx-1 p-1 rounded'>{`${totalDiscount.discount}%`}</span>
+							</div>
+							{/* <div className='text-sm'>{`-${totalDiscount.discount}%`}</div> */}
+						</div>
+					)}
 					<hr className='my-2' />
 					<div className='flex justify-between font-semibold text-gray-800 p-1'>
 						<div>Estimated total</div>
-						<div className='text-sm'>{`$${total}`}</div>
+						<div>
+							{
+								totalDiscount.discount ? totalDiscount.totalDiscount :
+								total}
+						</div>
 					</div>
 					<div className='text-gray-500 text-xs p-1'>
 						Tax calculated during checkout
@@ -181,11 +224,19 @@ const Checkout = () => {
 					<hr className='my-2' />
 					<div className='p-1'>
 						<div className='mb-3 font-semibold text-gray-800'>Coupon</div>
-						<div className='flex-none'>
+						<div className='flex '>
 							<Input
 								variant='border p-2 w-full text-sm'
+								name='coupon'
+								onChange={(event) => setCoupon(event.target.value)}
 								placeHolder='Enter coupon'
 							/>
+							<button
+								onClick={() => handleApplyCoupon()}
+								className='w-full text-center font-semibold text-white bg-black p-3'
+							>
+								Apply
+							</button>
 						</div>
 					</div>
 					<div className='my-3 p-1'>
