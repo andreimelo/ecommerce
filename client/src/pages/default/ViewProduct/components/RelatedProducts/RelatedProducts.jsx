@@ -19,9 +19,10 @@ const RelatedProducts = ({ data, loading, numberOfStar, showAverageRating }) => 
 						data.map((item) => (
 							<Card
 								containerClass={
-									'relative my-5 flex w-full max-w-xs flex-col'
+									'relative my-5 flex w-full max-w-xs flex-col border h-96'
 								}
-								imgContainerClass='relative flex h-60 overflow-hidden'
+								imgClass='object-contain bg-gray-100'
+								imgContainerClass='relative flex overflow-hidden'
 								imgSrc={item.images}
 								title={item.title}
 								description={item.description}
