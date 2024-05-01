@@ -1,26 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-// import { Link } from 'react-router-dom/cjs/react-router-dom';
-// import Modal from '../../../library/components/Modal';
-// import { images } from '../../../resources/images';
-// import SelectOption from '../../../library/components/SelectOption';
 import Input from '../../../library/components/Input';
 import SelectOption from '../../../library/components/SelectOption';
 import { getUserCart, saveUserAddress } from '../../../library/services/user';
 import useInput from '../../../library/hooks/useInput';
 import { applyCoupon } from '../../../library/services/coupon';
-// import { type } from '../../../library/common/constants/types';
-// import { removeToCart } from '../../../library/helpers/cart';
 
 const Checkout = () => {
 	const { cart, user } = useSelector((state) => ({ ...state }));
-	// const dispatch = useDispatch();
-	const {
-		values,
-		handleChange,
-		// errors,
-		handleSubmit,
-	} = useInput(handleSaveAddress, () => {
+	const { values, handleChange, handleSubmit } = useInput(handleSaveAddress, () => {
 		return {};
 	});
 	const [
@@ -43,7 +31,6 @@ const Checkout = () => {
 			async function fetchUserCart(){
 				try {
 					const result = await getUserCart(user.token);
-					// console.log(result);
 					setTotal(result.cartTotal);
 				} catch (error) {
 					alert(error);
@@ -206,7 +193,6 @@ const Checkout = () => {
 								Discount
 								<span className='bg-gray-100 mx-1 p-1 rounded'>{`${totalDiscount.discount}%`}</span>
 							</div>
-							{/* <div className='text-sm'>{`-${totalDiscount.discount}%`}</div> */}
 						</div>
 					)}
 					<hr className='my-2' />
@@ -244,27 +230,6 @@ const Checkout = () => {
 							Place order
 						</button>
 					</div>
-					{/* {cart.length !== 0 && (
-						<div className='my-2 p-1'>
-							{
-								user ? <button
-									className='w-full text-center font-semibold text-white bg-black p-3'
-									onClick={() => history.push('/checkout')}
-								>
-									Proceed to Checkout
-								</button> :
-								<Link
-									to={{
-										pathname : '/login',
-										state    : { from: 'cart' },
-									}}
-								>
-									<button className='w-full text-center font-semibold text-white bg-black p-3'>
-										Login to Checkout
-									</button>
-								</Link>}
-						</div>
-					)} */}
 				</div>
 			</section>
 		</div>
