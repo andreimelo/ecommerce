@@ -32,4 +32,9 @@ module.exports = {
 			secret  : process.env.CLOUDINARY_API_SECRET,
 		},
 	},
+	stripe     : {
+		credentials : {
+			secret : process.env.STRIPE_API_SECRET,
+		},
+	},
 };
