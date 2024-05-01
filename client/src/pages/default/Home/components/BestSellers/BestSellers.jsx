@@ -53,7 +53,11 @@ const BestSellers = () => {
 						{dataResult &&
 							dataResult.map((item) => (
 								<Card
-									imgContainerClass='relative flex h-60 overflow-hidden rounded-xl'
+									containerClass={
+										'relative my-5 flex w-full max-w-xs flex-col border h-96'
+									}
+									imgClass='object-contain bg-gray-100'
+									imgContainerClass='relative flex overflow-hidden'
 									imgSrc={item.images}
 									title={item.title}
 									description={item.description}
