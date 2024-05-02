@@ -64,7 +64,10 @@ const Checkout = lazy(async () => {
 	const module = await import('../../pages/default/Checkout');
 	return module;
 });
-
+const Payment = lazy(async () => {
+	const module = await import('../../pages/default/Payment');
+	return module;
+});
 // Admin pages
 const AdminDashboard = lazy(async () => {
 	const module = await import('../../pages/admin/AdminDashboard');
@@ -231,6 +234,10 @@ const InitialRoutes = ({ store }) => {
 				element : Checkout,
 			},
 			{
+				path    : '/payment',
+				element : Payment,
+			},
+			{
 				path    : '*',
 				element : Error404,
 			},
@@ -285,6 +292,10 @@ const InitialRoutes = ({ store }) => {
 		{
 			path    : '/checkout',
 			element : Checkout,
+		},
+		{
+			path    : '/payment',
+			element : Payment,
 		},
 		{
 			path    : '*',

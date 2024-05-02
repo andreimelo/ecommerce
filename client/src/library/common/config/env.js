@@ -17,6 +17,11 @@ const env = {
 			measurement_id      : process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 		},
 	},
+	stripe            : {
+		credentials : {
+			api_key : process.env.REACT_APP_STRIPE_API_KEY,
+		},
+	},
 	under_maintenance : process.env.REACT_APP_UNDER_MAINTENANCE,
 };
 

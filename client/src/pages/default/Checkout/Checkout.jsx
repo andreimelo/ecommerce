@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import Input from '../../../library/components/Input';
 import SelectOption from '../../../library/components/SelectOption';
 import { getUserCart, saveUserAddress } from '../../../library/services/user';
@@ -7,6 +8,8 @@ import useInput from '../../../library/hooks/useInput';
 import { applyCoupon } from '../../../library/services/coupon';
 
 const Checkout = () => {
+	const dispatch = useDispatch();
+	const history = useHistory();
 	const { cart, user } = useSelector((state) => ({ ...state }));
 	const { values, handleChange, handleSubmit } = useInput(handleSaveAddress, () => {
 		return {};
@@ -30,16 +33,31 @@ const Checkout = () => {
 		() => {
 			async function fetchUserCart(){
 				try {
-					const result = await getUserCart(user.token);
-					setTotal(result.cartTotal);
+					if (cart.length > 0) {
+						const result = await getUserCart(user.token);
+						setTotal(result.cartTotal);
+					}
 				} catch (error) {
 					alert(error);
 				}
 			}
 			fetchUserCart();
+
+			// if page is refresh coupon state should be false and redirect to home
+			if (!totalDiscount && cart.length === 0) {
+				dispatch({
+					type    : 'COUPON_APPLIED',
+					payload : false,
+				});
+				return history.push('/');
+			}
 		},
 		[
 			user.token,
+			totalDiscount,
+			cart.length,
+			dispatch,
+			history,
 		],
 	);
 
@@ -47,9 +65,17 @@ const Checkout = () => {
 		try {
 			const result = await applyCoupon(coupon, user.token);
 			if (result.err) {
+				dispatch({
+					type    : 'COUPON_APPLIED',
+					payload : false,
+				});
 				alert(result.err);
 			}
 			setTotalDiscount(result);
+			dispatch({
+				type    : 'COUPON_APPLIED',
+				payload : true,
+			});
 			console.log(result);
 			// console.log(totalDiscount);
 		} catch (error) {
@@ -226,7 +252,10 @@ const Checkout = () => {
 						</div>
 					</div>
 					<div className='my-3 p-1'>
-						<button className='w-full text-center font-semibold text-white bg-black p-3'>
+						<button
+							className='w-full text-center font-semibold text-white bg-black p-3'
+							onClick={() => history.push('/payment')}
+						>
 							Place order
 						</button>
 					</div>
