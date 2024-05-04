@@ -119,7 +119,11 @@ exports.applyCouponToCart = async (req, res) => {
 			2,
 		);
 
-		Cart.findOneAndUpdate({ orderedBy: user._id }, { totalDiscount }, { new: true });
+		Cart.findOneAndUpdate(
+			{ orderedBy: user._id },
+			{ totalDiscount },
+			{ new: true },
+		).exec();
 
 		res.json({
 			totalDiscount,
