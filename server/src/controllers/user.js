@@ -2,6 +2,7 @@ const User = require('../models/user');
 const Product = require('../models/product');
 const Cart = require('../models/cart');
 const Coupon = require('../models/coupon');
+const Order = require('../models/order');
 
 exports.list = async (req, res) => {
 	try {
@@ -132,5 +133,27 @@ exports.applyCouponToCart = async (req, res) => {
 		});
 	} catch (error) {
 		res.status(400).send('Apply coupon failed');
+	}
+};
+
+exports.createOrder = async (req, res) => {
+	try {
+		const { paymentIntent } = req.body.stripeResponse;
+		const user = await User.findOne({ email: req.user.email }).exec();
+		let { products } = await Cart.findOne({ orderedBy: user._id }).exec();
+
+		let newOrder = await new Order({
+			products,
+			paymentIntent,
+			orderedBy     : user._id,
+		}).save();
+		console.log(newOrder, 'SAVE NEW ORDER');
+
+		res.json({
+			ok : true,
+		});
+	} catch (error) {
+		console.log(error);
+		res.status(400).send('Create order failed');
 	}
 };
