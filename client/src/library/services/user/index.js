@@ -83,3 +83,19 @@ export async function createOrder(stripeResponse, token){
 
 	return data;
 }
+
+export async function emptyCart(token){
+	const options = {
+		method  : 'DELETE',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json',
+			authToken      : token || '',
+		},
+	};
+	const result = await fetch(`${env.base_uri}/user/save-cart`, options);
+
+	const data = await result.json();
+
+	return data;
+}

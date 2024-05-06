@@ -157,3 +157,11 @@ exports.createOrder = async (req, res) => {
 		res.status(400).send('Create order failed');
 	}
 };
+
+exports.emptyCart = async (req, res) => {
+	const user = await User.findOne({ email: req.user.email }).exec();
+
+	const cart = await Cart.findOneAndRemove({ orderedBy: user._id }).exec();
+
+	res.json(cart);
+};

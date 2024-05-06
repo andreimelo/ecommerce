@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { useSelector } from 'react-redux';
 import { createPaymentIntent } from '../../../../library/services/stripe';
 import { style } from './constants/cart';
+import { removeFromStorage } from '../../../../library/helpers/storage';
 import '../component/stripe.css';
+import { createOrder, emptyCart } from '../../../../library/services/user';
 
 const StripeCheckout = () => {
 	// const history = useHistory();
-	// const dispatch = useDispatch();
+	const dispatch = useDispatch();
 	const { user, coupon } = useSelector((state) => ({ ...state }));
 	const [
 		success,
@@ -72,6 +75,22 @@ const StripeCheckout = () => {
 		}
 		else {
 			// console.log(JSON.stringify(payload, null, 4));
+			const result = await createOrder(payload, user.token);
+			if (result.ok) {
+				// empty
+				if (typeof window !== 'undefined') {
+					removeFromStorage('cart');
+					dispatch({
+						type    : 'ADD_TO_CART',
+						payload : [],
+					});
+					dispatch({
+						type    : 'COUPON_APPLIED',
+						payload : false,
+					});
+					await emptyCart(user.token);
+				}
+			}
 			setError(null);
 			setProcessing(false);
 			setSuccess(true);
