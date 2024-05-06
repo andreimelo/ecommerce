@@ -44,7 +44,7 @@ const ViewProduct = ({ match }) => {
 		setRelatedProduct,
 	] = useState([]);
 	const { average, length } = showAverageRating(product) || {};
-	const { title, description, brand, images, _id, ratings } = product || {};
+	const { title, description, brand, images, _id, ratings, quantity } = product || {};
 
 	async function fetchProductBySlug(){
 		try {
@@ -128,13 +128,20 @@ const ViewProduct = ({ match }) => {
 							</div>
 							<p className='mb-5'>{description}</p>
 							<ProductListItem data={product} />
-							<button
-								type='button'
-								className='font-semibold text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
-								onClick={() => addToCart(product, dispatch)}
-							>
-								Add to Cart
-							</button>
+							{
+								quantity && quantity > 0 ? <button
+									type='button'
+									className='font-semibold text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
+									onClick={() => addToCart(product, dispatch)}
+								>
+									Add to Cart
+								</button> :
+								<span
+									type='button'
+									className='font-semibold text-white bg-gray-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
+								>
+									Sold out
+								</span>}
 							<button
 								type='button'
 								className='font-semibold text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
