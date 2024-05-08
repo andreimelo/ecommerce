@@ -73,6 +73,7 @@ const SubCategory = ({ match }) => {
 										isProductAndCart
 										star={numberOfStar}
 										rating={showAverageRating(item)}
+										quantity={item.quantity}
 										handleAddToCart={() => addToCart(item, dispatch)}
 									/>
 								))}

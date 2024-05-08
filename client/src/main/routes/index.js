@@ -44,8 +44,12 @@ const Cart = lazy(async () => {
 	const module = await import('../../pages/default/Cart');
 	return module;
 });
-const History = lazy(async () => {
-	const module = await import('../../pages/user/History');
+const Orders = lazy(async () => {
+	const module = await import('../../pages/user/Orders');
+	return module;
+});
+const Profile = lazy(async () => {
+	const module = await import('../../pages/user/Profile');
 	return module;
 });
 const ShopByCategory = lazy(async () => {
@@ -198,8 +202,12 @@ const InitialRoutes = ({ store }) => {
 				element : Home,
 			},
 			{
-				path    : '/history',
-				element : History,
+				path    : '/user/orders',
+				element : Orders,
+			},
+			{
+				path    : '/user/profile',
+				element : Profile,
 			},
 			{
 				path    : '/product/:slug',

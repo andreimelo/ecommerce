@@ -149,6 +149,24 @@ exports.createOrder = async (req, res) => {
 		}).save();
 		console.log(newOrder, 'SAVE NEW ORDER');
 
+		let bulkOption = products.map((item) => {
+			return {
+				updateOne : {
+					filter : {
+						_id : item.product._id,
+					},
+					update : {
+						$inc : {
+							quantity : -item.count,
+							sold     : +item.count,
+						},
+					},
+				},
+			};
+		});
+		let updatedQuantity = await Product.bulkWrite(bulkOption, {});
+
+		console.log(updatedQuantity);
 		res.json({
 			ok : true,
 		});
@@ -156,4 +174,24 @@ exports.createOrder = async (req, res) => {
 		console.log(error);
 		res.status(400).send('Create order failed');
 	}
+};
+
+exports.emptyCart = async (req, res) => {
+	const user = await User.findOne({ email: req.user.email }).exec();
+
+	const cart = await Cart.findOneAndRemove({ orderedBy: user._id }).exec();
+
+	res.json(cart);
+};
+
+exports.orders = async (req, res) => {
+	let user = await User.findOne({ email: req.user.email }).exec();
+	let data = await Order.find({ orderedBy: user._id })
+		.populate('products.product')
+		.exec();
+
+	res.json({
+		ok   : true,
+		data,
+	});
 };

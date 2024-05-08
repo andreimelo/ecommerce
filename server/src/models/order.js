@@ -16,7 +16,7 @@ const orderSchema = new mongoose.Schema(
 		paymentIntent : {},
 		orderStatus   : {
 			type    : String,
-			default : 'Not Processed',
+			default : 'Not yet processed',
 			enum    : [
 				'Not yet processed',
 				'Ongoing process',

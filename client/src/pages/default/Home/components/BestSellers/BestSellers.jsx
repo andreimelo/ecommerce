@@ -67,6 +67,7 @@ const BestSellers = () => {
 									price={`$${item.price}`}
 									star={numberOfStar}
 									rating={showAverageRating(item)}
+									quantity={item.quantity}
 									handleAddToCart={() => addToCart(item, dispatch)}
 								/>
 							))}

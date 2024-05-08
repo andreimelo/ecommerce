@@ -22,6 +22,7 @@ const Card = ({
 	rating,
 	price,
 	handleAddToCart,
+	quantity,
 }) => {
 	return (
 		<div className={containerClass}>
@@ -72,13 +73,17 @@ const Card = ({
 							<div>View Product</div>
 						</div>
 					</Link>
-					<div
-						className='flex flex-col items-center text-xs cursor-pointer'
-						onClick={handleAddToCart}
-					>
-						{icons.cardSolid}
-						Add to Cart
-					</div>
+					{
+						quantity > 0 ? <div
+							className='flex flex-col items-center text-xs cursor-pointer'
+							onClick={handleAddToCart}
+						>
+							{icons.cardSolid}
+							Add to Cart
+						</div> :
+						<div className='flex flex-col items-center text-xs'>
+							Sold out
+						</div>}
 				</div>
 			)}
 			{isDeleteAndEdit && (
@@ -111,6 +116,7 @@ Card.propTypes = {
 	rating            : PropTypes.number,
 	price             : PropTypes.string,
 	handleAddToCart   : PropTypes.any,
+	quantity          : PropTypes.number,
 };
 
 Card.defaultProps = {
@@ -130,6 +136,7 @@ Card.defaultProps = {
 	rating            : 0,
 	price             : '0',
 	handleAddToCart   : [],
+	quantity          : 0,
 };
 
 export default Card;
