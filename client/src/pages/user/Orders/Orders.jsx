@@ -2,7 +2,7 @@ import React from 'react';
 import SideBar from '../../../library/components/SideBar';
 import PropTypes from 'prop-types';
 
-function History({ role }){
+function Orders({ role }){
 	return (
 		<div className='w-full max-w-screen-xl mx-auto'>
 			<div className='flex my-10'>
@@ -10,15 +10,15 @@ function History({ role }){
 					<SideBar role={role} />
 				</div>
 				<div className='flex-auto w-64 mx-10'>
-					<label className='text-2xl font-semibold'>History</label>
+					<label className='text-2xl font-semibold'>Orders</label>
 				</div>
 			</div>
 		</div>
 	);
 }
 
-History.propTypes = {
+Orders.propTypes = {
 	role : PropTypes.string,
 };
 
-export default History;
+export default Orders;

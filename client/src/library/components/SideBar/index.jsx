@@ -21,13 +21,24 @@ function Sidebar({ role }){
 					<nav>
 						<div>
 							<NavLink
-								to='/history'
+								to='/user/profile'
 								className={() =>
 
-										isActiveLink(pathname, '/history') ? active :
+										isActiveLink(pathname, '/user/profile') ? active :
 										inactive}
 							>
-								{string.routes.historyTitle}
+								{string.routes.profileTitle}
+							</NavLink>
+						</div>
+						<div>
+							<NavLink
+								to='/user/orders'
+								className={() =>
+
+										isActiveLink(pathname, '/user/orders') ? active :
+										inactive}
+							>
+								{string.routes.ordersTitle}
 							</NavLink>
 						</div>
 						<div>

@@ -158,22 +158,27 @@ function Header({ role, imageURL }){
 									<div className='nav-link-container'>
 										<div className='settings'>
 											<div className='nav-title list'>
-												{(user && <Profile imageURL={imageURL} />) ||
+												{(user && (
+													<Profile imageURL={imageURL} />
+												)) ||
 													(!user &&
 														string.routes
 															.userNamePlaceHolderTitle)}
 											</div>
-											<div
-												className='settings-content bg-white border'
-											>
-												<div className="my-2"  onClick={() => history.push('/settings')}> {string.routes.settingsTitle}</div>
+											<div className='w-full settings-content bg-white border'>
 												<div
-												className="my-2" 
-												onClick={() =>
-													logOutAction(history, dispatch)}
-											>
-												{string.routes.logOutTitle}
-											</div>
+													onClick={() =>
+														history.push('/user/profile')}
+												>
+													{' '}
+													{string.routes.profileTitle}
+												</div>
+												<div
+													onClick={() =>
+														logOutAction(history, dispatch)}
+												>
+													{string.routes.logOutTitle}
+												</div>
 											</div>
 										</div>
 									</div>
