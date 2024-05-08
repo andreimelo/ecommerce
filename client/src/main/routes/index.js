@@ -48,6 +48,10 @@ const History = lazy(async () => {
 	const module = await import('../../pages/user/History');
 	return module;
 });
+const Settings = lazy(async () => {
+	const module = await import('../../pages/user/Settings');
+	return module;
+});
 const ShopByCategory = lazy(async () => {
 	const module = await import('../../pages/default/ShopByCategory');
 	return module;
@@ -200,6 +204,10 @@ const InitialRoutes = ({ store }) => {
 			{
 				path    : '/history',
 				element : History,
+			},
+			{
+				path    : '/settings',
+				element : Settings,
 			},
 			{
 				path    : '/product/:slug',

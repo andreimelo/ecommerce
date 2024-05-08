@@ -10,6 +10,7 @@ export const string = {
 		registerTitle            : 'Register',
 		userNamePlaceHolderTitle : 'Username',
 		logOutTitle              : 'Logout',
+		settingsTitle            : 'Settings',
 		historyTitle             : 'History',
 		changePasswordTitle      : 'Change Password',
 		wishlistTitle            : 'Wishlist',

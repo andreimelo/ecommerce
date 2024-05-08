@@ -7,6 +7,7 @@ const {
 	applyCouponToCart,
 	createOrder,
 	emptyCart,
+	orders,
 } = require('../controllers/user');
 const { authCheck, adminCheck } = require('../middlewares/authSecurity');
 
@@ -20,5 +21,5 @@ router.get('/user/accounts', authCheck, adminCheck, list);
 router.post('/user/address', authCheck, saveAddress);
 router.post('/user/cart/coupon', authCheck, applyCouponToCart);
 router.post('/user/order', authCheck, createOrder);
-
+router.get('/user/orders', authCheck, orders);
 module.exports = router;
