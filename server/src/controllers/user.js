@@ -186,12 +186,12 @@ exports.emptyCart = async (req, res) => {
 
 exports.orders = async (req, res) => {
 	let user = await User.findOne({ email: req.user.email }).exec();
-	let userOrders = await Order.find({ orderedBy: user._id })
+	let data = await Order.find({ orderedBy: user._id })
 		.populate('products.product')
 		.exec();
 
 	res.json({
-		ok         : true,
-		userOrders,
+		ok   : true,
+		data,
 	});
 };
