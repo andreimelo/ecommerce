@@ -158,7 +158,7 @@ const StripeCheckout = () => {
 					}
 				>
 					Payment Successful!
-					<Link to='/user/history'> See your order history.</Link>
+					<Link to='/user/orders'> See your order history.</Link>
 				</div>
 			</form>
 		</div>

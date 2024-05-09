@@ -6,6 +6,7 @@ import { getUserOrders } from '../../../library/services/user';
 import Table from '../../../library/components/Table';
 import { options } from '../../../library/common/constants/currency';
 import OrderInfoModal from './components/OrderInfoModal';
+import OrderPdf from './components/OrderPdf';
 
 function Orders({ role }){
 	// const dispatch = useDispatch();
@@ -84,7 +85,16 @@ function Orders({ role }){
 													Status
 												</th>
 												<th scope='col' class='px-6 py-3'>
-													PDF
+													Date
+												</th>
+												<th scope='col' class='px-6 py-3'>
+													Payment method
+												</th>
+												<th scope='col' class='px-6 py-3'>
+													Payment status
+												</th>
+												<th scope='col' class='px-6 py-3'>
+													Receipt
 												</th>
 											</tr>
 										</thead>
@@ -112,10 +122,26 @@ function Orders({ role }){
 												<td className='px-6 py-4 font-medium text-gray-600 whitespace-nowrap'>
 													{item.orderStatus}
 												</td>
+												<td className='px-6 py-4 font-medium text-gray-600 whitespace-nowrap'>
+													{new Date(
+														item.createdAt,
+													).toLocaleString()}
+												</td>
+												<td className='px-6 py-4 font-medium text-gray-600 whitespace-nowrap'>
+													{item.paymentIntent.payment_method_types[0].toUpperCase()}
+												</td>
+												<td className='px-6 py-4 font-medium text-gray-600 whitespace-nowrap'>
+													{item.paymentIntent.status.toUpperCase()}
+												</td>
 												<td className='px-6 py-4 cursor-pointer'>
 													{/* {icons['delete']} */}
 													<span className='text-blue-500'>
-														Download
+														<OrderPdf
+															data={item}
+															fileName={`Receipt#${index +
+																1}.pdf`}
+															title='Download'
+														/>
 													</span>
 												</td>
 											</tr>
