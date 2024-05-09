@@ -46,7 +46,7 @@ const OrderInfoModal = ({ data, title, modalOpen, closeModal }) => (
 							</td>
 							<td className='px-6 py-4 font-medium text-gray-600 whitespace-nowrap'>
 								{options['usd']}
-								{(item.product.price / 100).toFixed(2)}{' '}
+								{(item.product.price * 100 / 100).toFixed(2)}{' '}
 								{/* {item.discount}% */}
 							</td>
 							<td className='px-6 py-4 font-medium text-gray-600 whitespace-nowrap'>
