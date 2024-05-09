@@ -1,61 +1,62 @@
 {
-  "name": "melo-ecommerce",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@babel/core": "^7.23.7",
-    "@stripe/react-stripe-js": "^2.7.0",
-    "@stripe/stripe-js": "^3.3.0",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "firebase": "^9.8.3",
-    "lodash": "^4.17.21",
-    "postcss-flexbugs-fixes": "^5.0.2",
-    "postcss-normalize": "^10.0.1",
-    "postcss-preset-env": "^9.3.0",
-    "prop-types": "^15.7.2",
-    "rc-slider": "^10.5.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-image-file-resizer": "^0.4.8",
-    "react-modern-drawer": "^1.2.2",
-    "react-redux": "^7.2.2",
-    "react-responsive-carousel": "^3.2.23",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "5.0.1",
-    "react-select": "^5.8.0",
-    "redux": "^4.0.5",
-    "redux-devtools-extension": "^2.13.9",
-    "web-vitals": "^0.2.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.17",
-    "postcss": "^8.4.33",
-    "tailwindcss": "^3.4.1"
-  }
+	"name": "melo-ecommerce",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"@babel/core": "^7.23.7",
+		"@react-pdf/renderer": "^3.4.4",
+		"@stripe/react-stripe-js": "^2.7.0",
+		"@stripe/stripe-js": "^3.3.0",
+		"@testing-library/jest-dom": "^5.11.4",
+		"@testing-library/react": "^11.1.0",
+		"@testing-library/user-event": "^12.1.10",
+		"firebase": "^9.8.3",
+		"lodash": "^4.17.21",
+		"postcss-flexbugs-fixes": "^5.0.2",
+		"postcss-normalize": "^10.0.1",
+		"postcss-preset-env": "^9.3.0",
+		"prop-types": "^15.7.2",
+		"rc-slider": "^10.5.0",
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1",
+		"react-image-file-resizer": "^0.4.8",
+		"react-modern-drawer": "^1.2.2",
+		"react-redux": "^7.2.2",
+		"react-responsive-carousel": "^3.2.23",
+		"react-router-dom": "^5.2.0",
+		"react-scripts": "5.0.1",
+		"react-select": "^5.8.0",
+		"redux": "^4.0.5",
+		"redux-devtools-extension": "^2.13.9",
+		"web-vitals": "^0.2.4"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"devDependencies": {
+		"autoprefixer": "^10.4.17",
+		"postcss": "^8.4.33",
+		"tailwindcss": "^3.4.1"
+	}
 }
