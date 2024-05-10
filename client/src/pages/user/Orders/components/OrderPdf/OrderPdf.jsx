@@ -75,6 +75,7 @@ const OrderPdf = ({ fileName, size, title, data }) => {
 						{(data.paymentIntent.amount / 100).toFixed(2)}
 					</Text>
 				</View>
+				<Text style={styles.footer}>Thank you for shopping with us.</Text>
 			</Page>
 		</Pdf>
 	);
