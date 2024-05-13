@@ -16,7 +16,7 @@ export async function getOrderList(token){
 	return data;
 }
 
-export async function updateOrderStatus(status){
+export async function updateOrderStatus(orderId, orderStatus, token){
 	const options = {
 		method  : 'PUT',
 		headers : {
@@ -24,7 +24,7 @@ export async function updateOrderStatus(status){
 			'Content-Type' : 'application/json',
 			authToken      : token || '',
 		},
-		body    : JSON.stringify(status),
+		body    : JSON.stringify({ orderId, orderStatus }),
 	};
 	const result = await fetch(`${env.base_uri}/admin/order-status`, options);
 
