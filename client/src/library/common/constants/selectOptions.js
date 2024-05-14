@@ -54,3 +54,30 @@ export const productOptions = {
 		},
 	],
 };
+
+export const orderStatusOptions = [
+	{
+		name  : 'Not yet processed',
+		value : 'Not yet processed',
+	},
+	{
+		name  : 'Ongoing process',
+		value : 'Ongoing process',
+	},
+	{
+		name  : 'Order has been dispatched',
+		value : 'Order has been dispatched',
+	},
+	{
+		name  : 'Out for delivery',
+		value : 'Out for delivery',
+	},
+	{
+		name  : 'Order has been cancelled',
+		value : 'Order has been cancelled',
+	},
+	{
+		name  : 'Order is completed',
+		value : 'Order is completed',
+	},
+];

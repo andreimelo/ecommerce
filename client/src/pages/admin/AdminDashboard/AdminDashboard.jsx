@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Sidebar from '../../../library/components/SideBar';
 import Table from '../../../library/components/Table';
+import SelectOption from '../../../library/components/SelectOption';
 import PropTypes from 'prop-types';
-import { getOrderList } from '../../../library/services/admin';
+import { getOrderList, updateOrderStatus } from '../../../library/services/admin';
 import { options } from '../../../library/common/constants/currency';
+import { orderStatusOptions } from '../../../library/common/constants/selectOptions';
 
 const AdminDashboard = ({ role }) => {
 	const [
@@ -17,29 +19,37 @@ const AdminDashboard = ({ role }) => {
 	] = useState(false);
 	const { user } = useSelector((state) => ({ ...state }));
 	const { allOrders } = orderList || {};
-	useEffect(
-		() => {
-			async function fetchOrderList(){
-				try {
-					setLoading(true);
-					const result = await getOrderList(user.token);
-					if (result.ok) {
-						setLoading(false);
-						setOrderList(result);
-					}
-				} catch (error) {
-					setLoading(false);
 
-					alert(error);
-				}
+	async function fetchOrderList(){
+		try {
+			setLoading(true);
+			const result = await getOrderList(user.token);
+			if (result.ok) {
+				setLoading(false);
+				setOrderList(result);
 			}
-			fetchOrderList();
-		},
-		[
-			user.token,
-		],
-	);
+		} catch (error) {
+			setLoading(false);
 
+			alert(error);
+		}
+	}
+
+	useEffect(() => {
+		fetchOrderList();
+		// eslint-disable-next-line
+	}, []);
+
+	async function handleChangeStatus(orderId, orderStatus){
+		try {
+			const result = await updateOrderStatus(orderId, orderStatus, user.token);
+			if (result.ok) {
+				await fetchOrderList();
+			}
+		} catch (error) {
+			alert(error);
+		}
+	}
 	return (
 		<div className='w-full max-w-screen-xl mx-auto'>
 			<div className='flex my-10'>
@@ -58,20 +68,32 @@ const AdminDashboard = ({ role }) => {
 											<div className='bg-gray-100 p-5'>
 												<div className='flex justify-between'>
 													<div>
-														<span className='font-semibold'>
+														<span className='font-semibold mx-2'>
 															Order Id:{' '}
 														</span>
 														{item._id}
 													</div>
-													<div>
-														<span className='font-semibold'>
+													<div className='flex'>
+														<div className='font-semibold mx-2'>
 															Status:{' '}
-														</span>
-														{item.orderStatus}
+														</div>
+														<div>
+															<SelectOption
+																labelClass
+																selectClass={'w-auto'}
+																value={item.orderStatus}
+																onChange={(e) =>
+																	handleChangeStatus(
+																		item._id,
+																		e.target.value,
+																	)}
+																data={orderStatusOptions}
+															/>
+														</div>
 													</div>
 												</div>
 												<div>
-													<span className='font-semibold'>
+													<span className='font-semibold mx-2'>
 														Ordered By:
 													</span>
 													{new Date(
