@@ -8,6 +8,9 @@ const {
 	createOrder,
 	emptyCart,
 	orders,
+	addToWishList,
+	wishList,
+	removeFromWishList,
 } = require('../controllers/user');
 const { authCheck, adminCheck } = require('../middlewares/authSecurity');
 
@@ -22,4 +25,8 @@ router.post('/user/address', authCheck, saveAddress);
 router.post('/user/cart/coupon', authCheck, applyCouponToCart);
 router.post('/user/order', authCheck, createOrder);
 router.get('/user/orders', authCheck, orders);
+router.post('/user/wishlist', authCheck, addToWishList);
+router.get('/user/wishlist', authCheck, wishList);
+router.put('/user/wishlist/:productId', authCheck, removeFromWishList);
+
 module.exports = router;

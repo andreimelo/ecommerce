@@ -22,9 +22,9 @@ const userSchema = new mongoose.Schema(
 		state    : String,
 		city     : String,
 		zip_code : String,
-		// wishlist : [
-		// 	{ type: ObjectId, ref: 'Product' },
-		// ],
+		wishlist : [
+			{ type: ObjectId, ref: 'Product' },
+		],
 	},
 	{ timestamps: true },
 );
