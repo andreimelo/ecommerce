@@ -5,6 +5,7 @@ import {
 	putProductStarRating,
 	getRelatedProducts,
 } from '../../../library/services/product';
+import { addToWishList } from '../../../library/services/user';
 import Carousel from '../../../library/components/Carousel';
 import ProductListItem from './components/ProductListItem/ProductListItem';
 import RatingIcon from '../../../library/components/RatingIcon';
@@ -82,6 +83,14 @@ const ViewProduct = ({ match }) => {
 			},
 		});
 	}
+	async function saveToWishlist(productId, token){
+		try {
+			const result = await addToWishList(productId, token);
+			if (result.ok) {
+				alert('Successfully added to wishlist');
+			}
+		} catch (error) {}
+	}
 
 	function closeModal(){
 		setModalOpen(false);
@@ -145,6 +154,7 @@ const ViewProduct = ({ match }) => {
 							<button
 								type='button'
 								className='font-semibold text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2'
+								onClick={() => saveToWishlist(_id, user.token)}
 							>
 								Add to Wishlist
 							</button>
