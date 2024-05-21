@@ -212,17 +212,19 @@ exports.addToWishList = async (req, res) => {
 };
 
 exports.wishList = async (req, res) => {
-	await User.findOne({ email: req.user.email }).select('wishlist').populate('wishlist');
+	const { wishlist } = await User.findOne({ email: req.user.email })
+		.select('wishlist')
+		.populate('wishlist');
 
 	res.json({
-		ok   : true,
-		list,
+		ok       : true,
+		wishlist,
 	});
 };
 
 exports.removeFromWishList = async (req, res) => {
-	const { productId } = req.body;
-	await User.findOne(
+	const { productId } = req.params;
+	await User.findOneAndUpdate(
 		{ email: req.user.email },
 		{
 			$pull : { wishlist: productId },
