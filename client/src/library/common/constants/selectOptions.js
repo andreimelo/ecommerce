@@ -81,3 +81,14 @@ export const orderStatusOptions = [
 		value : 'Order is completed',
 	},
 ];
+
+export const paymentOption = [
+	{
+		name  : 'Credit/Debit',
+		value : 'Credit/Debit',
+	},
+	{
+		name  : 'Cash on Delivery',
+		value : 'Cash on Delivery',
+	},
+];

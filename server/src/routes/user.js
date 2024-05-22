@@ -11,6 +11,7 @@ const {
 	addToWishList,
 	wishList,
 	removeFromWishList,
+	createCashOrder,
 } = require('../controllers/user');
 const { authCheck, adminCheck } = require('../middlewares/authSecurity');
 
@@ -23,7 +24,8 @@ router.delete('/user/save-cart', authCheck, emptyCart);
 router.get('/user/accounts', authCheck, adminCheck, list);
 router.post('/user/address', authCheck, saveAddress);
 router.post('/user/cart/coupon', authCheck, applyCouponToCart);
-router.post('/user/order', authCheck, createOrder);
+router.post('/user/order', authCheck, createOrder); // stripe
+router.post('/user/cash-order', authCheck, createCashOrder); //cod
 router.get('/user/orders', authCheck, orders);
 router.post('/user/wishlist', authCheck, addToWishList);
 router.get('/user/wishlist', authCheck, wishList);

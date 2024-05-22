@@ -3,26 +3,33 @@ import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Input from '../../../library/components/Input';
 import SelectOption from '../../../library/components/SelectOption';
-import { getUserCart, saveUserAddress } from '../../../library/services/user';
+import {
+	getUserCart,
+	saveUserAddress,
+	createCashOrder,
+} from '../../../library/services/user';
 import useInput from '../../../library/hooks/useInput';
 import { applyCoupon } from '../../../library/services/coupon';
+import { emptyCart } from '../../../library/services/user';
+import { paymentOption } from '../../../library/common/constants/selectOptions';
+import { removeFromStorage } from '../../../library/helpers/storage';
 
 const Checkout = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const { cart, user } = useSelector((state) => ({ ...state }));
+	const { cart, user, coupon } = useSelector((state) => ({ ...state }));
 	const { values, handleChange, handleSubmit } = useInput(handleSaveAddress, () => {
 		return {};
 	});
 	const [
-		coupon,
+		couponInput,
 		setCoupon,
 	] = useState('');
 	const [
 		totalDiscount,
 		setTotalDiscount,
 	] = useState('');
-	const { address1, address2, state, city, zip_code } = values;
+	const { address1, address2, state, city, zip_code, payment } = values;
 	const subTotal = cart.reduce((acc, curr) => acc + curr.count, 0);
 	const [
 		total,
@@ -63,7 +70,7 @@ const Checkout = () => {
 
 	async function handleApplyCoupon(){
 		try {
-			const result = await applyCoupon(coupon, user.token);
+			const result = await applyCoupon(couponInput, user.token);
 			if (result.err) {
 				dispatch({
 					type    : 'COUPON_APPLIED',
@@ -92,15 +99,46 @@ const Checkout = () => {
 		}
 	}
 
+	async function handleSubmitPayment(){
+		try {
+			if (payment === paymentOption[0].value) {
+				return history.push('/payment');
+			}
+			const result = await createCashOrder(payment, user.token, coupon);
+			if (result.ok) {
+				if (typeof window !== 'undefined') removeFromStorage('cart');
+				dispatch({
+					type    : 'ADD_TO_CART',
+					payload : [],
+				});
+
+				dispatch({
+					type    : 'COUPON_APPLIED',
+					payload : false,
+				});
+
+				await emptyCart(user.token);
+
+				setTimeout(() => {
+					history.push('/');
+				}, 1400);
+			}
+		} catch (error) {
+			alert(error);
+		}
+	}
+
 	return (
 		<div className='w-full max-w-screen-xl mx-auto whitespace-pre-wrap break-words'>
 			<section className='grid grid-cols-4 gap-4 my-10'>
 				<form className='col-span-3' onSubmit={handleSubmit}>
-					<label className='text-2xl font-semibold'>Delivery Address</label>
 					<div className='flex border my-5 p-5'>
 						<div className='grid grid-cols-4 gap-4 w-full'>
+							<div className='col-span-4 text-2xl font-semibold ml-3'>
+								Delivery Address
+							</div>
 							<div className='col-span-2 mx-3'>
-								<div className='text-sm font-semibold mt-3 mb-2'>
+								<div className='text-sm font-semibold mb-2'>
 									Address 1
 								</div>
 								<Input
@@ -116,7 +154,7 @@ const Checkout = () => {
 								/>
 							</div>
 							<div className='col-span-2 mx-3'>
-								<div className='text-sm font-semibold mt-3 mb-2'>
+								<div className='text-sm font-semibold mb-2'>
 									Address 2
 								</div>
 								<Input
@@ -132,9 +170,7 @@ const Checkout = () => {
 								/>
 							</div>
 							<div className='col-span-2 mx-3'>
-								<div className='text-sm font-semibold mt-3 mb-2'>
-									State
-								</div>
+								<div className='text-sm font-semibold mb-2'>State</div>
 								<SelectOption
 									labelClass=''
 									name='state'
@@ -150,9 +186,7 @@ const Checkout = () => {
 								/>
 							</div>
 							<div className='col-span-2 mx-3'>
-								<div className='text-sm font-semibold mt-3 mb-2'>
-									City
-								</div>
+								<div className='text-sm font-semibold mb-2'>City</div>
 								<SelectOption
 									labelClass=''
 									name='city'
@@ -167,10 +201,8 @@ const Checkout = () => {
 									placeHolder='Enter City'
 								/>
 							</div>
-							<div className='col-span-1 mx-3 mb-5'>
-								<div className='text-sm font-semibold mt-3 mb-2'>
-									Zip Code
-								</div>
+							<div className='col-span-1 mx-3	'>
+								<div className='text-sm font-semibold mb-3'>Zip Code</div>
 								<Input
 									value={zip_code}
 									onChange={(event) =>
@@ -183,10 +215,28 @@ const Checkout = () => {
 									name='zip_code'
 								/>
 							</div>
-							<div className='col-end-4 mx-3 mb-5 '>
-								<button className='mt-9 w-full text-center font-semibold text-white bg-black p-3'>
+							<div className='col-end-4 mx-3 mt-6'>
+								<button className='w-full text-center font-semibold text-white bg-black p-3'>
 									Save
 								</button>
+							</div>
+							<div className='col-span-2 mx-3 mb-5'>
+								<div className='text-2xl font-semibold my-5'>
+									Payment Option
+								</div>
+								<SelectOption
+									name='payment'
+									value={payment}
+									onChange={(event) =>
+										handleChange(
+											event.target.name,
+											event.target.value,
+										)}
+									data={paymentOption}
+									variant='m-0 text-sm w-full'
+									selectClass='rounded-none border p-3 text-sm w-full'
+									placeHolder='Select option'
+								/>
 							</div>
 						</div>
 					</div>
@@ -254,7 +304,7 @@ const Checkout = () => {
 					<div className='my-3 p-1'>
 						<button
 							className='w-full text-center font-semibold text-white bg-black p-3'
-							onClick={() => history.push('/payment')}
+							onClick={() => handleSubmitPayment()}
 						>
 							Place order
 						</button>
