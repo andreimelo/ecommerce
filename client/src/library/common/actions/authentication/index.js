@@ -75,6 +75,7 @@ export async function onAuthStateAction(user, dispatch){
 		});
 	} catch (error) {
 		console.log('Auth State Action Log', error);
+		alert(error);
 	}
 }
 
