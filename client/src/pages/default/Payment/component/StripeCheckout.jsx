@@ -44,7 +44,7 @@ const StripeCheckout = () => {
 			async function fetchCreatePaymentIntent(){
 				try {
 					const result = await createPaymentIntent(user.token);
-					console.log(result);
+					// console.log(result);
 					setStripeData(result);
 				} catch (error) {
 					alert(error);

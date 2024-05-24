@@ -83,7 +83,7 @@ const Checkout = () => {
 				type    : 'COUPON_APPLIED',
 				payload : true,
 			});
-			console.log(result);
+			// console.log(result);
 			// console.log(totalDiscount);
 		} catch (error) {
 			alert(error);
