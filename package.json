@@ -2,8 +2,7 @@
 	"name": "ecommerce_server",
 	"version": "1.0.0",
 	"scripts": {
-		"service": "yarn install && node server/src/loaders/server.js",
-		"build": "react-script build"
+		"service": "yarn install && node server/src/loaders/server.js"
 	},
 	"keywords": [],
 	"author": "",
