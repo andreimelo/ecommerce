@@ -1,0 +1,11 @@
+{
+	"name": "ecommerce_server",
+	"version": "1.0.0",
+	"scripts": {
+		"service": "node server/src/loaders/server.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {}
+}

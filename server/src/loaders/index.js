@@ -24,7 +24,7 @@ app.use(cors());
 app.use(compression());
 
 // File system
-readdirSync('src/routes').map((r) => app.use('/api', require('../routes/' + r)));
+readdirSync('server/src/routes').map((r) => app.use('/api', require('../routes/' + r)));
 
 app.get('/', (req, res) => {
 	res.send(string.common.startServerMessage);
