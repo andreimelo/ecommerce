@@ -1,3 +1,9 @@
-command = "npm run build"
-publish="build/"
-base = "client/"
+[build]
+  command = "npm run build"
+  publish="build/"
+  base = "client/"
+
+[[redirects]]
+  from = “/*”
+  to = “/index.html”
+  status = 200
