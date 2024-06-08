@@ -69,22 +69,6 @@ function Header({ role, imageURL }){
 										</div>
 									</div>
 								)}
-								{/* {!user && (
-									<div>
-										<div
-											className='nav-title'
-											onClick={() => history.push('/login')}
-										>
-											{string.routes.loginTitle}
-										</div>
-										<div
-											className='nav-title'
-											onClick={() => history.push('/register')}
-										>
-											{string.routes.registerTitle}
-										</div>
-									</div>
-								)} */}
 							</div>
 						</div>
 					</nav>
@@ -191,20 +175,10 @@ function Header({ role, imageURL }){
 										>
 											{string.routes.loginTitle}
 										</div>
-										{/* <div className="nav-title" onClick={() => history.push('/register')}>
-											{string.routes.registerTitle}
-										</div> */}
 									</div>
 								)}
 							</div>
 						</div>
-						{/*  .category
-				<div className='nav-link-container'>
-				<div className="nav-title category">{string.navigation.categoriesTitle}</div>
-				<div className="nav-title category">
-					{string.navigation.subCategoriesTitle}
-				</div>
-			</div> */}
 					</nav>
 				);
 			default:
@@ -297,20 +271,10 @@ function Header({ role, imageURL }){
 										>
 											{string.routes.loginTitle}
 										</div>
-										{/* <div className="nav-title" onClick={() => history.push('/register')}>
-												{string.routes.registerTitle}
-											</div> */}
 									</div>
 								)}
 							</div>
 						</div>
-						{/*  .category
-					<div className='nav-link-container'>
-					<div className="nav-title category">{string.navigation.categoriesTitle}</div>
-					<div className="nav-title category">
-						{string.navigation.subCategoriesTitle}
-					</div>
-				</div> */}
 					</nav>
 				);
 		}
