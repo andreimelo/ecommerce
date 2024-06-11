@@ -55,7 +55,7 @@ const ShopByCategory = ({ match }) => {
 						({product.length}) Products found in "{category.name}" category
 					</div>
 					<div className='flex'>
-						<div className='grid grid-cols-4 gap-4'>
+						<div className='grid grid-cols-4 gap-4 mb-10'>
 							{product &&
 								product.map((item) => (
 									<Card
