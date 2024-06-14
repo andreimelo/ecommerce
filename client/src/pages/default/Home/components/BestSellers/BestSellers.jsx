@@ -49,7 +49,7 @@ const BestSellers = () => {
 			<div className='flex'>
 				{
 					loading ? <h2>🌀 Loading....</h2> :
-					<div className='grid grid-cols-4 gap-4'>
+					<div className='grid grid-cols-4 gap-4 max-[600px]:inline-flex max-[600px]:w-500 max-[600px]:overflow-x-scroll'>
 						{dataResult &&
 							dataResult.map((item) => (
 								<Card
