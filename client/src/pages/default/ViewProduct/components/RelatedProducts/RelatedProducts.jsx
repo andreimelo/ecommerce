@@ -12,7 +12,7 @@ const RelatedProducts = ({ data, loading, numberOfStar, showAverageRating }) => 
 		<div>
 			<section className='my-5 text-xl font-semibold'>Related Products</section>
 			<div className='flex'>
-				<div className='grid grid-cols-4 gap-4'>
+				<div className='grid grid-cols-4 gap-4 max-[600px]:inline-flex max-[600px]:w-500 max-[600px]:overflow-x-scroll'>
 					{
 						loading ? <h2>🌀 Loading....</h2> :
 						data &&
