@@ -42,9 +42,9 @@ function Login(){
 
 	return (
 		<div className='w-full max-w-screen-xl mx-auto'>
-			<div className='grid grid-cols-[50%_auto] gap-3 my-10'>
+			<div className='grid grid-cols-[50%_auto] gap-3 my-10 max-[600px]:grid-cols-[none]'>
 				<div className='col-span-1' />
-				<div className='container col-span-1 border-l-2 border-gray-200'>
+				<div className='container col-span-1 border-l-2 border-gray-200 max-[600px]:border-none'>
 					<div className='w-8/12 mx-auto'>
 						<label className='text-3xl font-semibold'>
 							{string.routes.loginTitle}
