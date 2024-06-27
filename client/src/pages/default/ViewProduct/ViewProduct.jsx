@@ -122,7 +122,8 @@ const ViewProduct = ({ match }) => {
 			{
 				loading ? <h2>🌀 Loading....</h2> :
 				<div>
-					<section className='grid grid-cols-[50%_auto] gap-3 my-10'>
+					{/* Mobile View - n refactor */}
+					<section className='grid grid-cols-2 gap-3 max-[600px]:grid-cols-1 my-10'>
 						<div className='col-span-1'>
 							<Carousel images={images} />
 						</div>
