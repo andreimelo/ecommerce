@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { string } from '../../common/constants/strings';
+import { images } from '../../../resources/images';
 import PropTypes from 'prop-types';
 import './style.css';
 import { getCategories } from '../../services/category';
@@ -49,7 +50,12 @@ function Header({ role, imageURL }){
 								id='logo'
 								onClick={() => history.push('/')}
 							>
-								{string.common.logoTitle}
+								{/* {string.common.logoTitle} */}
+								<img
+									className='w-30 h-20 object-contain'
+									alt='productLogo'
+									src={images['productLogo']}
+								/>
 							</div>
 							<div className='nav-link-container'>
 								{user && (
@@ -82,7 +88,12 @@ function Header({ role, imageURL }){
 								id='logo'
 								onClick={() => history.push('/')}
 							>
-								{string.common.logoTitle}
+								{/* {string.common.logoTitle} */}
+								<img
+									className='w-30 h-20 object-contain'
+									alt='productLogo'
+									src={images['productLogo']}
+								/>
 							</div>
 							<div className='nav-link-container'>
 								{category && (
@@ -185,12 +196,13 @@ function Header({ role, imageURL }){
 				return (
 					<nav className='nav-container shadow'>
 						<div className='nav-sub-container w-full max-w-screen-xl mx-auto'>
-							<div
-								className='self-center text-2xl font-semibold whitespace-nowrap'
-								id='logo'
-								onClick={() => history.push('/')}
-							>
-								{string.common.logoTitle}
+							<div id='logo' onClick={() => history.push('/')}>
+								{/* {string.common.logoTitle} */}
+								<img
+									className='w-30 h-20 object-contain'
+									src={images['productLogo']}
+									alt='productLogo'
+								/>
 							</div>
 							<div className='nav-link-container'>
 								{category && (
