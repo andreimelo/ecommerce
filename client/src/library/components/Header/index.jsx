@@ -53,8 +53,8 @@ function Header({ role, imageURL }){
 								{/* {string.common.logoTitle} */}
 								<img
 									className='w-30 h-20 object-contain'
-									alt='productLogo'
-									src={images['productLogo']}
+									alt='brandLogo'
+									src={images['brandLogo']}
 								/>
 							</div>
 							<div className='nav-link-container'>
@@ -91,8 +91,8 @@ function Header({ role, imageURL }){
 								{/* {string.common.logoTitle} */}
 								<img
 									className='w-30 h-20 object-contain'
-									alt='productLogo'
-									src={images['productLogo']}
+									alt='brandLogo'
+									src={images['brandLogo']}
 								/>
 							</div>
 							<div className='nav-link-container'>
@@ -200,8 +200,8 @@ function Header({ role, imageURL }){
 								{/* {string.common.logoTitle} */}
 								<img
 									className='w-30 h-20 object-contain'
-									src={images['productLogo']}
-									alt='productLogo'
+									src={images['brandLogo']}
+									alt='brandLogo'
 								/>
 							</div>
 							<div className='nav-link-container'>
