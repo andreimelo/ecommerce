@@ -320,21 +320,23 @@ const InitialRoutes = ({ store }) => {
 			<BrowserRouter>
 				<Header role={role} imageURL={imageURL} />
 				<SideDrawer />
-				<Switch>
-					{mappingRoutes.map((route, index) => (
-						<Route
-							key={index}
-							exact
-							path={route.path}
-							render={(props) =>
-								// refactor
+				<div className='app'>
+					<Switch>
+						{mappingRoutes.map((route, index) => (
+							<Route
+								key={index}
+								exact
+								path={route.path}
+								render={(props) =>
+									// refactor
 
 
-									loading ? '' :
-									<route.element {...props} {...user} />}
-						/>
-					))}
-				</Switch>
+										loading ? '' :
+										<route.element {...props} {...user} />}
+							/>
+						))}
+					</Switch>
+				</div>
 				<Footer />
 			</BrowserRouter>
 		</Suspense>

@@ -62,3 +62,7 @@ input:focus {
   height: 520px;
   object-fit: cover;
 }
+
+.app {
+  min-height: 65vh;
+}
