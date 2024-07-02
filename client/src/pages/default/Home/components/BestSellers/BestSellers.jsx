@@ -6,6 +6,7 @@ import Pagination from '../../../../../library/components/Pagination';
 import usePagination from '../../../../../library/hooks/usePagination';
 import { showAverageRating, numberOfStar } from '../../../../../library/helpers/rating';
 import { addToCart } from '../../../../../library/helpers/cart';
+import Spinner from '../../../../../library/components/Spinner/Spinner';
 
 const BestSellers = () => {
 	const dispatch = useDispatch();
@@ -48,7 +49,7 @@ const BestSellers = () => {
 			<label className='text-2xl font-semibold'>Best Sellers</label>
 			<div className='flex'>
 				{
-					loading ? <h2>🌀 Loading....</h2> :
+					loading ? <Spinner /> :
 					<div className='grid grid-cols-4 gap-4 max-[600px]:inline-flex max-[600px]:w-500 max-[600px]:overflow-x-scroll'>
 						{dataResult &&
 							dataResult.map((item) => (

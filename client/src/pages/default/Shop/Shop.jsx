@@ -15,6 +15,7 @@ import Card from '../../../library/components/Card';
 import Input from '../../../library/components/Input';
 import Accordion from '../../../library/components/Accordion';
 import MultiRangeSlider from '../../../library/components/MultiRangeSlider';
+import Spinner from '../../../library/components/Spinner/Spinner';
 
 const Shop = () => {
 	const dispatch = useDispatch();
@@ -344,7 +345,7 @@ const Shop = () => {
 				<div className='flex mx-10'>
 					<div className='grid grid-cols-3 gap-4'>
 						{
-							loading ? <h2>🌀 Loading....</h2> :
+							loading ? <Spinner /> :
 							products &&
 							products.map((item, index) => (
 								<Card

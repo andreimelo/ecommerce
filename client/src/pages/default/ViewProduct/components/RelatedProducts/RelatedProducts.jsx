@@ -4,6 +4,7 @@ import Card from '../../../../../library/components/Card';
 import { addToCart } from '../../../../../library/helpers/cart';
 
 import PropTypes from 'prop-types';
+import Spinner from '../../../../../library/components/Spinner/Spinner';
 
 const RelatedProducts = ({ data, loading, numberOfStar, showAverageRating }) => {
 	const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const RelatedProducts = ({ data, loading, numberOfStar, showAverageRating }) => 
 			<div className='flex'>
 				<div className='grid grid-cols-4 gap-4 max-[600px]:inline-flex max-[600px]:w-500 max-[600px]:overflow-x-scroll'>
 					{
-						loading ? <h2>🌀 Loading....</h2> :
+						loading ? <Spinner /> :
 						data &&
 						data.map((item) => (
 							<Card

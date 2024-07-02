@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { getOrderList, updateOrderStatus } from '../../../library/services/admin';
 import { options } from '../../../library/common/constants/currency';
 import { orderStatusOptions } from '../../../library/common/constants/selectOptions';
+import Spinner from '../../../library/components/Spinner/Spinner';
 
 const AdminDashboard = ({ role }) => {
 	const [
@@ -59,7 +60,7 @@ const AdminDashboard = ({ role }) => {
 				<div className='flex-auto w-64 mx-10'>
 					<label className='text-2xl font-semibold'>Dashboard</label>
 					{
-						loading ? <h2>🌀 Loading....</h2> :
+						loading ? <Spinner /> :
 						<div>
 							{allOrders &&
 								allOrders.map((item) => {

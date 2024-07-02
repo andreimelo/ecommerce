@@ -5,6 +5,7 @@ import BreadCrumbs from '../../../library/components/BreadCrumbs';
 import { showAverageRating, numberOfStar } from '../../../library/helpers/rating';
 import Card from '../../../library/components/Card';
 import { addToCart } from '../../../library/helpers/cart';
+import Spinner from '../../../library/components/Spinner/Spinner';
 
 const ShopByCategory = ({ match }) => {
 	const dispatch = useDispatch();
@@ -46,7 +47,7 @@ const ShopByCategory = ({ match }) => {
 	return (
 		<div className='w-full max-w-screen-xl mx-auto whitespace-pre-wrap break-words'>
 			{
-				loading ? <h2>🌀 Loading....</h2> :
+				loading ? <Spinner /> :
 				<section>
 					{/* Welcome to {slug} */}
 					{/* <div>{JSON.stringify(category)}</div> */}
