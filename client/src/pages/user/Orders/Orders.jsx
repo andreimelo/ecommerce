@@ -7,6 +7,7 @@ import Table from '../../../library/components/Table';
 import { options } from '../../../library/common/constants/currency';
 import OrderInfoModal from './components/OrderInfoModal';
 import OrderPdf from './components/OrderPdf';
+import Spinner from '../../../library/components/Spinner/Spinner';
 
 function Orders({ role }){
 	// const dispatch = useDispatch();
@@ -67,7 +68,7 @@ function Orders({ role }){
 				<div className='flex-auto w-64 mx-10'>
 					<label className='text-2xl font-semibold'>Orders</label>
 					{
-						loading ? <h2>🌀 Loading....</h2> :
+						loading ? <Spinner /> :
 						<div>
 							<Table
 								thead={

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from '../../../library/components/SideBar';
 import { getUserAccounts } from '../../../library/services/user';
 import { useSelector } from 'react-redux';
+import Spinner from '../../../library/components/Spinner/Spinner';
 
 const Accounts = ({ role }) => {
 	const [
@@ -41,7 +42,9 @@ const Accounts = ({ role }) => {
 					<label className='text-2xl font-semibold'>Accounts</label>
 					{/* will refactor */}
 					{
-						loading ? <h2 className='my-10'>🌀 Loading....</h2> :
+						loading ? <h2 className='my-10'>
+							<Spinner />
+						</h2> :
 						<div className='relative overflow-x-auto shadow-md sm:rounded-lg mt-5'>
 							<table className='w-full text-sm text-left rtl:text-right  bg-gray-100'>
 								<thead className='text-xs text-white uppercase bg-gray-900 dark:text-white'>

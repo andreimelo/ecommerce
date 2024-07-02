@@ -5,6 +5,7 @@ import SideBar from '../../../library/components/SideBar';
 import PropTypes from 'prop-types';
 import { getWishList, removeFromWishList } from '../../../library/services/user';
 import icons from '../../../resources/icons';
+import Spinner from '../../../library/components/Spinner/Spinner';
 
 function Wishlist({ role }){
 	const [
@@ -61,7 +62,7 @@ function Wishlist({ role }){
 				<div className='flex-auto w-64 mx-10'>
 					<label className='text-2xl font-semibold'>Wishlist</label>
 					{
-						loading ? <h2>🌀 Loading....</h2> :
+						loading ? <Spinner /> :
 						<div className='my-5'>
 							{wishList.length <= 0 && (
 								<div className='text-center font-semibold text-2xl my-2 p-4'>

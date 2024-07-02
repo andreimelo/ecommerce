@@ -14,6 +14,7 @@ import RelatedProducts from './components/RelatedProducts';
 import { useSelector, useDispatch } from 'react-redux';
 import { showAverageRating, numberOfStar } from '../../../library/helpers/rating';
 import { addToCart } from '../../../library/helpers/cart';
+import Spinner from '../../../library/components/Spinner/Spinner';
 
 const ViewProduct = ({ match }) => {
 	const { slug } = match.params;
@@ -120,7 +121,7 @@ const ViewProduct = ({ match }) => {
 	return (
 		<div className='w-full max-w-screen-xl mx-auto whitespace-pre-wrap break-words'>
 			{
-				loading ? <h2>🌀 Loading....</h2> :
+				loading ? <Spinner /> :
 				<div>
 					{/* Mobile View - n refactor */}
 					<section className='grid grid-cols-2 gap-3 max-[600px]:grid-cols-1 my-10'>

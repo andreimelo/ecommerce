@@ -6,6 +6,7 @@ import usePagination from '../../../../../library/hooks/usePagination';
 import { showAverageRating, numberOfStar } from '../../../../../library/helpers/rating';
 import { addToCart } from '../../../../../library/helpers/cart';
 import { useDispatch } from 'react-redux';
+import Spinner from '../../../../../library/components/Spinner/Spinner';
 
 const NewArrivals = () => {
 	const dispatch = useDispatch();
@@ -53,7 +54,7 @@ const NewArrivals = () => {
 			<div className='flex'>
 				<div className='grid grid-cols-4 gap-4 max-[600px]:inline-flex max-[600px]:w-500 max-[600px]:overflow-x-scroll'>
 					{
-						loading ? <h2>🌀 Loading....</h2> :
+						loading ? <Spinner /> :
 						dataResult &&
 						dataResult.map((item) => (
 							<Card
