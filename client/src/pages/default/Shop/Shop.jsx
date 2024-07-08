@@ -39,26 +39,14 @@ const Shop = () => {
 		brand,
 		setBrand,
 	] = useState([]);
-	// const [
-	// 	brandList,
-	// 	setBrandList,
-	// ] = useState([]);
 	const [
 		color,
 		setColor,
 	] = useState([]);
-	// const [
-	// 	colorList,
-	// 	setColorList,
-	// ] = useState([]);
 	const [
 		shipping,
 		setShipping,
 	] = useState([]);
-	// const [
-	// 	shippingList,
-	// 	setShippingList,
-	// ] = useState([]);
 	const [
 		category,
 		setCategory,
@@ -257,11 +245,6 @@ const Shop = () => {
 					</div>
 				)),
 		},
-		// {
-		// 	title   : 'Rating',
-		// 	content :
-		// 		'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-		// },
 		{
 			title   : 'Sub Category',
 			content :
