@@ -41,7 +41,7 @@ function Sidebar({ role }){
 								{string.routes.ordersTitle}
 							</NavLink>
 						</div>
-						<div>
+						{/* <div>
 							<NavLink
 								to='/user/change-password'
 								className={() =>
@@ -54,7 +54,7 @@ function Sidebar({ role }){
 							>
 								{string.routes.changePasswordTitle}
 							</NavLink>
-						</div>
+						</div> */}
 						<div>
 							<NavLink
 								to='/user/wishlist'
