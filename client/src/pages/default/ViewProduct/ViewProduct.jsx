@@ -14,7 +14,9 @@ import RelatedProducts from './components/RelatedProducts';
 import { useSelector, useDispatch } from 'react-redux';
 import { showAverageRating, numberOfStar } from '../../../library/helpers/rating';
 import { addToCart } from '../../../library/helpers/cart';
+import { documentTitle } from '../../../library/helpers/tags';
 import Spinner from '../../../library/components/Spinner/Spinner';
+import Helmet from '../../../library/components/Helmet';
 
 const ViewProduct = ({ match }) => {
 	const { slug } = match.params;
@@ -47,6 +49,7 @@ const ViewProduct = ({ match }) => {
 	] = useState([]);
 	const { average, length } = showAverageRating(product) || {};
 	const { title, description, brand, images, _id, ratings, quantity } = product || {};
+	const helmetTitle = documentTitle(`${title + ' - ' + brand}`) || '';
 
 	async function fetchProductBySlug(){
 		try {
@@ -120,6 +123,7 @@ const ViewProduct = ({ match }) => {
 
 	return (
 		<div className='w-full max-w-screen-xl mx-auto whitespace-pre-wrap break-words'>
+			<Helmet title={helmetTitle} />
 			{
 				loading ? <Spinner /> :
 				<div>
