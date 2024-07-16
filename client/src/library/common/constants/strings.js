@@ -2,6 +2,7 @@ export const string = {
 	common       : {
 		logoTitle : 'Logo',
 	},
+	brandTitle   : 'Melo Electronics',
 	title        : 'Name',
 	routes       : {
 		homeTitle                : 'Home',
