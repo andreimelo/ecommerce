@@ -6,6 +6,8 @@ import { showAverageRating, numberOfStar } from '../../../library/helpers/rating
 import Card from '../../../library/components/Card';
 import { addToCart } from '../../../library/helpers/cart';
 import Spinner from '../../../library/components/Spinner/Spinner';
+import Helmet from '../../../library/components/Helmet';
+import { documentTitle } from '../../../library/helpers/tags';
 
 const ShopByCategory = ({ match }) => {
 	const dispatch = useDispatch();
@@ -22,6 +24,7 @@ const ShopByCategory = ({ match }) => {
 		setLoading,
 	] = useState(false);
 	const { slug } = match.params;
+	const helmetTitle = documentTitle(category.name || '');
 
 	async function fetchCategoryBySlug(path){
 		try {
@@ -46,6 +49,7 @@ const ShopByCategory = ({ match }) => {
 	);
 	return (
 		<div className='w-full max-w-screen-xl mx-auto whitespace-pre-wrap break-words'>
+			<Helmet title={helmetTitle} />
 			{
 				loading ? <Spinner /> :
 				<section>
