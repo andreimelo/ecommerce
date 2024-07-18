@@ -24,13 +24,12 @@ const SubCategory = ({ match }) => {
 		setLoading,
 	] = useState(false);
 	const { slug } = match.params;
-	const helmetTitle =
-		documentTitle(
-			// tb refactor
-			`${
-				product[0] ? product[0].brand :
-				'' + ' - ' + category['name']}`,
-		) || '';
+	const helmetTitle = documentTitle(
+		// tb refactor
+		`${
+			product[0] ? product[0].brand :
+			null + ' - ' + category['name']}`,
+	);
 
 	async function fetchCategoryBySlug(path){
 		try {
