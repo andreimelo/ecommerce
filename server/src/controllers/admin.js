@@ -4,6 +4,7 @@ exports.orders = async (req, res) => {
 	let allOrders = await Order.find({})
 		.sort('-createdAt')
 		.populate('products.product')
+		.populate('orderedBy', 'name email address1 address2 city state zip_code')
 		.exec();
 
 	res.json({
