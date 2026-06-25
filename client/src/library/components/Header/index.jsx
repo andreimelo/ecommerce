@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { string } from '../../common/constants/strings';
 import { images } from '../../../resources/images';
 import PropTypes from 'prop-types';
 import './style.css';
-import { getCategories } from '../../services/category';
 import { logOutAction } from '../../common/actions/authentication';
 import icons from '../../../resources/icons';
 import Profile from '../../components/Profile';
@@ -16,28 +15,12 @@ function Header({ role, imageURL }){
 	const dispatch = useDispatch();
 	const { user, search, cart } = useSelector((state) => ({ ...state }));
 	const { text } = search;
-	const [
-		category,
-		setCategory,
-	] = useState([]);
 	let totalCount = cart.reduce((acc, curr) => acc + curr.count, 0);
-
-	async function fetchCategoriesData(){
-		try {
-			const result = await getCategories();
-			setCategory(result);
-		} catch (err) {
-			alert(err);
-		}
-	}
 
 	async function handleSubmitSearch(e){
 		e.preventDefault();
 		history.push(`/shop?${text}`);
 	}
-	useEffect(() => {
-		fetchCategoriesData();
-	}, []);
 
 	function renderRoleHeader(){
 		switch (role) {
@@ -96,32 +79,13 @@ function Header({ role, imageURL }){
 								/>
 							</div>
 							<div className='nav-link-container'>
-								{category && (
-									<div className='settings'>
-										<div className='nav-title text-sm font-semibold list'>
-											Shop By Category
-										</div>
-										<div className='z-10 settings-content bg-white border'>
-											{category.map((item) => (
-												<div>
-													<Link
-														key={item._id}
-														to={`/category/${item.slug}`}
-													>
-														{item.name}
-													</Link>
-												</div>
-											))}
-										</div>
-									</div>
-								)}
 								{/* Input */}
 								<form onSubmit={handleSubmitSearch}>
 									<SearchFilter
 										type='search'
 										searchValue={text}
 										placeHolder='Search'
-										searchClass=' mx-10 border p-2 border-gray-300'
+										searchClass='mx-10'
 										handleSearchFilterChange={(event) =>
 											dispatch({
 												type    : 'SEARCH_QUERY',
@@ -205,32 +169,13 @@ function Header({ role, imageURL }){
 								/>
 							</div>
 							<div className='nav-link-container'>
-								{category && (
-									<div className='settings'>
-										<div className='nav-title text-sm font-semibold list'>
-											Shop By Category
-										</div>
-										<div className='z-10 settings-content bg-white border'>
-											{category.map((item) => (
-												<div>
-													<Link
-														key={item._id}
-														to={`/category/${item.slug}`}
-													>
-														{item.name}
-													</Link>
-												</div>
-											))}
-										</div>
-									</div>
-								)}
 								{/* Input */}
 								<form onSubmit={handleSubmitSearch}>
 									<SearchFilter
 										type='search'
 										searchValue={text}
 										placeHolder='Search'
-										searchClass=' mx-10 border p-2 border-gray-300'
+										searchClass='mx-10 rounded-lg overflow-hidden'
 										handleSearchFilterChange={(event) =>
 											dispatch({
 												type    : 'SEARCH_QUERY',
