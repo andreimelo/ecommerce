@@ -28,7 +28,7 @@ const Pagination = ({
 							{icons.previousArrow}
 						</li>
 					)}
-					{pageNumbers.map((number) => (
+					{pagination > 1  && pageNumbers.map((number) => (
 						<li
 							key={number}
 							onClick={() => handlePagination(number)}
