@@ -170,6 +170,39 @@ const icons = {
 			/>
 		</svg>
 	),
+	login: (
+		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+			stroke-width="1.5" stroke="currentColor" width="24" height="24">
+			<path stroke-linecap="round" stroke-linejoin="round"
+				d="M15.75 6.75a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.5 20.118a7.5 7.5 0 0115 0A17.933 17.933 0 0112 21.75a17.933 17.933 0 01-7.5-1.632z" />
+		</svg>
+	),
+	search: (
+		<svg
+			width="20"
+			height="20"
+			viewBox="0 0 24 24"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+			>
+			<circle
+				cx="11"
+				cy="11"
+				r="7"
+				stroke="currentColor"
+				stroke-width="2"
+			/>
+			<line
+				x1="16.65"
+				y1="16.65"
+				x2="21"
+				y2="21"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+			/>
+		</svg>
+	)
 };
 
 export default icons;

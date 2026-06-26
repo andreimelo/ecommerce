@@ -93,12 +93,12 @@ function Header({ role, imageURL }){
 											})}
 									/>
 								</form>
-								<div
+								{/* <div
 									className='nav-title'
 									onClick={() => history.push('/shop')}
 								>
 									{icons['shop']}
-								</div>
+								</div> */}
 								<div
 									className='nav-title relative flex'
 									onClick={() => history.push('/cart')}
@@ -148,7 +148,7 @@ function Header({ role, imageURL }){
 											className='nav-title font-semibold text-sm'
 											onClick={() => history.push('/login')}
 										>
-											{string.routes.loginTitle}
+											{icons['login']}
 										</div>
 									</div>
 								)}
@@ -175,7 +175,7 @@ function Header({ role, imageURL }){
 										type='search'
 										searchValue={text}
 										placeHolder='Search'
-										searchClass='mx-10 rounded-lg overflow-hidden'
+										searchClass='mx-5 rounded-lg overflow-hidden'
 										handleSearchFilterChange={(event) =>
 											dispatch({
 												type    : 'SEARCH_QUERY',
@@ -183,12 +183,12 @@ function Header({ role, imageURL }){
 											})}
 									/>
 								</form>
-								<div
+								{/* <div
 									className='nav-title'
 									onClick={() => history.push('/shop')}
 								>
 									{icons['shop']}
-								</div>
+								</div> */}
 								<div
 									className='nav-title relative flex'
 									onClick={() => history.push('/cart')}
@@ -226,7 +226,7 @@ function Header({ role, imageURL }){
 											className='nav-title font-semibold text-sm'
 											onClick={() => history.push('/login')}
 										>
-											{string.routes.loginTitle}
+											{icons['login']}
 										</div>
 									</div>
 								)}

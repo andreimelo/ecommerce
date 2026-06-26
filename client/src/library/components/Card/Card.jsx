@@ -53,7 +53,7 @@ const Card = ({
 							<div className='text-sm text-gray-500'>No rating</div>
 						))}
 					</div>
-					<div className='text-lg font-bold text-indigo-600'>{price}</div>
+					<div className='text-lg font-semibold'>{price}</div>
 				</div>
 
 				{isProductAndCart && (

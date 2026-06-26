@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import icons from '../../../resources/icons';
 import { type } from '../../common/constants/types';
 
 const SearchFilter = ({
@@ -26,9 +27,7 @@ const SearchFilter = ({
 					aria-label='Search'
 					className='absolute right-2 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center	transition hover:border-indigo-300 hover:text-indigo-600'
 				>
-						<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="18" height="18" viewBox="0 0 24 24">
-							<path d="M21.414,18.586c-0.287-0.287-1.942-1.942-2.801-2.801c-0.719,1.142-1.686,2.109-2.828,2.828	c0.859,0.859,2.514,2.514,2.801,2.801c0.781,0.781,2.047,0.781,2.828,0C22.195,20.633,22.195,19.367,21.414,18.586z"></path><circle cx="11" cy="11" r="9" opacity=".35"></circle>
-						</svg>
+					{icons['search']}
 				</button>
 			)}
 		</div>
