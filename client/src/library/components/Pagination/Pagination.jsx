@@ -11,43 +11,43 @@ const Pagination = ({
 	previousPage,
 	nextPage,
 }) => {
-	const pageNumbers =
-		totalLength ? [
-			...Array(Math.ceil(totalLength / totalRenderPerPage) + 1).keys(),
-		].slice(1) :
-		[];
+	const pageNumbers = totalLength
+		? [...Array(Math.ceil(totalLength / totalRenderPerPage) + 1).keys()].slice(1)
+		: [];
+
 	return (
 		<div className={containerClass}>
-			<ul className='flex items-center -space-x-px h-8 text-sm'>
-				{pagination > 1 && (
-					<li
-						className='flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
-						onClick={previousPage}
-					>
-						<span class='sr-only'>Previous</span>
-						{icons.previousArrow}
-					</li>
-				)}
-				{pageNumbers.map((number) => (
-					<li
-						key={number}
-						onClick={() => handlePagination(number)}
-						className='flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
-					>
-						{number}
-					</li>
-				))}
-				{pagination === pageNumbers.length ||
-					(pagination <= pageNumbers.length && (
+			<div className='w-full overflow-x-auto'>
+				<ul className='flex flex-wrap items-center gap-2 h-8 text-sm justify-center'>
+					{pagination > 1 && (
 						<li
-							className='flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white'
-							onClick={nextPage}
+							className='flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-100 hover:text-gray-700'
+							onClick={previousPage}
 						>
-							<span class='sr-only'>Next</span>
-							{icons.nextArrow}
+							<span className='sr-only'>Previous</span>
+							{icons.previousArrow}
+						</li>
+					)}
+					{pagination > 1  && pageNumbers.map((number) => (
+						<li
+							key={number}
+							onClick={() => handlePagination(number)}
+							className='flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700'
+						>
+							{number}
 						</li>
 					))}
-			</ul>
+					{pagination < pageNumbers.length && (
+						<li
+							className='flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-md hover:bg-gray-100 hover:text-gray-700'
+							onClick={nextPage}
+						>
+							<span className='sr-only'>Next</span>
+							{icons.nextArrow}
+						</li>
+					)}
+				</ul>
+			</div>
 		</div>
 	);
 };
@@ -63,7 +63,7 @@ Pagination.propTypes = {
 };
 
 Pagination.defaultProps = {
-	containerClass     : 'flex justify-center',
+	containerClass     : 'flex justify-center mt-6',
 	handlePagination   : () => {},
 	totalRenderPerPage : 3,
 	totalLength        : 0,

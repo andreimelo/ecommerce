@@ -95,6 +95,7 @@ const Category = ({ role }) => {
 					<SearchFilter
 						searchValue={search}
 						handleSearchFilterChange={handleSearchFilterChange}
+						showButton={false}
 					/>
 					<Table
 						searchFilter={searchBy}

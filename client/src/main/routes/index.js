@@ -6,6 +6,7 @@ import env from '../../library/common/config/env';
 import SideDrawer from '../../library/components/SideDrawer';
 import Spinner from '../../library/components/Spinner/Spinner';
 import RoleHelmet from './components/RoleHelmet/RoleHelmet';
+import ChatWidget from '../../library/components/ChatWidget'
 
 //Lazy-loaded pages
 // User/Subscriber pages
@@ -342,6 +343,7 @@ const InitialRoutes = ({ store }) => {
 						))}
 					</Switch>
 				</div>
+				<ChatWidget />
 				<Footer />
 			</BrowserRouter>
 		</Suspense>

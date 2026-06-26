@@ -134,6 +134,7 @@ const SubCategory = ({ role }) => {
 					<SearchFilter
 						searchValue={search}
 						handleSearchFilterChange={handleSearchFilterChange}
+						showButton={false}
 					/>
 					<Table
 						searchFilter={searchBy}

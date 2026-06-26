@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom/cjs/react-router-dom';
 import Modal from '../../../library/components/Modal';
 import { images } from '../../../resources/images';
 import SelectOption from '../../../library/components/SelectOption';
@@ -107,19 +106,22 @@ function Cart(){
 					{cart &&
 						cart.map((item) => {
 							return (
-								<div className='flex border my-5'>
+								<div key={item._id} className='flex border my-5'>
 									<div id='clickPreview' onClick={openModal}>
 										{
-											item.images.length ? <img
-												className='w-40 h-40 object-cover'
-												src={item.images[0].url}
-												alt='cartProductPreview'
-											/> :
-											<img
-												src={images['default']}
-												className='w-40 h-40 object-cover'
-												alt={`cartDefaultImage`}
-											/>}
+											item.images && item.images.length ? (
+												<img
+													className='w-40 h-40 object-cover'
+													src={item.images[0].url}
+													alt='cartProductPreview'
+												/>
+											) : (
+												<img
+													src={images['default']}
+													className='w-40 h-40 object-cover'
+													alt={`cartDefaultImage`}
+												/>
+											)}
 									</div>
 									<div className='mx-10 my-5'>
 										<label className='font-semibold'>
@@ -171,7 +173,7 @@ function Cart(){
 										modalTitle='Preview'
 									>
 										<img
-											src={item.images[0].url}
+											src={item.images && item.images.length ? item.images[0].url : images['default']}
 											alt='cartProductPreview'
 										/>
 									</Modal>

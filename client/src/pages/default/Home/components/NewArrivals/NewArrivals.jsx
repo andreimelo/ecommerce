@@ -50,19 +50,24 @@ const NewArrivals = () => {
 
 	return (
 		<div className='my-10'>
-			<label className='text-2xl font-semibold'>New Arrivals</label>
+			<div className='flex items-center justify-between mb-4'>
+				<div>
+					<h2 className='text-2xl font-semibold'>New Arrivals</h2>
+					<p className='text-sm text-gray-500'>Latest products just added</p>
+				</div>
+			</div>
 			<div className='flex'>
-				<div className='grid grid-cols-4 gap-4 max-[600px]:inline-flex max-[600px]:w-500 max-[600px]:overflow-x-scroll'>
+				<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full pb-6'>
 					{
 						loading ? <Spinner /> :
 						dataResult &&
 						dataResult.map((item) => (
 							<Card
 								containerClass={
-									'relative my-5 flex w-full max-w-xs flex-col border h-96'
+									'relative my-5 flex w-full flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow hover:shadow-lg transition transform hover:-translate-y-1 h-full'
 								}
-								imgClass='object-contain bg-gray-100'
-								imgContainerClass='relative flex overflow-hidden'
+								imgClass='object-contain bg-gray-100 w-full h-56'
+								imgContainerClass='relative mx-3 mt-3 flex h-56 overflow-hidden rounded-t-lg justify-center items-center bg-gray-50'
 								imgSrc={item.images}
 								title={item.title}
 								description={item.description}
