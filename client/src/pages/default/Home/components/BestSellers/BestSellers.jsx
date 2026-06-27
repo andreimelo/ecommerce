@@ -6,7 +6,7 @@ import Pagination from '../../../../../library/components/Pagination';
 import usePagination from '../../../../../library/hooks/usePagination';
 import { showAverageRating, numberOfStar } from '../../../../../library/helpers/rating';
 import { addToCart } from '../../../../../library/helpers/cart';
-import Spinner from '../../../../../library/components/Spinner/Spinner';
+import { Skeleton } from 'boneyard-js/react'
 
 const BestSellers = () => {
 	const dispatch = useDispatch();
@@ -52,9 +52,9 @@ const BestSellers = () => {
 					<p className='text-sm text-gray-500'>Top-rated items customers love</p>
 				</div>
 			</div>
+			<Skeleton name="best-seller-card" loading={loading}>
 			<div className='flex'>
 				{
-					loading ? <Spinner /> :
 					<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full pb-6'>
 						{dataResult &&
 							dataResult.map((item) => (
@@ -79,6 +79,7 @@ const BestSellers = () => {
 							))}
 					</div>}
 			</div>
+			</Skeleton>
 			<Pagination
 				pagination={pagination}
 				handlePagination={handlePagination}

@@ -6,7 +6,8 @@ import usePagination from '../../../../../library/hooks/usePagination';
 import { showAverageRating, numberOfStar } from '../../../../../library/helpers/rating';
 import { addToCart } from '../../../../../library/helpers/cart';
 import { useDispatch } from 'react-redux';
-import Spinner from '../../../../../library/components/Spinner/Spinner';
+// import Spinner from '../../../../../library/components/Spinner/Spinner';
+import { Skeleton } from 'boneyard-js/react'
 
 const NewArrivals = () => {
 	const dispatch = useDispatch();
@@ -57,9 +58,11 @@ const NewArrivals = () => {
 				</div>
 			</div>
 			<div className='flex'>
+				<Skeleton name="new-arrival-card" loading={loading}
+				  
+				>
 				<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full pb-6'>
 					{
-						loading ? <Spinner /> :
 						dataResult &&
 						dataResult.map((item) => (
 							<Card
@@ -82,6 +85,7 @@ const NewArrivals = () => {
 							/>
 						))}
 				</div>
+				</Skeleton>
 			</div>
 			<Pagination
 				pagination={pagination}
