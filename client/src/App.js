@@ -5,6 +5,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { onAuthStateAction } from './library/common/actions/authentication';
 import './index.css';
+import './bones/registry';
 
 function App(){
 	const dispatch = useDispatch();
