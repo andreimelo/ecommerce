@@ -168,9 +168,7 @@ function Header({ role, imageURL }){
 									alt='brandLogo'
 								/>
 							</div>
-							<div className='nav-link-container'>
-								{/* Input */}
-								<form onSubmit={handleSubmitSearch}>
+							<form onSubmit={handleSubmitSearch} >
 									<SearchFilter
 										type='search'
 										searchValue={text}
@@ -183,6 +181,7 @@ function Header({ role, imageURL }){
 											})}
 									/>
 								</form>
+							<div className='nav-link-container'>
 								{/* <div
 									className='nav-title'
 									onClick={() => history.push('/shop')}
