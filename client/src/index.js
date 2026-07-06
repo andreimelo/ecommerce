@@ -5,6 +5,31 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import store from './library/common/store';
 import { Provider } from 'react-redux';
+import { refreshSession } from './library/services/auth';
+import { shouldAttemptSessionRefresh } from './library/helpers/auth/session';
+
+const originalFetch = window.fetch.bind(window);
+
+window.fetch = async (input, init = {}) => {
+	const requestInit = {
+		...init,
+		credentials : init.credentials || 'include',
+	};
+
+	const response = await originalFetch(input, requestInit);
+
+	if (shouldAttemptSessionRefresh(input, requestInit, response)) {
+		const refreshed = await refreshSession();
+		if (refreshed && refreshed.ok) {
+			return originalFetch(input, {
+				...requestInit,
+				__isRetry : true,
+			});
+		}
+	}
+
+	return response;
+};
 
 ReactDOM.render(
 	<React.StrictMode>
