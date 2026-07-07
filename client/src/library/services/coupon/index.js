@@ -1,4 +1,5 @@
 import env from '../../common/config/env';
+import { apiFetch } from '../../common/config/fetch';
 
 export async function createCoupon(fields, token){
 	const options = {
@@ -10,7 +11,7 @@ export async function createCoupon(fields, token){
 		},
 		body    : JSON.stringify({ ...fields }),
 	};
-	const result = await fetch(`${env.base_uri}/coupon`, options);
+	const result = await apiFetch(`${env.base_uri}/coupon`, options);
 
 	const data = await result.json();
 
@@ -26,7 +27,7 @@ export async function removeCoupon(id, token){
 			authToken      : token || '',
 		},
 	};
-	const result = await fetch(`${env.base_uri}/coupon/${id}`, options);
+	const result = await apiFetch(`${env.base_uri}/coupon/${id}`, options);
 
 	const data = await result.json();
 
@@ -42,7 +43,7 @@ export async function getCoupons(token){
 			authToken      : token || '',
 		},
 	};
-	const result = await fetch(`${env.base_uri}/coupons`, options);
+	const result = await apiFetch(`${env.base_uri}/coupons`, options);
 
 	const data = await result.json();
 
@@ -59,7 +60,7 @@ export async function applyCoupon(coupon, token){
 		},
 		body    : JSON.stringify({ coupon }),
 	};
-	const result = await fetch(`${env.base_uri}/user/cart/coupon`, options);
+	const result = await apiFetch(`${env.base_uri}/user/cart/coupon`, options);
 
 	const data = await result.json();
 

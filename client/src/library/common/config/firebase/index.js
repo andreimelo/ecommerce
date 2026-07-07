@@ -25,7 +25,7 @@ export const forgotPasswordConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+ const app = initializeApp(firebaseConfig);
 
 getAnalytics(app);
 

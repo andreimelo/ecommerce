@@ -13,9 +13,10 @@ import SearchFilter from '../SearchFilter';
 function Header({ role, imageURL }){
 	const history = useHistory();
 	const dispatch = useDispatch();
-	const { user, search, cart } = useSelector((state) => ({ ...state }));
-	const { text } = search;
-	let totalCount = cart.reduce((acc, curr) => acc + curr.count, 0);
+	const { user = {}, search = {}, cart = [] } = useSelector((state) => ({ ...state })) || {};
+	const { text = '' } = search;
+	const safeCart = Array.isArray(cart) ? cart : [];
+	let totalCount = safeCart.reduce((acc, curr) => acc + (curr.count || 0), 0);
 
 	async function handleSubmitSearch(e){
 		e.preventDefault();

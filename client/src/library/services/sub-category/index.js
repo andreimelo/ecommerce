@@ -1,4 +1,5 @@
 import env from '../../common/config/env';
+import { apiFetch } from '../../common/config/fetch';
 
 export async function getSubCategories(){
 	const options = {
@@ -8,7 +9,7 @@ export async function getSubCategories(){
 			'Content-Type' : 'application/json',
 		},
 	};
-	const result = await fetch(`${env.base_uri}/sub-categories`, options);
+	const result = await apiFetch(`${env.base_uri}/sub-categories`, options);
 
 	const data = await result.json();
 
@@ -23,7 +24,7 @@ export async function getSubCategory(slug){
 			'Content-Type' : 'application/json',
 		},
 	};
-	const result = await fetch(`${env.base_uri}/sub-category/${slug}`, options);
+	const result = await apiFetch(`${env.base_uri}/sub-category/${slug}`, options);
 
 	const data = await result.json();
 
@@ -39,7 +40,7 @@ export async function removeSubCategory(slug, token){
 			authToken      : token || '',
 		},
 	};
-	const result = await fetch(`${env.base_uri}/sub-category/${slug}`, options);
+	const result = await apiFetch(`${env.base_uri}/sub-category/${slug}`, options);
 
 	const data = await result.json();
 
@@ -59,7 +60,7 @@ export async function updateSubCategory(slug, category, token){
 				...category,
 			}),
 		};
-		const result = await fetch(`${env.base_uri}/sub-category/${slug}`, options);
+		const result = await apiFetch(`${env.base_uri}/sub-category/${slug}`, options);
 
 		const data = await result.json();
 
@@ -81,7 +82,7 @@ export async function createSubCategory(category, token){
 			...category,
 		}),
 	};
-	const result = await fetch(`${env.base_uri}/sub-category`, options);
+	const result = await apiFetch(`${env.base_uri}/sub-category`, options);
 
 	const data = await result.json();
 

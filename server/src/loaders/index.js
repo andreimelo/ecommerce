@@ -6,6 +6,7 @@ const { connectToMongoDb } = require('../config/mongoDb');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const { readdirSync } = require('fs');
+const path = require('path');
 
 //  Body parser json
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
@@ -18,13 +19,29 @@ connectToMongoDb();
 app.use(morgan('dev'));
 
 // Cors
-app.use(cors());
+const corsOptions = {
+	origin      : true,
+	credentials : true,
+	allowedHeaders : [
+		'Content-Type',
+		'Authorization',
+		'authToken',
+		'X-CSRF-Token',
+		'X-Requested-With',
+		'Accept',
+	],
+	methods     : ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 // Compression
 app.use(compression());
 
 // File system
-readdirSync('server/src/routes').map((r) => app.use('/api', require('../routes/' + r)));
+const routesDirectory = path.join(__dirname, '..', 'routes');
+readdirSync(routesDirectory).map((r) => app.use('/api', require('../routes/' + r)));
 
 app.get('/', (req, res) => {
 	res.send(string.common.startServerMessage);
