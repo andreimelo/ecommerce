@@ -1,10 +1,10 @@
 import env from '../../common/config/env';
+import { apiFetch } from '../../common/config/fetch';
 
 async function getCsrfToken(){
 	try {
-		const response = await fetch(`${env.base_uri}/auth/csrf-token`, {
+		const response = await apiFetch(`${env.base_uri}/auth/csrf-token`, {
 			method      : 'GET',
-			credentials : 'include',
 			headers     : {
 				Accept : 'application/json',
 			},
@@ -35,7 +35,7 @@ async function createRequestOptions(token, method = 'POST'){
 export async function refreshSession(){
 	try {
 		const csrfToken = await getCsrfToken();
-		const response = await fetch(`${env.base_uri}/auth/refresh`, {
+		const response = await apiFetch(`${env.base_uri}/auth/refresh`, {
 			method      : 'POST',
 			credentials : 'include',
 			headers     : {
@@ -57,7 +57,7 @@ export async function createOrUpdateUser(token){
 			throw new Error('Token is required for authentication');
 		}
 		const options = await createRequestOptions(token);
-		const result = await fetch(`${env.base_uri}/auth/create-or-update`, options);
+		const result = await apiFetch(`${env.base_uri}/auth/create-or-update`, options);
 
 		if (!result.ok) {
 			const error = await result.json();
@@ -78,7 +78,7 @@ export async function currentUser(token){
 			throw new Error('Token is required for authentication');
 		}
 		const options = await createRequestOptions(token);
-		const result = await fetch(`${env.base_uri}/auth/current-user`, options);
+		const result = await apiFetch(`${env.base_uri}/auth/current-user`, options);
 
 		if (!result.ok) {
 			const error = await result.json();
@@ -99,7 +99,7 @@ export async function currentAdmin(token){
 			throw new Error('Token is required for authentication');
 		}
 		const options = await createRequestOptions(token);
-		const result = await fetch(`${env.base_uri}/auth/current-admin`, options);
+		const result = await apiFetch(`${env.base_uri}/auth/current-admin`, options);
 
 		if (!result.ok) {
 			const error = await result.json();
@@ -117,9 +117,8 @@ export async function currentAdmin(token){
 export async function logoutUser(token){
 	try {
 		const csrfToken = await getCsrfToken();
-		const result = await fetch(`${env.base_uri}/auth/logout`, {
+		const result = await apiFetch(`${env.base_uri}/auth/logout`, {
 			method      : 'POST',
-			credentials : 'include',
 			headers     : {
 				Accept         : 'application/json',
 				'Content-Type' : 'application/json',

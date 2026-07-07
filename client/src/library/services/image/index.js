@@ -1,4 +1,5 @@
 import env from '../../common/config/env';
+import { apiFetch } from '../../common/config/fetch';
 
 export async function imageUpload(imageUri, token){
 	// refactor
@@ -11,7 +12,7 @@ export async function imageUpload(imageUri, token){
 		},
 		body    : JSON.stringify(imageUri),
 	};
-	const result = await fetch(`${env.base_uri}/upload-images`, options);
+	const result = await apiFetch(`${env.base_uri}/upload-images`, options);
 
 	const data = await result.json();
 
@@ -29,7 +30,7 @@ export async function removeImageUpload(imageUri, token){
 		},
 		body    : JSON.stringify({ public_id: imageUri }),
 	};
-	const result = await fetch(`${env.base_uri}/remove-image`, options);
+	const result = await apiFetch(`${env.base_uri}/remove-image`, options);
 
 	const data = await result.json();
 

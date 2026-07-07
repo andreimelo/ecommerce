@@ -13,7 +13,7 @@ const originalFetch = window.fetch.bind(window);
 window.fetch = async (input, init = {}) => {
 	const requestInit = {
 		...init,
-		credentials : init.credentials || 'include',
+		// credentials : 'include',
 	};
 
 	const response = await originalFetch(input, requestInit);

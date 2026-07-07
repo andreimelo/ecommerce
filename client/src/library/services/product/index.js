@@ -1,4 +1,5 @@
 import env from '../../common/config/env';
+import { apiFetch } from '../../common/config/fetch';
 
 export async function createProduct(product, token){
 	// refactor
@@ -11,7 +12,7 @@ export async function createProduct(product, token){
 		},
 		body    : JSON.stringify(product),
 	};
-	const result = await fetch(`${env.base_uri}/product`, options);
+	const result = await apiFetch(`${env.base_uri}/product`, options);
 
 	const data = await result.json();
 
@@ -26,7 +27,7 @@ export async function getProductsByCount(count){
 			'Content-Type' : 'application/json',
 		},
 	};
-	const result = await fetch(`${env.base_uri}/products/${count}`, options);
+	const result = await apiFetch(`${env.base_uri}/products/${count}`, options);
 
 	const data = await result.json();
 
@@ -43,7 +44,7 @@ export async function removeProduct(slug, token){
 			authToken      : token || '',
 		},
 	};
-	const result = await fetch(`${env.base_uri}/product/${slug}`, options);
+	const result = await apiFetch(`${env.base_uri}/product/${slug}`, options);
 
 	const data = await result.json();
 
@@ -58,7 +59,7 @@ export async function getProductBySlug(slug){
 			'Content-Type' : 'application/json',
 		},
 	};
-	const result = await fetch(`${env.base_uri}/product/${slug}`, options);
+	const result = await apiFetch(`${env.base_uri}/product/${slug}`, options);
 
 	const data = await result.json();
 
@@ -76,7 +77,7 @@ export async function updateProductBySlug(slug, product, token){
 		},
 		body    : JSON.stringify(product),
 	};
-	const result = await fetch(`${env.base_uri}/product/${slug}`, options);
+	const result = await apiFetch(`${env.base_uri}/product/${slug}`, options);
 
 	const data = await result.json();
 
@@ -99,7 +100,7 @@ export async function getProductsBySortAndOrder(sort, order, page){
 		},
 		body    : JSON.stringify(transformData),
 	};
-	const result = await fetch(`${env.base_uri}/products`, options);
+	const result = await apiFetch(`${env.base_uri}/products`, options);
 
 	const data = await result.json();
 
@@ -120,7 +121,7 @@ export async function putProductStarRating(productId, star, token){
 		},
 		body    : JSON.stringify(transformData),
 	};
-	const result = await fetch(`${env.base_uri}/product/star/${productId}`, options);
+	const result = await apiFetch(`${env.base_uri}/product/star/${productId}`, options);
 
 	const data = await result.json();
 
@@ -135,7 +136,7 @@ export async function getRelatedProducts(productId){
 			'Content-Type' : 'application/json',
 		},
 	};
-	const result = await fetch(`${env.base_uri}/product/related/${productId}`, options);
+	const result = await apiFetch(`${env.base_uri}/product/related/${productId}`, options);
 
 	const data = await result.json();
 
@@ -152,7 +153,7 @@ export async function getProductsByFilter(arg){
 		},
 		body    : JSON.stringify(arg),
 	};
-	const result = await fetch(`${env.base_uri}/search/filters`, options);
+	const result = await apiFetch(`${env.base_uri}/search/filters`, options);
 	const data = await result.json();
 
 	return data;

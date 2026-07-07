@@ -38,11 +38,11 @@ export async function logInAction(values, history, dispatch){
 export async function googleLogInAction(history, dispatch){
 	try {
 		const result = await signInWithPopup(auth, googleAuthProvider);
+		
 		const { user } = result;
 		const idTokenResult = await user.getIdTokenResult();
 
 		const { name, role, _id } = await createOrUpdateUser(idTokenResult.token);
-		console.log(result, 'PEPEPEPE')
 		dispatch({
 			type    : 'LOGGED_IN_USER',
 			payload : {
@@ -54,9 +54,10 @@ export async function googleLogInAction(history, dispatch){
 				imageURL : user.photoURL,
 			},
 		});
+
 		return roleBasedRedirect(role, history);
 	} catch (error) {
-		console.error('Google login error:', error);
+		console.error('Google login error:', error.code);
 		const errorMessage = error.message || 'Failed to login with Google';
 		alert(errorMessage);
 		throw error;
