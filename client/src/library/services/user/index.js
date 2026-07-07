@@ -1,4 +1,5 @@
 import env from '../../common/config/env';
+import { apiFetch } from '../../common/config/fetch';
 
 export async function getUserAccounts(token){
 	const options = {
@@ -9,7 +10,7 @@ export async function getUserAccounts(token){
 			authToken      : token || '',
 		},
 	};
-	const result = await fetch(`${env.base_uri}/user/accounts`, options);
+	const result = await apiFetch(`${env.base_uri}/user/accounts`, options);
 
 	const data = await result.json();
 
@@ -26,7 +27,7 @@ export async function saveUserCart(cart, token){
 		},
 		body    : JSON.stringify({ cart }),
 	};
-	const result = await fetch(`${env.base_uri}/user/save-cart`, options);
+	const result = await apiFetch(`${env.base_uri}/user/save-cart`, options);
 
 	const data = await result.json();
 
@@ -42,7 +43,7 @@ export async function getUserCart(token){
 			authToken      : token || '',
 		},
 	};
-	const result = await fetch(`${env.base_uri}/user/save-cart`, options);
+	const result = await apiFetch(`${env.base_uri}/user/save-cart`, options);
 
 	const data = await result.json();
 
@@ -60,7 +61,7 @@ export async function saveUserAddress(userDetails, token){
 		},
 		body    : JSON.stringify({ ...userDetails }),
 	};
-	const result = await fetch(`${env.base_uri}/user/address`, options);
+	const result = await apiFetch(`${env.base_uri}/user/address`, options);
 
 	const data = await result.json();
 
@@ -74,10 +75,11 @@ export async function createOrder(stripeResponse, token){
 			Accept         : 'application/json',
 			'Content-Type' : 'application/json',
 			authToken      : token || '',
+			
 		},
 		body    : JSON.stringify({ stripeResponse }),
 	};
-	const result = await fetch(`${env.base_uri}/user/order`, options);
+	const result = await apiFetch(`${env.base_uri}/user/order`, options);
 
 	const data = await result.json();
 
@@ -93,7 +95,7 @@ export async function emptyCart(token){
 			authToken      : token || '',
 		},
 	};
-	const result = await fetch(`${env.base_uri}/user/save-cart`, options);
+	const result = await apiFetch(`${env.base_uri}/user/save-cart`, options);
 
 	const data = await result.json();
 
@@ -109,7 +111,7 @@ export async function getUserOrders(token){
 			authToken      : token || '',
 		},
 	};
-	const result = await fetch(`${env.base_uri}/user/orders`, options);
+	const result = await apiFetch(`${env.base_uri}/user/orders`, options);
 
 	const data = await result.json();
 
@@ -125,7 +127,7 @@ export async function getWishList(token){
 			authToken      : token || '',
 		},
 	};
-	const result = await fetch(`${env.base_uri}/user/wishlist`, options);
+	const result = await apiFetch(`${env.base_uri}/user/wishlist`, options);
 
 	const data = await result.json();
 
@@ -142,7 +144,7 @@ export async function addToWishList(productId, token){
 		},
 		body    : JSON.stringify({ productId }),
 	};
-	const result = await fetch(`${env.base_uri}/user/wishlist`, options);
+	const result = await apiFetch(`${env.base_uri}/user/wishlist`, options);
 
 	const data = await result.json();
 
@@ -158,7 +160,7 @@ export async function removeFromWishList(productId, token){
 			authToken      : token || '',
 		},
 	};
-	const result = await fetch(`${env.base_uri}/user/wishlist/${productId}`, options);
+	const result = await apiFetch(`${env.base_uri}/user/wishlist/${productId}`, options);
 
 	const data = await result.json();
 
@@ -175,9 +177,10 @@ export async function createCashOrder(payment, token, coupon){
 		},
 		body    : JSON.stringify({ payment, couponApplied: coupon }),
 	};
-	const result = await fetch(`${env.base_uri}/user/cash-order`, options);
+	const result = await apiFetch(`${env.base_uri}/user/cash-order`, options);
 
 	const data = await result.json();
 
 	return data;
 }
+

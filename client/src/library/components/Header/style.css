@@ -23,8 +23,11 @@
 
 .nav-container {
   width: 100%;
+  min-height: 80px;
   height: auto;
   background-color: var(--white-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  z-index: 20;
 }
 
 .nav-sub-container {

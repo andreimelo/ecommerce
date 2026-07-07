@@ -1,4 +1,5 @@
 import env from '../../common/config/env';
+import { apiFetch } from '../../common/config/fetch';
 
 export async function getCategories(){
 	const options = {
@@ -8,7 +9,7 @@ export async function getCategories(){
 			'Content-Type' : 'application/json',
 		},
 	};
-	const result = await fetch(`${env.base_uri}/categories`, options);
+	const result = await apiFetch(`${env.base_uri}/categories`, options);
 
 	const data = await result.json();
 
@@ -23,7 +24,7 @@ export async function getCategory(slug){
 			'Content-Type' : 'application/json',
 		},
 	};
-	const result = await fetch(`${env.base_uri}/category/${slug}`, options);
+	const result = await apiFetch(`${env.base_uri}/category/${slug}`, options);
 
 	const data = await result.json();
 
@@ -39,7 +40,7 @@ export async function removeCategory(slug, token){
 			authToken      : token || '',
 		},
 	};
-	const result = await fetch(`${env.base_uri}/category/${slug}`, options);
+	const result = await apiFetch(`${env.base_uri}/category/${slug}`, options);
 
 	const data = await result.json();
 
@@ -59,7 +60,7 @@ export async function updateCategory(slug, category, token){
 				name : category,
 			}),
 		};
-		const result = await fetch(`${env.base_uri}/category/${slug}`, options);
+		const result = await apiFetch(`${env.base_uri}/category/${slug}`, options);
 
 		const data = await result.json();
 
@@ -81,7 +82,7 @@ export async function createCategory(category, token){
 			name : category,
 		}),
 	};
-	const result = await fetch(`${env.base_uri}/category`, options);
+	const result = await apiFetch(`${env.base_uri}/category`, options);
 
 	const data = await result.json();
 
@@ -96,7 +97,7 @@ export async function getSubCategory(id){
 			'Content-Type' : 'application/json',
 		},
 	};
-	const result = await fetch(`${env.base_uri}/category/sub-category/${id}`, options);
+	const result = await apiFetch(`${env.base_uri}/category/sub-category/${id}`, options);
 
 	const data = await result.json();
 
