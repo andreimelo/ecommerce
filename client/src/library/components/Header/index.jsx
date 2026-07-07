@@ -27,7 +27,7 @@ function Header({ role, imageURL }){
 		switch (role) {
 			case 'admin':
 				return (
-					<nav className='nav-container shadow'>
+					<nav className='nav-container'>
 						<div className='nav-sub-container w-full max-w-screen-xl mx-auto'>
 							<div
 								className='self-center text-2xl font-semibold whitespace-nowrap'
@@ -65,7 +65,7 @@ function Header({ role, imageURL }){
 				);
 			case 'subscriber':
 				return (
-					<nav className='nav-container shadow'>
+					<nav className='nav-container'>
 						<div className='nav-sub-container w-full max-w-screen-xl mx-auto'>
 							<div
 								className='self-center text-2xl font-semibold whitespace-nowrap'
@@ -79,21 +79,21 @@ function Header({ role, imageURL }){
 									src={images['brandLogo']}
 								/>
 							</div>
+							{/* Input */}
+							<form onSubmit={handleSubmitSearch}>
+								<SearchFilter
+									type='search'
+									searchValue={text}
+									placeHolder='Search'
+									searchClass='mx-10'
+									handleSearchFilterChange={(event) =>
+										dispatch({
+											type    : 'SEARCH_QUERY',
+											payload : { text: event.target.value },
+										})}
+								/>
+							</form>
 							<div className='nav-link-container'>
-								{/* Input */}
-								<form onSubmit={handleSubmitSearch}>
-									<SearchFilter
-										type='search'
-										searchValue={text}
-										placeHolder='Search'
-										searchClass='mx-10'
-										handleSearchFilterChange={(event) =>
-											dispatch({
-												type    : 'SEARCH_QUERY',
-												payload : { text: event.target.value },
-											})}
-									/>
-								</form>
 								{/* <div
 									className='nav-title'
 									onClick={() => history.push('/shop')}
@@ -159,7 +159,7 @@ function Header({ role, imageURL }){
 				);
 			default:
 				return (
-					<nav className='nav-container shadow'>
+					<nav className='nav-container'>
 						<div className='nav-sub-container w-full max-w-screen-xl mx-auto'>
 							<div id='logo' onClick={() => history.push('/')}>
 								{/* {string.common.logoTitle} */}
