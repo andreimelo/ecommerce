@@ -66,7 +66,6 @@ function Header({ role, imageURL }){
 			case 'subscriber':
 				return (
 					<nav className='nav-container'>
-						pepe
 						<div className='nav-sub-container w-full max-w-screen-xl mx-auto'>
 							<div
 								className='self-center text-2xl font-semibold whitespace-nowrap'
