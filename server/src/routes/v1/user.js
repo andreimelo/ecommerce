@@ -1,4 +1,4 @@
-const { router } = require('../config/express');
+const { router } = require('../../config/express');
 const {
 	list,
 	userCart,
@@ -12,8 +12,8 @@ const {
 	wishList,
 	removeFromWishList,
 	createCashOrder,
-} = require('../controllers/user');
-const { authCheck, adminCheck } = require('../middlewares/authSecurity');
+} = require('../../controllers/user');
+const { authCheck, adminCheck } = require('../../middlewares/authSecurity');
 
 router.get('/user', (req, res) => {
 	return res.json({ data: 'This is user route' });
