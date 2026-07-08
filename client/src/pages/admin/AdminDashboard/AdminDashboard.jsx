@@ -164,7 +164,7 @@ const AdminDashboard = ({ role }) => {
 												<td className='px-6 py-4'>
 													<div className='flex items-center gap-3'>
 														<div className={`w-10 h-10 rounded-full ${getAvatarColor(idx)} flex items-center justify-center text-white font-semibold text-sm`}>
-															{getInitials(order.userId?.name || 'User')}
+															{getInitials(order.orderedBy?.name || 'User')}
 														</div>
 														<div>
 															<div className='font-medium text-gray-900'>{order.orderedBy?.name || 'Unknown'}</div>
@@ -201,12 +201,12 @@ const AdminDashboard = ({ role }) => {
 												</td>
 												<td className='px-6 py-4'>
 													<div className='flex items-center gap-3'>
-														<button className='text-gray-500 hover:text-gray-700 transition'>
+														{/* <button className='text-gray-500 hover:text-gray-700 transition'>
 															<svg className='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
 																<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M15 12a3 3 0 11-6 0 3 3 0 016 0z' />
 																<path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z' />
 															</svg>
-														</button>
+														</button> */}
 														<button className='text-gray-500 hover:text-gray-700 transition'>
 															<svg className='w-5 h-5' fill='currentColor' viewBox='0 0 24 24'>
 																<path d='M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z' />

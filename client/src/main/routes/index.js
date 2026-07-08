@@ -343,7 +343,7 @@ const InitialRoutes = ({ store }) => {
 						))}
 					</Switch>
 				</div>
-				<ChatWidget />
+				{(isUser || noRole) && <ChatWidget />}
 				<Footer />
 			</BrowserRouter>
 		</Suspense>
