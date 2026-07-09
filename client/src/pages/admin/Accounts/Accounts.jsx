@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../../../library/components/SideBar';
 import { getUserAccounts } from '../../../library/services/user';
+import { updateUserAccount } from '../../../library/services/admin';
 import { useSelector } from 'react-redux';
 import Spinner from '../../../library/components/Spinner/Spinner';
 
@@ -26,6 +27,15 @@ const Accounts = ({ role }) => {
 			setLoading(false);
 		}
 	}
+	
+	// async function handleButtonEditUser(userId, updatedData) {
+	// 	try {
+	// 		const result = await updateUserAccount(userId, updatedData, user.token);
+	// 		await fetchUserAccounts();
+	// 	} catch (error) {
+	// 		alert(error);
+	// 	}
+	// }
 
 	useEffect(() => {
 		fetchUserAccounts();
@@ -77,7 +87,9 @@ const Accounts = ({ role }) => {
 													{item.email}
 												</td>
 												<td className='px-6 py-4'>{item.role}</td>
-												<td className='px-6 py-4'>Edit</td>
+												<td className='px-6 py-4' >
+													Edit
+												</td>
 											</tr>
 										))}
 								</tbody>
