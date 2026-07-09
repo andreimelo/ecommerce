@@ -41,7 +41,9 @@ app.use(compression());
 
 // File system
 const routesDirectory = path.join(__dirname, '..', 'routes');
-readdirSync(routesDirectory).map((r) => app.use('/api', require('../routes/' + r)));
+readdirSync(routesDirectory).forEach((version) => {
+    app.use(`/api/${version}`, require(path.join(routesDirectory, version)));
+});
 
 app.get('/', (req, res) => {
 	res.send(string.common.startServerMessage);

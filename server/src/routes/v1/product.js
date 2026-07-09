@@ -1,5 +1,5 @@
-const { router } = require('../config/express');
-const { authCheck, adminCheck } = require('../middlewares/authSecurity');
+const { router } = require('../../config/express');
+const { authCheck, adminCheck } = require('../../middlewares/authSecurity');
 const {
 	create,
 	list,
@@ -10,7 +10,7 @@ const {
 	productRatingStar,
 	listRelated,
 	searchFilters,
-} = require('../controllers/product');
+} = require('../../controllers/product');
 
 //routes
 router.post('/product', authCheck, adminCheck, create);
