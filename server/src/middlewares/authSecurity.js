@@ -5,9 +5,9 @@ const { getCookieValue, verifyToken } = require('../utilities/auth');
 exports.authCheck = async (req, res, next) => {
 	const accessToken = getCookieValue(req, 'access_token');
 	const authtoken = req.headers.authtoken || req.headers.authToken;
-
 	try {
 		if (accessToken) {
+
 			try {
 				const sessionUser = verifyToken(accessToken);
 				if (sessionUser.type === 'access') {
@@ -19,11 +19,11 @@ exports.authCheck = async (req, res, next) => {
 			}
 		}
 
-		if (authtoken) {
-			const firebaseUser = await admin.auth().verifyIdToken(authtoken);
-			req.user = firebaseUser;
-			return next();
-		}
+		// if (authtoken) {
+		// 	const firebaseUser = await admin.auth().verifyIdToken(authtoken);
+		// 	req.user = firebaseUser;
+		// 	return next();
+		// }
 
 		return res.status(401).json({ message: 'Authentication required' });
 	} catch (error) {
