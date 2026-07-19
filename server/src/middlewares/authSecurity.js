@@ -19,11 +19,11 @@ exports.authCheck = async (req, res, next) => {
 			}
 		}
 
-		// if (authtoken) {
-		// 	const firebaseUser = await admin.auth().verifyIdToken(authtoken);
-		// 	req.user = firebaseUser;
-		// 	return next();
-		// }
+		if (authtoken) {
+			const firebaseUser = await admin.auth().verifyIdToken(authtoken);
+			req.user = firebaseUser;
+			return next();
+		}
 
 		return res.status(401).json({ message: 'Authentication required' });
 	} catch (error) {
