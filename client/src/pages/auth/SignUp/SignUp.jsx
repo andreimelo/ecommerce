@@ -39,7 +39,7 @@ function SignUp(){
 				title={string.label.register.email}
 			/>
 			<CustomInput
-				type={type.input.default}
+				type={type.input.email}
 				value={values.email || ''}
 				name='email'
 				variant={
@@ -52,9 +52,9 @@ function SignUp(){
 				errorMessage={errors && errors.email}
 			/>
 			<CustomButton
-				variant={'button mt-10 bg-default-color no-size'}
+				variant={'button mt-10 bg-black no-size'}
 				title={'Submit'}
-				onClick={() => handleSubmit()}
+				onClick={(event) => handleSubmit(event)}
 			/>
 		</div>
 	);

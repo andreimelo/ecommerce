@@ -11,10 +11,11 @@
 .settings-content {
   display: none;
   position: absolute;
-  width: 100%;
+  right: 0;
+  min-width: 160px;
   padding: 10px;
-  /* box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); */
   cursor: pointer;
+  z-index: 40;
 }
 
 .settings:hover .settings-content {
@@ -23,25 +24,28 @@
 
 .nav-container {
   width: 100%;
-  min-height: 80px;
+  min-height: 92px;
   height: auto;
-  background-color: var(--white-color);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  z-index: 20;
+  position: sticky;
+  top: 0;
+  z-index: 30;
 }
 
 .nav-sub-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0px;
+  gap: 16px;
+  padding: 14px 0px;
 }
 
 .nav-title {
-  /* background: red;  */
   font-weight: var(--font-poppins-400);
   cursor: pointer;
-  padding: 0px 20px;
+  padding: 0px 12px;
 }
 
 /* .category {
@@ -60,4 +64,18 @@
 .nav-link-container {
   display: inline-flex;
   align-items: center;
+}
+
+.admin-header .nav-sub-container {
+  min-height: 92px;
+}
+
+@media (max-width: 1024px) {
+  .nav-sub-container {
+    flex-wrap: wrap;
+  }
+
+  .nav-link-container {
+    margin-left: auto;
+  }
 }

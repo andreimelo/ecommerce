@@ -1,5 +1,6 @@
 const { router } = require('../../config/express');
 const { authCheck, adminCheck } = require('../../middlewares/authSecurity');
+const csrfProtection = require('../../middlewares/csrf');
 const {
 	create,
 	list,
@@ -13,16 +14,16 @@ const {
 } = require('../../controllers/product');
 
 //routes
-router.post('/product', authCheck, adminCheck, create);
+router.post('/product', authCheck, csrfProtection, adminCheck, create);
 // router.get('/products/total', productsCount);
 router.get('/products/:count', list);
-router.delete('/product/:slug', authCheck, adminCheck, remove);
+router.delete('/product/:slug', authCheck, csrfProtection, adminCheck, remove);
 router.get('/product/:slug', read);
-router.put('/product/:slug', authCheck, adminCheck, update);
+router.put('/product/:slug', authCheck, csrfProtection, adminCheck, update);
 router.post('/products', listAll);
 
 // rating
-router.put('/product/star/:productId', authCheck, productRatingStar);
+router.put('/product/star/:productId', authCheck, csrfProtection, productRatingStar);
 //related product
 router.get('/product/related/:productId', listRelated);
 // search

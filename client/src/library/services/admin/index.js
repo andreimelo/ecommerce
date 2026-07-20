@@ -56,3 +56,19 @@ export async function updateUserAccount(userId, userData, token) {
 
     return data;
 }
+
+export async function deleteUserAccount(userId, token) {
+	const options = {
+		method  : 'DELETE',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json',
+			authToken      : token || '',
+		},
+	};
+
+	const result = await apiFetch(`${env.base_uri}/admin/user/${userId}`, options);
+	const data = await result.json();
+
+	return data;
+}

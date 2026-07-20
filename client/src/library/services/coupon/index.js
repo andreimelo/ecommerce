@@ -34,6 +34,23 @@ export async function removeCoupon(id, token){
 	return data;
 }
 
+export async function updateCoupon(id, fields, token){
+	const options = {
+		method  : 'PUT',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json',
+			authToken      : token || '',
+		},
+		body    : JSON.stringify({ ...fields }),
+	};
+	const result = await apiFetch(`${env.base_uri}/coupon/${id}`, options);
+
+	const data = await result.json();
+
+	return data;
+}
+
 export async function getCoupons(token){
 	const options = {
 		method  : 'GET',

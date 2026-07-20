@@ -84,28 +84,12 @@ const AdminCategory = lazy(async () => {
 	const module = await import('../../pages/admin/Category');
 	return module;
 });
-const AdminCategoryUpdate = lazy(async () => {
-	const module = await import('../../pages/admin/Category/CategoryUpdate');
-	return module;
-});
 const AdminSubCategory = lazy(async () => {
 	const module = await import('../../pages/admin/SubCategory');
 	return module;
 });
-const AdminSubCategoryUpdate = lazy(async () => {
-	const module = await import('../../pages/admin/SubCategory/SubCategoryUpdate');
-	return module;
-});
-const AdminProduct = lazy(async () => {
-	const module = await import('../../pages/admin/Product');
-	return module;
-});
 const AdminProducts = lazy(async () => {
 	const module = await import('../../pages/admin/Products');
-	return module;
-});
-const AdminProductsUpdate = lazy(async () => {
-	const module = await import('../../pages/admin/Products/ProductsUpdate');
 	return module;
 });
 const AdminCoupon = lazy(async () => {
@@ -163,28 +147,12 @@ const InitialRoutes = ({ store }) => {
 				element : AdminCategory,
 			},
 			{
-				path    : '/admin/category/:slug',
-				element : AdminCategoryUpdate,
-			},
-			{
 				path    : '/admin/sub-category',
 				element : AdminSubCategory,
 			},
 			{
-				path    : '/admin/sub-category/:slug',
-				element : AdminSubCategoryUpdate,
-			},
-			{
-				path    : '/admin/product',
-				element : AdminProduct,
-			},
-			{
 				path    : '/admin/products',
 				element : AdminProducts,
-			},
-			{
-				path    : '/admin/products/:slug',
-				element : AdminProductsUpdate,
 			},
 			{
 				path    : '/admin/coupon',
@@ -343,8 +311,8 @@ const InitialRoutes = ({ store }) => {
 						))}
 					</Switch>
 				</div>
-				<ChatWidget />
-				<Footer />
+				{(isUser || noRole) && <ChatWidget />}
+				<Footer role={role} />
 			</BrowserRouter>
 		</Suspense>
 	);
