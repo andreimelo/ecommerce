@@ -3,52 +3,7 @@ import './style.css';
 import { NavLink, useLocation } from 'react-router-dom';
 import { string } from '../../common/constants/strings';
 import PropTypes from 'prop-types';
-
-const NAV_ICONS = {
-	home       : (
-		<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.8' className='h-4 w-4'>
-			<path strokeLinecap='round' strokeLinejoin='round' d='M3 11.5 12 4l9 7.5V20a1 1 0 0 1-1 1h-5.5v-6h-5v6H4a1 1 0 0 1-1-1v-8.5Z' />
-		</svg>
-	),
-	products   : (
-		<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.8' className='h-4 w-4'>
-			<path strokeLinecap='round' strokeLinejoin='round' d='M4 7.5 12 3l8 4.5-8 4.5L4 7.5Z' />
-			<path strokeLinecap='round' strokeLinejoin='round' d='M4 7.5V16.5L12 21l8-4.5V7.5' />
-			<path strokeLinecap='round' strokeLinejoin='round' d='M12 12v9' />
-		</svg>
-	),
-	category   : (
-		<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.8' className='h-4 w-4'>
-			<rect x='4' y='4' width='6' height='6' rx='1.5' />
-			<rect x='14' y='4' width='6' height='6' rx='1.5' />
-			<rect x='4' y='14' width='6' height='6' rx='1.5' />
-			<rect x='14' y='14' width='6' height='6' rx='1.5' />
-		</svg>
-	),
-	subCategory: (
-		<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.8' className='h-4 w-4'>
-			<path strokeLinecap='round' strokeLinejoin='round' d='M7 6h10M7 12h10M7 18h10' />
-			<circle cx='5' cy='6' r='1' fill='currentColor' stroke='none' />
-			<circle cx='5' cy='12' r='1' fill='currentColor' stroke='none' />
-			<circle cx='5' cy='18' r='1' fill='currentColor' stroke='none' />
-		</svg>
-	),
-	coupon     : (
-		<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.8' className='h-4 w-4'>
-			<path strokeLinecap='round' strokeLinejoin='round' d='M8 4h8l5 5v7l-5 5H8l-5-5V9l5-5Z' />
-			<path strokeLinecap='round' strokeLinejoin='round' d='M9 12h6' />
-			<circle cx='9' cy='9' r='1' fill='currentColor' stroke='none' />
-			<circle cx='15' cy='15' r='1' fill='currentColor' stroke='none' />
-		</svg>
-	),
-	accounts   : (
-		<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.8' className='h-4 w-4'>
-			<path strokeLinecap='round' strokeLinejoin='round' d='M16 19a4 4 0 0 0-8 0' />
-			<circle cx='12' cy='10' r='3' />
-			<path strokeLinecap='round' strokeLinejoin='round' d='M5 19h14' />
-		</svg>
-	),
-};
+import icons from '../../../resources/icons';
 
 function Sidebar({ role, collapsed, onToggle }){
 	const { pathname } = useLocation();
@@ -74,7 +29,7 @@ function Sidebar({ role, collapsed, onToggle }){
 				title={collapsed ? label : undefined}
 			>
 				<span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-xs font-semibold ${selected ? 'bg-white/12 text-white group-hover:text-white' : 'bg-slate-100 text-slate-600 group-hover:bg-white group-hover:text-slate-700'}`}>
-					{NAV_ICONS[iconKey] || shortLabel}
+					{icons[iconKey] || shortLabel}
 				</span>
 				{!collapsed && <span className={`truncate text-[15px] font-medium ${selected ? 'text-white' : 'text-slate-500 group-hover:text-slate-900'}`}>{label}</span>}
 			</NavLink>
@@ -109,7 +64,7 @@ function Sidebar({ role, collapsed, onToggle }){
 							</button>
 						</div>
 						<nav className='space-y-2'>
-							{renderLink('/', string.routes.homeTitle, 'H', 'home')}
+							{renderLink('/', string.routes.homeTitle, 'H', 'home_admin')}
 							{renderLink('/admin/products', string.routes.admin.productsTitle, 'P', 'products')}
 							{renderLink('/admin/category', string.routes.admin.categoryTitle, 'C', 'category')}
 							{renderLink('/admin/sub-category', string.routes.admin.subCategoryTitle, 'S', 'subCategory')}

@@ -109,7 +109,7 @@ const Products = ({ role }) => {
 			const result = await getProductBySlug(slug);
 			const transformedSubOptions = (result.subCategory || []).map((option) => ({
 				_id   : option._id,
-				value : option.name.toLowerCase(),
+				value : option._id,
 				label : option.name,
 			}));
 
@@ -161,13 +161,18 @@ const Products = ({ role }) => {
 
 	async function handleProductSubmit(event) {
 		event.preventDefault();
+		const normalizedSubCategory = (productValues.subCategory || []).map((item) => item.value || item._id || item);
+		const payload = {
+			...productValues,
+			subCategory : normalizedSubCategory,
+		};
 
 		try {
 			if (modalMode === 'edit' && editingSlug) {
-				await updateProductBySlug(editingSlug, productValues, user.token);
+				await updateProductBySlug(editingSlug, payload, user.token);
 				alert('Successfully updated the product');
 			} else {
-				await createProduct(productValues, user.token);
+				await createProduct(payload, user.token);
 				alert('Product successfully created');
 			}
 

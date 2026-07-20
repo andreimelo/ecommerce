@@ -35,7 +35,7 @@ const Form = ({
 
 	const transformedSubOptions = subCategoryDataOption.map((option) => ({
 		_id   : option._id,
-		value : option.name.toLowerCase(),
+		value : option._id,
 		label : option.name,
 	}));
 	return (
