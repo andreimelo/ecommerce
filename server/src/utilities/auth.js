@@ -2,7 +2,11 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 
 function getJwtSecret(){
-	return process.env.JWT_SECRET || 'dev-auth-secret';
+	if (!process.env.JWT_SECRET) {
+		throw new Error('JWT_SECRET is required');
+	}
+
+	return process.env.JWT_SECRET;
 }
 
 function getCookieValue(req, name){
@@ -45,7 +49,7 @@ function createAccessToken(user = {}){
 
 function createRefreshToken(user = {}){
 	return jwt.sign(
-		{ ...createSessionPayload(user), type: 'refresh' },
+		{ ...createSessionPayload(user), type: 'refresh', jti: user.refreshTokenId },
 		getJwtSecret(),
 		{ expiresIn: '7d' },
 	);
@@ -55,8 +59,21 @@ function verifyToken(token){
 	return jwt.verify(token, getJwtSecret());
 }
 
-function createCsrfToken(){
-	return crypto.randomBytes(24).toString('hex');
+function createRefreshTokenId(){
+	return crypto.randomBytes(32).toString('hex');
+}
+
+function createCsrfToken(user = {}){
+	return jwt.sign(
+		{
+			type  : 'csrf',
+			email : user.email,
+			uid   : user.uid,
+			nonce : crypto.randomBytes(12).toString('hex'),
+		},
+		getJwtSecret(),
+		{ expiresIn: '1h' },
+	);
 }
 
 function setAuthCookies(res, { accessToken, refreshToken, csrfToken }){
@@ -79,6 +96,7 @@ module.exports = {
 	createSessionPayload,
 	createAccessToken,
 	createRefreshToken,
+	createRefreshTokenId,
 	verifyToken,
 	createCsrfToken,
 	setAuthCookies,

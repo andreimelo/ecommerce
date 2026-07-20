@@ -2,9 +2,20 @@ const admin = require('../config/firebase');
 const User = require('../models/user');
 const { getCookieValue, verifyToken } = require('../utilities/auth');
 
+const HEADER_TOKEN_ALLOWLIST = [
+	'/auth/create-or-update',
+	'/auth/current-user',
+	'/auth/current-admin',
+];
+
+function canUseHeaderToken(pathname = '') {
+	return HEADER_TOKEN_ALLOWLIST.some((suffix) => pathname.endsWith(suffix));
+}
+
 exports.authCheck = async (req, res, next) => {
 	const accessToken = getCookieValue(req, 'access_token');
 	const authtoken = req.headers.authtoken || req.headers.authToken;
+	const requestPath = req.originalUrl || req.path || '';
 	try {
 		if (accessToken) {
 
@@ -19,10 +30,14 @@ exports.authCheck = async (req, res, next) => {
 			}
 		}
 
-		if (authtoken) {
+		if (authtoken && canUseHeaderToken(requestPath)) {
 			const firebaseUser = await admin.auth().verifyIdToken(authtoken);
 			req.user = firebaseUser;
 			return next();
+		}
+
+		if (authtoken && !canUseHeaderToken(requestPath)) {
+			return res.status(401).json({ message: 'Session cookie required for this resource' });
 		}
 
 		return res.status(401).json({ message: 'Authentication required' });
