@@ -25,6 +25,24 @@ exports.remove = async (req, res) => {
 	}
 };
 
+exports.update = async (req, res) => {
+	try {
+		const { name, expiry, discount } = req.body;
+		const updatedCoupon = await Coupon.findByIdAndUpdate(
+			req.params.couponId,
+			{ name, expiry, discount },
+			{ new: true, runValidators: true },
+		).exec();
+
+		res.json({
+			data : updatedCoupon,
+			ok   : true,
+		});
+	} catch (error) {
+		res.status(400).json(error);
+	}
+};
+
 exports.list = async (req, res) => {
 	try {
 		const listCoupon = await Coupon.find({}).sort({ createdAt: -1 }).exec();

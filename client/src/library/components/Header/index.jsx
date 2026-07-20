@@ -16,7 +16,8 @@ function Header({ role, imageURL }){
 	const { user = {}, search = {}, cart = [] } = useSelector((state) => ({ ...state })) || {};
 	const { text = '' } = search;
 	const safeCart = Array.isArray(cart) ? cart : [];
-	let totalCount = safeCart.reduce((acc, curr) => acc + (curr.count || 0), 0);
+	const totalCount = safeCart.reduce((acc, curr) => acc + (curr.count || 0), 0);
+	const shellClass = role === 'admin' ? 'max-w-screen-[1680px]' : 'max-w-screen-xl';
 
 	async function handleSubmitSearch(e){
 		e.preventDefault();
@@ -27,31 +28,33 @@ function Header({ role, imageURL }){
 		switch (role) {
 			case 'admin':
 				return (
-					<nav className='nav-container'>
-						<div className='nav-sub-container w-full max-w-screen-xl mx-auto'>
+					<nav className='nav-container admin-header'>
+						<div className={`nav-sub-container w-full ${shellClass} mx-auto px-4 md:px-6`}>
 							<div
-								className='self-center text-2xl font-semibold whitespace-nowrap'
+								className='self-center whitespace-nowrap'
 								id='logo'
 								onClick={() => history.push('/')}
 							>
-								{/* {string.common.logoTitle} */}
 								<img
-									className='w-30 h-20 object-contain'
+									className='h-16 object-contain md:h-20'
 									alt='brandLogo'
 									src={images['brandLogo']}
 								/>
 							</div>
-							<div className='nav-link-container'>
+							<div className='nav-link-container gap-3'>
+								<div className='hidden rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-slate-500 md:inline-flex'>
+									Admin workspace
+								</div>
 								{user && (
 									<div className='settings'>
-										<div className='nav-title list'>
+										<div className='nav-title list rounded-full border border-slate-200 bg-white px-2 py-1 shadow-sm'>
 											{(user && <Profile imageURL={imageURL} />) ||
 												(!user &&
 													string.routes
 														.userNamePlaceHolderTitle)}
 										</div>
 										<div
-											className='settings-content bg-white border'
+											className='settings-content rounded-2xl border border-slate-200 bg-white shadow-lg'
 											onClick={() =>
 												logOutAction(history, dispatch)}
 										>
@@ -66,21 +69,20 @@ function Header({ role, imageURL }){
 			case 'subscriber':
 				return (
 					<nav className='nav-container'>
-						<div className='nav-sub-container w-full max-w-screen-xl mx-auto'>
+						<div className={`nav-sub-container w-full ${shellClass} mx-auto px-4 md:px-6`}>
 							<div
-								className='self-center text-2xl font-semibold whitespace-nowrap'
+								className='self-center whitespace-nowrap'
 								id='logo'
 								onClick={() => history.push('/')}
 							>
-								{/* {string.common.logoTitle} */}
 								<img
-									className='w-30 h-20 object-contain'
+									className='h-16 object-contain md:h-20'
 									alt='brandLogo'
 									src={images['brandLogo']}
 								/>
 							</div>
 							{/* Input */}
-							<form onSubmit={handleSubmitSearch}>
+							<form onSubmit={handleSubmitSearch} className='hidden flex-1 lg:block'>
 								<SearchFilter
 									type='search'
 									searchValue={text}
@@ -160,16 +162,15 @@ function Header({ role, imageURL }){
 			default:
 				return (
 					<nav className='nav-container'>
-						<div className='nav-sub-container w-full max-w-screen-xl mx-auto'>
+						<div className={`nav-sub-container w-full ${shellClass} mx-auto px-4 md:px-6`}>
 							<div id='logo' onClick={() => history.push('/')}>
-								{/* {string.common.logoTitle} */}
 								<img
-									className='w-30 h-20 object-contain'
+									className='h-16 object-contain md:h-20'
 									src={images['brandLogo']}
 									alt='brandLogo'
 								/>
 							</div>
-							<form onSubmit={handleSubmitSearch} >
+							<form onSubmit={handleSubmitSearch} className='hidden flex-1 lg:block'>
 									<SearchFilter
 										type='search'
 										searchValue={text}

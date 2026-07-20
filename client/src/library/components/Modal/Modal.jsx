@@ -1,22 +1,49 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const Modal = ({ modalTitle, isOpen, onClose, children, modalContainerClass }) => {
+	useEffect(() => {
+		if (!isOpen) {
+			return undefined;
+		}
+
+		const originalOverflow = document.body.style.overflow;
+		document.body.style.overflow = 'hidden';
+
+		const handleEscape = (event) => {
+			if (event.key === 'Escape') {
+				onClose();
+			}
+		};
+
+		document.addEventListener('keydown', handleEscape);
+
+		return () => {
+			document.body.style.overflow = originalOverflow;
+			document.removeEventListener('keydown', handleEscape);
+		};
+	}, [isOpen, onClose]);
+
 	return (
 		<div
-			className={`fixed z-10 inset-0 overflow-y-auto ${
+			className={`fixed inset-0 z-50 overflow-y-auto ${
 				isOpen ? 'block' :
 				'hidden'}`}
-			style={{ background: 'rgba(0, 0, 0, 0.5)' }}
+			style={{ background: 'rgba(15, 23, 42, 0.45)', backdropFilter: 'blur(6px)' }}
 		>
-			<div className='flex items-center justify-center min-h-screen p-4'>
-				<div className='fixed inset-0 transition-opacity' aria-hidden='true' />
-
-				<div className={modalContainerClass}>
-					<div className='flex justify-between p-4 border-b'>
-						<h2 className='text-lg font-semibold'>{modalTitle}</h2>
+			<div className='flex min-h-screen items-center justify-center p-4 md:p-8'>
+				<button
+					type='button'
+					className='fixed inset-0 transition-opacity'
+					aria-label='Close modal backdrop'
+					onClick={onClose}
+				/>
+				<div className={modalContainerClass} role='dialog' aria-modal='true' aria-label={modalTitle}>
+					<div className='sticky top-0 z-10 flex items-center justify-between border-b border-slate-200 bg-white/95 p-5 backdrop-blur'>
+						<h2 className='text-lg font-semibold text-slate-900'>{modalTitle}</h2>
 						<button
-							className='text-gray-500 hover:text-gray-700'
+							type='button'
+							className='rounded-full p-1 text-gray-500 transition hover:bg-slate-100 hover:text-gray-700'
 							onClick={onClose}
 						>
 							<svg
@@ -34,7 +61,7 @@ const Modal = ({ modalTitle, isOpen, onClose, children, modalContainerClass }) =
 						</button>
 					</div>
 
-					<div className='p-4'>{children}</div>
+					<div className='p-5'>{children}</div>
 				</div>
 			</div>
 		</div>
@@ -44,16 +71,16 @@ const Modal = ({ modalTitle, isOpen, onClose, children, modalContainerClass }) =
 Modal.propTypes = {
 	isOpen              : PropTypes.bool,
 	onClose             : PropTypes.func,
-	children            : PropTypes.element,
+	children            : PropTypes.node,
 	modalTitle          : PropTypes.string,
 	modalContainerClass : PropTypes.string,
 };
 Modal.defaultProps = {
-	isOpen              : '',
+	isOpen              : false,
 	onClose             : () => {},
-	children            : '',
+	children            : null,
 	modalTitle          : 'Modal Title',
-	modalContainerClass : 'relative bg-white rounded-lg shadow-xl max-w-lg mx-auto',
+	modalContainerClass : 'relative mx-auto w-full max-w-lg rounded-[28px] bg-white shadow-xl',
 };
 
 export default Modal;
