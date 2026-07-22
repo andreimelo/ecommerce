@@ -9,5 +9,6 @@ router.use('/coupon', require('./coupon'));
 router.use('/stripe', require('./stripe'));
 router.use('/user', require('./user'));
 router.use('/product', require('./product'));
+router.use('/ai', require('./ai'));
 
 module.exports = router;

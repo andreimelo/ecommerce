@@ -27,3 +27,30 @@ exports.remove = async (req, res) => {
 		res.status(400).json(err);
 	}
 };
+
+exports.uploadReviewImage = async (req, res) => {
+	try {
+		let currentDate = Date.now();
+		let result = await cloudinary.uploader.upload(req.body.image, {
+			public_id     : `review-${currentDate}`,
+			resource_type : 'auto',
+			folder        : 'reviews',
+		});
+		res.json({
+			public_id : result.public_id,
+			url       : result.secure_url,
+		});
+	} catch (err) {
+		res.status(400).json(err);
+	}
+};
+
+exports.removeReviewImage = async (req, res) => {
+	try {
+		let image_id = req.body.public_id;
+		await cloudinary.uploader.destroy(image_id);
+		res.json('Review image successfully removed');
+	} catch (err) {
+		res.status(400).json(err);
+	}
+};

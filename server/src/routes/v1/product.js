@@ -9,6 +9,7 @@ const {
 	update,
 	listAll,
 	productRatingStar,
+	removeProductReview,
 	listRelated,
 	searchFilters,
 } = require('../../controllers/product');
@@ -24,6 +25,7 @@ router.post('/products', listAll);
 
 // rating
 router.put('/product/star/:productId', authCheck, csrfProtection, productRatingStar);
+router.delete('/product/review/:productId', authCheck, csrfProtection, removeProductReview);
 //related product
 router.get('/product/related/:productId', listRelated);
 // search

@@ -107,10 +107,10 @@ export async function getProductsBySortAndOrder(sort, order, page){
 	return data;
 }
 
-export async function putProductStarRating(productId, star, token){
-	const transformData = {
-		star,
-	};
+export async function putProductStarRating(productId, ratingPayload, token){
+	const transformData = typeof ratingPayload === 'number'
+		? { star: ratingPayload }
+		: { ...ratingPayload };
 	// refactor
 	const options = {
 		method  : 'PUT',
@@ -123,6 +123,21 @@ export async function putProductStarRating(productId, star, token){
 	};
 	const result = await apiFetch(`${env.base_uri}/product/star/${productId}`, options);
 
+	const data = await result.json();
+
+	return data;
+}
+
+export async function deleteProductReview(productId, token){
+	const options = {
+		method  : 'DELETE',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json',
+			authToken      : token || '',
+		},
+	};
+	const result = await apiFetch(`${env.base_uri}/product/review/${productId}`, options);
 	const data = await result.json();
 
 	return data;
