@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 function getJwtSecret(){
 	if (!process.env.JWT_SECRET) {
-		throw new Error('JWT_SECRET is required');
+		throw new Error('JWT_SECRET is required because the server signs its own session and CSRF JWTs');
 	}
 
 	return process.env.JWT_SECRET;

@@ -46,6 +46,7 @@ exports.read = async (req, res) => {
 		const getProduct = await Product.findOne({ slug: req.params.slug })
 			.populate('category')
 			.populate('subCategory')
+			.populate('ratings.postedBy', 'name email')
 			.exec();
 		res.json(getProduct);
 	} catch (error) {
@@ -123,31 +124,103 @@ exports.productRatingStar = async (req, res) => {
 	try {
 		const product = await Product.findById(req.params.productId).exec();
 		const user = await User.findOne({ email: req.user.email }).exec();
-		const { star } = req.body;
+		const { star, comment = '', images = [] } = req.body;
 
-		let existingRating = product.ratings.find(
-			(item) => item.postedBy.toString() === user._id,
+		if (!product) {
+			return res.status(404).json({ message: 'Product not found' });
+		}
+
+		if (!user) {
+			return res.status(404).json({ message: 'User not found' });
+		}
+
+		if (!star || Number(star) < 1 || Number(star) > 5) {
+			return res.status(400).json({ message: 'Star rating must be between 1 and 5' });
+		}
+
+		const userId = user._id.toString();
+		const userRatings = product.ratings.filter(
+			(item) => item.postedBy && item.postedBy.toString() === userId,
 		);
-		if (existingRating === undefined) {
-			let ratingAdded = await Product.findByIdAndUpdate(
+
+		if (!userRatings.length) {
+			const ratingAdded = await Product.findByIdAndUpdate(
 				product._id,
 				{
-					$push : { ratings: { star, postedBy: user._id } },
+					$push : { ratings: { star, comment, images, postedBy: user._id, createdAt: new Date() } },
 				},
 				{ new: true },
 			).exec();
 			return res.json(ratingAdded);
 		}
-		const ratingUpdated = await Product.updateOne(
+
+		// Keep original submission date while deduping any accidental duplicate entries.
+		const originalCreatedAt = userRatings
+			.map((item) => item.createdAt)
+			.filter(Boolean)
+			.sort((first, second) => new Date(first) - new Date(second))[0] || new Date();
+
+		await Product.findByIdAndUpdate(
+			product._id,
 			{
-				ratings : { $elemMatch: existingRating },
+				$pull : {
+					ratings : { postedBy: user._id },
+				},
 			},
-			{ $set: { 'ratings.$.star': star } },
+		).exec();
+
+		const ratingUpdated = await Product.findByIdAndUpdate(
+			product._id,
+			{
+				$push : {
+					ratings : {
+						star,
+						comment,
+						images,
+						postedBy  : user._id,
+						createdAt : originalCreatedAt,
+					},
+				},
+			},
 			{ new: true },
 		).exec();
+
 		return res.json(ratingUpdated);
 	} catch (error) {
 		res.status(400).send('Fetch products count failed');
+	}
+};
+
+exports.removeProductReview = async (req, res) => {
+	try {
+		const user = await User.findOne({ email: req.user.email }).exec();
+
+		if (!user) {
+			return res.status(404).json({ message: 'User not found' });
+		}
+
+		const updatedProduct = await Product.findByIdAndUpdate(
+			req.params.productId,
+			{
+				$pull : {
+					ratings : {
+						postedBy : user._id,
+					},
+				},
+			},
+			{ new: true },
+		).exec();
+
+		if (!updatedProduct) {
+			return res.status(404).json({ message: 'Product not found' });
+		}
+
+		return res.json({
+			ok      : true,
+			product : updatedProduct,
+		});
+	} catch (error) {
+		return res.status(400).json({ message: 'Delete review failed', error: error.message || error });
 	}
 };
 

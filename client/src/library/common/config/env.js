@@ -1,5 +1,14 @@
+function normalizeBaseUri(value = '') {
+	const cleanedValue = String(value)
+		.trim()
+		.replace(/^['"]+|['"]+$/g, '')
+		.replace(/\/+$/, '');
+
+	return cleanedValue || 'http://localhost:8000/api/v1';
+}
+
 const env = {
-	base_uri          : process.env.REACT_APP_BASE_URL,
+	base_uri          : normalizeBaseUri(process.env.REACT_APP_BASE_URL),
 	firebase          : {
 		register    : {
 			complete_registration_uri :
@@ -17,6 +26,7 @@ const env = {
 			measurement_id      : process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 		},
 	},
+	geolocation_url: process.env.REACT_GEOLOCATION_URL,
 	stripe            : {
 		credentials : {
 			api_key : process.env.REACT_APP_STRIPE_API_KEY,

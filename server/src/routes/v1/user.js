@@ -12,6 +12,8 @@ const {
 	wishList,
 	removeFromWishList,
 	createCashOrder,
+	profile,
+	editUser,
 } = require('../../controllers/user');
 const { authCheck, adminCheck } = require('../../middlewares/authSecurity');
 const csrfProtection = require('../../middlewares/csrf');
@@ -19,6 +21,8 @@ const csrfProtection = require('../../middlewares/csrf');
 router.get('/user', (req, res) => {
 	return res.json({ data: 'This is user route' });
 });
+router.get('/user/profile', authCheck, profile);
+router.put('/user/profile', authCheck, csrfProtection, editUser);
 router.post('/user/save-cart', authCheck, csrfProtection, userCart);
 router.get('/user/save-cart', authCheck, getUserCart);
 router.delete('/user/save-cart', authCheck, csrfProtection, emptyCart);
