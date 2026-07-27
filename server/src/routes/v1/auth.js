@@ -1,4 +1,4 @@
-const { router } = require('../config/express');
+const { router } = require('../../config/express');
 const {
 	defaultAuthRoute,
 	createOrUpdateUser,
@@ -6,9 +6,9 @@ const {
 	refreshToken,
 	logout,
 	csrfToken,
-} = require('../controllers/auth');
-const { authCheck, adminCheck } = require('../middlewares/authSecurity');
-const csrfProtection = require('../middlewares/csrf');
+} = require('../../controllers/auth');
+const { authCheck, adminCheck } = require('../../middlewares/authSecurity');
+const csrfProtection = require('../../middlewares/csrf');
 
 router.get('/auth', defaultAuthRoute);
 router.get('/auth/csrf-token', csrfToken);

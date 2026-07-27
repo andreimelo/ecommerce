@@ -33,3 +33,42 @@ export async function updateOrderStatus(orderId, orderStatus, token){
 
 	return data;
 }
+
+export async function updateUserAccount(userId, userData, token) {
+    
+	const options = {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            authToken: token || '',
+			// 'X-CSRF-Token' : csrfToken,
+        },
+        body: JSON.stringify(userData),
+    };
+   
+	const result = await apiFetch(
+        `${env.base_uri}/admin/user/${userId}/edit`,
+        options
+    );
+
+    const data = await result.json();
+
+    return data;
+}
+
+export async function deleteUserAccount(userId, token) {
+	const options = {
+		method  : 'DELETE',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json',
+			authToken      : token || '',
+		},
+	};
+
+	const result = await apiFetch(`${env.base_uri}/admin/user/${userId}`, options);
+	const data = await result.json();
+
+	return data;
+}

@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { askShoppingAssistant } from '../../services/ai';
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { id: 1, text: "Hello! How can I help you today?", isBot: true }
+    { id: 1, text: 'Hi! Ask me for products, recommendations, or review summaries.', isBot: true, recommendations: [] }
   ]);
   const [input, setInput] = useState("");
+  const [sending, setSending] = useState(false);
   const messageEndRef = useRef(null);
 
   // Auto-scrolls to the newest message
@@ -13,22 +15,41 @@ export default function ChatWidget() {
     messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  const handleSend = (e) => {
+  const handleSend = async (e) => {
     e.preventDefault();
-    if (!input.trim()) return;
+    const prompt = input.trim();
+    if (!prompt || sending) return;
 
     // Add user message
-    const userMessage = { id: Date.now(), text: input, isBot: false };
+    const userMessage = { id: Date.now(), text: prompt, isBot: false, recommendations: [] };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
+    setSending(true);
 
-    // Simulate backend or bot response trigger
-    setTimeout(() => {
+    try {
+      const result = await askShoppingAssistant(prompt);
       setMessages((prev) => [
         ...prev,
-        { id: Date.now() + 1, text: "Thanks for messaging! Our team will reply shortly.", isBot: true }
+        {
+          id: Date.now() + 1,
+          text: result?.assistantMessage || 'I can help you find products by budget, category, and features.',
+          isBot: true,
+          recommendations: result?.recommendations || [],
+        }
       ]);
-    }, 1000);
+    } catch (error) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now() + 1,
+          text: 'I could not process that request right now. Please try again.',
+          isBot: true,
+          recommendations: [],
+        },
+      ]);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -58,13 +79,29 @@ export default function ChatWidget() {
                 className={`flex ${msg.isBot ? 'justify-start' : 'justify-end'}`}
               >
                 <div
-                  className={`max-w-[75%] rounded-2xl px-4 py-2 text-sm ${
+                  className={`max-w-[85%] rounded-2xl px-4 py-2 text-sm ${
                     msg.isBot
                       ? 'bg-white text-gray-800 shadow-sm border border-gray-100'
                       : 'bg-blue-600 text-white'
                   }`}
                 >
                   {msg.text}
+                  {msg.isBot && msg.recommendations && msg.recommendations.length > 0 && (
+                    <div className='mt-3 space-y-2'>
+                      {msg.recommendations.slice(0, 3).map((item) => (
+                        <a
+                          key={item.id}
+                          href={`/product/${item.slug}`}
+                          className='block rounded-lg border border-slate-200 bg-slate-50 p-2 text-xs text-slate-700 no-underline hover:bg-slate-100'
+                        >
+                          <div className='font-semibold'>{item.title}</div>
+                          <div className='text-slate-500'>${item.price} • {item.brand || 'Brand'}</div>
+                          <div className='mt-1 text-[11px] text-slate-500'>{item.aiGeneratedDescription}</div>
+                          <div className='mt-1 text-[11px] text-slate-500'>{item.reviewSummary}</div>
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
@@ -82,9 +119,10 @@ export default function ChatWidget() {
             />
             <button
               type="submit"
+              disabled={sending}
               className="ml-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors"
             >
-              Send
+              {sending ? '...' : 'Send'}
             </button>
           </form>
         </div>

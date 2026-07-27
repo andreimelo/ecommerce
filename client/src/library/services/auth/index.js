@@ -1,7 +1,7 @@
 import env from '../../common/config/env';
 import { apiFetch } from '../../common/config/fetch';
 
-async function getCsrfToken(){
+ async function getCsrfToken(){
 	try {
 		const response = await apiFetch(`${env.base_uri}/auth/csrf-token`, {
 			method      : 'GET',

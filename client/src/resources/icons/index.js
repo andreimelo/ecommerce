@@ -202,6 +202,52 @@ const icons = {
 				stroke-linecap="round"
 			/>
 		</svg>
+	),
+	home_admin       : (
+		<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.8' className='h-4 w-4'>
+			<path strokeLinecap='round' strokeLinejoin='round' d='M3 11.5 12 4l9 7.5V20a1 1 0 0 1-1 1h-5.5v-6h-5v6H4a1 1 0 0 1-1-1v-8.5Z' />
+		</svg>
+	),
+	products   : (
+		<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.8' className='h-4 w-4'>
+			<path strokeLinecap='round' strokeLinejoin='round' d='M4 7.5 12 3l8 4.5-8 4.5L4 7.5Z' />
+			<path strokeLinecap='round' strokeLinejoin='round' d='M4 7.5V16.5L12 21l8-4.5V7.5' />
+			<path strokeLinecap='round' strokeLinejoin='round' d='M12 12v9' />
+		</svg>
+	),
+	category   : (
+		<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.8' className='h-4 w-4'>
+			<rect x='4' y='4' width='6' height='6' rx='1.5' />
+			<rect x='14' y='4' width='6' height='6' rx='1.5' />
+			<rect x='4' y='14' width='6' height='6' rx='1.5' />
+			<rect x='14' y='14' width='6' height='6' rx='1.5' />
+		</svg>
+	),
+	subCategory: (
+		<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.8' className='h-4 w-4'>
+			<path strokeLinecap='round' strokeLinejoin='round' d='M7 6h10M7 12h10M7 18h10' />
+			<circle cx='5' cy='6' r='1' fill='currentColor' stroke='none' />
+			<circle cx='5' cy='12' r='1' fill='currentColor' stroke='none' />
+			<circle cx='5' cy='18' r='1' fill='currentColor' stroke='none' />
+		</svg>
+	),
+	coupon     : (
+		<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.8' className='h-4 w-4'>
+			<path strokeLinecap='round' strokeLinejoin='round' d='M8 4h8l5 5v7l-5 5H8l-5-5V9l5-5Z' />
+			<path strokeLinecap='round' strokeLinejoin='round' d='M9 12h6' />
+			<circle cx='9' cy='9' r='1' fill='currentColor' stroke='none' />
+			<circle cx='15' cy='15' r='1' fill='currentColor' stroke='none' />
+		</svg>
+	),
+	accounts   : (
+		<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.8' className='h-4 w-4'>
+			<path strokeLinecap='round' strokeLinejoin='round' d='M16 19a4 4 0 0 0-8 0' />
+			<circle cx='12' cy='10' r='3' />
+			<path strokeLinecap='round' strokeLinejoin='round' d='M5 19h14' />
+		</svg>
+	),
+	target: (
+		<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#000000" className='h-5 w-5'><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8 10C9.10457 10 10 9.10457 10 8C10 6.89543 9.10457 6 8 6C6.89543 6 6 6.89543 6 8C6 9.10457 6.89543 10 8 10Z" fill="#ffffff"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M2.08296 7C2.50448 4.48749 4.48749 2.50448 7 2.08296V0H9V2.08296C11.5125 2.50448 13.4955 4.48749 13.917 7H16V9H13.917C13.4955 11.5125 11.5125 13.4955 9 13.917V16H7V13.917C4.48749 13.4955 2.50448 11.5125 2.08296 9H0V7H2.08296ZM4 8C4 5.79086 5.79086 4 8 4C10.2091 4 12 5.79086 12 8C12 10.2091 10.2091 12 8 12C5.79086 12 4 10.2091 4 8Z" fill="#ffffff"></path> </g></svg>
 	)
 };
 

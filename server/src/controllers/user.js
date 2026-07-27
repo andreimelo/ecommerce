@@ -15,6 +15,25 @@ exports.list = async (req, res) => {
 	}
 };
 
+exports.profile = async (req, res) => {
+	try {
+		const user = await User.findOne({ email: req.user.email })
+			.select('name email role address1 address2 state city zip_code createdAt')
+			.exec();
+
+		if (!user) {
+			return res.status(404).json({ message: 'User profile not found' });
+		}
+
+		return res.json({
+			ok   : true,
+			user,
+		});
+	} catch (error) {
+		return res.status(400).json({ message: 'Fetch user profile failed', error: error.message || error });
+	}
+};
+
 exports.userCart = async (req, res) => {
 	try {
 		const { cart } = req.body;
@@ -297,5 +316,44 @@ exports.createCashOrder = async (req, res) => {
 	} catch (error) {
 		console.log(error);
 		res.status(400).send('Create order failed');
+	}
+};
+
+
+exports.editUser = async (req, res) => {
+	try {
+		const payload = {
+			name     : req.body.name,
+			address1 : req.body.address1,
+			address2 : req.body.address2,
+			state    : req.body.state,
+			city     : req.body.city,
+			zip_code : req.body.zip_code,
+		};
+
+		Object.keys(payload).forEach((key) => {
+			if (payload[key] === undefined) {
+				delete payload[key];
+			}
+		});
+
+		const updatedUser = await User.findOneAndUpdate(
+			{ email: req.user.email },
+			payload,
+			{ new: true },
+		)
+			.select('name email role address1 address2 state city zip_code createdAt')
+			.exec();
+
+		if (!updatedUser) {
+			return res.status(404).json({ message: 'User profile not found' });
+		}
+
+		return res.json({
+			ok   : true,
+			user : updatedUser,
+		});
+	} catch (error) {
+		return res.status(400).json({ message: 'Update user profile failed', error: error.message || error });
 	}
 };

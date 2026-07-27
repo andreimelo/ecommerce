@@ -36,3 +36,35 @@ export async function removeImageUpload(imageUri, token){
 
 	return data;
 }
+
+export async function uploadReviewImage(imageUri, token){
+	const options = {
+		method  : 'POST',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json',
+			authToken      : token || '',
+		},
+		body    : JSON.stringify(imageUri),
+	};
+	const result = await apiFetch(`${env.base_uri}/upload-review-image`, options);
+	const data = await result.json();
+
+	return data;
+}
+
+export async function removeReviewImage(imageUri, token){
+	const options = {
+		method  : 'POST',
+		headers : {
+			Accept         : 'application/json',
+			'Content-Type' : 'application/json',
+			authToken      : token || '',
+		},
+		body    : JSON.stringify({ public_id: imageUri }),
+	};
+	const result = await apiFetch(`${env.base_uri}/remove-review-image`, options);
+	const data = await result.json();
+
+	return data;
+}

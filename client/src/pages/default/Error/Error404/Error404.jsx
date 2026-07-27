@@ -1,9 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-function Error404(){
+function Error404({role}){
 	const history = useHistory();
-	
+	const isAdmin = role === 'admin';
 	return(
 		<div className='w-full min-h-screen flex items-center justify-center'>
 			<div className='w-full text-center'>
@@ -12,7 +12,6 @@ function Error404(){
 					<div className='text-8xl md:text-9xl font-bold text-slate-200 mb-4'>404</div>
 					<div className='h-1 w-24 bg-slate-950 mx-auto mb-8'></div>
 				</div>
-
 				{/* Content */}
 				<div className='mb-12'>
 					<h1 className='text-3xl md:text-4xl font-semibold text-slate-950 mb-4'>
@@ -31,12 +30,14 @@ function Error404(){
 					>
 						Back to home
 					</button>
-					<button
-						onClick={() => history.push('/shop')}
-						className='inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-8 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-50'
-					>
-						Continue shopping
-					</button>
+					{!isAdmin && (
+						<button
+							onClick={() => history.push('/shop')}
+							className='inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-8 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-50'
+						>
+							Continue shopping
+						</button>
+					)}
 				</div>
 
 			</div>

@@ -77,6 +77,19 @@ const productSchema = new mongoose.Schema(
 		ratings     : [
 			{
 				star     : Number,
+				comment  : {
+					type      : String,
+					maxlength : 800,
+					default   : '',
+				},
+				images   : {
+					type    : Array,
+					default : [],
+				},
+				createdAt : {
+					type    : Date,
+					default : Date.now,
+				},
 				postedBy : { type: ObjectId, ref: 'User' },
 			},
 		],
