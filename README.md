@@ -1,6 +1,6 @@
-# Melo Ecommerce (Full Stack)
+# Ecommerce (Full Stack)
 
-Melo Ecommerce is a full-stack ecommerce platform with a React frontend and an Express/MongoDB backend.
+Ecommerce is a full-stack ecommerce platform with a React frontend and an Express/MongoDB backend.
 
 This root README is the main entry point for running and understanding the entire repository.
 
