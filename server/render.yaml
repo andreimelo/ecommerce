@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: ecommerce-api
+    runtime: node
+    envVars:
+      - key: NODE_VERSION
+        value: 22
