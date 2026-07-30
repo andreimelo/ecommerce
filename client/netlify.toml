@@ -2,3 +2,6 @@
   command = "npm run build"
   publish="build/"
   base = "client/"
+
+[build.environment]
+  SKIP_PREFLIGHT_CHECK = "true"

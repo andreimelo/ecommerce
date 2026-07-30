@@ -40,8 +40,7 @@
 	},
 	"eslintConfig": {
 		"extends": [
-			"react-app",
-			"react-app/jest"
+			"react-app"
 		]
 	},
 	"browserslist": {
@@ -58,6 +57,8 @@
 	},
 	"devDependencies": {
 		"autoprefixer": "^10.4.17",
+		"eslint-config-react-app": "7.0.1",
+		"eslint-plugin-jest": "25.7.0",
 		"postcss": "^8.4.33",
 		"tailwindcss": "^3.4.1"
 	}
