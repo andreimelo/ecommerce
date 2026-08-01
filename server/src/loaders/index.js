@@ -19,23 +19,25 @@ connectToMongoDb();
 app.use(morgan('dev'));
 
 // Cors
-const allowedOrigins = (process.env.CORS_ALLOWED_ORIGINS || 'http://localhost:3000,http://127.0.0.1:3000')
-	.split(',')
-	.map((origin) => origin.trim())
-	.filter(Boolean);
-
+const allowedOrigins = [
+    "http://localhost:3000",
+    process.env.CORS_ALLOWED_ORIGINS
+];
 const corsOptions = {
-	origin      : (origin, callback) => {
-		if (!origin) {
-			return callback(null, true);
-		}
+	 origin: function (origin, callback) {
 
-		if (allowedOrigins.includes(origin)) {
-			return callback(null, true);
-		}
+        console.log("Request Origin:", origin);
 
-		return callback(new Error('Not allowed by CORS'));
-	},
+        if (!origin) {
+            return callback(null, true);
+        }
+
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+
+        return callback(null, false);
+    },
 	credentials : true,
 	allowedHeaders : [
 		'Content-Type',
