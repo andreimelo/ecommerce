@@ -22,10 +22,16 @@ function getCookieValue(req, name){
 }
 
 function buildCookieOptions({ secure = false, maxAge = 15 * 60 * 1000, httpOnly = true } = {}){
+	const cookieSameSite = process.env.COOKIE_SAME_SITE || (secure ? 'none' : 'lax');
+	const normalizedSameSite = String(cookieSameSite).toLowerCase();
+	const sameSite = ['lax', 'strict', 'none'].includes(normalizedSameSite)
+		? normalizedSameSite
+		: (secure ? 'none' : 'lax');
+
 	return {
 		httpOnly,
 		secure,
-		sameSite : 'lax',
+		sameSite,
 		path     : '/',
 		maxAge,
 	};
